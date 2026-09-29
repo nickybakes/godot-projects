@@ -1,0 +1,185 @@
+[gd_scene format=3 uid="uid://dpytlw4ocuje4"]
+
+[ext_resource type="Script" uid="uid://c7enquvqm0by6" path="res://Dev/Frontend/Network/NetworkOverlayView.gd" id="1_08wy6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sy7qb"]
+bg_color = Color(0, 0, 0, 0.34117648)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pqjsn"]
+bg_color = Color(0.3, 0.3, 0.3, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mfcfy"]
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_s282h"]
+font_size = 27
+
+[sub_resource type="LabelSettings" id="LabelSettings_etr8x"]
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_bvqms"]
+line_spacing = -14.33
+font_size = 43
+
+[node name="NetworkOverlayView" type="Control" unique_id=298920046]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_08wy6")
+
+[node name="Input Coverup Panel" type="Panel" parent="." unique_id=1837573077]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sy7qb")
+
+[node name="Error Panel" type="Panel" parent="Input Coverup Panel" unique_id=1098828879]
+layout_mode = 0
+offset_left = 727.0
+offset_top = 298.0
+offset_right = 1227.0
+offset_bottom = 798.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pqjsn")
+
+[node name="Title" type="Label" parent="Input Coverup Panel/Error Panel" unique_id=1361950982]
+layout_mode = 0
+offset_right = 500.0
+offset_bottom = 80.0
+text = "Connection Failed"
+label_settings = SubResource("LabelSettings_mfcfy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Message" type="Label" parent="Input Coverup Panel/Error Panel" unique_id=324191209]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 120.0
+offset_right = 468.0
+offset_bottom = 341.0
+text = "Connection Failed wdaw dwad awd awd  efwad wad awd awd awd aw dwad aw dawd "
+label_settings = SubResource("LabelSettings_s282h")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
+[node name="Dismiss Error Button" type="Button" parent="Input Coverup Panel/Error Panel" unique_id=1348540019]
+layout_mode = 0
+offset_left = 137.0
+offset_top = 383.0
+offset_right = 362.0
+offset_bottom = 463.0
+theme_override_font_sizes/font_size = 44
+text = "OK"
+
+[node name="Connecting Panel" type="Panel" parent="Input Coverup Panel" unique_id=948512170]
+visible = false
+layout_mode = 0
+offset_left = 727.0
+offset_top = 378.0
+offset_right = 1227.0
+offset_bottom = 718.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pqjsn")
+
+[node name="Title" type="Label" parent="Input Coverup Panel/Connecting Panel" unique_id=961293903]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -130.0
+offset_right = 250.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Connecting..."
+label_settings = SubResource("LabelSettings_mfcfy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Dismiss Error Button" type="Button" parent="Input Coverup Panel/Connecting Panel" unique_id=4935668]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.5
+offset_top = 42.0
+offset_right = 112.5
+offset_bottom = 122.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 44
+text = "Cancel"
+
+[node name="Ping Label" type="Label" parent="." unique_id=1481001628]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -302.0
+offset_bottom = 74.0
+grow_horizontal = 0
+mouse_filter = 1
+mouse_behavior_recursive = 1
+text = "123"
+label_settings = SubResource("LabelSettings_etr8x")
+horizontal_alignment = 2
+
+[node name="Log Toggle" type="Button" parent="." unique_id=437489489]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -554.0
+offset_right = -439.0
+offset_bottom = 57.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 35
+text = "Log"
+
+[node name="Log Panel" type="Panel" parent="." unique_id=278196554]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -554.0
+offset_top = 57.0
+offset_right = -25.0
+offset_bottom = 498.0
+grow_horizontal = 0
+
+[node name="Log Scroll Container" type="ScrollContainer" parent="Log Panel" unique_id=2140427114]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="Log VBox Container" type="VBoxContainer" parent="Log Panel/Log Scroll Container" unique_id=540765153]
+layout_mode = 2
+
+[node name="Log Line Prefab" type="Label" parent="." unique_id=1134549986]
+visible = false
+custom_maximum_size = Vector2(529, -1)
+layout_mode = 0
+offset_right = 529.0
+offset_bottom = 74.0
+text = "log ytext"
+label_settings = SubResource("LabelSettings_bvqms")
+autowrap_mode = 1
+
+[connection signal="pressed" from="Input Coverup Panel/Error Panel/Dismiss Error Button" to="." method="DismissError"]
+[connection signal="pressed" from="Input Coverup Panel/Connecting Panel/Dismiss Error Button" to="." method="CancelConnection"]
+[connection signal="pressed" from="Log Toggle" to="." method="ToggleLog"]

@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://begu7jqmah13i"]
+
+[ext_resource type="Script" uid="uid://c6t5j2q827qcr" path="res://Dev/Frontend/Lobby/LobbyView.gd" id="1_3qv7l"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_c5qv8"]
+font_size = 54
+
+[node name="LobbyView" type="Control" unique_id=298920046]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_3qv7l")
+
+[node name="Name Label" type="Label" parent="." unique_id=616428234]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 83.33333
+text = "Player Name"
+label_settings = SubResource("LabelSettings_c5qv8")
+
+[node name="Host Local Button" type="Button" parent="." unique_id=1683915340]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 134.0
+offset_right = 488.875
+offset_bottom = 298.0
+theme_override_font_sizes/font_size = 54
+text = "Host local"
+
+[node name="Join Local Button" type="Button" parent="." unique_id=636893693]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 358.0
+offset_right = 488.875
+offset_bottom = 522.0
+theme_override_font_sizes/font_size = 54
+text = "Join local"
+
+[connection signal="pressed" from="Host Local Button" to="." method="hostLocalButton"]
+[connection signal="pressed" from="Join Local Button" to="." method="joinLocalButton"]

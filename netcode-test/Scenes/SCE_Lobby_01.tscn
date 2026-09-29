@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cqemrtackwhnb"]
+
+[ext_resource type="PackedScene" uid="uid://begu7jqmah13i" path="res://Dev/Frontend/Lobby/PRE_LobbyView_01.tscn" id="1_5a6u1"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mfcfy"]
+
+[sub_resource type="Sky" id="Sky_etr8x"]
+sky_material = SubResource("ProceduralSkyMaterial_mfcfy")
+
+[sub_resource type="Environment" id="Environment_c5qv8"]
+background_mode = 2
+sky = SubResource("Sky_etr8x")
+
+[node name="SCE_Lobby_01" type="Node3D" unique_id=1729758398]
+
+[node name="LobbyView" parent="." unique_id=298920046 instance=ExtResource("1_5a6u1")]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=58828749]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=678653966]
+environment = SubResource("Environment_c5qv8")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=909558786]
+transform = Transform3D(0.85651755, -0.17360538, 0.4860441, -0.5129993, -0.18299296, 0.8386569, -0.05665271, -0.9676646, -0.24579616, 0, 0, 0)
