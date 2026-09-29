@@ -29,7 +29,6 @@ func _physics_process(delta: float) -> void:
 		decimalCollector -= 1.00;
 	pass;	
 
-
 func receiveServerTime(serverTicksMsec : int, clientTicksMsec : int):
 	latency = (Time.get_ticks_msec() - clientTicksMsec) / 2;
 	clock = serverTicksMsec + latency;

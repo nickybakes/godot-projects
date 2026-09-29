@@ -19,19 +19,12 @@ font_size = 50
 
 [sub_resource type="LabelSettings" id="LabelSettings_bvqms"]
 line_spacing = -14.33
-font_size = 43
+font_size = 34
 
-[node name="NetworkOverlayView" type="Control" unique_id=298920046]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="NetworkOverlayView" type="CanvasLayer" unique_id=851211738]
 script = ExtResource("1_08wy6")
 
 [node name="Input Coverup Panel" type="Panel" parent="." unique_id=1837573077]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -122,7 +115,6 @@ theme_override_font_sizes/font_size = 44
 text = "Cancel"
 
 [node name="Ping Label" type="Label" parent="." unique_id=1481001628]
-layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -136,7 +128,6 @@ label_settings = SubResource("LabelSettings_etr8x")
 horizontal_alignment = 2
 
 [node name="Log Toggle" type="Button" parent="." unique_id=437489489]
-layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -148,7 +139,6 @@ theme_override_font_sizes/font_size = 35
 text = "Log"
 
 [node name="Log Panel" type="Panel" parent="." unique_id=278196554]
-layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -173,7 +163,6 @@ layout_mode = 2
 [node name="Log Line Prefab" type="Label" parent="." unique_id=1134549986]
 visible = false
 custom_maximum_size = Vector2(529, -1)
-layout_mode = 0
 offset_right = 529.0
 offset_bottom = 74.0
 text = "log ytext"

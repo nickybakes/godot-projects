@@ -9,28 +9,23 @@ const DEFAULT_PORT = 10567
 func HostLobby():
 	Network.Log("ENET Lobby Host");
 	isHost = true;
-	Network.peer = ENetMultiplayerPeer.new();
-	var hostMessage : Error = (Network.peer as ENetMultiplayerPeer).create_server(DEFAULT_PORT, MAX_CONNECTIONS);
+	connecting = false;
+	var peer : ENetMultiplayerPeer = ENetMultiplayerPeer.new();
+	var hostMessage : Error = (peer as ENetMultiplayerPeer).create_server(DEFAULT_PORT, MAX_CONNECTIONS);
 	Network.Log(error_string(hostMessage));
-	Network.multiplayer.set_multiplayer_peer(Network.peer);
+	Network.multiplayer.set_multiplayer_peer(peer);
 	pass;
 	
 func JoinLobby():
 	isHost = false;
-	Network.peer = ENetMultiplayerPeer.new();
-	var joinMessage : Error = (Network.peer as ENetMultiplayerPeer).create_client("127.0.0.1", DEFAULT_PORT);
+	var peer : ENetMultiplayerPeer = ENetMultiplayerPeer.new();
+	var joinMessage : Error = peer.create_client("127.0.0.1", DEFAULT_PORT);
 	Network.Log(error_string(joinMessage));
-	Network.multiplayer.set_multiplayer_peer(Network.peer);
+	Network.multiplayer.set_multiplayer_peer(peer);
+	startConnecting();
 	pass;
 	
 func LeaveLobby():
 	Network.purposefulDisconnect = true;
-	if(Network.peer):
-		Network.peer.close();
-	pass;
-	
-func DestroyLobby():
-	pass;
-	
-func KickConnection():
+	Network.CloseMultiplayer();
 	pass;

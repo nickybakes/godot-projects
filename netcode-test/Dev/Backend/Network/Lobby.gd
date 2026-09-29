@@ -1,10 +1,12 @@
-extends Node
 class_name Lobby
 
 const MAX_CONNECTIONS = 16
 const LOBBY_SPECIAL_PREFIX = "s10h56j792";
 
 var lobbyId;
+var connecting : bool;
+const maxTimeConnecting : float = 3;
+var timeConnecting : float = 0;
 var isHost : bool;
 var hostId : int;
 
@@ -22,6 +24,11 @@ func addNewConnection(id : int):
 		connections[id] = connection;
 	else:
 		connections.set(id, connection);
+		
+func startConnecting():
+	connecting = true;
+	timeConnecting = 0;
+	Network.Connecting.emit();
 
 func HostLobby():
 	Network.Log("Basic Lobby Host");
@@ -33,8 +40,11 @@ func JoinLobby():
 func LeaveLobby():
 	pass;
 	
-func DestroyLobby():
-	pass;
-	
 func KickConnection():
 	pass;
+	
+func Update(dt : float):
+	if(connecting):
+		timeConnecting += dt;
+		if(timeConnecting >= maxTimeConnecting):
+			Network.TimeOut();

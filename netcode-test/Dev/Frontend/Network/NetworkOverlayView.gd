@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 class_name NetworkOverlayView
 
 @onready var pingLabel : Label = $"Ping Label"
@@ -31,9 +31,13 @@ func ConnectingMessage():
 	connectingPanel.visible = true;
 	errorPanel.visible = false;
 	pass;
+	
+func ConnectionAccepted():
+	coverupPanel.visible = false;
 
 func CancelConnection():
 	coverupPanel.visible = false;
+	Network.CancelConnecting();
 	pass;
 	
 func DismissError():
