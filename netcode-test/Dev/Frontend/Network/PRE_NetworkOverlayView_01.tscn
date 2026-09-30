@@ -19,7 +19,7 @@ font_size = 50
 
 [sub_resource type="LabelSettings" id="LabelSettings_bvqms"]
 line_spacing = -14.33
-font_size = 34
+font_size = 20
 
 [node name="NetworkOverlayView" type="CanvasLayer" unique_id=851211738]
 script = ExtResource("1_08wy6")
@@ -138,6 +138,17 @@ grow_horizontal = 0
 theme_override_font_sizes/font_size = 35
 text = "Log"
 
+[node name="Test Log" type="Button" parent="." unique_id=1438603649]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -373.0
+offset_right = -225.0
+offset_bottom = 57.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 35
+text = "Test Log"
+
 [node name="Log Panel" type="Panel" parent="." unique_id=278196554]
 anchors_preset = 1
 anchor_left = 1.0
@@ -155,20 +166,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-horizontal_scroll_mode = 0
 
 [node name="Log VBox Container" type="VBoxContainer" parent="Log Panel/Log Scroll Container" unique_id=540765153]
 layout_mode = 2
 
 [node name="Log Line Prefab" type="Label" parent="." unique_id=1134549986]
 visible = false
-custom_maximum_size = Vector2(529, -1)
 offset_right = 529.0
-offset_bottom = 74.0
+offset_bottom = 25.0
 text = "log ytext"
 label_settings = SubResource("LabelSettings_bvqms")
-autowrap_mode = 1
 
 [connection signal="pressed" from="Input Coverup Panel/Error Panel/Dismiss Error Button" to="." method="DismissError"]
 [connection signal="pressed" from="Input Coverup Panel/Connecting Panel/Dismiss Error Button" to="." method="CancelConnection"]
 [connection signal="pressed" from="Log Toggle" to="." method="ToggleLog"]
+[connection signal="pressed" from="Test Log" to="." method="TestLog"]

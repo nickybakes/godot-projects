@@ -25,6 +25,13 @@ func addNewConnection(id : int):
 	else:
 		connections.set(id, connection);
 		
+func OnPeerDisconnect(id : int):
+	connections.erase(id);
+	if(isHost):
+		pass;
+	else:
+		pass;
+		
 func startConnecting():
 	connecting = true;
 	timeConnecting = 0;

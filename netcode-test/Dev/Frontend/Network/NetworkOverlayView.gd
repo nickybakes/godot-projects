@@ -9,7 +9,8 @@ class_name NetworkOverlayView
 @onready var messageLabel : Label = $"Input Coverup Panel/Error Panel/Message"
 @onready var connectingPanel: Panel = $"Input Coverup Panel/Connecting Panel"
 
-@onready var logScrollContainer: Panel = $"Log Panel"
+@onready var logPanel: Panel = $"Log Panel"
+@onready var logScrollContainer: ScrollContainer = $"Log Panel/Log Scroll Container/"
 @onready var logVBoxContainer: VBoxContainer = $"Log Panel/Log Scroll Container/Log VBox Container"
 @onready var logLinePrefab: Label = $"Log Line Prefab"
 
@@ -45,14 +46,19 @@ func DismissError():
 	pass;
 	
 func ToggleLog():
-	logScrollContainer.visible = !logScrollContainer.visible;
+	logPanel.visible = !logPanel.visible;
 	pass;
+	
+func TestLog():
+	LogMessage("Test wdaw d awd awd awdawdawdawdawdwd");
 	
 func LogMessage(message : String):
 	var newLogLine : Label = logLinePrefab.duplicate();
 	logVBoxContainer.add_child(newLogLine);
 	newLogLine.visible = true;
 	newLogLine.text = message;
+	await get_tree().create_timer(.01).timeout
+	logScrollContainer.set_deferred("scroll_vertical", logScrollContainer.get_v_scroll_bar().max_value)
 	pass;
 
 func setPing(ping : int):

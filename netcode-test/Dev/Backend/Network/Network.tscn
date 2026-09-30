@@ -12,4 +12,5 @@ script = ExtResource("1_eq1j8")
 [connection signal="Connecting" from="." to="NetworkOverlayView" method="ConnectingMessage"]
 [connection signal="ConnectionAccepted" from="." to="NetworkOverlayView" method="ConnectionAccepted"]
 [connection signal="ConnectionFailed" from="." to="NetworkOverlayView" method="ConnectionFailedMessage"]
+[connection signal="HostSuccess" from="." to="NetworkOverlayView" method="ConnectionAccepted"]
 [connection signal="LogMessage" from="." to="NetworkOverlayView" method="LogMessage"]

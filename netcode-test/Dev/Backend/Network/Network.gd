@@ -15,10 +15,11 @@ var myId : int;
 
 var serverConnectionError;
 
+signal HostSuccess()
 signal ConnectionFailed(message : String)
 signal ConnectionAccepted()
 signal Connecting()
-signal Disconnect()
+signal Disconnected()
 signal LogMessage(message : String);
 #signal game_ended()
 #signal game_error(what : String)
@@ -37,21 +38,39 @@ func _ready():
 func OnConnectionToServerSucceeded():
 	myId = multiplayer.get_unique_id();
 	Log("OnConnectionToServerSucceeded");
-	rpc_id(myId, "RequestConnectionToHost");
+	rpc_id(1, "RequestConnectionToHost", myId);
+	purposefulDisconnect = false;
 	pass;
+	
+func OnHostSuccess():
+	currentLobby.connecting = false;
+	myId = 1;
+	HostSuccess.emit();
+	purposefulDisconnect = false;
+	
+func OnHostFailure():
+	OnConnectionToServerFailed();
+	ConnectionFailed.emit("Could not start host.");
 	
 func OnConnectionToServerFailed():
 	CloseMultiplayer();
 	pass;
 	
 func OnServerDisconnected():
+	Disconnected.emit();
+	if(!purposefulDisconnect):
+		ConnectionFailed.emit("Server disconnected!");
+	CloseMultiplayer();
 	pass;
 	
 func OnPeerConnectedToMe(id : int):
-	Log("OnPeerConnectedToMe");
+	#Log("OnPeerConnectedToMe");
 	pass;
 	
 func OnPeerDisconnectedFromMe(id : int):
+	Log(str("Disconnect from ", id));
+	currentLobby.OnPeerDisconnect(id);
+	#if(currentLobby.isHost)
 	pass;
 	
 func GetPing() -> int:
@@ -65,6 +84,11 @@ func TimeOut():
 	ConnectionFailed.emit("No connection found, timed out.");
 	pass;
 	
+func DisconnectFromServer():
+	purposefulDisconnect = true;
+	Disconnected.emit();
+	CloseMultiplayer();
+	
 func CancelConnecting():
 	Log("Connection canceled");
 	CloseMultiplayer();
@@ -74,7 +98,11 @@ func CloseMultiplayer():
 		multiplayer.multiplayer_peer.close();
 	multiplayer.multiplayer_peer = null;
 	Log("Multiplayer closed");
+	if(netTime != null):
+		netTime.queue_free();
+	netTime = null;
 	currentLobby = null;
+	purposefulDisconnect = false;
 
 ## Lobby management functions.
 @rpc("call_remote", "any_peer")
@@ -98,6 +126,7 @@ func OnHostAcceptsConnection():
 @rpc("call_local", "authority")
 func OnHostDeclinesConnection():
 	ConnectionFailed.emit("Connection declined by host.");
+	CloseMultiplayer();
 	pass;
 	
 #region Lobbies

@@ -22,7 +22,15 @@ offset_bottom = 83.33333
 text = "Player Name"
 label_settings = SubResource("LabelSettings_c5qv8")
 
-[node name="Host Local Button" type="Button" parent="." unique_id=1683915340]
+[node name="Outside Lobby View" type="Control" parent="." unique_id=2045385266]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Host Local Button" type="Button" parent="Outside Lobby View" unique_id=1683915340]
 layout_mode = 0
 offset_left = 84.0
 offset_top = 134.0
@@ -31,7 +39,7 @@ offset_bottom = 298.0
 theme_override_font_sizes/font_size = 54
 text = "Host local"
 
-[node name="Join Local Button" type="Button" parent="." unique_id=636893693]
+[node name="Join Local Button" type="Button" parent="Outside Lobby View" unique_id=636893693]
 layout_mode = 0
 offset_left = 84.0
 offset_top = 358.0
@@ -40,5 +48,41 @@ offset_bottom = 522.0
 theme_override_font_sizes/font_size = 54
 text = "Join local"
 
-[connection signal="pressed" from="Host Local Button" to="." method="hostLocalButton"]
-[connection signal="pressed" from="Join Local Button" to="." method="joinLocalButton"]
+[node name="Inside Lobby Host" type="Control" parent="." unique_id=277915067]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Stop Host Button" type="Button" parent="Inside Lobby Host" unique_id=171216021]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 561.0
+offset_right = 488.875
+offset_bottom = 725.0
+theme_override_font_sizes/font_size = 54
+text = "Stop Host"
+
+[node name="Inside Lobby Member" type="Control" parent="." unique_id=90951677]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Leave Button" type="Button" parent="Inside Lobby Member" unique_id=197739756]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 561.0
+offset_right = 488.875
+offset_bottom = 725.0
+theme_override_font_sizes/font_size = 54
+text = "Leave"
+
+[connection signal="pressed" from="Outside Lobby View/Host Local Button" to="." method="hostLocalButton"]
+[connection signal="pressed" from="Outside Lobby View/Join Local Button" to="." method="joinLocalButton"]
+[connection signal="pressed" from="Inside Lobby Host/Stop Host Button" to="." method="stopHostButton"]
+[connection signal="pressed" from="Inside Lobby Member/Leave Button" to="." method="leaveLobbyButton"]
