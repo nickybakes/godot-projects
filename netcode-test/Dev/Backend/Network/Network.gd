@@ -5,6 +5,8 @@ enum NetworkType{
 	STEAM
 }
 
+const PRE_GAME_NET_MANAGER_01 = preload("uid://colj8jicr5etf");
+
 var networkType := NetworkType.ENET;
 
 var currentLobby : Lobby;
@@ -45,6 +47,8 @@ func OnConnectionToServerSucceeded():
 func OnHostSuccess():
 	currentLobby.connecting = false;
 	myId = 1;
+	SpawnGameNetManager();
+	setUpTime();
 	HostSuccess.emit();
 	purposefulDisconnect = false;
 	
@@ -102,7 +106,16 @@ func CloseMultiplayer():
 		netTime.queue_free();
 	netTime = null;
 	currentLobby = null;
+	DestroyGameNetManager();
 	purposefulDisconnect = false;
+	
+func SpawnGameNetManager():
+	var gameNetManager = PRE_GAME_NET_MANAGER_01.instantiate();
+	add_child(gameNetManager);
+	
+func DestroyGameNetManager():
+	if(GameNetManager.GameNet != null):
+		GameNetManager.GameNet.queue_free();
 
 ## Lobby management functions.
 @rpc("call_remote", "any_peer")
@@ -116,14 +129,15 @@ func RequestConnectionToHost(id : int):
 		rpc_id(id, "OnHostDeclinesConnection");
 	pass;
 
-@rpc("call_local", "authority")
+@rpc("call_remote", "authority")
 func OnHostAcceptsConnection():
 	setUpTime();
 	currentLobby.connecting = false;
+	SpawnGameNetManager();
 	ConnectionAccepted.emit();
 	pass;
 	
-@rpc("call_local", "authority")
+@rpc("call_remote", "authority")
 func OnHostDeclinesConnection():
 	ConnectionFailed.emit("Connection declined by host.");
 	CloseMultiplayer();

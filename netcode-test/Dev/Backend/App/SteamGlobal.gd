@@ -13,17 +13,18 @@ var displayName: String = "Player"
 var instanceId : String;
 
 func _init() -> void:
-	# Set your game's Steam app ID here
-	OS.set_environment("SteamAppId", str(steam_app_id))
-	OS.set_environment("SteamGameId", str(steam_app_id))
+	## Set your game's Steam app ID here
 	instanceId = str(OS.get_process_id());
-
-
-func _ready() -> void:
-	initialize_steam()
+	#OS.set_environment("SteamAppId", str(steam_app_id))
+	#OS.set_environment("SteamGameId", str(steam_app_id))
 	
-func _process(_delta: float) -> void:
-	Steam.run_callbacks()
+#
+#
+#func _ready() -> void:
+	#initialize_steam()
+	#
+#func _process(_delta: float) -> void:
+	#Steam.run_callbacks()
 
 
 func initialize_steam() -> void:

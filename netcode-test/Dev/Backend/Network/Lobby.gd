@@ -12,6 +12,8 @@ var hostId : int;
 
 var connections : Dictionary[int, Connection];
 
+signal PeerDisconnectedFromMe(id : int);
+
 func OnConnectionRequest(id : int) -> bool:
 	addNewConnection(id);
 	return true;
@@ -28,6 +30,7 @@ func addNewConnection(id : int):
 func OnPeerDisconnect(id : int):
 	connections.erase(id);
 	if(isHost):
+		PeerDisconnectedFromMe.emit(id);
 		pass;
 	else:
 		pass;

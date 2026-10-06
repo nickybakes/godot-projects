@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://colj8jicr5etf"]
+
+[ext_resource type="Script" uid="uid://bypppgyldenl2" path="res://Dev/Backend/Game/GameNetManager.gd" id="1_a7aat"]
+[ext_resource type="Script" uid="uid://8y7ybogubjip" path="res://Dev/Backend/Game/NetObjectManager.gd" id="2_b60cs"]
+
+[node name="PRE_GameNetManager_01" type="MultiplayerSpawner" unique_id=115177689]
+spawn_path = NodePath(".")
+script = ExtResource("1_a7aat")
+metadata/_custom_type_script = "uid://bypppgyldenl2"
+
+[node name="NetObjectManager" type="MultiplayerSpawner" parent="." unique_id=1366992134]
+spawn_path = NodePath(".")
+script = ExtResource("2_b60cs")
+metadata/_custom_type_script = "uid://8y7ybogubjip"

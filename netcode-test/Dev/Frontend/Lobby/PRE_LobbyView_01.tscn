@@ -82,7 +82,26 @@ offset_bottom = 725.0
 theme_override_font_sizes/font_size = 54
 text = "Leave"
 
+[node name="Inside Lobby" type="Control" parent="." unique_id=1555621572]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Spawn Ball Button" type="Button" parent="Inside Lobby" unique_id=2034910087]
+layout_mode = 0
+offset_left = 794.0
+offset_top = 868.0
+offset_right = 1198.875
+offset_bottom = 1032.0
+theme_override_font_sizes/font_size = 54
+text = "Spawn Ball"
+
 [connection signal="pressed" from="Outside Lobby View/Host Local Button" to="." method="hostLocalButton"]
 [connection signal="pressed" from="Outside Lobby View/Join Local Button" to="." method="joinLocalButton"]
 [connection signal="pressed" from="Inside Lobby Host/Stop Host Button" to="." method="stopHostButton"]
 [connection signal="pressed" from="Inside Lobby Member/Leave Button" to="." method="leaveLobbyButton"]
+[connection signal="pressed" from="Inside Lobby/Spawn Ball Button" to="." method="spawnBallButton"]

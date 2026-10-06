@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://oq33tksc2sxh"]
+
+[ext_resource type="Script" uid="uid://d023u4nam2amw" path="res://Dev/Backend/Objects/NetBall.gd" id="1_2soqp"]
+[ext_resource type="Script" uid="uid://b3en6qjx4o2tn" path="res://Dev/Frontend/Objects/BallController.gd" id="2_gxvss"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_gxvss"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:scale")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:visible")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+
+[sub_resource type="SphereMesh" id="SphereMesh_c5qv8"]
+
+[node name="PRE_NetBall_01" type="MultiplayerSynchronizer" unique_id=1525779440 node_paths=PackedStringArray("transform")]
+root_path = NodePath(".")
+replication_config = SubResource("SceneReplicationConfig_gxvss")
+script = ExtResource("1_2soqp")
+transform = NodePath("BallController")
+metadata/_custom_type_script = "uid://d023u4nam2amw"
+
+[node name="BallController" type="Node3D" parent="." unique_id=1560699686]
+script = ExtResource("2_gxvss")
+metadata/_custom_type_script = "uid://b3en6qjx4o2tn"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BallController" unique_id=1351204315]
+mesh = SubResource("SphereMesh_c5qv8")

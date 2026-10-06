@@ -1,6 +1,7 @@
 extends Node
 class_name NetTime
 
+@export var timeBetweenFetch : float = .5;
 
 var decimalCollector : float = 0.0;
 var latencyArray = [];
@@ -12,7 +13,7 @@ var clock : int = 0;
 func _ready() -> void:
 	fetchServerTime();
 	var timer = Timer.new();
-	timer.wait_time = .5;
+	timer.wait_time = timeBetweenFetch;
 	timer.autostart = true;
 	timer.timeout.connect(determineLatency);
 	self.add_child(timer);
@@ -50,9 +51,11 @@ func receiveLatency(clientTicksMsec : int):
 	pass;
 	
 func fetchServerTime():
-	Network.rpc_id(1, "fetchServerTime", Time.get_ticks_msec());
+	if(multiplayer.multiplayer_peer != null):
+		Network.rpc_id(1, "fetchServerTime", Time.get_ticks_msec());
 	pass
 	
 func determineLatency():
-	Network.rpc_id(1, "determineLatency", Time.get_ticks_msec());
+	if(multiplayer.multiplayer_peer != null):
+		Network.rpc_id(1, "determineLatency", Time.get_ticks_msec());
 	pass;

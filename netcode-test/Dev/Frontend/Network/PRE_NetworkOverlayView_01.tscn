@@ -139,6 +139,7 @@ theme_override_font_sizes/font_size = 35
 text = "Log"
 
 [node name="Test Log" type="Button" parent="." unique_id=1438603649]
+visible = false
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
