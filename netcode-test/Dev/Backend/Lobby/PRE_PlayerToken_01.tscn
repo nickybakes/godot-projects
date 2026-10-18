@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://4buqgu3qs5hk"]
+
+[ext_resource type="Script" uid="uid://dj210ni2xwg7c" path="res://Dev/Backend/Lobby/PlayerToken.gd" id="1_60ynm"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_k0tc8"]
+
+[node name="PRE_PlayerToken_01" type="MultiplayerSynchronizer" unique_id=1746111620]
+root_path = NodePath(".")
+replication_config = SubResource("SceneReplicationConfig_k0tc8")
+script = ExtResource("1_60ynm")
+metadata/_custom_type_script = "uid://dj210ni2xwg7c"

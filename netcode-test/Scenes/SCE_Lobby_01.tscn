@@ -1,24 +1,21 @@
-[gd_scene format=3 uid="uid://cqemrtackwhnb"]
+[gd_scene format=3 uid="uid://b5452rgondapk"]
 
-[ext_resource type="PackedScene" uid="uid://begu7jqmah13i" path="res://Dev/Frontend/Lobby/PRE_LobbyView_01.tscn" id="1_5a6u1"]
+[ext_resource type="Script" uid="uid://vwi1vjuecsdt" path="res://Dev/Backend/Lobby/PlayerJoiner.gd" id="1_5a6u1"]
+[ext_resource type="Script" uid="uid://ctgxxi7mqhyve" path="res://Dev/Frontend/Menu/CursorManager.gd" id="2_r5ok2"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mfcfy"]
+[node name="SCE_Lobby_01" type="Node3D" unique_id=1636650498]
 
-[sub_resource type="Sky" id="Sky_etr8x"]
-sky_material = SubResource("ProceduralSkyMaterial_mfcfy")
+[node name="Player Joiner" type="Node" parent="." unique_id=1136046608]
+script = ExtResource("1_5a6u1")
 
-[sub_resource type="Environment" id="Environment_c5qv8"]
-background_mode = 2
-sky = SubResource("Sky_etr8x")
-
-[node name="SCE_Lobby_01" type="Node3D" unique_id=1729758398]
-
-[node name="LobbyView" parent="." unique_id=298920046 instance=ExtResource("1_5a6u1")]
-
-[node name="Camera3D" type="Camera3D" parent="." unique_id=58828749]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=678653966]
-environment = SubResource("Environment_c5qv8")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=909558786]
-transform = Transform3D(0.85651755, -0.17360538, 0.4860441, -0.5129993, -0.18299296, 0.8386569, -0.05665271, -0.9676646, -0.24579616, 0, 0, 0)
+[node name="CursorManager" type="Node3D" parent="." unique_id=1092410923]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+script = ExtResource("2_r5ok2")
+width = 25.0
+height = 14.0
+cursorScale = 1.0
+cursorVerticalTime = 1.0
+cursorSpawnNormalizedHeight = 0.34
+cursorSpawnNormalizedLength = 0.67
+cursorColors = Array[Color]([Color(1, 0.110000014, 0.110000014, 1), Color(0.06666667, 0.23921569, 1, 1), Color(1, 0.9647059, 0.03529412, 1), Color(0, 0.7372549, 0.14509805, 1), Color(0.98039216, 0.3764706, 0, 1), Color(0.39607844, 0.05490196, 0.61960787, 1), Color(1, 0, 0.7019608, 1), Color(0.007843138, 0.79607844, 0.92156863, 1)])
+metadata/_custom_type_script = "uid://ctgxxi7mqhyve"

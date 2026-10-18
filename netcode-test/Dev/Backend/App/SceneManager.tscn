@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c4gvb5cl78ij1"]
+
+[ext_resource type="Script" uid="uid://coblg680jlh6p" path="res://Dev/Backend/App/SceneManager.gd" id="1_jsegc"]
+
+[node name="SceneManager" type="Node" unique_id=692836396]
+script = ExtResource("1_jsegc")
+metadata/_custom_type_script = "uid://coblg680jlh6p"

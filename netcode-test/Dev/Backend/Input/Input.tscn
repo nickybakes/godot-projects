@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://b7761q27xgwl"]
+
+[ext_resource type="Script" uid="uid://b2fmdva7xp2op" path="res://Dev/Backend/Input/InputManager.gd" id="1_iekpw"]
+[ext_resource type="PackedScene" uid="uid://y61dnykp4yhf" path="res://Dev/Frontend/Input/PRE_InputOverlayView_01.tscn" id="2_6cvmx"]
+
+[node name="Input" type="Node" unique_id=1790752934]
+script = ExtResource("1_iekpw")
+
+[node name="InputOverlayView" parent="." unique_id=851211738 instance=ExtResource("2_6cvmx")]
+
+[connection signal="DisconnectJoypad" from="." to="InputOverlayView" method="DisconnectJoypad"]
+[connection signal="ReconnectJoypad" from="." to="InputOverlayView" method="ReconnectJoypad"]
+[connection signal="RegisterJoypad" from="." to="InputOverlayView" method="RegisterJoypad"]

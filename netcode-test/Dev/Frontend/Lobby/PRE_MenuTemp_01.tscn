@@ -5,7 +5,7 @@
 [sub_resource type="LabelSettings" id="LabelSettings_c5qv8"]
 font_size = 54
 
-[node name="LobbyView" type="Control" unique_id=298920046]
+[node name="Menu Temp" type="Control" unique_id=298920046]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -58,10 +58,10 @@ grow_vertical = 2
 
 [node name="Stop Host Button" type="Button" parent="Inside Lobby Host" unique_id=171216021]
 layout_mode = 0
-offset_left = 84.0
-offset_top = 561.0
-offset_right = 488.875
-offset_bottom = 725.0
+offset_left = 34.0
+offset_top = 886.0
+offset_right = 438.875
+offset_bottom = 1050.0
 theme_override_font_sizes/font_size = 54
 text = "Stop Host"
 
@@ -75,10 +75,10 @@ grow_vertical = 2
 
 [node name="Leave Button" type="Button" parent="Inside Lobby Member" unique_id=197739756]
 layout_mode = 0
-offset_left = 84.0
-offset_top = 561.0
-offset_right = 488.875
-offset_bottom = 725.0
+offset_left = 34.0
+offset_top = 886.0
+offset_right = 438.875
+offset_bottom = 1050.0
 theme_override_font_sizes/font_size = 54
 text = "Leave"
 

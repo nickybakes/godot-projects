@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://ch7sfo3ux3n0v"]
+
+[ext_resource type="Script" uid="uid://d28wm3il6twd0" path="res://Dev/Frontend/Menu/Cursor.gd" id="1_wjgwl"]
+[ext_resource type="Texture2D" uid="uid://b8874osmtpjdw" path="res://Art/Sprites/SPR_Pointer_01.png" id="2_arpy3"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_6bq70"]
+properties/0/path = NodePath(".:normalizedPosition")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="PRE_Cursor_01" type="MultiplayerSynchronizer" unique_id=713730899 node_paths=PackedStringArray("transform", "sprite", "text")]
+root_path = NodePath(".")
+replication_config = SubResource("SceneReplicationConfig_6bq70")
+script = ExtResource("1_wjgwl")
+transform = NodePath("Cursor Transform")
+sprite = NodePath("Cursor Transform/Sprite")
+text = NodePath("Cursor Transform/Text")
+metadata/_custom_type_script = "uid://d28wm3il6twd0"
+
+[node name="Cursor Transform" type="Node3D" parent="." unique_id=1560013998]
+
+[node name="Sprite" type="Sprite3D" parent="Cursor Transform" unique_id=1977165846]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.037841, -1.1037508, 0)
+texture = ExtResource("2_arpy3")
+
+[node name="Text" type="Label3D" parent="Cursor Transform" unique_id=1732912915]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22550434, -1.6060162, 0.053711683)
+alpha_cut = 2
+text = "P1"
+font_size = 307
+outline_size = 78
+horizontal_alignment = 0

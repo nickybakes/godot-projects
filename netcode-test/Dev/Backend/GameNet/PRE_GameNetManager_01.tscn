@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://colj8jicr5etf"]
+
+[ext_resource type="Script" uid="uid://bypppgyldenl2" path="res://Dev/Backend/GameNet/GameNetManager.gd" id="1_2xcsi"]
+[ext_resource type="Script" uid="uid://8y7ybogubjip" path="res://Dev/Backend/GameNet/NetObjectManager.gd" id="2_psy7b"]
+[ext_resource type="Script" uid="uid://b05kcrx5rt4t3" path="res://Dev/Backend/Lobby/LobbyManager.gd" id="3_5p0yt"]
+[ext_resource type="Script" uid="uid://dx1vogfd01y12" path="res://Dev/Backend/GameNet/NetSceneManager.gd" id="3_psy7b"]
+
+[node name="PRE_GameNetManager_01" type="MultiplayerSpawner" unique_id=115177689]
+spawn_path = NodePath(".")
+script = ExtResource("1_2xcsi")
+metadata/_custom_type_script = "uid://bypppgyldenl2"
+
+[node name="Lobby Manager" type="Node" parent="." unique_id=751203014]
+script = ExtResource("3_5p0yt")
+
+[node name="NetSceneManager" type="MultiplayerSpawner" parent="." unique_id=1186417477]
+spawn_path = NodePath(".")
+script = ExtResource("3_psy7b")
+metadata/_custom_type_script = "uid://8y7ybogubjip"
+
+[node name="NetObjectManager" type="MultiplayerSpawner" parent="." unique_id=1366992134]
+spawn_path = NodePath(".")
+script = ExtResource("2_psy7b")
+metadata/_custom_type_script = "uid://8y7ybogubjip"

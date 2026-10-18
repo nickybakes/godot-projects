@@ -29,6 +29,12 @@ signal LogMessage(message : String);
 
 func Log(message):
 	LogMessage.emit(str(message));
+	
+func LogStr(...args):
+	var newString = "";
+	for val in args:
+		newString += str(val);
+	LogMessage.emit(newString);
 
 func _ready():
 	multiplayer.connected_to_server.connect(OnConnectionToServerSucceeded)

@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://y61dnykp4yhf"]
+
+[ext_resource type="Script" uid="uid://dml5oc7mil4wo" path="res://Dev/Frontend/Input/InputOverlayView.gd" id="1_eiu6y"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bvqms"]
+line_spacing = -14.33
+font_size = 20
+
+[node name="InputOverlayView" type="CanvasLayer" unique_id=851211738]
+script = ExtResource("1_eiu6y")
+
+[node name="Log Toggle" type="Button" parent="." unique_id=437489489]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -673.0
+offset_top = 1020.0
+offset_right = -558.0
+offset_bottom = 1077.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 35
+text = "Log"
+
+[node name="Test Log" type="Button" parent="." unique_id=1438603649]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -836.0
+offset_top = 1020.0
+offset_right = -688.0
+offset_bottom = 1077.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 35
+text = "Test Log"
+
+[node name="Log Panel" type="Panel" parent="." unique_id=278196554]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -553.0
+offset_top = -205.0
+offset_right = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Log Scroll Container" type="ScrollContainer" parent="Log Panel" unique_id=2140427114]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Log VBox Container" type="VBoxContainer" parent="Log Panel/Log Scroll Container" unique_id=540765153]
+layout_mode = 2
+
+[node name="Log Line Prefab" type="Label" parent="." unique_id=1134549986]
+visible = false
+offset_right = 529.0
+offset_bottom = 28.0
+text = "log ytext"
+label_settings = SubResource("LabelSettings_bvqms")
+
+[connection signal="pressed" from="Log Toggle" to="." method="ToggleLog"]
+[connection signal="pressed" from="Test Log" to="." method="TestLog"]

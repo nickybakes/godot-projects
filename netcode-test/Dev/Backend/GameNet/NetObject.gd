@@ -7,6 +7,8 @@ var isDummy : bool;
 var id : int;
 var ownerId : int;
 
+var syncedIds : Array[int] = [];
+
 func Spawn(_id : int, _ownerId : int, _spawnParams : Dictionary, _originalNetObjectPath : String):
 	id = _id;
 	spawnParams = _spawnParams;
@@ -22,6 +24,12 @@ func SetOwner(newOwnerId : int):
 		public_visibility = false;
 	else:
 		GameNetManager.GameNet.netObjectManager.rpc_id(ownerId, "ConfirmSpawnNetObject", id, Network.myId)
+
+func OwnerDisconnected():
+	pass;
+
+func GetSpawnParams():
+	return spawnParams;
 
 func DoSpawnParams():
 	pass;
