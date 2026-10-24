@@ -1,24 +1,77 @@
 [gd_scene format=3 uid="uid://cqemrtackwhnb"]
 
-[ext_resource type="PackedScene" uid="uid://begu7jqmah13i" path="res://Dev/Frontend/Lobby/PRE_MenuTemp_01.tscn" id="1_4g74i"]
+[ext_resource type="Script" uid="uid://cot4hd21yd7ka" path="res://Dev/Backend/App/Scene.gd" id="1_mldh5"]
+[ext_resource type="Script" uid="uid://bjseloqqmypie" path="res://Dev/Frontend/Menu/BaseMenuView.gd" id="2_mldh5"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_c5qv8"]
+font_size = 54
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mfcfy"]
 
-[sub_resource type="Sky" id="Sky_etr8x"]
+[sub_resource type="Sky" id="Sky_0bg6h"]
 sky_material = SubResource("ProceduralSkyMaterial_mfcfy")
 
 [sub_resource type="Environment" id="Environment_c5qv8"]
 background_mode = 2
-sky = SubResource("Sky_etr8x")
+sky = SubResource("Sky_0bg6h")
 
-[node name="SCE_Menu_01" type="Node3D" unique_id=1729758398]
+[node name="SCE_Menu_01" type="Node3D" unique_id=180864747]
+script = ExtResource("1_mldh5")
+isBaseScene = true
+metadata/_custom_type_script = "uid://cot4hd21yd7ka"
 
-[node name="Menu Temp" parent="." unique_id=298920046 instance=ExtResource("1_4g74i")]
+[node name="Menu Temp" type="Control" parent="." unique_id=298920046]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_mldh5")
+
+[node name="Name Label" type="Label" parent="Menu Temp" unique_id=616428234]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 83.33333
+text = "Player Name"
+label_settings = SubResource("LabelSettings_c5qv8")
+
+[node name="Outside Lobby View" type="Control" parent="Menu Temp" unique_id=2045385266]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Host Local Button" type="Button" parent="Menu Temp/Outside Lobby View" unique_id=1683915340]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 134.0
+offset_right = 488.875
+offset_bottom = 298.0
+theme_override_font_sizes/font_size = 54
+text = "Host local"
+
+[node name="Join Local Button" type="Button" parent="Menu Temp/Outside Lobby View" unique_id=636893693]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 358.0
+offset_right = 488.875
+offset_bottom = 522.0
+theme_override_font_sizes/font_size = 54
+text = "Join local"
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=58828749]
+current = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=678653966]
 environment = SubResource("Environment_c5qv8")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=909558786]
 transform = Transform3D(0.85651755, -0.17360538, 0.4860441, -0.5129993, -0.18299296, 0.8386569, -0.05665271, -0.9676646, -0.24579616, 0, 0, 0)
+light_bake_mode = 0
+
+[connection signal="pressed" from="Menu Temp/Outside Lobby View/Host Local Button" to="Menu Temp" method="hostLocalButton"]
+[connection signal="pressed" from="Menu Temp/Outside Lobby View/Join Local Button" to="Menu Temp" method="joinLocalButton"]

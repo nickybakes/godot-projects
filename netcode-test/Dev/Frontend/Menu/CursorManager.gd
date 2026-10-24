@@ -11,8 +11,7 @@ var cursorPath : String = "uid://ch7sfo3ux3n0v";
 @export_range(0, 1, .01) var cursorSpawnNormalizedHeight : float;
 @export_range(0, 1, .01) var cursorSpawnNormalizedLength : float;
 
-
-@export var cursorColors : Array[Color];
+@export var cursorCustomizationDirectory : CursorCustomizationDirectory;
 
 var aspectRatio : float;
 var normalizedCursorSpeed : float;
@@ -53,6 +52,11 @@ func CursorAdded(playerNumber : int, cursor : Cursor):
 func CursorRemoved(playerNumber : int):
 	cursors.erase(playerNumber);
 	
+func DestroyAllCursors():
+	for playerNumber in cursors.keys():
+		GameNetManager.GameNet.netObjectManager.DestroyNetObject(cursors[playerNumber].id);
+	pass;
+	
 func GetStartNormalizedPositionByPlayerNumber(playerNumber : int) -> Vector2:
 	var newPosition = Vector2.ZERO;
 	newPosition.y = cursorSpawnNormalizedHeight;
@@ -81,4 +85,4 @@ func SetTransformFromNormalizedPosition(normalizedPosition : Vector2, cursorTran
 	cursorTransform.scale = Vector3(cursorScale, cursorScale, cursorScale);
 
 func GetColorFromPlayerNumber(playerNumber : int) -> Color:
-	return cursorColors[(playerNumber - 1) % cursorColors.size()];
+	return cursorCustomizationDirectory.cursorColors[(playerNumber - 1) % cursorCustomizationDirectory.cursorColors.size()];

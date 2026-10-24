@@ -12,6 +12,7 @@ func SetupJoypad(_device : int, isReconnect : bool = false):
 	disconnected = false;
 	device = _device;
 	deviceName = Input.get_joy_name(device);
+	name = str(deviceName, " Input ", device);
 	if(isReconnect):
 		InputManager.ReconnectJoypad.emit(device, deviceName);
 	else:

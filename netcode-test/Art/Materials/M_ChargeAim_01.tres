@@ -1,0 +1,19 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://ltb43n3t3x1i"]
+
+[ext_resource type="Shader" uid="uid://cljn7m88xrttf" path="res://Art/Shaders/S_ChargeAim_01.gdshader" id="1_8mm1l"]
+[ext_resource type="Texture2D" uid="uid://dwq0lilq8ywcl" path="res://Art/Textures/T_Arrow_01.png" id="2_f41ol"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_8mm1l")
+shader_parameter/mainTexture = ExtResource("2_f41ol")
+shader_parameter/textureScale = Vector2(3, 4)
+shader_parameter/color = Color(1, 0, 0, 1)
+shader_parameter/colorBlend = 0.5999999865888
+shader_parameter/minAlpha = 0.1999999955296
+shader_parameter/alphaFadePower = 1.25
+shader_parameter/scrollSpeed = Vector2(1, 2)
+shader_parameter/emissive = 2.41
+shader_parameter/fresnelPower = 1.173
+shader_parameter/fresnelMultiply = 1.415
+shader_parameter/fresnelAlpha = 0.22999999485904

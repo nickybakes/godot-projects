@@ -6,4 +6,5 @@ enum InputAction
 	Jump,
 	Leave,
 	StartGame,
+	Charge,
 }

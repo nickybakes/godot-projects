@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dqrlfdt0mxo4s"]
+
+[ext_resource type="Shader" uid="uid://dxdiyx5ekscea" path="res://Art/Shaders/S_Xray_01.gdshader" id="1_8l8od"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_8l8od")
+shader_parameter/color = Color(1, 0.2, 0, 1)
+shader_parameter/brightness = 0.70999998413008
+shader_parameter/fresnelPower = 1.197
+shader_parameter/fresnelMultiply = 0.929

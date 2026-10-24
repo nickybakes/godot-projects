@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dsqom3ceceiyc"]
+
+[ext_resource type="Shader" uid="uid://dg38kvbgc3xay" path="res://Art/Shaders/S_DevEnv_01.gdshader" id="1_44l54"]
+[ext_resource type="Texture2D" uid="uid://diwwxtv6i6y3y" path="res://Art/Textures/T_DevEnv_01.png" id="2_qsorg"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_44l54")
+shader_parameter/devTexture = ExtResource("2_qsorg")
+shader_parameter/textureScale = 1.5
+shader_parameter/roughness = 0.53999998792992
+shader_parameter/roughnessAdjust = 0.25999999418848
+shader_parameter/metallic = 0.25999999418848
+shader_parameter/brightness = 0.15999999642368
+shader_parameter/saturation = 0.999999977648

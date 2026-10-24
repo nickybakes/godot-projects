@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="CursorCustomizationDirectory" format=3 uid="uid://dpwawajn4ovhe"]
+
+[ext_resource type="Script" uid="uid://blv6vy54iv88i" path="res://Dev/Frontend/Customization/CursorCustomizationDirectory.gd" id="1_ruw61"]
+
+[resource]
+script = ExtResource("1_ruw61")
+cursorColors = Array[Color]([Color(1, 0.110000014, 0.110000014, 1), Color(0.06666667, 0.23921569, 1, 1), Color(1, 0.9647059, 0.03529412, 1), Color(0, 0.7372549, 0.14509805, 1), Color(0.98039216, 0.3764706, 0, 1), Color(0.39607844, 0.05490196, 0.61960787, 1), Color(1, 0, 0.7019608, 1), Color(0.007843138, 0.79607844, 0.92156863, 1)])
+metadata/_custom_type_script = "uid://ddnmljwlmar2c"

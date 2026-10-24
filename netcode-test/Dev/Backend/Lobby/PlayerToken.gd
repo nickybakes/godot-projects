@@ -26,4 +26,5 @@ func _ready() -> void:
 	LobbyManager.Lobby.PlayerTokenCreated(self);
 
 func _exit_tree() -> void:
-	LobbyManager.Lobby.PlayerTokenDestroyed(self);
+	if(LobbyManager.Lobby != null):
+		LobbyManager.Lobby.PlayerTokenDestroyed(self);

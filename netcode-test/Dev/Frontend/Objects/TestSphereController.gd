@@ -1,5 +1,5 @@
 extends Node3D
-class_name BallController
+class_name TestSphereController
 
 @onready var netObject: NetObject = $".."
 var originPosition : Vector3;

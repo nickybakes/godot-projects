@@ -1,7 +1,12 @@
 [gd_scene format=3 uid="uid://c4gvb5cl78ij1"]
 
-[ext_resource type="Script" uid="uid://coblg680jlh6p" path="res://Dev/Backend/App/SceneManager.gd" id="1_jsegc"]
+[ext_resource type="Script" uid="uid://coblg680jlh6p" path="res://Dev/Backend/App/SceneGlobal.gd" id="1_mppln"]
 
 [node name="SceneManager" type="Node" unique_id=692836396]
-script = ExtResource("1_jsegc")
+script = ExtResource("1_mppln")
+scenePaths = Dictionary[int, String]({
+0: "uid://cqemrtackwhnb",
+1: "uid://b5452rgondapk",
+2: "uid://dfe26cy4cjnly"
+})
 metadata/_custom_type_script = "uid://coblg680jlh6p"

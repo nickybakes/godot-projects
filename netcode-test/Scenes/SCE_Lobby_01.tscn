@@ -1,9 +1,95 @@
 [gd_scene format=3 uid="uid://b5452rgondapk"]
 
 [ext_resource type="Script" uid="uid://vwi1vjuecsdt" path="res://Dev/Backend/Lobby/PlayerJoiner.gd" id="1_5a6u1"]
+[ext_resource type="Script" uid="uid://cot4hd21yd7ka" path="res://Dev/Backend/App/Scene.gd" id="1_gp2lw"]
+[ext_resource type="Script" uid="uid://c6t5j2q827qcr" path="res://Dev/Frontend/Lobby/LobbyView.gd" id="2_d28wa"]
 [ext_resource type="Script" uid="uid://ctgxxi7mqhyve" path="res://Dev/Frontend/Menu/CursorManager.gd" id="2_r5ok2"]
+[ext_resource type="Resource" uid="uid://dpwawajn4ovhe" path="res://Dev/Frontend/Customization/R_CursorCustomizationDirectory_01.tres" id="5_rsejo"]
 
-[node name="SCE_Lobby_01" type="Node3D" unique_id=1636650498]
+[sub_resource type="LabelSettings" id="LabelSettings_c5qv8"]
+font_size = 54
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gp2lw"]
+
+[sub_resource type="Sky" id="Sky_d28wa"]
+sky_material = SubResource("ProceduralSkyMaterial_gp2lw")
+
+[sub_resource type="Environment" id="Environment_d28wa"]
+background_mode = 2
+sky = SubResource("Sky_d28wa")
+
+[node name="SCE_Lobby_01" type="Node3D" unique_id=1459873858]
+script = ExtResource("1_gp2lw")
+metadata/_custom_type_script = "uid://cot4hd21yd7ka"
+
+[node name="Menu Temp" type="Control" parent="." unique_id=298920046]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_d28wa")
+
+[node name="Name Label" type="Label" parent="Menu Temp" unique_id=616428234]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 83.33333
+text = "Player Name"
+label_settings = SubResource("LabelSettings_c5qv8")
+
+[node name="Inside Lobby Host" type="Control" parent="Menu Temp" unique_id=277915067]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Stop Host Button" type="Button" parent="Menu Temp/Inside Lobby Host" unique_id=171216021]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 886.0
+offset_right = 438.875
+offset_bottom = 1050.0
+theme_override_font_sizes/font_size = 54
+text = "Stop Host"
+
+[node name="Inside Lobby Member" type="Control" parent="Menu Temp" unique_id=90951677]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Leave Button" type="Button" parent="Menu Temp/Inside Lobby Member" unique_id=197739756]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 886.0
+offset_right = 438.875
+offset_bottom = 1050.0
+theme_override_font_sizes/font_size = 54
+text = "Leave"
+
+[node name="Inside Lobby" type="Control" parent="Menu Temp" unique_id=1555621572]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Spawn Ball Button" type="Button" parent="Menu Temp/Inside Lobby" unique_id=2034910087]
+layout_mode = 0
+offset_left = 794.0
+offset_top = 868.0
+offset_right = 1198.875
+offset_bottom = 1032.0
+theme_override_font_sizes/font_size = 54
+text = "Spawn Ball"
 
 [node name="Player Joiner" type="Node" parent="." unique_id=1136046608]
 script = ExtResource("1_5a6u1")
@@ -17,5 +103,19 @@ cursorScale = 1.0
 cursorVerticalTime = 1.0
 cursorSpawnNormalizedHeight = 0.34
 cursorSpawnNormalizedLength = 0.67
-cursorColors = Array[Color]([Color(1, 0.110000014, 0.110000014, 1), Color(0.06666667, 0.23921569, 1, 1), Color(1, 0.9647059, 0.03529412, 1), Color(0, 0.7372549, 0.14509805, 1), Color(0.98039216, 0.3764706, 0, 1), Color(0.39607844, 0.05490196, 0.61960787, 1), Color(1, 0, 0.7019608, 1), Color(0.007843138, 0.79607844, 0.92156863, 1)])
+cursorCustomizationDirectory = ExtResource("5_rsejo")
 metadata/_custom_type_script = "uid://ctgxxi7mqhyve"
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=416222106]
+current = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=696283838]
+environment = SubResource("Environment_d28wa")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2043443790]
+transform = Transform3D(0.85651755, -0.17360538, 0.4860441, -0.5129993, -0.18299296, 0.8386569, -0.05665271, -0.9676646, -0.24579616, 0, 0, 0)
+light_bake_mode = 0
+
+[connection signal="pressed" from="Menu Temp/Inside Lobby Host/Stop Host Button" to="Menu Temp" method="stopHostButton"]
+[connection signal="pressed" from="Menu Temp/Inside Lobby Member/Leave Button" to="Menu Temp" method="leaveLobbyButton"]
+[connection signal="pressed" from="Menu Temp/Inside Lobby/Spawn Ball Button" to="Menu Temp" method="spawnBallButton"]

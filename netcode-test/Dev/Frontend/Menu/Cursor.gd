@@ -20,9 +20,10 @@ func DoSpawnParams():
 		currentNormalizedPosition = spawnParams["normalizedPosition"];
 		
 	text.text = str("P", playerNumber);	
-	sprite.modulate = CursorManager.Manager.GetColorFromPlayerNumber(playerNumber);
 	
-	CursorManager.Manager.CursorAdded(playerNumber, self);
+	if(CursorManager.Manager):
+		sprite.modulate = CursorManager.Manager.cursorCustomizationDirectory.GetColorFromPlayerNumber(playerNumber);
+		CursorManager.Manager.CursorAdded(playerNumber, self);
 	
 	if(!isDummy):
 		playerToken = LobbyManager.Lobby.GetPlayerTokenByPlayerNumber(playerNumber);
@@ -41,4 +42,5 @@ func _process(delta: float) -> void:
 		CursorManager.Manager.SetTransformFromNormalizedPosition(currentNormalizedPosition, transform);
 
 func _exit_tree() -> void:
-	CursorManager.Manager.CursorRemoved(playerNumber);
+	if(CursorManager.Manager != null):
+		CursorManager.Manager.CursorRemoved(playerNumber);

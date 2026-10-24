@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BallTraits" format=3 uid="uid://bkj4hy78bq3cb"]
+
+[ext_resource type="Script" uid="uid://bxpl8bbykl3xb" path="res://Dev/Frontend/Ball Controller/BallTraits.gd" id="1_nmqsg"]
+
+[resource]
+script = ExtResource("1_nmqsg")
+gravity = 20.0
+deceleration = 10.0
+jumpHeight = 8.0
+chargeDeceleration = 10.0
+metadata/_custom_type_script = "uid://bxpl8bbykl3xb"

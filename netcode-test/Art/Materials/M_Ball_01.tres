@@ -1,0 +1,16 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://di1to8x2plpx"]
+
+[ext_resource type="Shader" uid="uid://s2fyajxg2852" path="res://Art/Shaders/S_Ball_01.gdshader" id="1_j8625"]
+[ext_resource type="Texture2D" uid="uid://btdty6y1b3s8f" path="res://Art/Textures/T_Checker_01.png" id="2_hs83p"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_j8625")
+shader_parameter/mainTexture = ExtResource("2_hs83p")
+shader_parameter/textureScale = 1.5
+shader_parameter/color = Color(1, 0, 0, 1)
+shader_parameter/emissive = 1.7999999821184
+shader_parameter/roughness = 0.27999999374144
+shader_parameter/metallic = 0.25999999418848
+shader_parameter/fresnelPower = 0.47
+shader_parameter/fresnelMultiply = 1.4020000000000001

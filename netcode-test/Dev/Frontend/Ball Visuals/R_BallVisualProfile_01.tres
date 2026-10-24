@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BallVisualProfile" format=3 uid="uid://b3ori3ghnplsq"]
+
+[ext_resource type="Script" uid="uid://cx0pe6ktsy0rm" path="res://Dev/Frontend/Ball Visuals/BallVisualProfile.gd" id="1_4sm07"]
+
+[resource]
+script = ExtResource("1_4sm07")
+maxStretchCharge = 2.297
+maxOffsetCharge = 1.149
+maxStretch = 2.297
+metadata/_custom_type_script = "uid://cx0pe6ktsy0rm"

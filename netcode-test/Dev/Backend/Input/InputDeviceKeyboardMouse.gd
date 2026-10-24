@@ -5,6 +5,7 @@ var mouseScale := .001;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	name = "Keyboard & Mouse Input";
 	device = 16;
 	pass # Replace with function body.
 
@@ -15,6 +16,7 @@ func _process(delta: float) -> void:
 	
 func _input(event: InputEvent) -> void:
 	if(event.device == 16 || event.device == 32):
+		event.device = 16;
 		inputBuffer.OnInput(event);
 		GetMoveInput();
 		pass;

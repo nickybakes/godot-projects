@@ -1,45 +1,56 @@
 extends Control
 class_name LobbyView
 
-@onready var outsideLobbyView: Control = $"Outside Lobby View"
 @onready var insideLobbyHost: Control = $"Inside Lobby Host"
 @onready var insideLobbyMember: Control = $"Inside Lobby Member"
 @onready var insideLobby: Control = $"Inside Lobby"
 
+var gameStarted := false;
+
 
 func _ready():
-	Network.HostSuccess.connect(OnHostSuccess);
-	Network.ConnectionAccepted.connect(OnJoinSuccess);
-	Network.Disconnected.connect(ResetLobby);
-	ResetLobby();
+	if(Network.currentLobby.isHost):
+		OnHostSuccess();
+	else:
+		OnJoinSuccess();
+		
+func _process(delta: float) -> void:
+	CheckForStartGameInput();
+	pass;
 	
+	
+func CheckForStartGameInput():
+	if(LobbyManager.Lobby):
+		for playerToken in LobbyManager.Lobby.playerTokens:
+			if(playerToken.inputDevice):
+				if(playerToken.inputDevice.inputBuffer.IsActionJustPressedThisFrame(Enums.InputAction.StartGame)):
+					if(Network.currentLobby.isHost):
+						RequestStartGame();
+					else:
+						rpc_id(1, 'RequestStartGame');
+					pass;
+	pass;
+	
+@rpc("any_peer", "call_remote")
+func RequestStartGame():
+	if(!gameStarted):
+		gameStarted = true;
+		CursorManager.Manager.DestroyAllCursors();
+		GameNetManager.GameNet.netSceneManager.SwitchScene(SceneManager.SCENE.ArenaScene_01);
+	pass;
 	
 func OnHostSuccess():
-	outsideLobbyView.visible = false;
 	insideLobbyHost.visible = true;
 	insideLobbyMember.visible = false;
 	insideLobby.visible = true;
 	pass;
 	
 func OnJoinSuccess():
-	outsideLobbyView.visible = false;
 	insideLobbyHost.visible = false;
 	insideLobbyMember.visible = true;
 	insideLobby.visible = true;
 	pass;
-	
-func ResetLobby():
-	outsideLobbyView.visible = true;
-	insideLobbyHost.visible = false;
-	insideLobbyMember.visible = false;
-	insideLobby.visible = false;
 
-func hostLocalButton():
-	Network.HostLobby(Network.NetworkType.ENET);
-
-func joinLocalButton():
-	Network.JoinLobby(Network.NetworkType.ENET);
-	
 func stopHostButton():
 	Network.DisconnectFromServer();
 	

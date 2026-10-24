@@ -1,0 +1,46 @@
+extends NetObject
+class_name NetBall
+
+@export var ballController : BallMCC;
+
+@export var position : Vector3;
+@export var velocity : Vector3;
+@export var stateIndex : int;
+
+var playerNumber : int;
+var playerToken : PlayerToken;
+var inputDevice : InputDevice;
+var currentStateIndex : int = -1;
+
+func DoSpawnParams():
+	if(spawnParams.has("playerNumber")):
+		playerNumber = spawnParams["playerNumber"];
+	if(spawnParams.has("position")):
+		position = spawnParams["position"];
+		ballController.position = position;
+	if(spawnParams.has("velocity")):
+		velocity = spawnParams["velocity"];
+		ballController.velocity = velocity;
+		
+	ballController.visuals.Setup(playerNumber);
+	ballController.updatePhysics = !isDummy;
+	
+	if(!isDummy):
+		playerToken = LobbyManager.Lobby.GetPlayerTokenByPlayerNumber(playerNumber);
+		inputDevice = playerToken.inputDevice;
+		ballController.inputDevice = inputDevice;
+		
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	if(isDummy):
+		ballController.position = lerp(ballController.position, position, .5);
+		ballController.velocity = lerp(ballController.velocity, velocity, .5);
+		if(currentStateIndex != stateIndex):
+			currentStateIndex = stateIndex;
+			ballController.DoStateTransitionByIndex(stateIndex);
+	else:
+		position = ballController.position;
+		velocity = ballController.velocity;
+		stateIndex = ballController.currentState.stateIndex;
+	pass

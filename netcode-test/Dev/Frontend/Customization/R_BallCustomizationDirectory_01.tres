@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="BallCustomizationDirectory" format=3 uid="uid://0aagooiulhx6"]
+
+[ext_resource type="Material" uid="uid://di1to8x2plpx" path="res://Art/Materials/M_Ball_01.tres" id="1_2a82k"]
+[ext_resource type="Script" uid="uid://ddnmljwlmar2c" path="res://Dev/Frontend/Customization/BallCustomizationDirectory.gd" id="1_uj00y"]
+[ext_resource type="Material" uid="uid://clerrjhlukxmf" path="res://Art/Materials/M_Outline_01.tres" id="2_y8lo0"]
+[ext_resource type="Material" uid="uid://ltb43n3t3x1i" path="res://Art/Materials/M_ChargeAim_01.tres" id="4_2a82k"]
+[ext_resource type="Material" uid="uid://dqrlfdt0mxo4s" path="res://Art/Materials/M_Xray_01.tres" id="4_t2djn"]
+
+[resource]
+script = ExtResource("1_uj00y")
+ballColors = Array[Color]([Color(1, 0.110000014, 0.110000014, 1), Color(0.06666667, 0.23921569, 1, 1), Color(1, 0.9647059, 0.03529412, 1), Color(0, 0.7372549, 0.14509805, 1), Color(0.98039216, 0.3764706, 0, 1), Color(0.39607844, 0.05490196, 0.61960787, 1), Color(1, 0, 0.7019608, 1), Color(0.007843138, 0.79607844, 0.92156863, 1)])
+ballMaterialBasic = ExtResource("1_2a82k")
+outlineMaterial = ExtResource("2_y8lo0")
+xrayMaterial = ExtResource("4_t2djn")
+chargeAimMaterial = ExtResource("4_2a82k")
+metadata/_custom_type_script = "uid://ddnmljwlmar2c"

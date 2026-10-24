@@ -4,6 +4,7 @@ class_name GameNetManager
 static var GameNet : GameNetManager
 
 @onready var netObjectManager: NetObjectManager = $NetObjectManager
+@onready var netSceneManager: NetSceneManager = $NetSceneManager
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

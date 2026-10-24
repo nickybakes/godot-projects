@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://2rolpfky2ye3"]
+
+[ext_resource type="Script" uid="uid://rmn08h6akfrp" path="res://Dev/Frontend/Ball Controller/NetBall.gd" id="1_yhnyd"]
+[ext_resource type="PackedScene" uid="uid://c42ssx2u21iv8" path="res://Dev/Frontend/Ball Controller/PRE_BallController_01.tscn" id="2_ox6n6"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_s4s5n"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:velocity")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:stateIndex")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[node name="PRE_NetBall_01" type="MultiplayerSynchronizer" unique_id=732516578 node_paths=PackedStringArray("ballController")]
+root_path = NodePath(".")
+replication_config = SubResource("SceneReplicationConfig_s4s5n")
+script = ExtResource("1_yhnyd")
+ballController = NodePath("PRE_BallController_01")
+metadata/_custom_type_script = "uid://rmn08h6akfrp"
+
+[node name="PRE_BallController_01" parent="." unique_id=1860976213 instance=ExtResource("2_ox6n6")]
