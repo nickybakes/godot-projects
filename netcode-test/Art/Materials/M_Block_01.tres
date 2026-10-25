@@ -1,0 +1,26 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://okolx5gyqwo1"]
+
+[ext_resource type="Shader" uid="uid://bxaq8kyw8f5i3" path="res://Art/Shaders/S_Block_01.gdshader" id="1_6nu2s"]
+[ext_resource type="Texture2D" uid="uid://ckk8ykikq37oj" path="res://Art/Textures/T_Sparkles_01.png" id="2_mijvr"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_6nu2s")
+shader_parameter/mainTexture = ExtResource("2_mijvr")
+shader_parameter/textureScale = Vector2(5, 5)
+shader_parameter/textureScale2 = Vector2(7, 7)
+shader_parameter/scrollSpeed = Vector2(0.21, 0.422)
+shader_parameter/scrollSpeed2 = Vector2(0.543, -0.095)
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/textureAlpha = 0.48999998904752
+shader_parameter/minAlpha = 0.0
+shader_parameter/alphaFadePower = 2.0
+shader_parameter/emissive = 3.252
+shader_parameter/roughness = 0.46999998949456
+shader_parameter/metallic = 0.58999998681232
+shader_parameter/highlightPower = 14.394
+shader_parameter/highlightMultiply = 1.772
+shader_parameter/highlightAlpha = 0.249999994412
+shader_parameter/fresnelPower = 3.096
+shader_parameter/fresnelMultiply = 6.396
+shader_parameter/fresnelAlpha = 0.68999998457712

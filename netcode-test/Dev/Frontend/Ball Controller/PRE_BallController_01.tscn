@@ -11,15 +11,22 @@
 [ext_resource type="Material" uid="uid://ltb43n3t3x1i" path="res://Art/Materials/M_ChargeAim_01.tres" id="5_icp2y"]
 [ext_resource type="Script" uid="uid://cbhbr4ha54spr" path="res://Dev/Frontend/Ball Controller/BallPhysics.gd" id="7_jioly"]
 [ext_resource type="Material" uid="uid://dqrlfdt0mxo4s" path="res://Art/Materials/M_Xray_01.tres" id="8_m53x3"]
+[ext_resource type="Material" uid="uid://okolx5gyqwo1" path="res://Art/Materials/M_Block_01.tres" id="11_v2vyv"]
 [ext_resource type="Script" uid="uid://decpb0lh7o7qx" path="res://Dev/Frontend/Ball Controller/Ball States/Roll.gd" id="12_84w8q"]
 [ext_resource type="Script" uid="uid://bxuank2e18mxg" path="res://Dev/Frontend/Ball Controller/Ball States/Charge.gd" id="12_apf2q"]
+[ext_resource type="Script" uid="uid://bspbsgt6kyqhv" path="res://Dev/Frontend/Ball Controller/StatRefill.gd" id="12_g4d1v"]
 [ext_resource type="Script" uid="uid://bc4ag7pcktrlg" path="res://Dev/Frontend/Ball Controller/Ball States/Jump.gd" id="12_ilenv"]
 [ext_resource type="Script" uid="uid://bao3317lfi3tc" path="res://Dev/Frontend/Modular Character Controller/MCCTransition.gd" id="12_nefp1"]
+[ext_resource type="Script" uid="uid://c3t7bpre2tf53" path="res://Dev/Frontend/Modular Character Controller/StorageNode.gd" id="12_ods0j"]
+[ext_resource type="ArrayMesh" uid="uid://dintwgaqg63jo" path="res://Art/Models/SM_Block_01a.res" id="12_v2vyv"]
 [ext_resource type="Script" uid="uid://cx8j2ywloqwq7" path="res://Dev/Frontend/Ball Controller/Rules/OnSurfaceRule.gd" id="13_2mr7f"]
 [ext_resource type="Script" uid="uid://b2jd3djd45lf3" path="res://Dev/Frontend/Ball Controller/Rules/InputRule.gd" id="13_ilenv"]
+[ext_resource type="Script" uid="uid://nlxsi446gre7" path="res://Dev/Frontend/Ball Controller/Cooldown.gd" id="14_s4hg4"]
 [ext_resource type="Script" uid="uid://bya8tt6ubw05d" path="res://Dev/Frontend/Ball Controller/Ball States/Launch.gd" id="15_84w8q"]
 [ext_resource type="Script" uid="uid://dulfhx4ftd06" path="res://Dev/Frontend/Ball Controller/Rules/TraitRule.gd" id="15_ahjyt"]
-[ext_resource type="Script" uid="uid://bfcdq2fubr72f" path="res://Dev/Frontend/Ball Controller/Ball States/Soar.gd" id="16_1er7t"]
+[ext_resource type="Script" uid="uid://b3ldpufefysau" path="res://Dev/Frontend/Ball Controller/Ball States/Bounce.gd" id="19_s4hg4"]
+[ext_resource type="Script" uid="uid://bahf8h0o6ombf" path="res://Dev/Frontend/Ball Controller/Ball States/Block.gd" id="22_g6j7v"]
+[ext_resource type="Script" uid="uid://cer4nd24f3oe8" path="res://Dev/Frontend/Ball Controller/Rules/CooldownRule.gd" id="23_thta1"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_c5qv8"]
 top_radius = 0.374
@@ -32,24 +39,30 @@ cap_bottom = false
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_c5qv8"]
 
-[node name="PRE_BallController_01" type="CharacterBody3D" unique_id=2124224045 node_paths=PackedStringArray("visuals", "defaultPhysics", "defaultState", "statesParent")]
+[node name="PRE_BallController_01" type="CharacterBody3D" unique_id=2124224045 node_paths=PackedStringArray("visuals", "defaultPhysics", "defaultState", "currentPhysicsStorage", "currentStateStorage", "staminaStat", "statesParent")]
+collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_84w8q")
 visuals = NodePath("Ball Visuals")
-defaultPhysics = NodePath("BallPhysics")
+defaultPhysics = NodePath("Physics/BallPhysics")
 traits = ExtResource("2_1er7t")
 defaultState = NodePath("States/Roll")
+currentPhysicsStorage = NodePath("Current Storage/Current Physics")
+currentStateStorage = NodePath("Current Storage/Current State")
+staminaStat = NodePath("Stamina Stat")
 statesParent = NodePath("States")
 metadata/_custom_type_script = "uid://cmlx0uqgnib0r"
 
-[node name="Ball Visuals" type="Node3D" parent="." unique_id=851201941 node_paths=PackedStringArray("ballMesh", "outlineMesh", "xrayMesh", "chargeAimMesh", "spinner", "pitcher", "stretcher", "roller")]
+[node name="Ball Visuals" type="Node3D" parent="." unique_id=851201941 node_paths=PackedStringArray("ballController", "ballMesh", "outlineMesh", "xrayMesh", "chargeAimMesh", "blockMesh", "spinner", "pitcher", "stretcher", "roller")]
 script = ExtResource("2_3d8wc")
+ballController = NodePath("..")
 ballCustomizationDirectory = ExtResource("4_lr45t")
 profile = ExtResource("5_6873s")
 ballMesh = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Roller/Ball Mesh")
 outlineMesh = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Roller/Outline Mesh")
 xrayMesh = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Roller/Xray Mesh")
 chargeAimMesh = NodePath("Visual Spinner/Visual Pitcher/Charge Aim Mesh")
+blockMesh = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Roller/Block Mesh")
 spinner = NodePath("Visual Spinner")
 pitcher = NodePath("Visual Spinner/Visual Pitcher")
 stretcher = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher")
@@ -62,6 +75,7 @@ metadata/_custom_type_script = "uid://diamkkypctj6o"
 
 [node name="Charge Aim Mesh" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher" unique_id=283875934]
 transform = Transform3D(-1, -8.742278e-08, 3.821371e-15, 0, -4.371139e-08, -1, 8.742278e-08, -1, 4.371139e-08, -2.4041267e-08, -1.2020633e-08, -0.89000005)
+visible = false
 material_override = ExtResource("5_icp2y")
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_c5qv8")
@@ -82,32 +96,73 @@ mesh = ExtResource("3_3d8wc")
 material_override = ExtResource("8_m53x3")
 mesh = ExtResource("3_3d8wc")
 
+[node name="Block Mesh" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Roller" unique_id=595999983]
+material_override = ExtResource("11_v2vyv")
+cast_shadow = 0
+mesh = ExtResource("12_v2vyv")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1755982985]
 visible = false
 shape = SubResource("SphereShape3D_c5qv8")
 
-[node name="BallPhysics" type="Node" parent="." unique_id=227758182]
+[node name="Current Storage" type="Node" parent="." unique_id=1361367863]
+
+[node name="Current Physics" type="Node" parent="Current Storage" unique_id=949530795]
+script = ExtResource("12_ods0j")
+metadata/_custom_type_script = "uid://c3t7bpre2tf53"
+
+[node name="Current State" type="Node" parent="Current Storage" unique_id=487631750]
+script = ExtResource("12_ods0j")
+metadata/_custom_type_script = "uid://c3t7bpre2tf53"
+
+[node name="Physics" type="Node" parent="." unique_id=286023308]
+
+[node name="BallPhysics" type="Node" parent="Physics" unique_id=227758182]
 script = ExtResource("7_jioly")
 metadata/_custom_type_script = "uid://cbhbr4ha54spr"
+
+[node name="Stamina Stat" type="Node" parent="." unique_id=57812921]
+script = ExtResource("12_g4d1v")
+startingPercent = 1.0
+cooldownPerValueSpent = 2.2
+cooldownMax = 2.0
+metadata/_custom_type_script = "uid://bspbsgt6kyqhv"
+
+[node name="Cooldowns" type="Node" parent="." unique_id=924135913]
+
+[node name="Jump Cooldown" type="Node" parent="Cooldowns" unique_id=1796004397]
+script = ExtResource("14_s4hg4")
+cooldownTime = 0.75
+metadata/_custom_type_script = "uid://nlxsi446gre7"
+
+[node name="Charge Cooldown" type="Node" parent="Cooldowns" unique_id=1241911831]
+script = ExtResource("14_s4hg4")
+metadata/_custom_type_script = "uid://nlxsi446gre7"
+
+[node name="Block Cooldown" type="Node" parent="Cooldowns" unique_id=1611394625]
+script = ExtResource("14_s4hg4")
+metadata/_custom_type_script = "uid://nlxsi446gre7"
 
 [node name="States" type="Node" parent="." unique_id=1727491952]
 
 [node name="Roll" type="Node" parent="States" unique_id=1070377533 node_paths=PackedStringArray("transitions")]
 script = ExtResource("12_84w8q")
 codeName = "roll"
-transitions = [NodePath("../../Transitions/Charge Transition")]
+transitions = [NodePath("../../Transitions/Charge Transition"), NodePath("../../Transitions/Jump Transition"), NodePath("../../Transitions/Block Start Transition")]
 metadata/_custom_type_script = "uid://decpb0lh7o7qx"
 
-[node name="Jump" type="Node" parent="States" unique_id=547728586 node_paths=PackedStringArray("transitions")]
+[node name="Jump" type="Node" parent="States" unique_id=547728586 node_paths=PackedStringArray("cooldown", "transitions")]
 script = ExtResource("12_ilenv")
+cooldown = NodePath("../../Cooldowns/Jump Cooldown")
 codeName = "jump"
-transitions = [NodePath("../../Transitions/Roll Transition"), NodePath("../../Transitions/Charge Transition")]
+transitions = [NodePath("../../Transitions/Force End Jump Transition"), NodePath("../../Transitions/Force End Jump Transition 2"), NodePath("../../Transitions/End Jump Transition"), NodePath("../../Transitions/Charge Transition"), NodePath("../../Transitions/Block Start Transition")]
 metadata/_custom_type_script = "uid://bc4ag7pcktrlg"
 
-[node name="Charge" type="Node" parent="States" unique_id=1096450482 node_paths=PackedStringArray("transitions")]
+[node name="Charge" type="Node" parent="States" unique_id=1096450482 node_paths=PackedStringArray("cooldown", "transitions")]
 script = ExtResource("12_apf2q")
+cooldown = NodePath("../../Cooldowns/Charge Cooldown")
 codeName = "charge"
-transitions = [NodePath("../../Transitions/Launch Transition")]
+transitions = [NodePath("../../Transitions/Force Launch Transition"), NodePath("../../Transitions/Launch Transition")]
 metadata/_custom_type_script = "uid://bxuank2e18mxg"
 
 [node name="Launch" type="Node" parent="States" unique_id=1923802051 node_paths=PackedStringArray("transitions")]
@@ -116,10 +171,17 @@ codeName = "launch"
 transitions = [NodePath("../../Transitions/Roll Transition")]
 metadata/_custom_type_script = "uid://bya8tt6ubw05d"
 
-[node name="Soar" type="Node" parent="States" unique_id=142540549]
-script = ExtResource("16_1er7t")
-codeName = "soar"
-metadata/_custom_type_script = "uid://bfcdq2fubr72f"
+[node name="Bounce" type="Node" parent="States" unique_id=915088411]
+script = ExtResource("19_s4hg4")
+codeName = "bounce"
+metadata/_custom_type_script = "uid://b3ldpufefysau"
+
+[node name="Block" type="Node" parent="States" unique_id=396913574 node_paths=PackedStringArray("cooldown", "transitions")]
+script = ExtResource("22_g6j7v")
+cooldown = NodePath("../../Cooldowns/Block Cooldown")
+codeName = "block"
+transitions = [NodePath("../../Transitions/Block Stop Transition")]
+metadata/_custom_type_script = "uid://bahf8h0o6ombf"
 
 [node name="Transitions" type="Node" parent="." unique_id=40976891]
 
@@ -128,36 +190,75 @@ script = ExtResource("12_nefp1")
 stateTransitionTo = NodePath("../../States/Roll")
 metadata/_custom_type_script = "uid://bao3317lfi3tc"
 
-[node name="Soar Transition" type="Node" parent="Transitions" unique_id=479053814 node_paths=PackedStringArray("stateTransitionTo", "rules")]
-script = ExtResource("12_nefp1")
-stateTransitionTo = NodePath("../../States/Soar")
-rules = [NodePath("../../Generic Rules/Off Surface Rule")]
-metadata/_custom_type_script = "uid://bao3317lfi3tc"
-
 [node name="Jump Transition" type="Node" parent="Transitions" unique_id=1642511494 node_paths=PackedStringArray("stateTransitionTo", "rules")]
 script = ExtResource("12_nefp1")
 stateTransitionTo = NodePath("../../States/Jump")
-rules = [NodePath("../../Generic Rules/Input Rules/Jump Pressed Buffered"), NodePath("../../Generic Rules/On Surface Rule")]
+rules = [NodePath("../../Input Rules/Jump Pressed Buffered"), NodePath("../../Generic Rules/Has Stamina"), NodePath("../../Cooldown Rules/Jump Cooled Down")]
 metadata/_custom_type_script = "uid://bao3317lfi3tc"
+
+[node name="End Jump Transition" type="Node" parent="Transitions" unique_id=1271299548 node_paths=PackedStringArray("stateTransitionTo", "rules")]
+script = ExtResource("12_nefp1")
+stateTransitionTo = NodePath("../../States/Roll")
+rules = [NodePath("../../Input Rules/Jump Released")]
+metadata/_custom_type_script = "uid://bao3317lfi3tc"
+
+[node name="Force End Jump Transition" type="Node" parent="Transitions" unique_id=1663629199 node_paths=PackedStringArray("stateTransitionTo", "rules")]
+script = ExtResource("12_nefp1")
+stateTransitionTo = NodePath("../../States/Roll")
+rules = [NodePath("../../Generic Rules/Has No Stamina")]
+metadata/_custom_type_script = "uid://bao3317lfi3tc"
+
+[node name="Force End Jump Transition 2" type="Node" parent="Transitions" unique_id=399432867 node_paths=PackedStringArray("stateTransitionTo", "rules")]
+script = ExtResource("12_nefp1")
+stateTransitionTo = NodePath("../../States/Roll")
+rules = [NodePath("Jump Time Max Rule")]
+metadata/_custom_type_script = "uid://bao3317lfi3tc"
+
+[node name="Jump Time Max Rule" type="Node" parent="Transitions/Force End Jump Transition 2" unique_id=1355433088 node_paths=PackedStringArray("node")]
+script = ExtResource("15_ahjyt")
+node = NodePath("../../../Current Storage/Current State")
+property = "timeInState"
+comparisonType = 1
+traitProperty = "maxJumpTime"
+metadata/_custom_type_script = "uid://dulfhx4ftd06"
 
 [node name="Charge Transition" type="Node" parent="Transitions" unique_id=1540785255 node_paths=PackedStringArray("stateTransitionTo", "rules")]
 script = ExtResource("12_nefp1")
 stateTransitionTo = NodePath("../../States/Charge")
-rules = [NodePath("../../Generic Rules/Input Rules/Charge Pressed Buffered")]
+rules = [NodePath("../../Input Rules/Charge Pressed This Frame"), NodePath("../../Generic Rules/Has Stamina"), NodePath("../../Cooldown Rules/Charge Cooled Down")]
 metadata/_custom_type_script = "uid://bao3317lfi3tc"
 
 [node name="Launch Transition" type="Node" parent="Transitions" unique_id=379377229 node_paths=PackedStringArray("stateTransitionTo", "rules")]
 script = ExtResource("12_nefp1")
 stateTransitionTo = NodePath("../../States/Launch")
-rules = [NodePath("../../Generic Rules/Input Rules/Charge Released"), NodePath("Charge Time Min Rule")]
+rules = [NodePath("../../Input Rules/Charge Released"), NodePath("Charge Time Min Rule")]
 metadata/_custom_type_script = "uid://bao3317lfi3tc"
 
-[node name="Charge Time Min Rule" type="Node" parent="Transitions/Launch Transition" unique_id=1172744449]
+[node name="Charge Time Min Rule" type="Node" parent="Transitions/Launch Transition" unique_id=1172744449 node_paths=PackedStringArray("node")]
 script = ExtResource("15_ahjyt")
-stateProperty = "timeInState"
+node = NodePath("../../../Current Storage/Current State")
+property = "timeInState"
 comparisonType = 1
 traitProperty = "minChargeTime"
 metadata/_custom_type_script = "uid://dulfhx4ftd06"
+
+[node name="Force Launch Transition" type="Node" parent="Transitions" unique_id=1729558237 node_paths=PackedStringArray("stateTransitionTo", "rules")]
+script = ExtResource("12_nefp1")
+stateTransitionTo = NodePath("../../States/Launch")
+rules = [NodePath("../../Generic Rules/Has No Stamina")]
+metadata/_custom_type_script = "uid://bao3317lfi3tc"
+
+[node name="Block Start Transition" type="Node" parent="Transitions" unique_id=611461240 node_paths=PackedStringArray("stateTransitionTo", "rules")]
+script = ExtResource("12_nefp1")
+stateTransitionTo = NodePath("../../States/Block")
+rules = [NodePath("../../Input Rules/Block Pressed This Frame"), NodePath("../../Cooldown Rules/Block Cooled Down")]
+metadata/_custom_type_script = "uid://bao3317lfi3tc"
+
+[node name="Block Stop Transition" type="Node" parent="Transitions" unique_id=570208158 node_paths=PackedStringArray("stateTransitionTo", "rules")]
+script = ExtResource("12_nefp1")
+stateTransitionTo = NodePath("../../States/Roll")
+rules = [NodePath("../../Input Rules/Block Released")]
+metadata/_custom_type_script = "uid://bao3317lfi3tc"
 
 [node name="Generic Rules" type="Node" parent="." unique_id=1625890100]
 
@@ -170,21 +271,71 @@ script = ExtResource("13_2mr7f")
 invert = true
 metadata/_custom_type_script = "uid://cx8j2ywloqwq7"
 
-[node name="Input Rules" type="Node" parent="Generic Rules" unique_id=1738338588]
+[node name="Has Stamina" type="Node" parent="Generic Rules" unique_id=274538780 node_paths=PackedStringArray("node")]
+script = ExtResource("15_ahjyt")
+node = NodePath("../../Stamina Stat")
+property = "value"
+traitProperty = "zero"
+metadata/_custom_type_script = "uid://dulfhx4ftd06"
 
-[node name="Jump Pressed Buffered" type="Node" parent="Generic Rules/Input Rules" unique_id=109286253]
+[node name="Has No Stamina" type="Node" parent="Generic Rules" unique_id=814752911 node_paths=PackedStringArray("node")]
+script = ExtResource("15_ahjyt")
+node = NodePath("../../Stamina Stat")
+property = "value"
+comparisonType = 2
+traitProperty = "zero"
+metadata/_custom_type_script = "uid://dulfhx4ftd06"
+
+[node name="Cooldown Rules" type="Node" parent="." unique_id=239466743]
+
+[node name="Jump Cooled Down" type="Node" parent="Cooldown Rules" unique_id=1756823682 node_paths=PackedStringArray("cooldown")]
+script = ExtResource("23_thta1")
+cooldown = NodePath("../../Cooldowns/Jump Cooldown")
+metadata/_custom_type_script = "uid://cer4nd24f3oe8"
+
+[node name="Charge Cooled Down" type="Node" parent="Cooldown Rules" unique_id=289090477 node_paths=PackedStringArray("cooldown")]
+script = ExtResource("23_thta1")
+cooldown = NodePath("../../Cooldowns/Charge Cooldown")
+metadata/_custom_type_script = "uid://cer4nd24f3oe8"
+
+[node name="Block Cooled Down" type="Node" parent="Cooldown Rules" unique_id=1573106155 node_paths=PackedStringArray("cooldown")]
+script = ExtResource("23_thta1")
+cooldown = NodePath("../../Cooldowns/Block Cooldown")
+metadata/_custom_type_script = "uid://cer4nd24f3oe8"
+
+[node name="Input Rules" type="Node" parent="." unique_id=1738338588]
+
+[node name="Jump Pressed Buffered" type="Node" parent="Input Rules" unique_id=109286253]
 script = ExtResource("13_ilenv")
 action = 1
 metadata/_custom_type_script = "uid://b2jd3djd45lf3"
 
-[node name="Charge Pressed Buffered" type="Node" parent="Generic Rules/Input Rules" unique_id=403396158]
+[node name="Jump Released" type="Node" parent="Input Rules" unique_id=881419020]
+script = ExtResource("13_ilenv")
+action = 1
+inputType = 5
+metadata/_custom_type_script = "uid://b2jd3djd45lf3"
+
+[node name="Charge Pressed This Frame" type="Node" parent="Input Rules" unique_id=403396158]
 script = ExtResource("13_ilenv")
 action = 4
 inputType = 1
 metadata/_custom_type_script = "uid://b2jd3djd45lf3"
 
-[node name="Charge Released" type="Node" parent="Generic Rules/Input Rules" unique_id=882457808]
+[node name="Charge Released" type="Node" parent="Input Rules" unique_id=882457808]
 script = ExtResource("13_ilenv")
 action = 4
+inputType = 5
+metadata/_custom_type_script = "uid://b2jd3djd45lf3"
+
+[node name="Block Pressed This Frame" type="Node" parent="Input Rules" unique_id=997638150]
+script = ExtResource("13_ilenv")
+action = 5
+inputType = 1
+metadata/_custom_type_script = "uid://b2jd3djd45lf3"
+
+[node name="Block Released" type="Node" parent="Input Rules" unique_id=201494177]
+script = ExtResource("13_ilenv")
+action = 5
 inputType = 5
 metadata/_custom_type_script = "uid://b2jd3djd45lf3"

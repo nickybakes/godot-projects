@@ -1,3 +1,4 @@
+@icon("res://Editor/Icons/AudioBusSolo_Red.svg")
 @abstract class_name MCCState extends Node
 
 @export var codeName : String = "state";

@@ -6,10 +6,16 @@ class_name BallMCC
 @export var traits : BallTraits;
 @export var defaultState : BallState;
 
+@export_category("Current Storages")
+@export var currentPhysicsStorage : StorageNode;
+@export var currentStateStorage : StorageNode;
+
+@export_category("Stats")
+@export var staminaStat : StatRefill;
+
 var allStates : Array[BallState];
 var currentState : BallState;
 var previousState : BallState;
-var ballSoaring : bool;
 
 func GetTraits() -> BallTraits:
 	return traits;
@@ -40,6 +46,7 @@ func GetTotalStates() -> int:
 func DoStateTransition(nextState : MCCState):
 	previousState = currentState;
 	currentState = nextState;
+	currentStateStorage.storedNode = currentState;
 	
 	currentState.ExitState();
 	if(updatePhysics):
@@ -64,7 +71,9 @@ func CalculateRequestedMoveDirection(delta : float):
 func _ready() -> void:
 	SetupStates();
 	currentPhysics = GetDefaultPhysics();
+	currentPhysicsStorage.storedNode = currentPhysics;
 	currentState = GetDefaultState();
+	currentStateStorage.storedNode = currentState;
 	previousState = currentState;
 	currentPhysics.mcc = self;
 
@@ -77,6 +86,7 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
 	currentState.Process(delta);
 	if(updateVisuals):
+		visuals.header.DisplayStamina(staminaStat.value);
 		currentState.ProcessVisuals(delta);
 
 func BasicMoveInput():

@@ -4,6 +4,7 @@
 [ext_resource type="Material" uid="uid://dsqom3ceceiyc" path="res://Art/Materials/M_DevEnv_01.tres" id="1_avklc"]
 [ext_resource type="Script" uid="uid://dwjf48i5tqrx3" path="res://Dev/Frontend/Game/GameManager.gd" id="2_n03q8"]
 [ext_resource type="Script" uid="uid://lomqln3v0xvt" path="res://Dev/Frontend/Game/GameSceneSetup.gd" id="4_8lxd5"]
+[ext_resource type="Script" uid="uid://b3mping6psqq0" path="res://Dev/Frontend/Camera/CameraManager.gd" id="4_d6cxq"]
 [ext_resource type="Material" uid="uid://di1to8x2plpx" path="res://Art/Materials/M_Ball_01.tres" id="5_yiscj"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_c5qv8"]
@@ -64,8 +65,13 @@ mesh = SubResource("CylinderMesh_c5qv8")
 script = ExtResource("2_n03q8")
 metadata/_custom_type_script = "uid://dwjf48i5tqrx3"
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=799328789]
+[node name="CameraManager" type="Node3D" parent="." unique_id=104827752 node_paths=PackedStringArray("camera")]
 transform = Transform3D(1, 0, 0, 0, 0.73009646, 0.6833441, 0, -0.6833441, 0.73009646, -3.8146973e-06, 30.29789, 36.43136)
+script = ExtResource("4_d6cxq")
+camera = NodePath("Camera3D")
+metadata/_custom_type_script = "uid://b3mping6psqq0"
+
+[node name="Camera3D" type="Camera3D" parent="CameraManager" unique_id=799328789]
 current = true
 fov = 26.3
 
@@ -100,7 +106,14 @@ mesh = SubResource("PlaneMesh_8lxd5")
 shape = SubResource("ConvexPolygonShape3D_yiscj")
 
 [node name="Wall 2" type="MeshInstance3D" parent="." unique_id=1071047872]
-transform = Transform3D(-1.6927612, 8.742278e-08, 0, 6.4686682e-15, 4.371139e-08, -1, -1.4798589e-07, -1, -4.371139e-08, 0, 0, 8.359859)
+transform = Transform3D(-1.6927612, 8.742278e-08, 0, 6.4686682e-15, 4.371139e-08, -1, -1.4798589e-07, -1, -4.371139e-08, 0, 0, 15.399498)
+material_override = ExtResource("1_avklc")
+transparency = 0.32
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_8lxd5")
+
+[node name="Wall 2 Model" type="MeshInstance3D" parent="Wall 2" unique_id=129586812]
+transform = Transform3D(-1, -8.7422784e-08, -3.6415056e-15, 8.742282e-08, -1, -1.8996124e-08, -9.115962e-15, -8.742278e-08, 0.21729034, 0, 0, 0)
 material_override = ExtResource("1_avklc")
 transparency = 0.32
 cast_shadow = 0

@@ -6,7 +6,7 @@
 script = ExtResource("1_4sm07")
 rollSpeedScalar = 1.0
 maxStretchCharge = 2.297
-maxOffsetCharge = 1.149
+maxOffsetCharge = 0.922
 maxChargeRollSpeed = 10.0
 maxStretch = 2.297
 metadata/_custom_type_script = "uid://cx0pe6ktsy0rm"

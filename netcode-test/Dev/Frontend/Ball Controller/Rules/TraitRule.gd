@@ -9,15 +9,17 @@ enum Comparison{
 	LessThanOrEqualTo
 }
 
-@export var stateProperty : String;
+@export var node : Node;
+@export var property : String;
 @export var comparisonType : Comparison;
 @export var traitProperty : String;
 
 func CheckForPass(state : MCCState, transition : MCCTransition, delta : float) -> bool:
-	var stateValue = state.get(stateProperty);
+	var value = node.get(property);
+		
 	var traitValue = state.GetMCC().GetTraits().get(traitProperty);
 	
-	return DoComparison(stateValue, traitValue);
+	return DoComparison(value, traitValue);
 
 func DoComparison(a : float, b : float) -> bool:
 	match(comparisonType):

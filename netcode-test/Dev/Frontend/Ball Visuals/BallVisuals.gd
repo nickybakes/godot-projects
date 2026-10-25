@@ -1,6 +1,7 @@
 extends Node3D
 class_name BallVisuals;
 
+@export var ballController : BallMCC;
 @export var ballCustomizationDirectory : BallCustomizationDirectory;
 @export var profile : BallVisualProfile;
 
@@ -9,6 +10,7 @@ class_name BallVisuals;
 @export var outlineMesh : MeshInstance3D;
 @export var xrayMesh : MeshInstance3D;
 @export var chargeAimMesh : MeshInstance3D;
+@export var blockMesh : MeshInstance3D;
 
 @export_category("Transforms")
 @export var spinner : Node3D;
@@ -16,6 +18,8 @@ class_name BallVisuals;
 @export var stretcher : Node3D;
 @export var roller : Node3D;
 
+const headerPrefab = preload("uid://u6oslcx36ah4");
+var header : BallHeader;
 
 func Setup(playerNumber : int):
 	var color = ballCustomizationDirectory.GetColorFromPlayerNumber(playerNumber);
@@ -33,7 +37,14 @@ func Setup(playerNumber : int):
 	chargeAimMesh.material_override = chargeAimMaterial;
 	
 	StopChargeVisual();
+	StopBlockVisual();
+	CreateHeader();
 	
+func CreateHeader():
+	header = headerPrefab.instantiate();
+	get_parent().add_child.call_deferred(header);
+	header.target = self;
+	header.DisplayStaminaMax(ballController.staminaStat.maxValue);
 	
 func RollBall(currentSpeed : float, delta : float):
 	roller.rotate_object_local(Vector3.LEFT, currentSpeed * profile.rollSpeedScalar * delta);
@@ -64,12 +75,9 @@ func StartChargeVisual():
 	
 func StopChargeVisual():
 	chargeAimMesh.visible = false;
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	
+func StartBlockVisual():
+	blockMesh.visible = true;
+	
+func StopBlockVisual():
+	blockMesh.visible = false;

@@ -1,3 +1,4 @@
+@icon("res://Editor/Icons/AudioEffect_Blue.svg")
 @abstract class_name MCCRule extends Node
 
 @export var breakOutIfPass := false;

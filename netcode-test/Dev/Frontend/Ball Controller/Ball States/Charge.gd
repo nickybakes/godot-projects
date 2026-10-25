@@ -1,11 +1,17 @@
 extends BallState
 class_name Charge
 
+@export var cooldown : Cooldown;
+
 var chargeDirection := Vector3.DOWN;
 var chargeAmount : float;
+var staminaSpent : float;
 
 func StartStateVisuals(params : Dictionary = {}):
 	mcc.visuals.StartChargeVisual();
+	
+func StartStatePhysics(params : Dictionary = {}):
+	staminaSpent = 0;
 
 func ExitStateVisuals():
 	mcc.visuals.StopChargeVisual();
@@ -13,6 +19,9 @@ func ExitStateVisuals():
 	pass;
 	
 func ExitStatePhysics():
+	cooldown.Restart();
+	if(staminaSpent < mcc.traits.chargeMinStaminaCost):
+		mcc.staminaStat.Spend(max(mcc.traits.chargeMinStaminaCost - staminaSpent, 0))
 	exitPhysicsParams.set('direction', chargeDirection)
 	var speed = lerp(mcc.traits.minLaunchSpeed, mcc.traits.maxLaunchSpeed, chargeAmount)
 	exitPhysicsParams.set('speed', speed);
@@ -33,6 +42,7 @@ func ProcessVisuals(delta : float):
 
 func ProcessPhysics(delta : float):
 	super(delta);
+	staminaSpent += mcc.staminaStat.Spend(mcc.traits.chargeStaminaCost * delta);
 	mcc.velocity.x = move_toward(mcc.velocity.x, 0, mcc.traits.chargeDeceleration * delta)
 	mcc.velocity.y = move_toward(mcc.velocity.y, 0, mcc.traits.chargeDeceleration * delta)
 	mcc.velocity.z = move_toward(mcc.velocity.z, 0, mcc.traits.chargeDeceleration * delta)

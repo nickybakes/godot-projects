@@ -6,6 +6,7 @@ func GetMCC() -> BallMCC:
 	return mcc;
 
 func ProcessPhysics(delta : float):
+	mcc.staminaStat.Process(delta);
 	super(delta);
 	
 func ProcessVisuals(delta : float):

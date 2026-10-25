@@ -1,3 +1,4 @@
+@icon("res://Editor/Icons/MoveRight_Green.svg")
 class_name MCCTransition extends Node
 
 @export var stateTransitionTo : MCCState;

@@ -35,6 +35,10 @@ window/size/initial_position_type=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[editor]
+
+script/templates_search_path="res://Editor/script_templates"
+
 [input]
 
 _jump={

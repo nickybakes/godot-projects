@@ -7,20 +7,26 @@ const MAX_ANGLE = PI * .5;
 var onSurface := false;
 
 var collision : KinematicCollision3D;
+var currentSurfaceNormal := Vector3.UP;
+var collisionDotProduct : float;
+var collisionReflection : Vector3;
 
 func MoveAndCollide(delta : float):
 	var collided = mcc.move_and_slide();
-	onSurface = collided;
 	if(collided):
 		collision = mcc.get_last_slide_collision();
+		if(collision.get_normal() != currentSurfaceNormal):
+			currentSurfaceNormal = collision.get_normal();
+			collisionDotProduct = abs(mcc.currentDirection.dot(collision.get_normal()));
+			collisionReflection = mcc.currentDirection.reflect(collision.get_normal());
 		mcc.velocity = mcc.velocity.slide(collision.get_normal());
-	pass;
-	
-func JustOffSurface():
 	pass;
 
 func ProcessPhysics(delta : float, params : Dictionary = {}):
+	Gravity(delta);
 	MoveAndCollide(delta);
+	DecelerateTopDown(delta);
+	MovementControl(delta);
 	pass;
 	
 func GetSteepness() -> float:
@@ -39,7 +45,7 @@ func Gravity(delta : float):
 			mcc.velocity.y -= mcc.traits.gravity * mcc.traits.gravityFallMultiplier * delta
 			
 
-func Decelerate(delta : float):
+func DecelerateTopDown(delta : float):
 	mcc.velocity.x = move_toward(mcc.velocity.x, 0, mcc.traits.deceleration * delta);
 	mcc.velocity.z = move_toward(mcc.velocity.z, 0, mcc.traits.deceleration * delta);
 
