@@ -48,6 +48,10 @@ func PitchBall(pitch : float):
 	pitcher.rotation.x = lerp_angle(pitcher.rotation.x, pitch, .5);
 	pass
 	
+func FaceDirection(direction : Vector3):
+	SpinFaceDirection(Vector2(direction.x, direction.z));
+	PitchBall(direction.y * (PI * .5))
+	
 func ChargeStretchBall(t : float):
 	stretcher.scale.z = lerp(1.0, profile.maxStretchCharge, t);
 	stretcher.position.z = lerp(0.0, profile.maxOffsetCharge, t);

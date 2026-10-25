@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://c42ssx2u21iv8"]
 
-[ext_resource type="Script" uid="uid://cmlx0uqgnib0r" path="res://Dev/Frontend/Ball Controller/BallMCC.gd" id="1_i0e7p"]
+[ext_resource type="Script" uid="uid://cmlx0uqgnib0r" path="res://Dev/Frontend/Ball Controller/BallMCC.gd" id="1_84w8q"]
+[ext_resource type="Resource" uid="uid://bkj4hy78bq3cb" path="res://Dev/Frontend/Ball Controller/R_BallTraits_01.tres" id="2_1er7t"]
 [ext_resource type="Script" uid="uid://diamkkypctj6o" path="res://Dev/Frontend/Ball Visuals/BallVisuals.gd" id="2_3d8wc"]
 [ext_resource type="Material" uid="uid://di1to8x2plpx" path="res://Art/Materials/M_Ball_01.tres" id="2_i0e7p"]
-[ext_resource type="Resource" uid="uid://bkj4hy78bq3cb" path="res://Dev/Frontend/Ball Controller/R_BallTraits_01.tres" id="2_jioly"]
 [ext_resource type="ArrayMesh" uid="uid://k16kwalmlv6u" path="res://Art/Models/SM_Ball_01.res" id="3_3d8wc"]
 [ext_resource type="Material" uid="uid://clerrjhlukxmf" path="res://Art/Materials/M_Outline_01.tres" id="4_jioly"]
 [ext_resource type="Resource" uid="uid://0aagooiulhx6" path="res://Dev/Frontend/Customization/R_BallCustomizationDirectory_01.tres" id="4_lr45t"]
@@ -11,13 +11,15 @@
 [ext_resource type="Material" uid="uid://ltb43n3t3x1i" path="res://Art/Materials/M_ChargeAim_01.tres" id="5_icp2y"]
 [ext_resource type="Script" uid="uid://cbhbr4ha54spr" path="res://Dev/Frontend/Ball Controller/BallPhysics.gd" id="7_jioly"]
 [ext_resource type="Material" uid="uid://dqrlfdt0mxo4s" path="res://Art/Materials/M_Xray_01.tres" id="8_m53x3"]
-[ext_resource type="Script" uid="uid://db0q8mnhgncoe" path="res://Dev/Frontend/Ball Controller/Ball States/Idle.gd" id="10_w34lc"]
+[ext_resource type="Script" uid="uid://decpb0lh7o7qx" path="res://Dev/Frontend/Ball Controller/Ball States/Roll.gd" id="12_84w8q"]
 [ext_resource type="Script" uid="uid://bxuank2e18mxg" path="res://Dev/Frontend/Ball Controller/Ball States/Charge.gd" id="12_apf2q"]
 [ext_resource type="Script" uid="uid://bc4ag7pcktrlg" path="res://Dev/Frontend/Ball Controller/Ball States/Jump.gd" id="12_ilenv"]
 [ext_resource type="Script" uid="uid://bao3317lfi3tc" path="res://Dev/Frontend/Modular Character Controller/MCCTransition.gd" id="12_nefp1"]
-[ext_resource type="Script" uid="uid://cx8j2ywloqwq7" path="res://Dev/Frontend/Ball Controller/Rules/GroundedRule.gd" id="13_2mr7f"]
+[ext_resource type="Script" uid="uid://cx8j2ywloqwq7" path="res://Dev/Frontend/Ball Controller/Rules/OnSurfaceRule.gd" id="13_2mr7f"]
 [ext_resource type="Script" uid="uid://b2jd3djd45lf3" path="res://Dev/Frontend/Ball Controller/Rules/InputRule.gd" id="13_ilenv"]
+[ext_resource type="Script" uid="uid://bya8tt6ubw05d" path="res://Dev/Frontend/Ball Controller/Ball States/Launch.gd" id="15_84w8q"]
 [ext_resource type="Script" uid="uid://dulfhx4ftd06" path="res://Dev/Frontend/Ball Controller/Rules/TraitRule.gd" id="15_ahjyt"]
+[ext_resource type="Script" uid="uid://bfcdq2fubr72f" path="res://Dev/Frontend/Ball Controller/Ball States/Soar.gd" id="16_1er7t"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_c5qv8"]
 top_radius = 0.374
@@ -30,12 +32,13 @@ cap_bottom = false
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_c5qv8"]
 
-[node name="PRE_BallController_01" type="CharacterBody3D" unique_id=1860976213 node_paths=PackedStringArray("visuals", "defaultPhysics", "defaultState", "statesParent")]
-script = ExtResource("1_i0e7p")
+[node name="PRE_BallController_01" type="CharacterBody3D" unique_id=2124224045 node_paths=PackedStringArray("visuals", "defaultPhysics", "defaultState", "statesParent")]
+motion_mode = 1
+script = ExtResource("1_84w8q")
 visuals = NodePath("Ball Visuals")
 defaultPhysics = NodePath("BallPhysics")
-traits = ExtResource("2_jioly")
-defaultState = NodePath("States/Idle")
+traits = ExtResource("2_1er7t")
+defaultState = NodePath("States/Roll")
 statesParent = NodePath("States")
 metadata/_custom_type_script = "uid://cmlx0uqgnib0r"
 
@@ -89,16 +92,16 @@ metadata/_custom_type_script = "uid://cbhbr4ha54spr"
 
 [node name="States" type="Node" parent="." unique_id=1727491952]
 
-[node name="Idle" type="Node" parent="States" unique_id=765679165 node_paths=PackedStringArray("transitions")]
-script = ExtResource("10_w34lc")
-codeName = "idle"
-transitions = [NodePath("../../Transitions/Jump Transition"), NodePath("../../Transitions/Charge Transition")]
-metadata/_custom_type_script = "uid://db0q8mnhgncoe"
+[node name="Roll" type="Node" parent="States" unique_id=1070377533 node_paths=PackedStringArray("transitions")]
+script = ExtResource("12_84w8q")
+codeName = "roll"
+transitions = [NodePath("../../Transitions/Charge Transition")]
+metadata/_custom_type_script = "uid://decpb0lh7o7qx"
 
 [node name="Jump" type="Node" parent="States" unique_id=547728586 node_paths=PackedStringArray("transitions")]
 script = ExtResource("12_ilenv")
 codeName = "jump"
-transitions = [NodePath("../../Transitions/Idle Transition"), NodePath("../../Transitions/Charge Transition")]
+transitions = [NodePath("../../Transitions/Roll Transition"), NodePath("../../Transitions/Charge Transition")]
 metadata/_custom_type_script = "uid://bc4ag7pcktrlg"
 
 [node name="Charge" type="Node" parent="States" unique_id=1096450482 node_paths=PackedStringArray("transitions")]
@@ -107,18 +110,34 @@ codeName = "charge"
 transitions = [NodePath("../../Transitions/Launch Transition")]
 metadata/_custom_type_script = "uid://bxuank2e18mxg"
 
+[node name="Launch" type="Node" parent="States" unique_id=1923802051 node_paths=PackedStringArray("transitions")]
+script = ExtResource("15_84w8q")
+codeName = "launch"
+transitions = [NodePath("../../Transitions/Roll Transition")]
+metadata/_custom_type_script = "uid://bya8tt6ubw05d"
+
+[node name="Soar" type="Node" parent="States" unique_id=142540549]
+script = ExtResource("16_1er7t")
+codeName = "soar"
+metadata/_custom_type_script = "uid://bfcdq2fubr72f"
+
 [node name="Transitions" type="Node" parent="." unique_id=40976891]
 
-[node name="Idle Transition" type="Node" parent="Transitions" unique_id=1361190315 node_paths=PackedStringArray("stateTransitionTo", "rules")]
+[node name="Roll Transition" type="Node" parent="Transitions" unique_id=1361190315 node_paths=PackedStringArray("stateTransitionTo")]
 script = ExtResource("12_nefp1")
-stateTransitionTo = NodePath("../../States/Idle")
-rules = [NodePath("../../Generic Rules/Is Grounded")]
+stateTransitionTo = NodePath("../../States/Roll")
+metadata/_custom_type_script = "uid://bao3317lfi3tc"
+
+[node name="Soar Transition" type="Node" parent="Transitions" unique_id=479053814 node_paths=PackedStringArray("stateTransitionTo", "rules")]
+script = ExtResource("12_nefp1")
+stateTransitionTo = NodePath("../../States/Soar")
+rules = [NodePath("../../Generic Rules/Off Surface Rule")]
 metadata/_custom_type_script = "uid://bao3317lfi3tc"
 
 [node name="Jump Transition" type="Node" parent="Transitions" unique_id=1642511494 node_paths=PackedStringArray("stateTransitionTo", "rules")]
 script = ExtResource("12_nefp1")
 stateTransitionTo = NodePath("../../States/Jump")
-rules = [NodePath("../../Generic Rules/Input Rules/Jump Pressed Buffered"), NodePath("../../Generic Rules/Is Grounded")]
+rules = [NodePath("../../Generic Rules/Input Rules/Jump Pressed Buffered"), NodePath("../../Generic Rules/On Surface Rule")]
 metadata/_custom_type_script = "uid://bao3317lfi3tc"
 
 [node name="Charge Transition" type="Node" parent="Transitions" unique_id=1540785255 node_paths=PackedStringArray("stateTransitionTo", "rules")]
@@ -129,7 +148,7 @@ metadata/_custom_type_script = "uid://bao3317lfi3tc"
 
 [node name="Launch Transition" type="Node" parent="Transitions" unique_id=379377229 node_paths=PackedStringArray("stateTransitionTo", "rules")]
 script = ExtResource("12_nefp1")
-stateTransitionTo = NodePath("../../States/Jump")
+stateTransitionTo = NodePath("../../States/Launch")
 rules = [NodePath("../../Generic Rules/Input Rules/Charge Released"), NodePath("Charge Time Min Rule")]
 metadata/_custom_type_script = "uid://bao3317lfi3tc"
 
@@ -142,8 +161,13 @@ metadata/_custom_type_script = "uid://dulfhx4ftd06"
 
 [node name="Generic Rules" type="Node" parent="." unique_id=1625890100]
 
-[node name="Is Grounded" type="Node" parent="Generic Rules" unique_id=1029663937]
+[node name="On Surface Rule" type="Node" parent="Generic Rules" unique_id=1029663937]
 script = ExtResource("13_2mr7f")
+metadata/_custom_type_script = "uid://cx8j2ywloqwq7"
+
+[node name="Off Surface Rule" type="Node" parent="Generic Rules" unique_id=2136132179]
+script = ExtResource("13_2mr7f")
+invert = true
 metadata/_custom_type_script = "uid://cx8j2ywloqwq7"
 
 [node name="Input Rules" type="Node" parent="Generic Rules" unique_id=1738338588]

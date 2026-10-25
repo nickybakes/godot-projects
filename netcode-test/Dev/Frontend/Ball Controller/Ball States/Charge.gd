@@ -1,8 +1,8 @@
 extends BallState
 class_name Charge
 
-func StartStatePhysics(params : Dictionary = {}):
-	super(params);
+var chargeDirection := Vector3.DOWN;
+var chargeAmount : float;
 
 func StartStateVisuals(params : Dictionary = {}):
 	mcc.visuals.StartChargeVisual();
@@ -12,8 +12,23 @@ func ExitStateVisuals():
 	mcc.visuals.ChargeStretchBall(0.0);
 	pass;
 	
+func ExitStatePhysics():
+	exitPhysicsParams.set('direction', chargeDirection)
+	var speed = lerp(mcc.traits.minLaunchSpeed, mcc.traits.maxLaunchSpeed, chargeAmount)
+	exitPhysicsParams.set('speed', speed);
+	
+func Process(delta : float):
+	super(delta);
+	var inputLength = mcc.requestedMoveDirection.length();
+	chargeDirection.x = mcc.requestedMoveDirection.x;
+	chargeDirection.y = lerp(-1.0, mcc.traits.chargeDirectionMaxY, inputLength);
+	chargeDirection.z = mcc.requestedMoveDirection.z;
+	chargeAmount = clamp(timeInState / mcc.traits.timeTilMaxCharge, 0.0, 1.0);
+	
 func ProcessVisuals(delta : float):
-	mcc.visuals.ChargeStretchBall(clamp(timeInState / mcc.traits.timeTilMaxCharge, 0.0, 1.0));
+	mcc.visuals.RollBall(chargeAmount * mcc.visuals.profile.maxChargeRollSpeed, delta);
+	mcc.visuals.ChargeStretchBall(chargeAmount);
+	mcc.visuals.FaceDirection(chargeDirection);
 	pass;
 
 func ProcessPhysics(delta : float):

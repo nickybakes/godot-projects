@@ -3,6 +3,9 @@ class_name InputDeviceKeyboardMouse
 
 var mouseScale := .001;
 
+var leftMouseButtonPressed := false;
+var rightMouseButtonPressed := false;
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	name = "Keyboard & Mouse Input";

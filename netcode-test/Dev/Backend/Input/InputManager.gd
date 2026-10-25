@@ -21,7 +21,6 @@ func _ready() -> void:
 				if(event.device == 16 || event.device == -1):
 					if(!InputMap.has_action(action + str(16))):
 						InputMap.add_action(action + str(16));
-						
 					InputMap.action_add_event(action + str(16), event);
 					pass;
 				elif(event.device == 0):

@@ -5,6 +5,7 @@ class_name NetBall
 
 @export var position : Vector3;
 @export var velocity : Vector3;
+@export var requestedMoveDirection : Vector3;
 @export var stateIndex : int;
 
 var playerNumber : int;
@@ -36,11 +37,13 @@ func _process(delta: float) -> void:
 	if(isDummy):
 		ballController.position = lerp(ballController.position, position, .5);
 		ballController.velocity = lerp(ballController.velocity, velocity, .5);
+		ballController.requestedMoveDirection = lerp(ballController.requestedMoveDirection, requestedMoveDirection, .5)
 		if(currentStateIndex != stateIndex):
 			currentStateIndex = stateIndex;
 			ballController.DoStateTransitionByIndex(stateIndex);
 	else:
 		position = ballController.position;
 		velocity = ballController.velocity;
+		requestedMoveDirection = ballController.requestedMoveDirection;
 		stateIndex = ballController.currentState.stateIndex;
 	pass

@@ -7,4 +7,5 @@ enum InputAction
 	Leave,
 	StartGame,
 	Charge,
+	Block,
 }

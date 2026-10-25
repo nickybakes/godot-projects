@@ -10,6 +10,7 @@ var timeInState : float;
 
 var exitPhysicsParams : Dictionary = {};
 var exitVisualsParams : Dictionary = {};
+var exitStateParams : Dictionary = {};
 
 @abstract func GetMCC() -> ModularCharacterController;
 
@@ -31,10 +32,13 @@ func StartStateVisuals(params : Dictionary = {}):
 func ExitStateVisuals():
 	pass;
 	
-func ResetClock():
+func StartState(params : Dictionary = {}):
 	timeInState = 0;
 	
-func ProcessClock(delta : float):
+func ExitState():
+	pass;
+	
+func Process(delta : float):
 	timeInState += delta;
 
 func ProcessPhysics(delta : float):

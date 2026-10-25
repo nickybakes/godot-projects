@@ -7,6 +7,7 @@ class_name BallVisualProfile
 @export_category("Charge")
 @export var maxStretchCharge : float;
 @export var maxOffsetCharge : float;
+@export var maxChargeRollSpeed : float;
 
 @export_category("Soaring")
 @export var stretchSpeedScalar : float;

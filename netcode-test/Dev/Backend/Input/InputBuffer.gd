@@ -8,7 +8,7 @@ var inputs_released_this_frame := []
 var inputs_released := []
 var inputs_held_time := []
 var inputs_is_held := []
-var inputs := ["_join", "_jump", "_leave", "_startgame", "_charge"]
+var inputs := ["_join", "_jump", "_leave", "_startgame", "_charge", "_block"]
 
 func _init() -> void:
 	for i in inputs.size():
@@ -66,8 +66,7 @@ func OnInput(inputEvent : InputEvent):
 	for index in inputs.size():
 		var inputName = inputs[index] + str(inputEvent.device);
 		if(InputMap.has_action(inputName)):
-			if(Input.is_action_just_pressed_by_event(inputName, inputEvent)):
+			if(inputEvent.is_action_pressed(inputName)):
 				InputJustPressed(index);
-			if(Input.is_action_just_released_by_event(inputName, inputEvent)):
+			if(inputEvent.is_action_released(inputName)):
 				InputJustReleased(index);
-	

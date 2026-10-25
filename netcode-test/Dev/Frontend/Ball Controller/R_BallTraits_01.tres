@@ -5,7 +5,9 @@
 [resource]
 script = ExtResource("1_nmqsg")
 gravity = 20.0
-deceleration = 10.0
+moveSpeed = 10.0
+moveControl = 20.0
+deceleration = 5.0
 jumpHeight = 8.0
 chargeDeceleration = 10.0
 metadata/_custom_type_script = "uid://bxpl8bbykl3xb"

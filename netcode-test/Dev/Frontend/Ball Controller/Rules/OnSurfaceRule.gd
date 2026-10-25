@@ -1,10 +1,10 @@
 extends MCCRule
-class_name GroundedRule
+class_name OnSurfaceRule
 
 @export var invert := false;
 
 func CheckForPass(state : MCCState, transition : MCCTransition, delta : float) -> bool:
 	if(invert):
-		return !state.GetMCC().is_on_floor();
+		return !state.GetMCC().currentPhysics.get('onSurface');
 	else:
-		return state.GetMCC().is_on_floor();
+		return state.GetMCC().currentPhysics.get('onSurface');

@@ -41,17 +41,15 @@ func DoStateTransition(nextState : MCCState):
 	previousState = currentState;
 	currentState = nextState;
 	
+	currentState.ExitState();
 	if(updatePhysics):
 		previousState.ExitStatePhysics();
-		
 	if(updateVisuals):
 		previousState.ExitStateVisuals();
 		
+	currentState.StartState(previousState.exitStateParams);
 	if(updatePhysics):
 		currentState.StartStatePhysics(previousState.exitPhysicsParams);
-		
-	currentState.ResetClock();
-		
 	if(updateVisuals):
 		currentState.StartStateVisuals(previousState.exitVisualsParams);
 	pass;
@@ -77,7 +75,7 @@ func _physics_process(delta: float) -> void:
 	pass;
 	
 func _process(delta: float) -> void:
-	currentState.ProcessClock(delta);
+	currentState.Process(delta);
 	if(updateVisuals):
 		currentState.ProcessVisuals(delta);
 
