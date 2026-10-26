@@ -89,7 +89,8 @@ func SoarStretchBall(currentSpeed : float, delta : float):
 	
 func UpdateFireVisuals(fireAmount : float, delta : float):
 	for i in fireMeshes.size():
-		fireMeshes[i].visible = fireAmount >= ((i + 1) * firePercentSplit) && fireAmount <= ((i + 2) * firePercentSplit)
+		fireMeshes[i].visible = fireAmount >= ((i + 1) * firePercentSplit)
+#	 && fireAmount <= ((i + 2) * firePercentSplit)
 
 func StartChargeVisual():
 	chargeAimMesh.visible = true;
