@@ -23,6 +23,7 @@ var topDownVelocity : Vector2;
 var currentTopDownSpeed : float;
 var currentSpeed : float;
 var currentTopDownDirection : Vector2;
+var currentTopDownDirection3D : Vector3 = Vector3.ZERO;
 var currentDirection : Vector3;
 
 func CalculateBasicStats(delta : float):
@@ -42,3 +43,6 @@ func CalculateBasicStats(delta : float):
 		currentTopDownDirection = Vector2.ZERO;
 	else:
 		currentTopDownDirection = topDownVelocity/currentTopDownSpeed;
+		
+	currentTopDownDirection3D.x = currentTopDownDirection.x;
+	currentTopDownDirection3D.z = currentTopDownDirection.y;

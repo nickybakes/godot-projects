@@ -2,19 +2,38 @@
 
 [ext_resource type="Script" uid="uid://bxpl8bbykl3xb" path="res://Dev/Frontend/Ball Controller/BallTraits.gd" id="1_nmqsg"]
 
+[sub_resource type="Curve" id="Curve_pqr02"]
+_limits = [0.0, 1.0, 0.0, 1.17]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5900286, 0), 0.0, 0.0, 0, 0, Vector2(0.93532944, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_mf80y"]
+_limits = [0.0, 3.0, 0.0, 40.0]
+_data = [Vector2(16.160458, 0), 0.0, 0.0, 0, 0, Vector2(27.965614, 3), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [resource]
 script = ExtResource("1_nmqsg")
 gravity = 20.0
 moveSpeed = 10.0
 moveControl = 20.0
 deceleration = 5.0
+overSpeedThreshold = 7.0
+overSpeedLimitDirectionalControl = 2.74
+basicBounceMoveControlCooldown = SubResource("Curve_pqr02")
+fireBuildUpBySpeed = SubResource("Curve_mf80y")
 jumpForce = 8.0
 jumpHover = 1.0
 jumpInitialStaminaCost = 0.75
 jumpHoverStaminaCost = 0.5
 maxJumpTime = 1.5
+basicBounceMinDotProduct = 0.67
+basicBounceVerticalSpeedScalar = 0.57
+basicBounceMinSpeed = 2.0
 chargeDeceleration = 10.0
 chargeMinStaminaCost = 0.5
+minLaunchSpeed = 17.875
+maxLaunchSpeed = 38.0
 blockDecelMin = 6.0
 blockDecelMaxSpeed = 20.0
 blockStaminaSpeedBoost = 0.4

@@ -5,8 +5,15 @@
 [resource]
 script = ExtResource("1_4sm07")
 rollSpeedScalar = 1.0
-maxStretchCharge = 2.297
-maxOffsetCharge = 0.922
+spinFaceMinSpeed = 0.332
+pitchChangeSpeed = 10.0
+rollStretchSpeedScalar = 0.03
+maxRollStretch = 1.5
+rollMinThin = 0.9
+fireRollSpeedScalar = 0.204
+fireAutoSpinSpeed = 5.0
+maxStretchCharge = 2.017
+minThinCharge = 0.783
+maxOffsetCharge = 0.5
 maxChargeRollSpeed = 10.0
-maxStretch = 2.297
 metadata/_custom_type_script = "uid://cx0pe6ktsy0rm"

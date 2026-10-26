@@ -178,6 +178,16 @@ mesh = SubResource("PrismMesh_0hxaj")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ramp 3/StaticBody3D" unique_id=1953355518]
 shape = SubResource("ConvexPolygonShape3D_0hxaj")
 
+[node name="Ramp 7" type="MeshInstance3D" parent="." unique_id=1201758714]
+transform = Transform3D(-1.691143, 0, -8.742278e-08, 0, 7.8876915, 0, 1.4784442e-07, 0, -1, 7.4492817, 2.5589802, 2.3395343)
+material_override = ExtResource("1_avklc")
+mesh = SubResource("PrismMesh_0hxaj")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ramp 7" unique_id=542099534]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ramp 7/StaticBody3D" unique_id=149331946]
+shape = SubResource("ConvexPolygonShape3D_0hxaj")
+
 [node name="Ramp 4" type="MeshInstance3D" parent="." unique_id=1306186735]
 transform = Transform3D(0.04773588, 0, 0.99960154, 0, 1, 0, -1.6904691, 0, 0.028226992, 2.3332105, 0.5, -1.2822273)
 material_override = ExtResource("1_avklc")

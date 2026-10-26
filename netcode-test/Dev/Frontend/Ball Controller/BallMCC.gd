@@ -12,6 +12,8 @@ class_name BallMCC
 
 @export_category("Stats")
 @export var staminaStat : StatRefill;
+@export var healthStat : StatRefill;
+@export var fireStat : StatFill;
 
 var allStates : Array[BallState];
 var currentState : BallState;
@@ -86,7 +88,9 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
 	currentState.Process(delta);
 	if(updateVisuals):
-		visuals.header.DisplayStamina(staminaStat.value);
+		visuals.header.DisplayStamina(staminaStat.value, staminaStat.maxValue);
+		visuals.header.DisplayHealth(healthStat.value, healthStat.maxValue);
+		visuals.UpdateFireVisuals(fireStat.value, delta);
 		currentState.ProcessVisuals(delta);
 
 func BasicMoveInput():

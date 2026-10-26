@@ -8,7 +8,6 @@ func ExitStatePhysics():
 
 func StartStatePhysics(params : Dictionary = {}):
 	super(params);
-	print("Jump");
 	mcc.velocity.y = mcc.traits.jumpForce;
 	mcc.staminaStat.Spend(mcc.traits.jumpInitialStaminaCost);
 

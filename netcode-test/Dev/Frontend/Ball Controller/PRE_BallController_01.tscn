@@ -10,6 +10,8 @@
 [ext_resource type="Resource" uid="uid://b3ori3ghnplsq" path="res://Dev/Frontend/Ball Visuals/R_BallVisualProfile_01.tres" id="5_6873s"]
 [ext_resource type="Material" uid="uid://ltb43n3t3x1i" path="res://Art/Materials/M_ChargeAim_01.tres" id="5_icp2y"]
 [ext_resource type="Script" uid="uid://cbhbr4ha54spr" path="res://Dev/Frontend/Ball Controller/BallPhysics.gd" id="7_jioly"]
+[ext_resource type="Material" uid="uid://6gebtoc6f1lh" path="res://Art/Materials/M_Fire_Level_1.tres" id="8_2dflj"]
+[ext_resource type="Material" uid="uid://bvlfs25a0pu8h" path="res://Art/Materials/M_Fire_Level_2.tres" id="8_7kln7"]
 [ext_resource type="Material" uid="uid://dqrlfdt0mxo4s" path="res://Art/Materials/M_Xray_01.tres" id="8_m53x3"]
 [ext_resource type="Material" uid="uid://okolx5gyqwo1" path="res://Art/Materials/M_Block_01.tres" id="11_v2vyv"]
 [ext_resource type="Script" uid="uid://decpb0lh7o7qx" path="res://Dev/Frontend/Ball Controller/Ball States/Roll.gd" id="12_84w8q"]
@@ -21,9 +23,11 @@
 [ext_resource type="ArrayMesh" uid="uid://dintwgaqg63jo" path="res://Art/Models/SM_Block_01a.res" id="12_v2vyv"]
 [ext_resource type="Script" uid="uid://cx8j2ywloqwq7" path="res://Dev/Frontend/Ball Controller/Rules/OnSurfaceRule.gd" id="13_2mr7f"]
 [ext_resource type="Script" uid="uid://b2jd3djd45lf3" path="res://Dev/Frontend/Ball Controller/Rules/InputRule.gd" id="13_ilenv"]
+[ext_resource type="Material" uid="uid://c15ftcac4uccf" path="res://Art/Materials/M_Fire_Full.tres" id="13_wvtf1"]
 [ext_resource type="Script" uid="uid://nlxsi446gre7" path="res://Dev/Frontend/Ball Controller/Cooldown.gd" id="14_s4hg4"]
 [ext_resource type="Script" uid="uid://bya8tt6ubw05d" path="res://Dev/Frontend/Ball Controller/Ball States/Launch.gd" id="15_84w8q"]
 [ext_resource type="Script" uid="uid://dulfhx4ftd06" path="res://Dev/Frontend/Ball Controller/Rules/TraitRule.gd" id="15_ahjyt"]
+[ext_resource type="Script" uid="uid://xjddwtm4q0e2" path="res://Dev/Frontend/Ball Controller/StatFill.gd" id="19_mf80y"]
 [ext_resource type="Script" uid="uid://b3ldpufefysau" path="res://Dev/Frontend/Ball Controller/Ball States/Bounce.gd" id="19_s4hg4"]
 [ext_resource type="Script" uid="uid://bahf8h0o6ombf" path="res://Dev/Frontend/Ball Controller/Ball States/Block.gd" id="22_g6j7v"]
 [ext_resource type="Script" uid="uid://cer4nd24f3oe8" path="res://Dev/Frontend/Ball Controller/Rules/CooldownRule.gd" id="23_thta1"]
@@ -37,9 +41,11 @@ rings = 0
 cap_top = false
 cap_bottom = false
 
+[sub_resource type="SphereMesh" id="SphereMesh_wvtf1"]
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_c5qv8"]
 
-[node name="PRE_BallController_01" type="CharacterBody3D" unique_id=2124224045 node_paths=PackedStringArray("visuals", "defaultPhysics", "defaultState", "currentPhysicsStorage", "currentStateStorage", "staminaStat", "statesParent")]
+[node name="PRE_BallController_01" type="CharacterBody3D" unique_id=2124224045 node_paths=PackedStringArray("visuals", "defaultPhysics", "defaultState", "currentPhysicsStorage", "currentStateStorage", "staminaStat", "healthStat", "fireStat", "statesParent")]
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_84w8q")
@@ -50,10 +56,12 @@ defaultState = NodePath("States/Roll")
 currentPhysicsStorage = NodePath("Current Storage/Current Physics")
 currentStateStorage = NodePath("Current Storage/Current State")
 staminaStat = NodePath("Stamina Stat")
+healthStat = NodePath("Health Stat")
+fireStat = NodePath("Fire Stat")
 statesParent = NodePath("States")
 metadata/_custom_type_script = "uid://cmlx0uqgnib0r"
 
-[node name="Ball Visuals" type="Node3D" parent="." unique_id=851201941 node_paths=PackedStringArray("ballController", "ballMesh", "outlineMesh", "xrayMesh", "chargeAimMesh", "blockMesh", "spinner", "pitcher", "stretcher", "roller")]
+[node name="Ball Visuals" type="Node3D" parent="." unique_id=851201941 node_paths=PackedStringArray("ballController", "ballMesh", "outlineMesh", "xrayMesh", "chargeAimMesh", "blockMesh", "fireMeshes", "spinner", "pitcher", "stretcher", "roller", "fires")]
 script = ExtResource("2_3d8wc")
 ballController = NodePath("..")
 ballCustomizationDirectory = ExtResource("4_lr45t")
@@ -63,10 +71,12 @@ outlineMesh = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Ro
 xrayMesh = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Roller/Xray Mesh")
 chargeAimMesh = NodePath("Visual Spinner/Visual Pitcher/Charge Aim Mesh")
 blockMesh = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Roller/Block Mesh")
+fireMeshes = [NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Fire Meshes/Fire Mesh Level 1"), NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Fire Meshes/Fire Mesh Level 2"), NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Fire Meshes/Fire Mesh Full")]
 spinner = NodePath("Visual Spinner")
 pitcher = NodePath("Visual Spinner/Visual Pitcher")
 stretcher = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher")
 roller = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Roller")
+fires = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Fire Meshes")
 metadata/_custom_type_script = "uid://diamkkypctj6o"
 
 [node name="Visual Spinner" type="Node3D" parent="Ball Visuals" unique_id=1916116689]
@@ -82,7 +92,31 @@ mesh = SubResource("CylinderMesh_c5qv8")
 
 [node name="Visual Stretcher" type="Node3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher" unique_id=884396108]
 
+[node name="Fire Meshes" type="Node3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher" unique_id=826626503]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+
+[node name="Fire Mesh Level 1" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher/Fire Meshes" unique_id=967568471]
+transform = Transform3D(1.2159005, 0, 0, 0, 1.2159003, 0, 0, 0, 1.2159004, 0, 0, 0)
+visible = false
+material_override = ExtResource("8_2dflj")
+cast_shadow = 0
+mesh = SubResource("SphereMesh_wvtf1")
+
+[node name="Fire Mesh Level 2" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher/Fire Meshes" unique_id=1212891910]
+transform = Transform3D(1.2159005, 0, 0, 0, 1.2159003, 0, 0, 0, 1.2159004, 0, 0, 0)
+visible = false
+material_override = ExtResource("8_7kln7")
+cast_shadow = 0
+mesh = SubResource("SphereMesh_wvtf1")
+
+[node name="Fire Mesh Full" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher/Fire Meshes" unique_id=423124205]
+transform = Transform3D(1.2159005, 0, 0, 0, 1.2159003, 0, 0, 0, 1.2159004, 0, 0, 0)
+material_override = ExtResource("13_wvtf1")
+cast_shadow = 0
+mesh = SubResource("SphereMesh_wvtf1")
+
 [node name="Visual Roller" type="Node3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher" unique_id=1061095184]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999998, 0, 0, 0, 0.99999994, 0, 0, 0)
 
 [node name="Ball Mesh" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Roller" unique_id=1877079017]
 material_override = ExtResource("2_i0e7p")
@@ -93,10 +127,12 @@ material_override = ExtResource("4_jioly")
 mesh = ExtResource("3_3d8wc")
 
 [node name="Xray Mesh" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Roller" unique_id=1785291860]
+visible = false
 material_override = ExtResource("8_m53x3")
 mesh = ExtResource("3_3d8wc")
 
 [node name="Block Mesh" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Roller" unique_id=595999983]
+visible = false
 material_override = ExtResource("11_v2vyv")
 cast_shadow = 0
 mesh = ExtResource("12_v2vyv")
@@ -124,9 +160,28 @@ metadata/_custom_type_script = "uid://cbhbr4ha54spr"
 [node name="Stamina Stat" type="Node" parent="." unique_id=57812921]
 script = ExtResource("12_g4d1v")
 startingPercent = 1.0
+maxValue = 6.0
 cooldownPerValueSpent = 2.2
 cooldownMax = 2.0
 metadata/_custom_type_script = "uid://bspbsgt6kyqhv"
+
+[node name="Health Stat" type="Node" parent="." unique_id=1311019482]
+script = ExtResource("12_g4d1v")
+startingPercent = 1.0
+maxValue = 100.0
+fillSpeed = 1.5
+cooldownPerValueSpent = 5.0
+cooldownMax = 12.0
+metadata/_custom_type_script = "uid://bspbsgt6kyqhv"
+
+[node name="Fire Stat" type="Node" parent="." unique_id=1320798174]
+script = ExtResource("19_mf80y")
+maxValue = 1.0
+depleteSpeed = 0.2
+cooldownPerValueAdded = 3.0
+cooldownForHittingMaxValue = 3.0
+cooldownMax = 5.0
+metadata/_custom_type_script = "uid://xjddwtm4q0e2"
 
 [node name="Cooldowns" type="Node" parent="." unique_id=924135913]
 
