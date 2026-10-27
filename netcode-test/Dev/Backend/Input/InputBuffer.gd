@@ -8,7 +8,7 @@ var inputs_released_this_frame := []
 var inputs_released := []
 var inputs_held_time := []
 var inputs_is_held := []
-var inputs := ["_join", "_jump", "_leave", "_startgame", "_charge", "_block"]
+var inputs := ["_join", "_jump", "_leave", "_startgame", "_charge", "_block", "_endgame"]
 
 func _init() -> void:
 	for i in inputs.size():

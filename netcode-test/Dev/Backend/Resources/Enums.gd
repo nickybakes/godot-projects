@@ -8,4 +8,5 @@ enum InputAction
 	StartGame,
 	Charge,
 	Block,
+	EndGame,
 }

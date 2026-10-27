@@ -12,6 +12,9 @@ class_name BallVisualProfile
 @export_category("Fire")
 @export var fireRollSpeedScalar : float;
 
+@export_category("Invuln")
+@export var invulnBlinkSpeed : float;
+
 @export_category("Charge")
 @export var maxStretchCharge : float;
 @export var minThinCharge : float;

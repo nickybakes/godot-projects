@@ -20,17 +20,38 @@
 [ext_resource type="Script" uid="uid://bc4ag7pcktrlg" path="res://Dev/Frontend/Ball Controller/Ball States/Jump.gd" id="12_ilenv"]
 [ext_resource type="Script" uid="uid://bao3317lfi3tc" path="res://Dev/Frontend/Modular Character Controller/MCCTransition.gd" id="12_nefp1"]
 [ext_resource type="Script" uid="uid://c3t7bpre2tf53" path="res://Dev/Frontend/Modular Character Controller/StorageNode.gd" id="12_ods0j"]
-[ext_resource type="ArrayMesh" uid="uid://dintwgaqg63jo" path="res://Art/Models/SM_Block_01a.res" id="12_v2vyv"]
+[ext_resource type="ArrayMesh" uid="uid://00w8rb42nln8" path="res://Art/Models/SM_Block_01a.res" id="12_v2vyv"]
 [ext_resource type="Script" uid="uid://cx8j2ywloqwq7" path="res://Dev/Frontend/Ball Controller/Rules/OnSurfaceRule.gd" id="13_2mr7f"]
 [ext_resource type="Script" uid="uid://b2jd3djd45lf3" path="res://Dev/Frontend/Ball Controller/Rules/InputRule.gd" id="13_ilenv"]
 [ext_resource type="Material" uid="uid://c15ftcac4uccf" path="res://Art/Materials/M_Fire_Full.tres" id="13_wvtf1"]
 [ext_resource type="Script" uid="uid://nlxsi446gre7" path="res://Dev/Frontend/Ball Controller/Cooldown.gd" id="14_s4hg4"]
 [ext_resource type="Script" uid="uid://bya8tt6ubw05d" path="res://Dev/Frontend/Ball Controller/Ball States/Launch.gd" id="15_84w8q"]
 [ext_resource type="Script" uid="uid://dulfhx4ftd06" path="res://Dev/Frontend/Ball Controller/Rules/TraitRule.gd" id="15_ahjyt"]
+[ext_resource type="Script" uid="uid://uwmqq6cynemg" path="res://Dev/Frontend/Ball Controller/HitBox.gd" id="16_1vn2h"]
+[ext_resource type="Script" uid="uid://bajnp1ma0ic1l" path="res://Dev/Frontend/Ball Controller/HitRegion.gd" id="17_xnpby"]
+[ext_resource type="Script" uid="uid://dyuiu7ou3tkbr" path="res://Dev/Frontend/Modular Character Controller/StorageResource.gd" id="19_4jolm"]
 [ext_resource type="Script" uid="uid://xjddwtm4q0e2" path="res://Dev/Frontend/Ball Controller/StatFill.gd" id="19_mf80y"]
 [ext_resource type="Script" uid="uid://b3ldpufefysau" path="res://Dev/Frontend/Ball Controller/Ball States/Bounce.gd" id="19_s4hg4"]
+[ext_resource type="Resource" uid="uid://c30op58wvx74q" path="res://Dev/Frontend/Interaction/R_InteractionTraits_01.tres" id="20_tcg3y"]
 [ext_resource type="Script" uid="uid://bahf8h0o6ombf" path="res://Dev/Frontend/Ball Controller/Ball States/Block.gd" id="22_g6j7v"]
 [ext_resource type="Script" uid="uid://cer4nd24f3oe8" path="res://Dev/Frontend/Ball Controller/Rules/CooldownRule.gd" id="23_thta1"]
+[ext_resource type="Script" uid="uid://bern5mlba1p1h" path="res://Dev/Frontend/Ball Controller/Ball States/StrikeAttempt.gd" id="29_c4qju"]
+[ext_resource type="Script" uid="uid://vcf8he70glst" path="res://Dev/Frontend/Ball Controller/Ball States/Clash.gd" id="32_p6qoy"]
+[ext_resource type="Script" uid="uid://buyurpcnosj5a" path="res://Dev/Frontend/Ball Controller/Rules/BoolRule.gd" id="33_5bk1e"]
+[ext_resource type="Script" uid="uid://c0v8bxb3qmsi1" path="res://Dev/Frontend/Ball Controller/Ball States/StrikeVictim.gd" id="33_ial18"]
+[ext_resource type="Script" uid="uid://xaqfhlgrrlor" path="res://Dev/Frontend/Ball Controller/Ball States/StrikeRecovery.gd" id="34_qm6jm"]
+[ext_resource type="Script" uid="uid://iw8oc28ys4uf" path="res://Dev/Frontend/Ball Controller/Rules/ComparisonRule.gd" id="35_o2kvp"]
+[ext_resource type="Script" uid="uid://8u3m8jk0i22f" path="res://Dev/Frontend/Ball Controller/Ball States/Deflect.gd" id="35_qm6jm"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_c4qju"]
+radius = 0.633
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1vn2h"]
+radius = 0.5888672
+height = 1.5279236
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xnpby"]
+radius = 1.056
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_c5qv8"]
 top_radius = 0.374
@@ -45,7 +66,10 @@ cap_bottom = false
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_c5qv8"]
 
-[node name="PRE_BallController_01" type="CharacterBody3D" unique_id=2124224045 node_paths=PackedStringArray("visuals", "defaultPhysics", "defaultState", "currentPhysicsStorage", "currentStateStorage", "staminaStat", "healthStat", "fireStat", "statesParent")]
+[sub_resource type="SphereShape3D" id="SphereShape3D_mf80y"]
+radius = 0.6
+
+[node name="PRE_BallController_01" type="CharacterBody3D" unique_id=2124224045 node_paths=PackedStringArray("visuals", "defaultPhysics", "defaultState", "currentPhysicsStorage", "currentStateStorage", "staminaStat", "healthStat", "fireStat", "invulnStat", "hitbox", "deflectRegion", "strikeRegion", "grabRegion", "statesParent")]
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_84w8q")
@@ -58,10 +82,15 @@ currentStateStorage = NodePath("Current Storage/Current State")
 staminaStat = NodePath("Stamina Stat")
 healthStat = NodePath("Health Stat")
 fireStat = NodePath("Fire Stat")
+invulnStat = NodePath("Invuln Stat")
+hitbox = NodePath("Ball Hit Box")
+deflectRegion = NodePath("Ball Visuals/Visual Spinner/Visual Pitcher/Ball Deflect Region")
+strikeRegion = NodePath("Ball Visuals/Visual Spinner/Visual Pitcher/Ball Strike Region")
+grabRegion = NodePath("Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region")
 statesParent = NodePath("States")
 metadata/_custom_type_script = "uid://cmlx0uqgnib0r"
 
-[node name="Ball Visuals" type="Node3D" parent="." unique_id=851201941 node_paths=PackedStringArray("ballController", "ballMesh", "outlineMesh", "xrayMesh", "chargeAimMesh", "blockMesh", "fireMeshes", "spinner", "pitcher", "stretcher", "roller", "fires")]
+[node name="Ball Visuals" type="Node3D" parent="." unique_id=851201941 node_paths=PackedStringArray("ballController", "ballMesh", "outlineMesh", "xrayMesh", "chargeAimMesh", "blockMesh", "fireMeshes", "clashVisual", "spinner", "pitcher", "stretcher", "roller", "fires")]
 script = ExtResource("2_3d8wc")
 ballController = NodePath("..")
 ballCustomizationDirectory = ExtResource("4_lr45t")
@@ -72,6 +101,7 @@ xrayMesh = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Rolle
 chargeAimMesh = NodePath("Visual Spinner/Visual Pitcher/Charge Aim Mesh")
 blockMesh = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Roller/Block Mesh")
 fireMeshes = [NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Fire Meshes/Fire Mesh Level 1"), NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Fire Meshes/Fire Mesh Level 2"), NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Fire Meshes/Fire Mesh Full")]
+clashVisual = NodePath("Clash Visual")
 spinner = NodePath("Visual Spinner")
 pitcher = NodePath("Visual Spinner/Visual Pitcher")
 stretcher = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher")
@@ -79,9 +109,55 @@ roller = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Roller"
 fires = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Fire Meshes")
 metadata/_custom_type_script = "uid://diamkkypctj6o"
 
+[node name="Clash Visual" type="Node3D" parent="Ball Visuals" unique_id=579476604]
+
+[node name="Clash Label" type="Label3D" parent="Ball Visuals/Clash Visual" unique_id=1718508793]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7962533, 0)
+billboard = 1
+text = "CLASH!"
+font_size = 74
+outline_size = 51
+
 [node name="Visual Spinner" type="Node3D" parent="Ball Visuals" unique_id=1916116689]
 
 [node name="Visual Pitcher" type="Node3D" parent="Ball Visuals/Visual Spinner" unique_id=1647844798]
+
+[node name="Ball Deflect Region" type="Area3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher" unique_id=97677339 node_paths=PackedStringArray("ballController")]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("17_xnpby")
+ballController = NodePath("../../../..")
+metadata/_custom_type_script = "uid://bajnp1ma0ic1l"
+
+[node name="Shape" type="CollisionShape3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Deflect Region" unique_id=1541166338]
+visible = false
+shape = SubResource("SphereShape3D_c4qju")
+
+[node name="Ball Strike Region" type="Area3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher" unique_id=213594514 node_paths=PackedStringArray("ballController")]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("17_xnpby")
+ballController = NodePath("../../../..")
+filterOutInvulnerableBalls = true
+metadata/_custom_type_script = "uid://bajnp1ma0ic1l"
+
+[node name="Shape" type="CollisionShape3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Strike Region" unique_id=444436944]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -1.873555e-09, -0.36668152)
+visible = false
+shape = SubResource("CapsuleShape3D_1vn2h")
+
+[node name="Ball Grab Region" type="Area3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher" unique_id=996602105 node_paths=PackedStringArray("ballController")]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("17_xnpby")
+ballController = NodePath("../../../..")
+filterOutInvulnerableBalls = true
+metadata/_custom_type_script = "uid://bajnp1ma0ic1l"
+
+[node name="Shape" type="CollisionShape3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region" unique_id=1688676039]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.25089332)
+visible = false
+shape = SubResource("SphereShape3D_xnpby")
 
 [node name="Charge Aim Mesh" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher" unique_id=283875934]
 transform = Transform3D(-1, -8.742278e-08, 3.821371e-15, 0, -4.371139e-08, -1, 8.742278e-08, -1, 4.371139e-08, -2.4041267e-08, -1.2020633e-08, -0.89000005)
@@ -103,14 +179,12 @@ mesh = SubResource("SphereMesh_wvtf1")
 
 [node name="Fire Mesh Level 2" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher/Fire Meshes" unique_id=1212891910]
 transform = Transform3D(1.2159005, 0, 0, 0, 1.2159003, 0, 0, 0, 1.2159004, 0, 0, 0)
-visible = false
 material_override = ExtResource("8_7kln7")
 cast_shadow = 0
 mesh = SubResource("SphereMesh_wvtf1")
 
 [node name="Fire Mesh Full" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher/Fire Meshes" unique_id=423124205]
 transform = Transform3D(1.2159005, 0, 0, 0, 1.2159003, 0, 0, 0, 1.2159004, 0, 0, 0)
-visible = false
 material_override = ExtResource("13_wvtf1")
 cast_shadow = 0
 mesh = SubResource("SphereMesh_wvtf1")
@@ -127,7 +201,6 @@ material_override = ExtResource("4_jioly")
 mesh = ExtResource("3_3d8wc")
 
 [node name="Xray Mesh" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Roller" unique_id=1785291860]
-visible = false
 material_override = ExtResource("8_m53x3")
 mesh = ExtResource("3_3d8wc")
 
@@ -137,9 +210,18 @@ material_override = ExtResource("11_v2vyv")
 cast_shadow = 0
 mesh = ExtResource("12_v2vyv")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1755982985]
-visible = false
+[node name="Physics Shape" type="CollisionShape3D" parent="." unique_id=1755982985]
 shape = SubResource("SphereShape3D_c5qv8")
+
+[node name="Ball Hit Box" type="Area3D" parent="." unique_id=1337476997 node_paths=PackedStringArray("ballController")]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("16_1vn2h")
+ballController = NodePath("..")
+metadata/_custom_type_script = "uid://uwmqq6cynemg"
+
+[node name="Shape" type="CollisionShape3D" parent="Ball Hit Box" unique_id=1026210399]
+shape = SubResource("SphereShape3D_mf80y")
 
 [node name="Current Storage" type="Node" parent="." unique_id=1361367863]
 
@@ -150,6 +232,11 @@ metadata/_custom_type_script = "uid://c3t7bpre2tf53"
 [node name="Current State" type="Node" parent="Current Storage" unique_id=487631750]
 script = ExtResource("12_ods0j")
 metadata/_custom_type_script = "uid://c3t7bpre2tf53"
+
+[node name="Interactions Traits" type="Node" parent="Current Storage" unique_id=1935816793]
+script = ExtResource("19_4jolm")
+storedResource = ExtResource("20_tcg3y")
+metadata/_custom_type_script = "uid://dyuiu7ou3tkbr"
 
 [node name="Physics" type="Node" parent="." unique_id=286023308]
 
@@ -176,11 +263,18 @@ metadata/_custom_type_script = "uid://bspbsgt6kyqhv"
 
 [node name="Fire Stat" type="Node" parent="." unique_id=1320798174]
 script = ExtResource("19_mf80y")
-maxValue = 1.0
-depleteSpeed = 0.2
+depleteSpeed = 0.6
 cooldownPerValueAdded = 3.0
 cooldownForHittingMaxValue = 3.0
 cooldownMax = 5.0
+metadata/_custom_type_script = "uid://xjddwtm4q0e2"
+
+[node name="Invuln Stat" type="Node" parent="." unique_id=1008547764]
+script = ExtResource("19_mf80y")
+maxValue = 1.0
+depleteSpeed = 0.653
+cooldownForHittingMaxValue = 0.2
+cooldownMax = 0.0
 metadata/_custom_type_script = "uid://xjddwtm4q0e2"
 
 [node name="Cooldowns" type="Node" parent="." unique_id=924135913]
@@ -198,32 +292,41 @@ metadata/_custom_type_script = "uid://nlxsi446gre7"
 script = ExtResource("14_s4hg4")
 metadata/_custom_type_script = "uid://nlxsi446gre7"
 
+[node name="Remove Block Cooldown" type="Node" parent="Cooldowns" unique_id=1384251118]
+script = ExtResource("14_s4hg4")
+metadata/_custom_type_script = "uid://nlxsi446gre7"
+
+[node name="Strike Cooldown" type="Node" parent="Cooldowns" unique_id=1475447709]
+script = ExtResource("14_s4hg4")
+cooldownTime = 1.318
+metadata/_custom_type_script = "uid://nlxsi446gre7"
+
 [node name="States" type="Node" parent="." unique_id=1727491952]
 
 [node name="Roll" type="Node" parent="States" unique_id=1070377533 node_paths=PackedStringArray("transitions")]
 script = ExtResource("12_84w8q")
 codeName = "roll"
-transitions = [NodePath("../../Transitions/Charge Transition"), NodePath("../../Transitions/Jump Transition"), NodePath("../../Transitions/Block Start Transition")]
+transitions = [NodePath("../../Transitions/Movement/Charge Transition"), NodePath("../../Transitions/Movement/Jump Transition"), NodePath("../../Transitions/Movement/Block Start Transition"), NodePath("../../Transitions/Combat/Strike Attempt Transition"), NodePath("../../Transitions/Movement/Deflect Start Transition")]
 metadata/_custom_type_script = "uid://decpb0lh7o7qx"
 
 [node name="Jump" type="Node" parent="States" unique_id=547728586 node_paths=PackedStringArray("cooldown", "transitions")]
 script = ExtResource("12_ilenv")
 cooldown = NodePath("../../Cooldowns/Jump Cooldown")
 codeName = "jump"
-transitions = [NodePath("../../Transitions/Force End Jump Transition"), NodePath("../../Transitions/Force End Jump Transition 2"), NodePath("../../Transitions/End Jump Transition"), NodePath("../../Transitions/Charge Transition"), NodePath("../../Transitions/Block Start Transition")]
+transitions = [NodePath("../../Transitions/Movement/Force End Jump Transition"), NodePath("../../Transitions/Movement/Force End Jump Transition 2"), NodePath("../../Transitions/Movement/End Jump Transition"), NodePath("../../Transitions/Movement/Charge Transition"), NodePath("../../Transitions/Movement/Block Start Transition")]
 metadata/_custom_type_script = "uid://bc4ag7pcktrlg"
 
 [node name="Charge" type="Node" parent="States" unique_id=1096450482 node_paths=PackedStringArray("cooldown", "transitions")]
 script = ExtResource("12_apf2q")
 cooldown = NodePath("../../Cooldowns/Charge Cooldown")
 codeName = "charge"
-transitions = [NodePath("../../Transitions/Force Launch Transition"), NodePath("../../Transitions/Launch Transition")]
+transitions = [NodePath("../../Transitions/Movement/Force Launch Transition"), NodePath("../../Transitions/Movement/Launch Transition")]
 metadata/_custom_type_script = "uid://bxuank2e18mxg"
 
 [node name="Launch" type="Node" parent="States" unique_id=1923802051 node_paths=PackedStringArray("transitions")]
 script = ExtResource("15_84w8q")
 codeName = "launch"
-transitions = [NodePath("../../Transitions/Roll Transition")]
+transitions = [NodePath("../../Transitions/Movement/Roll Transition")]
 metadata/_custom_type_script = "uid://bya8tt6ubw05d"
 
 [node name="Bounce" type="Node" parent="States" unique_id=915088411]
@@ -231,89 +334,190 @@ script = ExtResource("19_s4hg4")
 codeName = "bounce"
 metadata/_custom_type_script = "uid://b3ldpufefysau"
 
-[node name="Block" type="Node" parent="States" unique_id=396913574 node_paths=PackedStringArray("cooldown", "transitions")]
+[node name="Block" type="Node" parent="States" unique_id=396913574 node_paths=PackedStringArray("cooldown", "removeBlockCooldown", "transitions")]
 script = ExtResource("22_g6j7v")
 cooldown = NodePath("../../Cooldowns/Block Cooldown")
+removeBlockCooldown = NodePath("../../Cooldowns/Remove Block Cooldown")
 codeName = "block"
-transitions = [NodePath("../../Transitions/Block Stop Transition")]
+transitions = [NodePath("../../Transitions/Movement/Block Stop Transition")]
 metadata/_custom_type_script = "uid://bahf8h0o6ombf"
+
+[node name="Clash" type="Node" parent="States" unique_id=451413507 node_paths=PackedStringArray("transitions")]
+script = ExtResource("32_p6qoy")
+codeName = "clash"
+transitions = [NodePath("../../Transitions/Combat/Clash End Transition"), NodePath("../../Transitions/Movement/Deflect Start Transition")]
+metadata/_custom_type_script = "uid://vcf8he70glst"
+
+[node name="StrikeAttempt" type="Node" parent="States" unique_id=1221542155 node_paths=PackedStringArray("cooldown", "transitions")]
+script = ExtResource("29_c4qju")
+cooldown = NodePath("../../Cooldowns/Strike Cooldown")
+codeName = "strikeAttempt"
+transitions = [NodePath("../../Transitions/Combat/Clash Start Transition"), NodePath("../../Transitions/Combat/Strike Recovery Start Transition")]
+metadata/_custom_type_script = "uid://bern5mlba1p1h"
+
+[node name="StrikeRecovery" type="Node" parent="States" unique_id=763220211 node_paths=PackedStringArray("cooldown", "transitions")]
+script = ExtResource("34_qm6jm")
+cooldown = NodePath("../../Cooldowns/Strike Cooldown")
+codeName = "strikeRecovery"
+transitions = [NodePath("../../Transitions/Combat/Strike Recovery End Transition")]
+metadata/_custom_type_script = "uid://xaqfhlgrrlor"
+
+[node name="StrikeVictim" type="Node" parent="States" unique_id=362616550 node_paths=PackedStringArray("cooldown", "transitions")]
+script = ExtResource("33_ial18")
+cooldown = NodePath("../../Cooldowns/Strike Cooldown")
+codeName = "strikeVictim"
+transitions = [NodePath("../../Transitions/Combat/Strike Victim End Transition"), NodePath("../../Transitions/Movement/Deflect Start Transition")]
+metadata/_custom_type_script = "uid://c0v8bxb3qmsi1"
+
+[node name="Deflect" type="Node" parent="States" unique_id=1912669768 node_paths=PackedStringArray("transitions")]
+script = ExtResource("35_qm6jm")
+codeName = "deflect"
+transitions = [NodePath("../../Transitions/Movement/Roll Transition")]
+metadata/_custom_type_script = "uid://8u3m8jk0i22f"
 
 [node name="Transitions" type="Node" parent="." unique_id=40976891]
 
-[node name="Roll Transition" type="Node" parent="Transitions" unique_id=1361190315 node_paths=PackedStringArray("stateTransitionTo")]
+[node name="Movement" type="Node" parent="Transitions" unique_id=1544327928]
+
+[node name="Roll Transition" type="Node" parent="Transitions/Movement" unique_id=1361190315 node_paths=PackedStringArray("stateTransitionTo")]
 script = ExtResource("12_nefp1")
-stateTransitionTo = NodePath("../../States/Roll")
+stateTransitionTo = NodePath("../../../States/Roll")
 metadata/_custom_type_script = "uid://bao3317lfi3tc"
 
-[node name="Jump Transition" type="Node" parent="Transitions" unique_id=1642511494 node_paths=PackedStringArray("stateTransitionTo", "rules")]
+[node name="Jump Transition" type="Node" parent="Transitions/Movement" unique_id=1642511494 node_paths=PackedStringArray("stateTransitionTo", "rules")]
 script = ExtResource("12_nefp1")
-stateTransitionTo = NodePath("../../States/Jump")
-rules = [NodePath("../../Input Rules/Jump Pressed Buffered"), NodePath("../../Generic Rules/Has Stamina"), NodePath("../../Cooldown Rules/Jump Cooled Down")]
+stateTransitionTo = NodePath("../../../States/Jump")
+rules = [NodePath("../../../Input Rules/Jump Pressed Buffered"), NodePath("../../../Generic Rules/Has Stamina"), NodePath("../../../Cooldown Rules/Jump Cooled Down")]
 metadata/_custom_type_script = "uid://bao3317lfi3tc"
 
-[node name="End Jump Transition" type="Node" parent="Transitions" unique_id=1271299548 node_paths=PackedStringArray("stateTransitionTo", "rules")]
+[node name="End Jump Transition" type="Node" parent="Transitions/Movement" unique_id=1271299548 node_paths=PackedStringArray("stateTransitionTo", "rules")]
 script = ExtResource("12_nefp1")
-stateTransitionTo = NodePath("../../States/Roll")
-rules = [NodePath("../../Input Rules/Jump Released")]
+stateTransitionTo = NodePath("../../../States/Roll")
+rules = [NodePath("../../../Input Rules/Jump Released")]
 metadata/_custom_type_script = "uid://bao3317lfi3tc"
 
-[node name="Force End Jump Transition" type="Node" parent="Transitions" unique_id=1663629199 node_paths=PackedStringArray("stateTransitionTo", "rules")]
+[node name="Force End Jump Transition" type="Node" parent="Transitions/Movement" unique_id=1663629199 node_paths=PackedStringArray("stateTransitionTo", "rules")]
 script = ExtResource("12_nefp1")
-stateTransitionTo = NodePath("../../States/Roll")
-rules = [NodePath("../../Generic Rules/Has No Stamina")]
+stateTransitionTo = NodePath("../../../States/Roll")
+rules = [NodePath("../../../Generic Rules/Has No Stamina")]
 metadata/_custom_type_script = "uid://bao3317lfi3tc"
 
-[node name="Force End Jump Transition 2" type="Node" parent="Transitions" unique_id=399432867 node_paths=PackedStringArray("stateTransitionTo", "rules")]
+[node name="Force End Jump Transition 2" type="Node" parent="Transitions/Movement" unique_id=399432867 node_paths=PackedStringArray("stateTransitionTo", "rules")]
 script = ExtResource("12_nefp1")
-stateTransitionTo = NodePath("../../States/Roll")
+stateTransitionTo = NodePath("../../../States/Roll")
 rules = [NodePath("Jump Time Max Rule")]
 metadata/_custom_type_script = "uid://bao3317lfi3tc"
 
-[node name="Jump Time Max Rule" type="Node" parent="Transitions/Force End Jump Transition 2" unique_id=1355433088 node_paths=PackedStringArray("node")]
+[node name="Jump Time Max Rule" type="Node" parent="Transitions/Movement/Force End Jump Transition 2" unique_id=1355433088 node_paths=PackedStringArray("node")]
 script = ExtResource("15_ahjyt")
-node = NodePath("../../../Current Storage/Current State")
+node = NodePath("../../../../Current Storage/Current State")
 property = "timeInState"
 comparisonType = 1
 traitProperty = "maxJumpTime"
 metadata/_custom_type_script = "uid://dulfhx4ftd06"
 
-[node name="Charge Transition" type="Node" parent="Transitions" unique_id=1540785255 node_paths=PackedStringArray("stateTransitionTo", "rules")]
+[node name="Charge Transition" type="Node" parent="Transitions/Movement" unique_id=1540785255 node_paths=PackedStringArray("stateTransitionTo", "rules")]
 script = ExtResource("12_nefp1")
-stateTransitionTo = NodePath("../../States/Charge")
-rules = [NodePath("../../Input Rules/Charge Pressed This Frame"), NodePath("../../Generic Rules/Has Stamina"), NodePath("../../Cooldown Rules/Charge Cooled Down")]
+stateTransitionTo = NodePath("../../../States/Charge")
+rules = [NodePath("../../../Input Rules/Charge Pressed This Frame"), NodePath("../../../Generic Rules/Has Stamina"), NodePath("../../../Cooldown Rules/Charge Cooled Down")]
 metadata/_custom_type_script = "uid://bao3317lfi3tc"
 
-[node name="Launch Transition" type="Node" parent="Transitions" unique_id=379377229 node_paths=PackedStringArray("stateTransitionTo", "rules")]
+[node name="Launch Transition" type="Node" parent="Transitions/Movement" unique_id=379377229 node_paths=PackedStringArray("stateTransitionTo", "rules")]
 script = ExtResource("12_nefp1")
-stateTransitionTo = NodePath("../../States/Launch")
-rules = [NodePath("../../Input Rules/Charge Released"), NodePath("Charge Time Min Rule")]
+stateTransitionTo = NodePath("../../../States/Launch")
+rules = [NodePath("../../../Input Rules/Charge Released"), NodePath("Charge Time Min Rule")]
 metadata/_custom_type_script = "uid://bao3317lfi3tc"
 
-[node name="Charge Time Min Rule" type="Node" parent="Transitions/Launch Transition" unique_id=1172744449 node_paths=PackedStringArray("node")]
+[node name="Charge Time Min Rule" type="Node" parent="Transitions/Movement/Launch Transition" unique_id=1172744449 node_paths=PackedStringArray("node")]
 script = ExtResource("15_ahjyt")
-node = NodePath("../../../Current Storage/Current State")
+node = NodePath("../../../../Current Storage/Current State")
 property = "timeInState"
 comparisonType = 1
 traitProperty = "minChargeTime"
 metadata/_custom_type_script = "uid://dulfhx4ftd06"
 
-[node name="Force Launch Transition" type="Node" parent="Transitions" unique_id=1729558237 node_paths=PackedStringArray("stateTransitionTo", "rules")]
+[node name="Force Launch Transition" type="Node" parent="Transitions/Movement" unique_id=1729558237 node_paths=PackedStringArray("stateTransitionTo", "rules")]
 script = ExtResource("12_nefp1")
-stateTransitionTo = NodePath("../../States/Launch")
-rules = [NodePath("../../Generic Rules/Has No Stamina")]
+stateTransitionTo = NodePath("../../../States/Launch")
+rules = [NodePath("../../../Generic Rules/Has No Stamina")]
 metadata/_custom_type_script = "uid://bao3317lfi3tc"
 
-[node name="Block Start Transition" type="Node" parent="Transitions" unique_id=611461240 node_paths=PackedStringArray("stateTransitionTo", "rules")]
+[node name="Block Start Transition" type="Node" parent="Transitions/Movement" unique_id=611461240 node_paths=PackedStringArray("stateTransitionTo", "rules")]
 script = ExtResource("12_nefp1")
-stateTransitionTo = NodePath("../../States/Block")
-rules = [NodePath("../../Input Rules/Block Pressed This Frame"), NodePath("../../Cooldown Rules/Block Cooled Down")]
+stateTransitionTo = NodePath("../../../States/Block")
+rules = [NodePath("../../../Input Rules/Block Pressed Buffered"), NodePath("../../../Cooldown Rules/Block Cooled Down")]
 metadata/_custom_type_script = "uid://bao3317lfi3tc"
 
-[node name="Block Stop Transition" type="Node" parent="Transitions" unique_id=570208158 node_paths=PackedStringArray("stateTransitionTo", "rules")]
+[node name="Block Stop Transition" type="Node" parent="Transitions/Movement" unique_id=570208158 node_paths=PackedStringArray("stateTransitionTo", "rules")]
 script = ExtResource("12_nefp1")
-stateTransitionTo = NodePath("../../States/Roll")
-rules = [NodePath("../../Input Rules/Block Released")]
+stateTransitionTo = NodePath("../../../States/Roll")
+rules = [NodePath("../../../Input Rules/Block Released"), NodePath("../../../Cooldown Rules/Can Remove Block")]
 metadata/_custom_type_script = "uid://bao3317lfi3tc"
+
+[node name="Deflect Start Transition" type="Node" parent="Transitions/Movement" unique_id=223068517 node_paths=PackedStringArray("stateTransitionTo", "rules")]
+script = ExtResource("12_nefp1")
+stateTransitionTo = NodePath("../../../States/Deflect")
+rules = [NodePath("../../../Generic Rules/Is Deflect Rule")]
+metadata/_custom_type_script = "uid://bao3317lfi3tc"
+
+[node name="Combat" type="Node" parent="Transitions" unique_id=802108804]
+
+[node name="Strike Attempt Transition" type="Node" parent="Transitions/Combat" unique_id=771331889 node_paths=PackedStringArray("stateTransitionTo", "rules")]
+script = ExtResource("12_nefp1")
+stateTransitionTo = NodePath("../../../States/StrikeAttempt")
+rules = [NodePath("../../../Generic Rules/Is Strike Attempt Rule"), NodePath("../../../Cooldown Rules/Strike Cooled Down"), NodePath("../../../Combat Rules/No Invuln Rule")]
+metadata/_custom_type_script = "uid://bao3317lfi3tc"
+
+[node name="Strike Recovery Start Transition" type="Node" parent="Transitions/Combat" unique_id=1363178095 node_paths=PackedStringArray("stateTransitionTo", "rules")]
+script = ExtResource("12_nefp1")
+stateTransitionTo = NodePath("../../../States/Roll")
+rules = [NodePath("../../../Combat Rules/Strike Buffer Time Max Rule")]
+metadata/_custom_type_script = "uid://bao3317lfi3tc"
+
+[node name="Strike Recovery End Transition" type="Node" parent="Transitions/Combat" unique_id=1109044551 node_paths=PackedStringArray("stateTransitionTo", "rules")]
+script = ExtResource("12_nefp1")
+stateTransitionTo = NodePath("../../../States/Roll")
+rules = [NodePath("../../../Combat Rules/Strike Activator Recovery Rule")]
+metadata/_custom_type_script = "uid://bao3317lfi3tc"
+
+[node name="Strike Victim End Transition" type="Node" parent="Transitions/Combat" unique_id=2089280344 node_paths=PackedStringArray("stateTransitionTo")]
+script = ExtResource("12_nefp1")
+stateTransitionTo = NodePath("../../../States/Roll")
+metadata/_custom_type_script = "uid://bao3317lfi3tc"
+
+[node name="Clash Start Transition" type="Node" parent="Transitions/Combat" unique_id=151579272 node_paths=PackedStringArray("stateTransitionTo", "rules")]
+script = ExtResource("12_nefp1")
+stateTransitionTo = NodePath("../../../States/Clash")
+rules = [NodePath("../../../Combat Rules/Strike Buffer Time Max Rule"), NodePath("../../../Generic Rules/Is Clash Rule")]
+metadata/_custom_type_script = "uid://bao3317lfi3tc"
+
+[node name="Clash End Transition" type="Node" parent="Transitions/Combat" unique_id=293215912 node_paths=PackedStringArray("stateTransitionTo", "rules")]
+script = ExtResource("12_nefp1")
+stateTransitionTo = NodePath("../../../States/Roll")
+rules = [NodePath("Clash Time Max Rule")]
+metadata/_custom_type_script = "uid://bao3317lfi3tc"
+
+[node name="Clash Time Max Rule" type="Node" parent="Transitions/Combat/Clash End Transition" unique_id=659505160 node_paths=PackedStringArray("node")]
+script = ExtResource("15_ahjyt")
+node = NodePath("../../../../Current Storage/Current State")
+property = "timeInState"
+comparisonType = 1
+traitProperty = "maxClashTime"
+metadata/_custom_type_script = "uid://dulfhx4ftd06"
+
+[node name="Fallback Transition" type="Node" parent="Transitions/Combat" unique_id=1209670402 node_paths=PackedStringArray("stateTransitionTo", "rules")]
+script = ExtResource("12_nefp1")
+stateTransitionTo = NodePath("../../../States/Roll")
+rules = [NodePath("Fallback Time Max Rule")]
+metadata/_custom_type_script = "uid://bao3317lfi3tc"
+
+[node name="Fallback Time Max Rule" type="Node" parent="Transitions/Combat/Fallback Transition" unique_id=1119534056 node_paths=PackedStringArray("node")]
+script = ExtResource("15_ahjyt")
+node = NodePath("../../../../Current Storage/Current State")
+property = "timeInState"
+comparisonType = 1
+traitProperty = "fallbackMaxTimeInState"
+metadata/_custom_type_script = "uid://dulfhx4ftd06"
 
 [node name="Generic Rules" type="Node" parent="." unique_id=1625890100]
 
@@ -341,6 +545,59 @@ comparisonType = 2
 traitProperty = "zero"
 metadata/_custom_type_script = "uid://dulfhx4ftd06"
 
+[node name="Is Deflect Rule" type="Node" parent="Generic Rules" unique_id=937309743 node_paths=PackedStringArray("node")]
+script = ExtResource("33_5bk1e")
+node = NodePath("../../Current Storage/Current Physics")
+property = "isDeflect"
+metadata/_custom_type_script = "uid://buyurpcnosj5a"
+
+[node name="Is Strike Attempt Rule" type="Node" parent="Generic Rules" unique_id=381531913 node_paths=PackedStringArray("node")]
+script = ExtResource("33_5bk1e")
+node = NodePath("../../Current Storage/Current Physics")
+property = "isStrikeAttempt"
+metadata/_custom_type_script = "uid://buyurpcnosj5a"
+
+[node name="Is Clash Rule" type="Node" parent="Generic Rules" unique_id=1699278001 node_paths=PackedStringArray("node")]
+script = ExtResource("33_5bk1e")
+node = NodePath("../..")
+property = "clash"
+metadata/_custom_type_script = "uid://buyurpcnosj5a"
+
+[node name="Combat Rules" type="Node" parent="." unique_id=1913771585]
+
+[node name="Strike Buffer Time Max Rule" type="Node" parent="Combat Rules" unique_id=1169002660 node_paths=PackedStringArray("node", "node2")]
+script = ExtResource("35_o2kvp")
+node = NodePath("../../Current Storage/Current State")
+property = "timeInState"
+comparisonType = 1
+node2 = NodePath("../../Current Storage/Interactions Traits")
+property2 = "strikeBuffer"
+metadata/_custom_type_script = "uid://iw8oc28ys4uf"
+
+[node name="Strike Activator Recovery Rule" type="Node" parent="Combat Rules" unique_id=874505830 node_paths=PackedStringArray("node")]
+script = ExtResource("15_ahjyt")
+node = NodePath("../../Current Storage/Current State")
+property = "timeInState"
+comparisonType = 1
+traitProperty = "strikeActivatorRecoveryTime"
+metadata/_custom_type_script = "uid://dulfhx4ftd06"
+
+[node name="Strike Victim Recovery Rule" type="Node" parent="Combat Rules" unique_id=368636940 node_paths=PackedStringArray("node")]
+script = ExtResource("15_ahjyt")
+node = NodePath("../../Current Storage/Current State")
+property = "timeInState"
+comparisonType = 1
+traitProperty = "strikeVictimRecoveryTime"
+metadata/_custom_type_script = "uid://dulfhx4ftd06"
+
+[node name="No Invuln Rule" type="Node" parent="Combat Rules" unique_id=1947464689 node_paths=PackedStringArray("node")]
+script = ExtResource("15_ahjyt")
+node = NodePath("../../Invuln Stat")
+property = "value"
+comparisonType = 2
+traitProperty = "zero"
+metadata/_custom_type_script = "uid://dulfhx4ftd06"
+
 [node name="Cooldown Rules" type="Node" parent="." unique_id=239466743]
 
 [node name="Jump Cooled Down" type="Node" parent="Cooldown Rules" unique_id=1756823682 node_paths=PackedStringArray("cooldown")]
@@ -354,6 +611,16 @@ cooldown = NodePath("../../Cooldowns/Charge Cooldown")
 metadata/_custom_type_script = "uid://cer4nd24f3oe8"
 
 [node name="Block Cooled Down" type="Node" parent="Cooldown Rules" unique_id=1573106155 node_paths=PackedStringArray("cooldown")]
+script = ExtResource("23_thta1")
+cooldown = NodePath("../../Cooldowns/Block Cooldown")
+metadata/_custom_type_script = "uid://cer4nd24f3oe8"
+
+[node name="Can Remove Block" type="Node" parent="Cooldown Rules" unique_id=450733646 node_paths=PackedStringArray("cooldown")]
+script = ExtResource("23_thta1")
+cooldown = NodePath("../../Cooldowns/Remove Block Cooldown")
+metadata/_custom_type_script = "uid://cer4nd24f3oe8"
+
+[node name="Strike Cooled Down" type="Node" parent="Cooldown Rules" unique_id=941728762 node_paths=PackedStringArray("cooldown")]
 script = ExtResource("23_thta1")
 cooldown = NodePath("../../Cooldowns/Block Cooldown")
 metadata/_custom_type_script = "uid://cer4nd24f3oe8"
@@ -383,10 +650,9 @@ action = 4
 inputType = 5
 metadata/_custom_type_script = "uid://b2jd3djd45lf3"
 
-[node name="Block Pressed This Frame" type="Node" parent="Input Rules" unique_id=997638150]
+[node name="Block Pressed Buffered" type="Node" parent="Input Rules" unique_id=997638150]
 script = ExtResource("13_ilenv")
 action = 5
-inputType = 1
 metadata/_custom_type_script = "uid://b2jd3djd45lf3"
 
 [node name="Block Released" type="Node" parent="Input Rules" unique_id=201494177]
@@ -394,3 +660,10 @@ script = ExtResource("13_ilenv")
 action = 5
 inputType = 5
 metadata/_custom_type_script = "uid://b2jd3djd45lf3"
+
+[connection signal="area_entered" from="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Deflect Region" to="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Deflect Region" method="OnBallEnteredThis"]
+[connection signal="area_exited" from="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Deflect Region" to="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Deflect Region" method="OnBallExitedThis"]
+[connection signal="area_entered" from="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Strike Region" to="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Strike Region" method="OnBallEnteredThis"]
+[connection signal="area_exited" from="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Strike Region" to="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Strike Region" method="OnBallExitedThis"]
+[connection signal="area_entered" from="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region" to="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region" method="OnBallEnteredThis"]
+[connection signal="area_exited" from="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region" to="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region" method="OnBallExitedThis"]

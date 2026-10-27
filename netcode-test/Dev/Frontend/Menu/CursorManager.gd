@@ -28,6 +28,7 @@ func _ready() -> void:
 	aspectRatio = width/height;
 	LobbyManager.Lobby.PlayerJoinAccepted.connect(PlayerJoinAccepted);
 	LobbyManager.Lobby.PlayerRemoved.connect(PlayerRemoved);
+	RecreateCursors();
 	
 func _exit_tree() -> void:
 	if(LobbyManager.Lobby):
@@ -51,6 +52,12 @@ func CursorAdded(playerNumber : int, cursor : Cursor):
 	
 func CursorRemoved(playerNumber : int):
 	cursors.erase(playerNumber);
+	
+func RecreateCursors():
+	if(LobbyManager.Lobby):
+		for playerToken in LobbyManager.Lobby.playerTokens:
+			Network.LogStr("Recreate: ", playerToken.playerNumber);
+			PlayerJoinAccepted(playerToken);
 	
 func DestroyAllCursors():
 	for playerNumber in cursors.keys():

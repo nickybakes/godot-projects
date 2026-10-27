@@ -8,7 +8,7 @@ var latencyArray = [];
 var latency : float = 0;
 var deltaLatency : float = 0;
 
-var clock : int = 0;
+static var clock : int = 0;
 
 func _ready() -> void:
 	fetchServerTime();

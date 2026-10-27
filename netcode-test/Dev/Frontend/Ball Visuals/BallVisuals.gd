@@ -16,6 +16,9 @@ class_name BallVisuals;
 @export var fireMeshes : Array[MeshInstance3D];
 var firePercentSplit : float;
 
+@export_category("Clash")
+@export var clashVisual : Node3D;
+
 @export_category("Transforms")
 @export var spinner : Node3D;
 @export var pitcher : Node3D;
@@ -41,10 +44,11 @@ func Setup(playerNumber : int):
 	xrayMesh.material_override = xrayMaterial;
 	chargeAimMesh.material_override = chargeAimMaterial;
 	
-	firePercentSplit = 1.0/(fireMeshes.size() + 1.0);
+	firePercentSplit = ballController.fireStat.maxValue/(fireMeshes.size() + 1.0);
 	
 	StopChargeVisual();
 	StopBlockVisual();
+	StopClashVisual();
 	CreateHeader();
 	
 func CreateHeader():
@@ -89,8 +93,18 @@ func SoarStretchBall(currentSpeed : float, delta : float):
 	
 func UpdateFireVisuals(fireAmount : float, delta : float):
 	for i in fireMeshes.size():
-		fireMeshes[i].visible = fireAmount >= ((i + 1) * firePercentSplit)
-#	 && fireAmount <= ((i + 2) * firePercentSplit)
+		fireMeshes[i].visible = fireAmount >= ((i + 1) * firePercentSplit) #&& fireAmount <= ((i + 2) * firePercentSplit)
+
+var blinkTime := 0.0;
+
+func UpdateInvulnVisuals(invulnAmount : float, delta : float):
+	if(is_zero_approx(invulnAmount)):
+		stretcher.visible = true;
+	else:
+		blinkTime += delta * invulnAmount * profile.invulnBlinkSpeed;
+		if(blinkTime > 1.0):
+			stretcher.visible = !stretcher.visible;
+	pass;
 
 func StartChargeVisual():
 	chargeAimMesh.visible = true;
@@ -103,3 +117,9 @@ func StartBlockVisual():
 	
 func StopBlockVisual():
 	blockMesh.visible = false;
+	
+func StartClashVisual():
+	clashVisual.visible = true;
+	
+func StopClashVisual():
+	clashVisual.visible = false;

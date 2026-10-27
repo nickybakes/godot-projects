@@ -14,6 +14,21 @@ class_name BallMCC
 @export var staminaStat : StatRefill;
 @export var healthStat : StatRefill;
 @export var fireStat : StatFill;
+@export var invulnStat : StatFill;
+
+@export_category("Hit Boxes and Regions")
+@export var hitbox : HitBox;
+@export var deflectRegion : HitRegion;
+@export var strikeRegion : HitRegion;
+@export var grabRegion : HitRegion;
+
+var playerNumber : int;
+var eliminated : bool;
+
+var clash : bool;
+
+var blocking : bool;
+var successfulBlock : bool;
 
 var allStates : Array[BallState];
 var currentState : BallState;
@@ -50,6 +65,11 @@ func DoStateTransition(nextState : MCCState):
 	currentState = nextState;
 	currentStateStorage.storedNode = currentState;
 	
+	if(playerNumber == 1 && nextState.codeName == 'strikeAttempt'):
+		print('prev state: ', previousState.codeName);
+	if(playerNumber == 1 && previousState.codeName == 'strikeAttempt'):
+		print('next state: ', currentState.codeName);
+	
 	currentState.ExitState();
 	if(updatePhysics):
 		previousState.ExitStatePhysics();
@@ -69,6 +89,23 @@ func DoStateTransitionByIndex(nextStateIndex : int):
 func CalculateRequestedMoveDirection(delta : float):
 	if(inputDevice):
 		requestedMoveDirection = Vector3(inputDevice.moveInput.x, 0, -inputDevice.moveInput.y);
+
+func TakeDamageFromStrike(activator : BallMCC, activatorSpeed : float, activatorFire : float) -> float:
+	var damageCalc = DamageCalc(activator, activatorSpeed, activatorFire);
+	if(updatePhysics):
+		healthStat.Spend(damageCalc);
+	return damageCalc;
+	
+func BlockDamageFromStrike(activator : BallMCC, activatorSpeed : float, activatorFire : float) -> float:
+	successfulBlock = true;
+	var damageCalc = DamageCalc(activator, activatorSpeed, activatorFire);
+	# maybe track blocked damage?
+	#healthStat.Spend(0);
+	return damageCalc;
+	
+func DamageCalc(activator : BallMCC, activatorSpeed : float, activatorFire : float) -> float:
+	var damageCalc = (traits.minStrikeDamage + (activatorSpeed * traits.strikeDamageSpeedScalar)) * (activatorFire * traits.strikeDamageFireMultScalar);
+	return damageCalc;
 
 func _ready() -> void:
 	SetupStates();
@@ -91,7 +128,8 @@ func _process(delta: float) -> void:
 		visuals.header.DisplayStamina(staminaStat.value, staminaStat.maxValue);
 		visuals.header.DisplayHealth(healthStat.value, healthStat.maxValue);
 		visuals.UpdateFireVisuals(fireStat.value, delta);
+		visuals.UpdateInvulnVisuals(invulnStat.value, delta);
 		currentState.ProcessVisuals(delta);
 
-func BasicMoveInput():
+func ProcessInteraction():
 	pass;

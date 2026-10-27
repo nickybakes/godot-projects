@@ -5,7 +5,8 @@
 [ext_resource type="Script" uid="uid://dwjf48i5tqrx3" path="res://Dev/Frontend/Game/GameManager.gd" id="2_n03q8"]
 [ext_resource type="Script" uid="uid://lomqln3v0xvt" path="res://Dev/Frontend/Game/GameSceneSetup.gd" id="4_8lxd5"]
 [ext_resource type="Script" uid="uid://b3mping6psqq0" path="res://Dev/Frontend/Camera/CameraManager.gd" id="4_d6cxq"]
-[ext_resource type="Material" uid="uid://di1to8x2plpx" path="res://Art/Materials/M_Ball_01.tres" id="5_yiscj"]
+[ext_resource type="Script" uid="uid://cyp11trxkh8nd" path="res://Dev/Frontend/Interaction/InteractionManager.gd" id="4_nmwte"]
+[ext_resource type="Resource" uid="uid://c30op58wvx74q" path="res://Dev/Frontend/Interaction/R_InteractionTraits_01.tres" id="5_nmwte"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_c5qv8"]
 top_radius = 1.0
@@ -39,13 +40,6 @@ size = Vector3(1.677, 1, 2.841)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0hxaj"]
 points = PackedVector3Array(0.8383359, 0.5, 1.4204998, 0.8383359, -0.5, 1.4204998, 0.8383359, 0.5, -1.4205, -0.8385, -0.5, 1.4204998, 0.8383359, -0.5, -1.4205, -0.8385, -0.5, -1.4205)
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yiscj"]
-friction = 13.29
-
-[sub_resource type="SphereMesh" id="SphereMesh_c5qv8"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_d6cxq"]
-
 [node name="SCE_Arena_01" type="Node3D" unique_id=1067432091]
 script = ExtResource("1_0hxaj")
 metadata/_custom_type_script = "uid://cot4hd21yd7ka"
@@ -64,6 +58,11 @@ mesh = SubResource("CylinderMesh_c5qv8")
 [node name="GameManager" type="Node" parent="." unique_id=335467618]
 script = ExtResource("2_n03q8")
 metadata/_custom_type_script = "uid://dwjf48i5tqrx3"
+
+[node name="InteractionManager" type="Node" parent="." unique_id=641186659]
+script = ExtResource("4_nmwte")
+traits = ExtResource("5_nmwte")
+metadata/_custom_type_script = "uid://cyp11trxkh8nd"
 
 [node name="CameraManager" type="Node3D" parent="." unique_id=104827752 node_paths=PackedStringArray("camera")]
 transform = Transform3D(1, 0, 0, 0, 0.73009646, 0.6833441, 0, -0.6833441, 0.73009646, -3.8146973e-06, 30.29789, 36.43136)
@@ -217,19 +216,3 @@ mesh = SubResource("PrismMesh_0hxaj")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ramp 6/StaticBody3D" unique_id=537127387]
 shape = SubResource("ConvexPolygonShape3D_0hxaj")
-
-[node name="Physics Ball" type="RigidBody3D" parent="." unique_id=1302468226]
-process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.871001, 5.572234, -1.8337005)
-visible = false
-collision_layer = 4
-mass = 10.0
-physics_material_override = SubResource("PhysicsMaterial_yiscj")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Physics Ball" unique_id=1648168625]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.36957, 0.9708996, 0)
-material_override = ExtResource("5_yiscj")
-mesh = SubResource("SphereMesh_c5qv8")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Physics Ball" unique_id=1699442979]
-shape = SubResource("SphereShape3D_d6cxq")

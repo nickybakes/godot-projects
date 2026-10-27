@@ -11,6 +11,9 @@ var currentSurfaceNormal := Vector3.UP;
 var collisionDotProduct : float;
 var collisionReflection : Vector3;
 
+var isDeflect : bool;
+var isStrikeAttempt : bool;
+
 var timeSinceBasicBounce : float = 5.0;
 
 func MoveAndCollide(delta : float):
@@ -47,6 +50,8 @@ func ProcessPhysics(delta : float, params : Dictionary = {}):
 	MoveAndCollide(delta);
 	DecelerateTopDown(delta);
 	MovementControl(delta);
+	CheckStrikeRegion(delta);
+	CheckDeflectRegion(delta);
 	pass;
 	
 func GetSteepness() -> float:
@@ -71,6 +76,22 @@ func DecelerateTopDown(delta : float):
 	
 func _physics_process(delta: float) -> void:
 	timeSinceBasicBounce += delta;
+	
+func CheckDeflectRegion(delta : float) -> void:
+	isDeflect = false;
+	
+	if(mcc.deflectRegion.numBallsInside >= 1):
+		isDeflect = true;
+	pass;
+	
+	
+func CheckStrikeRegion(delta : float) -> void:
+	isStrikeAttempt = false;
+	
+	if(mcc.strikeRegion.numBallsInside >= 1):
+		if(mcc.currentSpeed >= mcc.traits.minRequiredStrikeSpeed && mcc.fireStat.value > mcc.traits.minRequiredFireForStrike):
+			isStrikeAttempt = true;
+	pass;
 
 func MovementControl(delta : float):
 	var controlSurfacePower = 1.0 - GetSteepness();

@@ -8,8 +8,8 @@ _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5900286, 0), 0.0, 0.0, 0, 0, V
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_mf80y"]
-_limits = [0.0, 3.0, 0.0, 40.0]
-_data = [Vector2(16.160458, 0), 0.0, 0.0, 0, 0, Vector2(27.965614, 3), 0.0, 0.0, 0, 0]
+_limits = [0.0, 9.0, 0.0, 40.0]
+_data = [Vector2(16.160458, 0), 0.0, 0.0, 0, 0, Vector2(27.965614, 5.673913), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [resource]
@@ -37,4 +37,22 @@ maxLaunchSpeed = 38.0
 blockDecelMin = 6.0
 blockDecelMaxSpeed = 20.0
 blockStaminaSpeedBoost = 0.4
+minDeflectBounceSpeed = 5.743
+deflectTopDownSpeedScalar = 0.84
+deflectVerticalSpeedScalar = 0.9
+maxNumOfStrikedBalls = 8
+minRequiredFireForStrike = 0.0
+minStrikeDamage = 1.0
+strikeDamageSpeedScalar = 0.803
+strikeDamageFireMultScalar = 0.869
+strikeVictimDeceleration = 1.0
+strikeActivatorMinBounceSpeed = 10.0
+strikeActivatorMaxBounceSpeed = 30.0
+strikeActivatorTopDownSpeedScalar = 1.25
+strikeActivatorVerticalSpeedScalar = 1.25
+strikeVictimMinBounceSpeed = 10.0
+strikeVictimMaxBounceSpeed = 30.0
+strikeVictimTopDownSpeedScalar = 1.25
+strikeVictimVerticalSpeedScalar = 1.25
+maxClashTime = 0.5
 metadata/_custom_type_script = "uid://bxpl8bbykl3xb"

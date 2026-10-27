@@ -10,6 +10,7 @@ class_name NetBall
 @export var stamina : float;
 @export var health : float;
 @export var fire : float;
+@export var invuln : float;
 
 var playerNumber : int;
 var playerToken : PlayerToken;
@@ -26,6 +27,7 @@ func DoSpawnParams():
 		velocity = spawnParams["velocity"];
 		ballController.velocity = velocity;
 		
+	ballController.playerNumber = playerNumber;
 	ballController.visuals.Setup(playerNumber);
 	ballController.updatePhysics = !isDummy;
 	
@@ -33,6 +35,9 @@ func DoSpawnParams():
 		playerToken = LobbyManager.Lobby.GetPlayerTokenByPlayerNumber(playerNumber);
 		inputDevice = playerToken.inputDevice;
 		ballController.inputDevice = inputDevice;
+		
+	if(GameManager.Manager):
+		GameManager.Manager.BallAdded(playerNumber, self);
 		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -47,6 +52,9 @@ func _process(delta: float) -> void:
 		ballController.staminaStat.value = lerp(ballController.staminaStat.value, stamina, .5);
 		ballController.healthStat.value = lerp(ballController.healthStat.value, health, .5);
 		ballController.fireStat.value = lerp(ballController.fireStat.value, fire, .5);
+		ballController.invulnStat.value = lerp(ballController.invulnStat.value, invuln, .5);
+		if(is_zero_approx(invuln)):
+			ballController.invulnStat.value = 0;
 	else:
 		position = ballController.position;
 		velocity = ballController.velocity;
@@ -55,4 +63,10 @@ func _process(delta: float) -> void:
 		stamina = ballController.staminaStat.value;
 		health = ballController.healthStat.value;
 		fire = ballController.fireStat.value;
+		invuln = ballController.invulnStat.value;
 	pass
+	
+	
+func _exit_tree() -> void:
+	if(GameManager.Manager != null):
+		GameManager.Manager.BallRemoved(playerNumber);

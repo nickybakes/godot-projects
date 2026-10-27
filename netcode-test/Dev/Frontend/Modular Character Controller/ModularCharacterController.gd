@@ -12,6 +12,11 @@
 @abstract func DoStateTransitionByIndex(nextStateIndex : int);
 @abstract func GetTraits() -> MCCTraits;
 
+func ForceSetState(stateCodeName : String):
+	for i in GetTotalStates():
+		if(GetState(i).codeName == stateCodeName):
+			DoStateTransition(GetState(i));
+
 var updatePhysics := true;
 var updateVisuals := true;
 
