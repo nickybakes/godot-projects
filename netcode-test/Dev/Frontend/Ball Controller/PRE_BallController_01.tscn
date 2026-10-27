@@ -112,11 +112,11 @@ metadata/_custom_type_script = "uid://diamkkypctj6o"
 [node name="Clash Visual" type="Node3D" parent="Ball Visuals" unique_id=579476604]
 
 [node name="Clash Label" type="Label3D" parent="Ball Visuals/Clash Visual" unique_id=1718508793]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7962533, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.93949676, 0)
 billboard = 1
 text = "CLASH!"
-font_size = 74
-outline_size = 51
+font_size = 124
+outline_size = 65
 
 [node name="Visual Spinner" type="Node3D" parent="Ball Visuals" unique_id=1916116689]
 
@@ -470,7 +470,7 @@ metadata/_custom_type_script = "uid://bao3317lfi3tc"
 
 [node name="Strike Recovery Start Transition" type="Node" parent="Transitions/Combat" unique_id=1363178095 node_paths=PackedStringArray("stateTransitionTo", "rules")]
 script = ExtResource("12_nefp1")
-stateTransitionTo = NodePath("../../../States/Roll")
+stateTransitionTo = NodePath("../../../States/StrikeRecovery")
 rules = [NodePath("../../../Combat Rules/Strike Buffer Time Max Rule")]
 metadata/_custom_type_script = "uid://bao3317lfi3tc"
 

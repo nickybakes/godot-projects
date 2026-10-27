@@ -4,8 +4,8 @@
 
 [sub_resource type="Curve" id="Curve_pqr02"]
 _limits = [0.0, 1.0, 0.0, 1.17]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5900286, 0), 0.0, 0.0, 0, 0, Vector2(0.93532944, 1), 0.0, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, 0.47857141), 0.0, 0.0, 0, 0, Vector2(0.93532944, 1), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="Curve" id="Curve_mf80y"]
 _limits = [0.0, 9.0, 0.0, 40.0]
@@ -16,10 +16,12 @@ point_count = 2
 script = ExtResource("1_nmqsg")
 gravity = 20.0
 moveSpeed = 10.0
-moveControl = 20.0
+moveControl = 30.0
 deceleration = 5.0
 overSpeedThreshold = 7.0
 overSpeedLimitDirectionalControl = 2.74
+overSpeedMoveControl = 10.0
+overSpeedDeceleration = 5.0
 basicBounceMoveControlCooldown = SubResource("Curve_pqr02")
 fireBuildUpBySpeed = SubResource("Curve_mf80y")
 jumpForce = 8.0
@@ -35,7 +37,8 @@ chargeMinStaminaCost = 0.5
 minLaunchSpeed = 17.875
 maxLaunchSpeed = 38.0
 blockDecelMin = 6.0
-blockDecelMaxSpeed = 20.0
+blockDecelMax = 20.0
+blockDecelMaxSpeed = 18.724
 blockStaminaSpeedBoost = 0.4
 minDeflectBounceSpeed = 5.743
 deflectTopDownSpeedScalar = 0.84
@@ -54,5 +57,4 @@ strikeVictimMinBounceSpeed = 10.0
 strikeVictimMaxBounceSpeed = 30.0
 strikeVictimTopDownSpeedScalar = 1.25
 strikeVictimVerticalSpeedScalar = 1.25
-maxClashTime = 0.5
 metadata/_custom_type_script = "uid://bxpl8bbykl3xb"

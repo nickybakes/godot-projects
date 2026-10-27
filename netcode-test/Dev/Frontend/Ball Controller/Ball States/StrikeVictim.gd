@@ -11,6 +11,5 @@ func ProcessPhysics(delta : float):
 	super(delta);
 	mcc.currentPhysics.Gravity(delta);
 	mcc.currentPhysics.MoveAndCollide(delta);
-	mcc.velocity.x = move_toward(mcc.velocity.x, 0, mcc.traits.strikeVictimDeceleration * delta)
-	mcc.velocity.z = move_toward(mcc.velocity.z, 0, mcc.traits.strikeVictimDeceleration * delta)
+	mcc.currentPhysics.DecelerateTopDown(delta, mcc.traits.strikeVictimDeceleration);
 	mcc.currentPhysics.CheckDeflectRegion(delta);

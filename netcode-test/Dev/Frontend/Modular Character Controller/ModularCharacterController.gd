@@ -16,6 +16,7 @@ func ForceSetState(stateCodeName : String):
 	for i in GetTotalStates():
 		if(GetState(i).codeName == stateCodeName):
 			DoStateTransition(GetState(i));
+			return;
 
 var updatePhysics := true;
 var updateVisuals := true;

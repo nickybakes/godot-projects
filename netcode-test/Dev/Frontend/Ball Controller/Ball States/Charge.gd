@@ -44,8 +44,7 @@ func ProcessVisuals(delta : float):
 func ProcessPhysics(delta : float):
 	super(delta);
 	staminaSpent += mcc.staminaStat.Spend(mcc.traits.chargeStaminaCost * delta);
-	mcc.velocity.x = move_toward(mcc.velocity.x, 0, mcc.traits.chargeDeceleration * delta)
+	mcc.currentPhysics.DecelerateTopDown(delta, mcc.traits.chargeDeceleration);
 	mcc.velocity.y = move_toward(mcc.velocity.y, 0, mcc.traits.chargeDeceleration * delta)
-	mcc.velocity.z = move_toward(mcc.velocity.z, 0, mcc.traits.chargeDeceleration * delta)
 	mcc.move_and_slide();
 	pass;

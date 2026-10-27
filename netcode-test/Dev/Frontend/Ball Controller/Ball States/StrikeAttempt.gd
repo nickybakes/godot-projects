@@ -13,6 +13,9 @@ func StartStatePhysics(params : Dictionary = {}):
 
 	victims = [];
 	
+	if(mcc.strikeRegion.ballsInsideThisRegion.size() == 0):
+		mcc.ForceSetState('roll');
+	
 	for i in min(mcc.strikeRegion.ballsInsideThisRegion.size(), mcc.traits.maxNumOfStrikedBalls):
 		var hitBall = mcc.strikeRegion.ballsInsideThisRegion[i];
 		victims.push_back(hitBall);

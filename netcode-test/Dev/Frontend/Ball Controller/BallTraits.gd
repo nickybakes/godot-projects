@@ -9,6 +9,7 @@ class_name BallTraits
 @export var overSpeedThreshold : float = 5;
 @export var overSpeedLimitDirectionalControl : float = .5;
 @export var overSpeedMoveControl : float = 5;
+@export var overSpeedDeceleration : float = 1.0;
 @export var basicBounceMoveControlCooldown : Curve
 
 @export_category("Fire")
@@ -44,6 +45,7 @@ class_name BallTraits
 @export var blockDecelMax : float = 30;
 @export var blockDecelMaxSpeed : float = 40;
 @export var blockStaminaSpeedBoost : float = 0.5;
+@export_range(0.0, 1.0, .01) var blockVerticalBounceDamp : float = 0.5;
 
 @export_category("Deflect")
 @export var minDeflectBounceSpeed : float = 5;
@@ -87,9 +89,11 @@ class_name BallTraits
 @export var strikeBlockerTopDownSpeedScalar : float = .7;
 @export var strikeBlockerVerticalSpeedScalar : float = .7;
 
-
 @export_category("Clash")
 @export var maxClashTime : float = 1.0;
+@export var clashDeceleration : float = 10;
+@export var clashSpeedScalar : float = .5;
+
 
 @export_category("Misc")
 @export var fallbackMaxTimeInState : float = 8;

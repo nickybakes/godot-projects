@@ -28,6 +28,8 @@ func MoveAndCollide(delta : float):
 			collisionReflection = mcc.currentDirection.bounce(collision.get_normal());
 			if(collisionDotProduct > mcc.traits.basicBounceMinDotProduct && mcc.currentSpeed >= mcc.traits.basicBounceMinSpeed):
 				var scalar = Vector3(mcc.traits.basicBounceTopDownSpeedScalar, mcc.traits.basicBounceVerticalSpeedScalar, mcc.traits.basicBounceTopDownSpeedScalar)
+				if(mcc.blocking):
+					scalar.y *= mcc.traits.blockVerticalBounceDamp;
 				mcc.velocity = collisionReflection * mcc.currentSpeed * scalar;
 				timeSinceBasicBounce = 0.0;
 				isBasicBounce = true;
@@ -70,9 +72,9 @@ func Gravity(delta : float):
 			mcc.velocity.y -= mcc.traits.gravity * mcc.traits.gravityFallMultiplier * delta
 			
 
-func DecelerateTopDown(delta : float):
-	mcc.velocity.x = move_toward(mcc.velocity.x, 0, mcc.traits.deceleration * delta);
-	mcc.velocity.z = move_toward(mcc.velocity.z, 0, mcc.traits.deceleration * delta);
+func DecelerateTopDown(delta : float, deceleration : float = mcc.traits.deceleration):
+	mcc.velocity.x = move_toward(mcc.velocity.x, 0, deceleration * delta);
+	mcc.velocity.z = move_toward(mcc.velocity.z, 0, deceleration * delta);
 	
 func _physics_process(delta: float) -> void:
 	timeSinceBasicBounce += delta;
@@ -98,6 +100,7 @@ func MovementControl(delta : float):
 	var basicBounceControlDamp = mcc.traits.basicBounceMoveControlCooldown.sample(timeSinceBasicBounce);
 	
 	var moveControl = mcc.traits.moveControl * basicBounceControlDamp;
+	var moveSpeed = mcc.traits.moveSpeed;
 	
 	if mcc.requestedMoveDirection:
 		if(mcc.currentTopDownSpeed > mcc.traits.overSpeedThreshold):
@@ -109,8 +112,13 @@ func MovementControl(delta : float):
 			var newVel = mcc.velocity.rotated(Vector3.UP, angle * delta * mcc.traits.overSpeedLimitDirectionalControl * basicBounceControlDamp);
 			mcc.velocity = newVel;
 			moveControl = mcc.traits.overSpeedMoveControl;
+			moveSpeed = mcc.currentTopDownSpeed;
+			moveSpeed = move_toward(moveSpeed, mcc.traits.moveSpeed, mcc.traits.overSpeedDeceleration * delta);
 			pass;
-			
-		mcc.velocity.x = move_toward(mcc.velocity.x, mcc.requestedMoveDirection.x * mcc.traits.moveSpeed, mcc.traits.moveControl * controlSurfacePower * delta);
-		mcc.velocity.z = move_toward(mcc.velocity.z, mcc.requestedMoveDirection.z * mcc.traits.moveSpeed, mcc.traits.moveControl * controlSurfacePower * delta);
+		
+		mcc.velocity.x = move_toward(mcc.velocity.x, mcc.requestedMoveDirection.x * moveSpeed, moveControl * controlSurfacePower * delta);
+		mcc.velocity.z = move_toward(mcc.velocity.z, mcc.requestedMoveDirection.z * moveSpeed, moveControl * controlSurfacePower * delta);
 	
+
+func BounceVelocity(newDirection : Vector3):
+	pass;
