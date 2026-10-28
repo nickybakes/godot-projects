@@ -15,7 +15,7 @@ func ProcessPhysics(delta : float):
 	super(delta);
 	mcc.velocity.y += mcc.traits.jumpHover * delta;
 	mcc.staminaStat.Spend(mcc.traits.jumpHoverStaminaCost * delta);
-	mcc.currentPhysics.MoveAndCollide(delta);
-	mcc.currentPhysics.DecelerateTopDown(delta);
-	mcc.currentPhysics.MovementControl(delta);
+	mcc.GetPhysics().MoveAndCollide(delta);
+	mcc.GetPhysics().DecelerateTopDown(delta);
+	mcc.GetPhysics().MovementControl(delta);
 	

@@ -11,6 +11,7 @@
 @abstract func DoStateTransition(nextState : MCCState);
 @abstract func DoStateTransitionByIndex(nextStateIndex : int);
 @abstract func GetTraits() -> MCCTraits;
+@abstract func GetPhysics() -> MCCPhysics;
 
 func ForceSetState(stateCodeName : String):
 	for i in GetTotalStates():

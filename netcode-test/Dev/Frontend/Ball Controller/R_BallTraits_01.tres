@@ -1,6 +1,14 @@
 [gd_resource type="Resource" script_class="BallTraits" format=3 uid="uid://bkj4hy78bq3cb"]
 
+[ext_resource type="Resource" uid="uid://h0ec8a4eqlh2" path="res://Dev/Frontend/Ball Controller/Ball Bounce Traits/Basic Bounce.tres" id="1_iceax"]
 [ext_resource type="Script" uid="uid://bxpl8bbykl3xb" path="res://Dev/Frontend/Ball Controller/BallTraits.gd" id="1_nmqsg"]
+[ext_resource type="Resource" uid="uid://vpmugmuyfk3p" path="res://Dev/Frontend/Ball Controller/Ball Bounce Traits/Basic Bounce While Blocking.tres" id="2_lfl6j"]
+[ext_resource type="Resource" uid="uid://dyp3j7gnacp46" path="res://Dev/Frontend/Ball Controller/Ball Bounce Traits/Clash.tres" id="3_lfl6j"]
+[ext_resource type="Resource" uid="uid://dlj320edt2ui" path="res://Dev/Frontend/Ball Controller/Ball Bounce Traits/Deflect.tres" id="4_eb804"]
+[ext_resource type="Resource" uid="uid://guelj1v3mjj1" path="res://Dev/Frontend/Ball Controller/Ball Bounce Traits/Strike Blocker.tres" id="6_qwdnp"]
+[ext_resource type="Resource" uid="uid://bc6sotp2nmysj" path="res://Dev/Frontend/Ball Controller/Ball Bounce Traits/Strike Failed.tres" id="7_gmawk"]
+[ext_resource type="Resource" uid="uid://byxlk58ch56k7" path="res://Dev/Frontend/Ball Controller/Ball Bounce Traits/Strike Success.tres" id="8_pnx74"]
+[ext_resource type="Resource" uid="uid://bt1byfh6780lb" path="res://Dev/Frontend/Ball Controller/Ball Bounce Traits/Strike Victim.tres" id="9_37wd0"]
 
 [sub_resource type="Curve" id="Curve_pqr02"]
 _limits = [0.0, 1.0, 0.0, 1.17]
@@ -30,8 +38,7 @@ jumpInitialStaminaCost = 0.75
 jumpHoverStaminaCost = 0.5
 maxJumpTime = 1.5
 basicBounceMinDotProduct = 0.67
-basicBounceVerticalSpeedScalar = 0.57
-basicBounceMinSpeed = 2.0
+basicBounceTraits = ExtResource("1_iceax")
 chargeDeceleration = 10.0
 chargeMinStaminaCost = 0.5
 minLaunchSpeed = 17.875
@@ -40,21 +47,17 @@ blockDecelMin = 6.0
 blockDecelMax = 20.0
 blockDecelMaxSpeed = 18.724
 blockStaminaSpeedBoost = 0.4
-minDeflectBounceSpeed = 5.743
-deflectTopDownSpeedScalar = 0.84
-deflectVerticalSpeedScalar = 0.9
+basicBounceWhileBlockingTraits = ExtResource("2_lfl6j")
+deflectBounceTraits = ExtResource("4_eb804")
 maxNumOfStrikedBalls = 8
 minRequiredFireForStrike = 0.0
-minStrikeDamage = 1.0
-strikeDamageSpeedScalar = 0.803
-strikeDamageFireMultScalar = 0.869
+minStrikeDamage = 4.0
+strikeDamageSpeedScalar = 0.064
+strikeDamageFireMultScalar = 0.656
 strikeVictimDeceleration = 1.0
-strikeActivatorMinBounceSpeed = 10.0
-strikeActivatorMaxBounceSpeed = 30.0
-strikeActivatorTopDownSpeedScalar = 1.25
-strikeActivatorVerticalSpeedScalar = 1.25
-strikeVictimMinBounceSpeed = 10.0
-strikeVictimMaxBounceSpeed = 30.0
-strikeVictimTopDownSpeedScalar = 1.25
-strikeVictimVerticalSpeedScalar = 1.25
+strikeSuccessBounceTraits = ExtResource("8_pnx74")
+strikeFailedBounceTraits = ExtResource("7_gmawk")
+strikeVictimBounceTraits = ExtResource("9_37wd0")
+strikeBlockerBounceTraits = ExtResource("6_qwdnp")
+clashBounceTraits = ExtResource("3_lfl6j")
 metadata/_custom_type_script = "uid://bxpl8bbykl3xb"

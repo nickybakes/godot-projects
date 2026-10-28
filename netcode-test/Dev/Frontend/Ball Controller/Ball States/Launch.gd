@@ -3,6 +3,6 @@ class_name Launch
 
 func StartStatePhysics(params : Dictionary = {}):
 	mcc.velocity = params['direction'] * params['speed'];
-	mcc.currentPhysics.ResetSurface();
+	mcc.GetPhysics().ResetSurface();
 	pass;
 	#mcc.visuals.StartChargeVisual();

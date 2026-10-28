@@ -71,24 +71,12 @@ func Evaluate():
 				if(victimController.updatePhysics):
 					if(victimController.blocking):
 						victimController.BlockDamageFromStrike(activatorController, activatorSpeed, activatorFire);
-						
-						var blockerDirection = -directionsFromVictims[i];
-						var newBlockerVelocity = blockerDirection;
-						newBlockerVelocity *= max(victimController.traits.strikeBlockerMinBounceSpeed, min(victimController.traits.strikeBlockerMaxBounceSpeed, activatorSpeed));
-						var blockerVelScalar = Vector3(victimController.traits.strikeBlockerTopDownSpeedScalar, victimController.traits.strikeBlockerVerticalSpeedScalar, victimController.traits.strikeBlockerTopDownSpeedScalar)
-						victimController.velocity = newBlockerVelocity * blockerVelScalar;
-						
+						victimController.GetPhysics().BounceVelocity(-directionsFromVictims[i], activatorSpeed, victimController.traits.strikeBlockerBounceTraits);
 						pass;
 					else:
 						victimController.TakeDamageFromStrike(activatorController, activatorSpeed, activatorFire);
 						victimController.ForceSetState("strikeVictim");
-						
-						var victimDirection = -directionsFromVictims[i];
-						var newVictimVelocity = victimDirection;
-						newVictimVelocity *= max(victimController.traits.strikeVictimMinBounceSpeed, min(victimController.traits.strikeVictimMaxBounceSpeed, activatorSpeed));
-						var victimVelScalar = Vector3(victimController.traits.strikeVictimTopDownSpeedScalar, victimController.traits.strikeVictimVerticalSpeedScalar, victimController.traits.strikeVictimTopDownSpeedScalar)
-						victimController.velocity = newVictimVelocity * victimVelScalar;
-						
+						victimController.GetPhysics().BounceVelocity(-directionsFromVictims[i], activatorSpeed, victimController.traits.strikeVictimBounceTraits);
 						pass;
 						
 				totalDirection += directionsFromVictims[i];
@@ -100,7 +88,4 @@ func Evaluate():
 					totalHit += 1;
 				pass;
 		
-		var newActivatorVelocity = totalDirection.normalized();
-		newActivatorVelocity *= max(activatorController.traits.strikeActivatorMinBounceSpeed, min(activatorController.traits.strikeActivatorMaxBounceSpeed, activatorSpeed));
-		var activatorVelScalar = Vector3(activatorController.traits.strikeActivatorTopDownSpeedScalar, activatorController.traits.strikeActivatorVerticalSpeedScalar, activatorController.traits.strikeActivatorTopDownSpeedScalar)
-		activatorController.velocity = newActivatorVelocity * activatorVelScalar;
+		activatorController.GetPhysics().BounceVerlocityLerpTraits(totalDirection.normalized(), activatorSpeed, activatorController.traits.strikeFailedBounceTraits, activatorController.traits.strikeSuccessBounceTraits, (totalHit as float)/(totalVictims as float));

@@ -21,6 +21,7 @@ class_name BallMCC
 @export var deflectRegion : HitRegion;
 @export var strikeRegion : HitRegion;
 @export var grabRegion : HitRegion;
+@export var slamRegion : HitRegion;
 
 var playerNumber : int;
 var eliminated : bool;
@@ -59,6 +60,9 @@ func GetState(index : int) -> BallState:
 	
 func GetTotalStates() -> int:
 	return allStates.size();
+	
+func GetPhysics() -> BallPhysics:
+	return currentPhysics;
 	
 func DoStateTransition(nextState : MCCState):
 	previousState = currentState;
@@ -104,7 +108,7 @@ func BlockDamageFromStrike(activator : BallMCC, activatorSpeed : float, activato
 	return damageCalc;
 	
 func DamageCalc(activator : BallMCC, activatorSpeed : float, activatorFire : float) -> float:
-	var damageCalc = (traits.minStrikeDamage + (activatorSpeed * traits.strikeDamageSpeedScalar)) * (activatorFire * traits.strikeDamageFireMultScalar);
+	var damageCalc = (traits.minStrikeDamage + (activatorFire * traits.strikeDamageFireMultScalar)) * (activatorSpeed * traits.strikeDamageSpeedScalar);
 	return damageCalc;
 
 func _ready() -> void:

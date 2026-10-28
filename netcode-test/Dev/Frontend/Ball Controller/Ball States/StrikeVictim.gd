@@ -9,7 +9,7 @@ func StartStatePhysics(params : Dictionary = {}):
 	
 func ProcessPhysics(delta : float):
 	super(delta);
-	mcc.currentPhysics.Gravity(delta);
-	mcc.currentPhysics.MoveAndCollide(delta);
-	mcc.currentPhysics.DecelerateTopDown(delta, mcc.traits.strikeVictimDeceleration);
-	mcc.currentPhysics.CheckDeflectRegion(delta);
+	mcc.GetPhysics().Gravity(delta);
+	mcc.GetPhysics().MoveAndCollide(delta);
+	mcc.GetPhysics().DecelerateTopDown(delta, mcc.traits.strikeVictimDeceleration);
+	mcc.GetPhysics().CheckDeflectRegion(delta);

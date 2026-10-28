@@ -20,17 +20,21 @@ func MoveAndCollide(delta : float):
 	var collided = mcc.move_and_slide();
 	if(collided):
 		collision = mcc.get_last_slide_collision();
+					
+		mcc.slamRegion.rotation.z = -collision.get_normal().x * MAX_ANGLE;
+		mcc.slamRegion.rotation.x = collision.get_normal().z * MAX_ANGLE;
 		
 		var isBasicBounce = false;
 		if(collision.get_normal() != currentSurfaceNormal || !onSurface):
 			currentSurfaceNormal = collision.get_normal();
 			collisionDotProduct = abs(mcc.currentDirection.dot(collision.get_normal()));
 			collisionReflection = mcc.currentDirection.bounce(collision.get_normal());
-			if(collisionDotProduct > mcc.traits.basicBounceMinDotProduct && mcc.currentSpeed >= mcc.traits.basicBounceMinSpeed):
-				var scalar = Vector3(mcc.traits.basicBounceTopDownSpeedScalar, mcc.traits.basicBounceVerticalSpeedScalar, mcc.traits.basicBounceTopDownSpeedScalar)
+			
+			if(collisionDotProduct > mcc.traits.basicBounceMinDotProduct && mcc.currentSpeed >= mcc.traits.basicBounceRequiredMinSpeed):
 				if(mcc.blocking):
-					scalar.y *= mcc.traits.blockVerticalBounceDamp;
-				mcc.velocity = collisionReflection * mcc.currentSpeed * scalar;
+					BounceVelocity(collisionReflection, mcc.currentSpeed, mcc.traits.basicBounceWhileBlockingTraits);
+				else:
+					BounceVelocity(collisionReflection, mcc.currentSpeed, mcc.traits.basicBounceTraits);
 				timeSinceBasicBounce = 0.0;
 				isBasicBounce = true;
 		
@@ -120,5 +124,24 @@ func MovementControl(delta : float):
 		mcc.velocity.z = move_toward(mcc.velocity.z, mcc.requestedMoveDirection.z * moveSpeed, moveControl * controlSurfacePower * delta);
 	
 
-func BounceVelocity(newDirection : Vector3):
+func BounceVelocity(newDirection : Vector3, speed : float, bounceTraits : BallBounceTraits):
+	BounceVelocitySpecific(newDirection, speed, bounceTraits.minBounceSpeed, bounceTraits.maxBounceSpeed, bounceTraits.topDownSpeedScalar, bounceTraits.verticalSpeedScalar);
 	pass;
+
+
+func BounceVerlocityLerpTraits(newDirection : Vector3, speed : float, bounceA : BallBounceTraits, bounceB : BallBounceTraits, t : float):
+	var minBounceSpeed = lerp(bounceA.minBounceSpeed, bounceB.minBounceSpeed, t);
+	var maxBounceSpeed = lerp(bounceA.maxBounceSpeed, bounceB.maxBounceSpeed, t);
+	var topDownSpeedScalar = lerp(bounceA.topDownSpeedScalar, bounceB.topDownSpeedScalar, t);
+	var verticalSpeedScalar = lerp(bounceA.verticalSpeedScalar, bounceB.verticalSpeedScalar, t);
+	BounceVelocitySpecific(newDirection, speed, minBounceSpeed, maxBounceSpeed, topDownSpeedScalar, verticalSpeedScalar);
+	
+func BounceVelocitySpecific(newDirection : Vector3, speed : float, minBounceSpeed : float, maxBounceSpeed : float, topDownSpeedScalar : float, verticalSpeedScalar : float):
+	var newVelocity = newDirection;
+	newVelocity *= max(minBounceSpeed, min(maxBounceSpeed, speed));
+	var velocityScalar = Vector3(topDownSpeedScalar, verticalSpeedScalar, topDownSpeedScalar);
+	mcc.velocity = newVelocity * velocityScalar;
+	pass;
+	
+	
+	

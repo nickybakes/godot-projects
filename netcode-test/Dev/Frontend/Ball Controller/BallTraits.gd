@@ -24,9 +24,8 @@ class_name BallTraits
 
 @export_category("Bounce")
 @export_range(0.0, 1.0, .01) var basicBounceMinDotProduct : float = .3;
-@export_range(0.0, 1.0, .01) var basicBounceTopDownSpeedScalar : float = .7;
-@export_range(0.0, 1.0, .01) var basicBounceVerticalSpeedScalar : float = .7;
-@export var basicBounceMinSpeed : float = 4;
+@export var basicBounceRequiredMinSpeed : float = 4;
+@export var basicBounceTraits : BallBounceTraits;
 
 @export_category("Charge")
 @export var timeTilMaxCharge : float = .5;
@@ -45,18 +44,16 @@ class_name BallTraits
 @export var blockDecelMax : float = 30;
 @export var blockDecelMaxSpeed : float = 40;
 @export var blockStaminaSpeedBoost : float = 0.5;
+@export var basicBounceWhileBlockingTraits : BallBounceTraits;
+
 @export_range(0.0, 1.0, .01) var blockVerticalBounceDamp : float = 0.5;
 
 @export_category("Deflect")
-@export var minDeflectBounceSpeed : float = 5;
-@export_range(0.0, 1.0, .01) var deflectTopDownSpeedScalar : float = .7;
-@export_range(0.0, 1.0, .01) var deflectVerticalSpeedScalar : float = .7;
+@export var deflectBounceTraits : BallBounceTraits;
 
 @export_category("Strike")
 @export var maxNumOfStrikedBalls : int = 1;
-
 @export var minRequiredFireForStrike : float = 1;
-
 @export var minRequiredStrikeSpeed : float = 10;
 
 @export_group("Damage Calculation")
@@ -71,28 +68,16 @@ class_name BallTraits
 @export var strikeActivatorDeceleration : float = 1;
 @export var strikeVictimDeceleration : float = .5;
 
-@export_group("Activator Bounce")
-@export var strikeActivatorMinBounceSpeed : float = 5;
-@export var strikeActivatorMaxBounceSpeed : float = 15;
-@export var strikeActivatorTopDownSpeedScalar : float = .7;
-@export var strikeActivatorVerticalSpeedScalar : float = .7;
-
-@export_group("Victim Bounce")
-@export var strikeVictimMinBounceSpeed : float = 5;
-@export var strikeVictimMaxBounceSpeed : float = 15;
-@export var strikeVictimTopDownSpeedScalar : float = .7;
-@export var strikeVictimVerticalSpeedScalar : float = .7;
-
-@export_group("Blocker Bounce")
-@export var strikeBlockerMinBounceSpeed : float = 5;
-@export var strikeBlockerMaxBounceSpeed : float = 15;
-@export var strikeBlockerTopDownSpeedScalar : float = .7;
-@export var strikeBlockerVerticalSpeedScalar : float = .7;
+@export_group("Strike Bounce")
+@export var strikeSuccessBounceTraits : BallBounceTraits;
+@export var strikeFailedBounceTraits : BallBounceTraits;
+@export var strikeVictimBounceTraits : BallBounceTraits;
+@export var strikeBlockerBounceTraits : BallBounceTraits;
 
 @export_category("Clash")
 @export var maxClashTime : float = 1.0;
 @export var clashDeceleration : float = 10;
-@export var clashSpeedScalar : float = .5;
+@export var clashBounceTraits : BallBounceTraits;
 
 
 @export_category("Misc")

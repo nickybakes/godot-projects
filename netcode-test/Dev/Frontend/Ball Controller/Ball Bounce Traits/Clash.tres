@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BallBounceTraits" format=3 uid="uid://dyp3j7gnacp46"]
+
+[ext_resource type="Script" uid="uid://cwsqglbcgrd4x" path="res://Dev/Frontend/Ball Controller/BallBounceTraits.gd" id="1_a1fa2"]
+
+[resource]
+script = ExtResource("1_a1fa2")
+minBounceSpeed = 8.0
+maxBounceSpeed = 12.0
+topDownSpeedScalar = 0.75
+verticalSpeedScalar = 0.9
+metadata/_custom_type_script = "uid://cwsqglbcgrd4x"

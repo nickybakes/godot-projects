@@ -36,6 +36,6 @@ func ProcessPhysics(delta : float):
 	
 	mcc.velocity.x = move_toward(mcc.velocity.x, 0, decel * delta)
 	mcc.velocity.z = move_toward(mcc.velocity.z, 0, decel * delta)
-	mcc.currentPhysics.Gravity(delta);
-	mcc.currentPhysics.MoveAndCollide(delta);
+	mcc.GetPhysics().Gravity(delta);
+	mcc.GetPhysics().MoveAndCollide(delta);
 	pass;

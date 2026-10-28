@@ -50,6 +50,7 @@ func GetEarliestLoggedInteractionIndex() -> int:
 	for i in loggedInteractions.size():
 		if(loggedInteractions[i].timeStamp < earliestTimeStamp):
 			index = i;
+			earliestTimeStamp = loggedInteractions[i].timeStamp;
 	
 	return index;
 	
@@ -64,8 +65,8 @@ func EvaluateInteractions():
 		elif(interaction.GetLifeTime() > interactionTimeDecay):
 			removeIndices.push_back(i);
 	
-	for i in removeIndices:
-		loggedInteractions.remove_at(i);
+	for indexToRemove in removeIndices:
+		loggedInteractions.remove_at(indexToRemove);
 	
 	pass;
 	

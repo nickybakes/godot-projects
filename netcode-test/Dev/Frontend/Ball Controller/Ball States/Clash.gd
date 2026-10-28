@@ -8,6 +8,7 @@ func ExitStateVisuals():
 	mcc.visuals.StopClashVisual();
 	
 func StartStatePhysics(params : Dictionary = {}):
+	mcc.GetPhysics().BounceVelocity(-mcc.currentDirection, mcc.currentSpeed, mcc.traits.clashBounceTraits);
 	mcc.clash = false;
 	
 func ExitStatePhysics(params : Dictionary = {}):
@@ -15,7 +16,7 @@ func ExitStatePhysics(params : Dictionary = {}):
 
 func ProcessPhysics(delta : float):
 	super(delta);
-	mcc.currentPhysics.Gravity(delta);
-	mcc.currentPhysics.DecelerateTopDown(delta);
-	mcc.currentPhysics.MoveAndCollide(delta);
-	mcc.currentPhysics.CheckDeflectRegion(delta);
+	mcc.GetPhysics().Gravity(delta);
+	mcc.GetPhysics().DecelerateTopDown(delta, mcc.traits.clashDeceleration);
+	mcc.GetPhysics().MoveAndCollide(delta);
+	mcc.GetPhysics().CheckDeflectRegion(delta);
