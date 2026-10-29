@@ -23,6 +23,8 @@ class_name BallMCC
 @export var grabRegion : HitRegion;
 @export var slamRegion : HitRegion;
 
+var interactive : bool = true;
+
 var playerNumber : int;
 var eliminated : bool;
 
@@ -30,6 +32,14 @@ var clash : bool;
 
 var blocking : bool;
 var successfulBlock : bool;
+
+var grabParent : BallMCC;
+var grabParentFire : float;
+var grabVictimIndex : int;
+var grabVictimTotal : int;
+var grabVictimAngleOffset : float;
+
+var strikePrioritied : bool
 
 var allStates : Array[BallState];
 var currentState : BallState;
@@ -69,12 +79,7 @@ func DoStateTransition(nextState : MCCState):
 	currentState = nextState;
 	currentStateStorage.storedNode = currentState;
 	
-	if(playerNumber == 1 && nextState.codeName == 'strikeAttempt'):
-		print('prev state: ', previousState.codeName);
-	if(playerNumber == 1 && previousState.codeName == 'strikeAttempt'):
-		print('next state: ', currentState.codeName);
-	
-	currentState.ExitState();
+	previousState.ExitState();
 	if(updatePhysics):
 		previousState.ExitStatePhysics();
 	if(updateVisuals):
@@ -95,20 +100,31 @@ func CalculateRequestedMoveDirection(delta : float):
 		requestedMoveDirection = Vector3(inputDevice.moveInput.x, 0, -inputDevice.moveInput.y);
 
 func TakeDamageFromStrike(activator : BallMCC, activatorSpeed : float, activatorFire : float) -> float:
-	var damageCalc = DamageCalc(activator, activatorSpeed, activatorFire);
+	var damageCalc = DamageCalcStrike(activator, activatorSpeed, activatorFire);
 	if(updatePhysics):
 		healthStat.Spend(damageCalc);
 	return damageCalc;
 	
 func BlockDamageFromStrike(activator : BallMCC, activatorSpeed : float, activatorFire : float) -> float:
 	successfulBlock = true;
-	var damageCalc = DamageCalc(activator, activatorSpeed, activatorFire);
+	var damageCalc = DamageCalcStrike(activator, activatorSpeed, activatorFire);
 	# maybe track blocked damage?
 	#healthStat.Spend(0);
 	return damageCalc;
 	
-func DamageCalc(activator : BallMCC, activatorSpeed : float, activatorFire : float) -> float:
-	var damageCalc = (traits.minStrikeDamage + (activatorFire * traits.strikeDamageFireMultScalar)) * (activatorSpeed * traits.strikeDamageSpeedScalar);
+func TakeDamageFromGrab(activator : BallMCC, activatorFire : float) -> float:
+	var damageCalc = DamageCalcGrab(activator, activatorFire);
+	if(updatePhysics):
+		healthStat.Spend(damageCalc);
+	return damageCalc;
+	
+func DamageCalcStrike(activator : BallMCC, activatorSpeed : float, activatorFire : float) -> float:
+	var damageCalc = (traits.baseStrikeDamage + (activatorFire * traits.strikeDamageFireMultScalar)) * (activatorSpeed * traits.strikeDamageSpeedScalar);
+	damageCalc = clamp(damageCalc, 0.0, traits.maxStrikeDamage);
+	return damageCalc;
+	
+func DamageCalcGrab(activator : BallMCC, activatorFire : float) -> float:
+	var damageCalc = traits.baseGrabDamage + (activatorFire * traits.grabDamageFireMultScalar);
 	return damageCalc;
 
 func _ready() -> void:
@@ -122,6 +138,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	CalculateBasicStats(delta);
+	grabRegion.ScaleBySpeed(currentSpeed);
 	if(updatePhysics):
 		currentState.ProcessPhysics(delta);
 	pass;

@@ -19,6 +19,16 @@ var firePercentSplit : float;
 @export_category("Clash")
 @export var clashVisual : Node3D;
 
+@export_category("Grab")
+@export var grabVisual : Node3D;
+
+@export_category("Messages")
+@export var eliminatedVisual : Node3D;
+@export var strikePriorityVisual : Node3D;
+@export var unblockableVisual : Node3D;
+
+var messageTime : float = 0.0;
+
 @export_category("Transforms")
 @export var spinner : Node3D;
 @export var pitcher : Node3D;
@@ -49,6 +59,9 @@ func Setup(playerNumber : int):
 	StopChargeVisual();
 	StopBlockVisual();
 	StopClashVisual();
+	StopGrabVisual();
+	StopGrabSuccessAimVisual();
+	HideMessages();
 	CreateHeader();
 	
 func CreateHeader():
@@ -123,3 +136,51 @@ func StartClashVisual():
 	
 func StopClashVisual():
 	clashVisual.visible = false;
+	
+func StartGrabVisual():
+	grabVisual.visible = true;
+	
+func StopGrabVisual():
+	grabVisual.visible = false;
+	
+	
+func StartGrabSuccessAimVisual():
+	chargeAimMesh.visible = true;
+	
+func StopGrabSuccessAimVisual():
+	chargeAimMesh.visible = false;
+	
+func HideMessages():
+	eliminatedVisual.visible = false;
+	strikePriorityVisual.visible = false;
+	unblockableVisual.visible = false;
+	
+func ShowEliminatedMessage():
+	messageTime = profile.eliminatedMessageTime;
+	HideMessages();
+	eliminatedVisual.visible = true;
+	
+func ShowStrikePriorityMessage():
+	messageTime = profile.strikePriorityMessageTime;
+	HideMessages();
+	strikePriorityVisual.visible = true;
+	
+func ShowUnblockableMessage():
+	messageTime = profile.unblockableMessageTime;
+	HideMessages();
+	unblockableVisual.visible = true;
+	
+func HideBall():
+	spinner.visible = false;
+	header.visible = false;
+	
+func ShowBall():
+	spinner.visible = true;
+	header.visible = true;
+	
+func _process(delta: float) -> void:
+	messageTime = move_toward(messageTime, 0.0, delta);
+	if(messageTime == 0):
+		HideMessages();
+	
+	

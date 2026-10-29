@@ -55,18 +55,17 @@ func GetEarliestLoggedInteractionIndex() -> int:
 	return index;
 	
 func EvaluateInteractions():
-	var removeIndices: Array[int] = []; 
+	var interactionsToRemove: Array[Interaction] = []; 
 	
-	for i in loggedInteractions.size():
-		var interaction : Interaction = loggedInteractions[i];
+	for interaction in loggedInteractions:
 		interaction.Evaluate();
 		if(interaction.removeFromLog):
-			removeIndices.push_back(i);
+			interactionsToRemove.push_back(interaction);
 		elif(interaction.GetLifeTime() > interactionTimeDecay):
-			removeIndices.push_back(i);
+			interactionsToRemove.push_back(interaction);
 	
-	for indexToRemove in removeIndices:
-		loggedInteractions.remove_at(indexToRemove);
+	for interaction in interactionsToRemove:
+		loggedInteractions.erase(interaction);
 	
 	pass;
 	
@@ -75,8 +74,8 @@ func ParseNewInteraction(params : Dictionary) -> Interaction:
 	match(params['type']):
 		'strikeAttempt':
 			interaction = IStrikeAttempt.new(params);
-		'clash':
-			interaction = IClash.new(params);
+		'grabAttempt':
+			interaction = IGrabAttempt.new(params);
 	
 	return interaction;
 

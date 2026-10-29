@@ -5,8 +5,11 @@
 [ext_resource type="Resource" uid="uid://vpmugmuyfk3p" path="res://Dev/Frontend/Ball Controller/Ball Bounce Traits/Basic Bounce While Blocking.tres" id="2_lfl6j"]
 [ext_resource type="Resource" uid="uid://dyp3j7gnacp46" path="res://Dev/Frontend/Ball Controller/Ball Bounce Traits/Clash.tres" id="3_lfl6j"]
 [ext_resource type="Resource" uid="uid://dlj320edt2ui" path="res://Dev/Frontend/Ball Controller/Ball Bounce Traits/Deflect.tres" id="4_eb804"]
+[ext_resource type="Resource" uid="uid://c2p36tvsrajeo" path="res://Dev/Frontend/Ball Controller/Ball Bounce Traits/Grab Attempt.tres" id="5_qwdnp"]
+[ext_resource type="Resource" uid="uid://d25ekiuctfsac" path="res://Dev/Frontend/Ball Controller/Ball Bounce Traits/Grab Success.tres" id="6_gmawk"]
 [ext_resource type="Resource" uid="uid://guelj1v3mjj1" path="res://Dev/Frontend/Ball Controller/Ball Bounce Traits/Strike Blocker.tres" id="6_qwdnp"]
 [ext_resource type="Resource" uid="uid://bc6sotp2nmysj" path="res://Dev/Frontend/Ball Controller/Ball Bounce Traits/Strike Failed.tres" id="7_gmawk"]
+[ext_resource type="Resource" uid="uid://chrxu443y0mng" path="res://Dev/Frontend/Ball Controller/Ball Bounce Traits/Grab Victim.tres" id="7_pnx74"]
 [ext_resource type="Resource" uid="uid://byxlk58ch56k7" path="res://Dev/Frontend/Ball Controller/Ball Bounce Traits/Strike Success.tres" id="8_pnx74"]
 [ext_resource type="Resource" uid="uid://bt1byfh6780lb" path="res://Dev/Frontend/Ball Controller/Ball Bounce Traits/Strike Victim.tres" id="9_37wd0"]
 
@@ -19,6 +22,16 @@ point_count = 2
 _limits = [0.0, 9.0, 0.0, 40.0]
 _data = [Vector2(16.160458, 0), 0.0, 0.0, 0, 0, Vector2(27.965614, 5.673913), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="Curve" id="Curve_qwdnp"]
+_limits = [0.0, 1.0, 0.0, 1.9971266]
+_data = [Vector2(0.92395806, 0), 0.0, 1.1631016, 0, 0, Vector2(1.0559521, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_gryrd"]
+_limits = [-60.0, 30.0, 0.0, 1.5]
+_data = [Vector2(0.4741379, 0), 0.0, 16.597775, 0, 0, Vector2(0.7397727, 27.486034), 0.0, 0.0, 0, 0, Vector2(1.2579545, -60), -113.611755, 0.0, 0, 0]
+point_count = 3
 
 [resource]
 script = ExtResource("1_nmqsg")
@@ -51,7 +64,6 @@ basicBounceWhileBlockingTraits = ExtResource("2_lfl6j")
 deflectBounceTraits = ExtResource("4_eb804")
 maxNumOfStrikedBalls = 8
 minRequiredFireForStrike = 0.0
-minStrikeDamage = 4.0
 strikeDamageSpeedScalar = 0.064
 strikeDamageFireMultScalar = 0.656
 strikeVictimDeceleration = 1.0
@@ -60,4 +72,21 @@ strikeFailedBounceTraits = ExtResource("7_gmawk")
 strikeVictimBounceTraits = ExtResource("9_37wd0")
 strikeBlockerBounceTraits = ExtResource("6_qwdnp")
 clashBounceTraits = ExtResource("3_lfl6j")
+grabAttemptBoost = ExtResource("5_qwdnp")
+grabAttemptDeceleration = 20.0
+grabRecoveryTime = 0.6
+baseGrabDamage = 7.0
+grabVerticalSpeedOverTime = SubResource("Curve_gryrd")
+grabAimPowerOverTime = SubResource("Curve_qwdnp")
+grabAimingTime = 0.9
+grabDirectionMaxY = -0.64
+grabMinTime = 0.7
+grabSuccessBounce = ExtResource("6_gmawk")
+grabVictimSuction = 50.0
+grabVictimTopDownOffset = 0.5
+grabVictimVerticalOffset = -0.5
+grabVictimBounceAnglePower = 2.0
+grabVictimBounce = ExtResource("7_pnx74")
+grabFailRecoveryTime = 0.6
+grabFailDeceleration = 30.0
 metadata/_custom_type_script = "uid://bxpl8bbykl3xb"

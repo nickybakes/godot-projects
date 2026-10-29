@@ -45,6 +45,22 @@ func Evaluate():
 							clashVictims.push_back(activator);
 						if(!clashVictims.has(possibleClash.activator)):
 							clashVictims.push_back(possibleClash.activator);
+		elif(interactionCheck is IGrabAttempt && interactionCheck != self):
+			var possibleGrab = interactionCheck as IGrabAttempt;
+			if(activator != possibleGrab.activator):
+				if(possibleGrab.victims.has(activator) && victims.has(possibleGrab.activator)):
+					if(!possibleGrab.alreadyActivated):
+						if(possibleGrab.outPrioritied && possibleGrab.striker == activator && clashVictims.size() != 0):
+							possibleGrab.outPrioritied = false;
+							possibleGrab.striker = -1;
+							var grabberController = GameManager.Manager.balls[possibleGrab.activator].ballController;
+							grabberController.strikePrioritied = false;
+						else:
+							possibleGrab.outPrioritied = true;
+							possibleGrab.striker = activator;
+							var grabberController = GameManager.Manager.balls[possibleGrab.activator].ballController;
+							grabberController.strikePrioritied = true;
+						
 							
 			
 	for victim in clashVictims:
@@ -88,4 +104,6 @@ func Evaluate():
 					totalHit += 1;
 				pass;
 		
-		activatorController.GetPhysics().BounceVerlocityLerpTraits(totalDirection.normalized(), activatorSpeed, activatorController.traits.strikeFailedBounceTraits, activatorController.traits.strikeSuccessBounceTraits, (totalHit as float)/(totalVictims as float));
+		totalVictims = max(totalVictims, 1);
+		if(activatorController.updatePhysics):
+			activatorController.GetPhysics().BounceVerlocityLerpTraits(totalDirection.normalized(), activatorSpeed, activatorController.traits.strikeFailedBounceTraits, activatorController.traits.strikeSuccessBounceTraits, (totalHit as float)/(totalVictims as float));

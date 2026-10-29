@@ -9,4 +9,5 @@ enum InputAction
 	Charge,
 	Block,
 	EndGame,
+	Grab,
 }

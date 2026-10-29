@@ -4,4 +4,5 @@
 
 [resource]
 script = ExtResource("1_gg46r")
+grabBuffer = 0.342
 metadata/_custom_type_script = "uid://brvfht4htuxbl"

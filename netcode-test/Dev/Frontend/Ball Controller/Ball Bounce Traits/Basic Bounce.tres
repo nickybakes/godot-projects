@@ -6,5 +6,5 @@
 script = ExtResource("1_o1gl7")
 minBounceSpeed = 2.0
 maxBounceSpeed = 999999.0
-verticalSpeedScalar = 0.57
+verticalSpeedScalar = 0.408
 metadata/_custom_type_script = "uid://cwsqglbcgrd4x"

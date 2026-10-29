@@ -5,6 +5,7 @@ var mcc : BallMCC;
 
 const MAX_ANGLE = PI * .5;
 var onSurface := false;
+var onFloor := false;
 
 var collision : KinematicCollision3D;
 var currentSurfaceNormal := Vector3.UP;
@@ -18,8 +19,14 @@ var timeSinceBasicBounce : float = 5.0;
 
 func MoveAndCollide(delta : float):
 	var collided = mcc.move_and_slide();
+	onFloor = false;
 	if(collided):
 		collision = mcc.get_last_slide_collision();
+		
+		for colIndex in collision.get_collision_count():
+			if(collision.get_normal(colIndex).y >= mcc.traits.floorMinNormalY):
+				onFloor = true;
+				break;
 					
 		mcc.slamRegion.rotation.z = -collision.get_normal().x * MAX_ANGLE;
 		mcc.slamRegion.rotation.x = collision.get_normal().z * MAX_ANGLE;

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://d023u4nam2amw" path="res://Dev/Backend/Objects/NetTestSphere.gd" id="1_q5rfo"]
 [ext_resource type="Script" uid="uid://b3en6qjx4o2tn" path="res://Dev/Frontend/Objects/TestSphereController.gd" id="2_ucln4"]
 [ext_resource type="Material" uid="uid://di1to8x2plpx" path="res://Art/Materials/M_Ball_01.tres" id="3_lq5cn"]
-[ext_resource type="ArrayMesh" uid="uid://ccluladksmoq5" path="res://Art/Models/SM_Ball_01.res" id="4_6wiga"]
+[ext_resource type="ArrayMesh" uid="uid://k16kwalmlv6u" path="res://Art/Models/SM_Ball_01.res" id="4_6wiga"]
 [ext_resource type="Material" uid="uid://clerrjhlukxmf" path="res://Art/Materials/M_Outline_01.tres" id="5_gg4tc"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_gxvss"]
@@ -20,7 +20,7 @@ properties/3/path = NodePath(".:visible")
 properties/3/spawn = true
 properties/3/replication_mode = 1
 
-[sub_resource type="SphereMesh" id="SphereMesh_c5qv8"]
+[sub_resource type="SphereMesh" id="SphereMesh_ecra8"]
 
 [node name="PRE_NetTestSphere_01" type="MultiplayerSynchronizer" unique_id=1525779440 node_paths=PackedStringArray("transform")]
 root_path = NodePath(".")
@@ -34,7 +34,7 @@ script = ExtResource("2_ucln4")
 metadata/_custom_type_script = "uid://b3en6qjx4o2tn"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="TestSphereController" unique_id=1351204315]
-mesh = SubResource("SphereMesh_c5qv8")
+mesh = SubResource("SphereMesh_ecra8")
 
 [node name="Model Container" type="Node3D" parent="TestSphereController" unique_id=1921274001]
 visible = false

@@ -5,8 +5,8 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_osljb")
-shader_parameter/color = Color(0.34781694, 0.34781697, 0.3478169, 1)
-shader_parameter/brightness = 0.70999998413008
-shader_parameter/fresnelPower = 1.197
-shader_parameter/fresnelMultiply = 0.929
-shader_parameter/alpha = 0.6999999843536
+shader_parameter/color = Color(0.8089983, 0.8089983, 0.8089982, 1)
+shader_parameter/brightness = 0.80999998189488
+shader_parameter/fresnelPower = 0.47
+shader_parameter/fresnelMultiply = 0.902
+shader_parameter/alpha = 0.749999983236

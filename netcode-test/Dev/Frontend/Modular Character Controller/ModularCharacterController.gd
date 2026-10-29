@@ -25,31 +25,59 @@ var updateVisuals := true;
 var currentPhysics : MCCPhysics;
 var inputDevice : InputDevice;
 
+var velocityX : float;
+var velocityY : float;
+var velocityZ : float;
 var requestedMoveDirection : Vector3;
 var topDownVelocity : Vector2;
 var currentTopDownSpeed : float;
 var currentSpeed : float;
 var currentTopDownDirection : Vector2;
 var currentTopDownDirection3D : Vector3 = Vector3.ZERO;
+var currentFacingDirection : Vector3 = Vector3.FORWARD;
+var lastNonZeroTopDownDirection3D : Vector3 = Vector3.FORWARD;
 var currentDirection : Vector3;
 
 func CalculateBasicStats(delta : float):
 	CalculateRequestedMoveDirection(delta);
 		
 	currentSpeed = velocity.length();
+	velocityX = velocity.x;
+	velocityY = velocity.y;
+	velocityZ = velocity.z;
 	
-	if(currentSpeed == 0):
+	if(is_zero_approx(currentSpeed)):
 		currentDirection = Vector3.ZERO;
+		currentSpeed = 0;
 	else:
-		currentDirection = velocity/currentSpeed;	
+		currentDirection = velocity/currentSpeed;
+
 		
 	topDownVelocity = Vector2(velocity.x, velocity.z);
 	currentTopDownSpeed = topDownVelocity.length();
 
-	if(currentTopDownSpeed == 0):
+	if(is_zero_approx(currentTopDownSpeed)):
 		currentTopDownDirection = Vector2.ZERO;
+		currentTopDownSpeed = 0;
 	else:
 		currentTopDownDirection = topDownVelocity/currentTopDownSpeed;
 		
 	currentTopDownDirection3D.x = currentTopDownDirection.x;
 	currentTopDownDirection3D.z = currentTopDownDirection.y;
+	
+	if(currentSpeed != 0):
+		if(currentTopDownSpeed != 0):
+			lastNonZeroTopDownDirection3D.x = currentTopDownDirection3D.x;
+			lastNonZeroTopDownDirection3D.z = currentTopDownDirection3D.z;
+			currentFacingDirection = currentDirection;
+		else:
+			currentFacingDirection.x = 0;
+			currentFacingDirection.y = currentDirection.y;
+			currentFacingDirection.z = 0;
+			currentFacingDirection = currentFacingDirection.normalized();
+	else:
+		currentFacingDirection.x = lastNonZeroTopDownDirection3D.x;
+		currentFacingDirection.y = 0;
+		currentFacingDirection.z = lastNonZeroTopDownDirection3D.z;
+		currentFacingDirection = currentFacingDirection.normalized();
+		
