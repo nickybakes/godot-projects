@@ -30,6 +30,18 @@ func AddNewConnection(id : int, accountId : int):
 	else:
 		connections.set(id, connection);
 		
+func GetConnectionIds() -> Array[int]:
+	var ids = [] as Array[int];
+	for connection in connections.values():
+		ids.push_back(connection.id);
+	return ids;
+	
+func GetAccountIds() -> Array[int]:
+	var ids = [] as Array[int];
+	for connection in connections.values():
+		ids.push_back(connection.accountId);
+	return ids;
+		
 func OnPeerDisconnect(id : int):
 	connections.erase(id);
 	if(isHost):
