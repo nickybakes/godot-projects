@@ -1,6 +1,6 @@
 extends Control
 
-@export var usernameLabel : Label;
+@export var myAccountDisplay : AccountDisplay;
 
 @export var steamLoggedOutView : Control;
 @export var steamLoggedInView : Control;
@@ -28,7 +28,7 @@ func SteamLogInButton():
 func SetSteamView():
 	steamLoggedOutView.visible = (!SteamGlobal.isOnline);
 	steamLoggedInView.visible = (SteamGlobal.isOnline);
-	usernameLabel.text = SteamGlobal.displayName;
 	if(SteamGlobal.isOnline):
 		lobbySearch.RequestLobbies();
+	myAccountDisplay.Setup(AccountManager.myAccountId);
 	pass

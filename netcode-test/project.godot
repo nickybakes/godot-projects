@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+AccountManager="*uid://dvec04i3bdvqh"
 SteamGlobal="*uid://bnxeirp1opbm8"
 SceneManager="*uid://c4gvb5cl78ij1"
 Network="*uid://cvfmvycbs1wmp"

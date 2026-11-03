@@ -1,8 +1,5 @@
 extends Node
 
-@onready var PLACEHOLDER_AVATAR = preload("res://icon.svg") as Texture2D;
-
-
 # Steam variables
 var isOnline: bool = false
 var isOwned: bool = false
@@ -40,6 +37,10 @@ func initialize_steam() -> void:
 		isOnline = Steam.loggedOn();
 		isOwned = Steam.isSubscribed();
 		steamId = Steam.getSteamID();
+		AccountManager.myAccountId = steamId;
+		AccountManager.accountType = AccountManager.AccountType.STEAM;
+		Steam.avatar_loaded.connect(OnSteamAvatarLoaded);
+		Steam.persona_state_change.connect(SteamPersonaChange);
 		if isOwned == false:
 			print("User does not own this game");
 			#get_tree().quit()
@@ -57,8 +58,22 @@ func initialize_steam() -> void:
 	
 	print(verbal);		
 				
+
+func SteamPersonaChange(id : int, flags : int):
+	AccountManager.LoadAccount(id, true);
+	pass;
 				
-				
-				
-				
-				
+func OnSteamAvatarLoaded(id : int, size : int, buffer : PackedByteArray):
+	var maxAvatarSize : int = 256;
+	
+	# Create the image and texture for loading
+	var avatarImage : Image = Image.create_from_data(size, size, false, Image.FORMAT_RGBA8, buffer)
+
+	# Optionally resize the image if it is too large
+	if size > maxAvatarSize:
+		avatarImage.resize(maxAvatarSize, maxAvatarSize, Image.INTERPOLATE_LANCZOS)
+		
+	var avatarTexture: ImageTexture = ImageTexture.create_from_image(avatarImage);
+	
+	AccountManager.accounts[id].SetAvatar(avatarTexture);
+	pass;

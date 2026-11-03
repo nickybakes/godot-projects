@@ -46,7 +46,7 @@ func _ready():
 func OnConnectionToServerSucceeded():
 	myId = multiplayer.get_unique_id();
 	Log("OnConnectionToServerSucceeded");
-	rpc_id(1, "RequestConnectionToHost", myId);
+	rpc_id(1, "RequestConnectionToHost", myId, AccountManager.myAccountId);
 	purposefulDisconnect = false;
 	pass;
 	
@@ -55,6 +55,7 @@ func OnHostSuccess():
 	myId = 1;
 	SpawnGameNetManager();
 	setUpTime();
+	rpc("NewConnection", 1, AccountManager.myAccountId);
 	HostSuccess.emit();
 	purposefulDisconnect = false;
 	
@@ -126,12 +127,14 @@ func DestroyGameNetManager():
 
 ## Lobby management functions.
 @rpc("call_remote", "any_peer")
-func RequestConnectionToHost(id : int):
+func RequestConnectionToHost(id : int, accountId : int):
 	Log(str("Connection requested with id ", id));
 #	TODO: Do any checks that may refuse a connection;
 	var result = currentLobby.OnConnectionRequest(id);
 	if(result):
 		rpc_id(id, "OnHostAcceptsConnection");
+		rpc_id(id, "SyncConnections", currentLobby.connections);
+		rpc("NewConnection", id, accountId);
 	else:
 		rpc_id(id, "OnHostDeclinesConnection");
 	pass;
@@ -148,6 +151,17 @@ func OnHostAcceptsConnection():
 func OnHostDeclinesConnection():
 	ConnectionFailed.emit("Connection declined by host.");
 	CloseMultiplayer();
+	pass;
+	
+@rpc("call_local", "authority")
+func SyncConnections(connections : Array[Connection]):
+	for connection in connections:
+		currentLobby.AddNewConnection(connection.id, connection.accountId);
+	pass;
+	
+@rpc("call_local", "authority")
+func NewConnection(connectionId : int, accountId : int):
+	currentLobby.AddNewConnection(connectionId, accountId);
 	pass;
 	
 #region Lobbies

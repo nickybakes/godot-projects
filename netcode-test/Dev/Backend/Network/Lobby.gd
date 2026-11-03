@@ -15,12 +15,15 @@ var connections : Dictionary[int, Connection];
 signal PeerDisconnectedFromMe(id : int);
 
 func OnConnectionRequest(id : int) -> bool:
-	addNewConnection(id);
-	return true;
+	if(connections.size() < MAX_CONNECTIONS):
+		return true;
+	return false;
 
-func addNewConnection(id : int):
+func AddNewConnection(id : int, accountId : int):
 	var connection = Connection.new();
 	connection.id = id;
+	connection.accountId = accountId;
+	AccountManager.LoadAccount(accountId);
 	connection.connected = true;
 	if(connections.has(id)):
 		connections[id] = connection;

@@ -3,10 +3,13 @@
 [ext_resource type="Script" uid="uid://cot4hd21yd7ka" path="res://Dev/Backend/App/Scene.gd" id="1_mldh5"]
 [ext_resource type="Script" uid="uid://bjseloqqmypie" path="res://Dev/Frontend/Menu/BaseMenuView.gd" id="2_mldh5"]
 [ext_resource type="Script" uid="uid://xyoknq0d35d7" path="res://Dev/Frontend/Menu/LobbySearch.gd" id="3_0bg6h"]
+[ext_resource type="Script" uid="uid://napor4at8qyp" path="res://Dev/Frontend/App/AccountDisplay.gd" id="3_vhhxt"]
 [ext_resource type="Script" uid="uid://dkjhh34oxbjf7" path="res://Dev/Frontend/Menu/LobbySelection.gd" id="4_dgu85"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_c5qv8"]
 font_size = 54
+outline_size = 13
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mfcfy"]
 
@@ -22,7 +25,7 @@ script = ExtResource("1_mldh5")
 isBaseScene = true
 metadata/_custom_type_script = "uid://cot4hd21yd7ka"
 
-[node name="Menu Temp" type="Control" parent="." unique_id=298920046 node_paths=PackedStringArray("usernameLabel", "steamLoggedOutView", "steamLoggedInView", "lobbySearch")]
+[node name="Menu Temp" type="Control" parent="." unique_id=298920046 node_paths=PackedStringArray("myAccountDisplay", "steamLoggedOutView", "steamLoggedInView", "lobbySearch")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -31,17 +34,31 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("2_mldh5")
-usernameLabel = NodePath("Name Label")
+myAccountDisplay = NodePath("My Account Display")
 steamLoggedOutView = NodePath("Steam Logged Out View")
 steamLoggedInView = NodePath("Steam Logged In View")
 lobbySearch = NodePath("Steam Logged In View/Lobby Search Panel")
 
-[node name="Name Label" type="Label" parent="Menu Temp" unique_id=616428234]
-layout_mode = 0
+[node name="My Account Display" type="Node" parent="Menu Temp" unique_id=119034588 node_paths=PackedStringArray("avatarDisplay", "nameDisplay")]
+script = ExtResource("3_vhhxt")
+avatarDisplay = NodePath("Avatar Display")
+nameDisplay = NodePath("Display Name Label")
+metadata/_custom_type_script = "uid://napor4at8qyp"
+
+[node name="Display Name Label" type="Label" parent="Menu Temp/My Account Display" unique_id=616428234]
+offset_left = 103.0
 offset_right = 1920.0
 offset_bottom = 83.33333
 text = "Player Name"
 label_settings = SubResource("LabelSettings_c5qv8")
+vertical_alignment = 1
+
+[node name="Avatar Display" type="TextureRect" parent="Menu Temp/My Account Display" unique_id=264858665]
+offset_left = 13.0
+offset_top = 7.0
+offset_right = 87.0
+offset_bottom = 81.0
+expand_mode = 1
 
 [node name="Outside Lobby View" type="Control" parent="Menu Temp" unique_id=2045385266]
 layout_mode = 1

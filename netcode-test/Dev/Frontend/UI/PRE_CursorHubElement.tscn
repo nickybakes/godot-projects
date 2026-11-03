@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dhegb6vyxgjc6"]
 
 [ext_resource type="Script" uid="uid://bvxfcpu055diw" path="res://Dev/Frontend/UI/CursorHubElement.gd" id="1_e3ono"]
+[ext_resource type="Script" uid="uid://napor4at8qyp" path="res://Dev/Frontend/App/AccountDisplay.gd" id="2_e3ono"]
 [ext_resource type="Texture2D" uid="uid://dh1hnai0m4bx0" path="res://icon.svg" id="2_ygx0c"]
-[ext_resource type="Script" uid="uid://btc1c226h3vp3" path="res://Dev/Frontend/App/AvatarDisplay.gd" id="3_da7sq"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_s282h"]
 font_size = 21
@@ -14,7 +14,7 @@ font_size = 78
 outline_size = 21
 outline_color = Color(0, 0, 0, 1)
 
-[node name="Cursor Hub Element" type="Control" unique_id=1590757279 node_paths=PackedStringArray("colorBar", "nameLabel", "playerNumberLabel", "avatarDisplay", "lineTrackerStartPoint")]
+[node name="Cursor Hub Element" type="Control" unique_id=1590757279 node_paths=PackedStringArray("colorBar", "playerNumberLabel", "lineTrackerStartPoint", "accountDisplay")]
 custom_minimum_size = Vector2(235, 127)
 layout_mode = 3
 anchor_left = 0.411
@@ -29,11 +29,16 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_e3ono")
 colorBar = NodePath("Color Bar")
-nameLabel = NodePath("Name Label")
 playerNumberLabel = NodePath("Player Number Label")
-avatarDisplay = NodePath("Avatar Display")
 lineTrackerStartPoint = NodePath("Line Tracker Start Point")
+accountDisplay = NodePath("Account Display")
 metadata/_custom_type_script = "uid://bvxfcpu055diw"
+
+[node name="Account Display" type="Node" parent="." unique_id=345427350 node_paths=PackedStringArray("avatarDisplay", "nameDisplay")]
+script = ExtResource("2_e3ono")
+avatarDisplay = NodePath("../Avatar Display")
+nameDisplay = NodePath("../Name Label")
+metadata/_custom_type_script = "uid://napor4at8qyp"
 
 [node name="Color Bar" type="ColorRect" parent="." unique_id=1147522623]
 layout_mode = 1
@@ -77,7 +82,7 @@ text = "P2"
 label_settings = SubResource("LabelSettings_mfcfy")
 vertical_alignment = 1
 
-[node name="Avatar Display" type="TextureRect" parent="." unique_id=439552488]
+[node name="Avatar Display" type="TextureRect" parent="." unique_id=1270017855]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -92,7 +97,6 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_ygx0c")
 expand_mode = 1
-script = ExtResource("3_da7sq")
 
 [node name="Line Tracker Start Point" type="Control" parent="." unique_id=1052638779]
 layout_mode = 1
