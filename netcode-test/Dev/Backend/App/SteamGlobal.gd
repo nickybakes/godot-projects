@@ -4,10 +4,10 @@ extends Node
 
 
 # Steam variables
-var is_online: bool = false
-var is_owned: bool = false
-var steam_app_id: int = 480
-var steamId: int = 0
+var isOnline: bool = false
+var isOwned: bool = false
+var steamAppId: int = 480
+var steamId: int = -1
 var displayName: String = "Player"
 var steamLobbyId : int = -1;
 
@@ -16,35 +16,49 @@ var instanceId : String;
 func _init() -> void:
 	## Set your game's Steam app ID here
 	instanceId = str(OS.get_process_id());
-	OS.set_environment("SteamAppId", str(steam_app_id))
-	OS.set_environment("SteamGameId", str(steam_app_id))
-	
-#
-#
-#func _ready() -> void:
-	#initialize_steam()
-	#
+	OS.set_environment("SteamAppId", str(steamAppId))
+	OS.set_environment("SteamGameId", str(steamAppId))
+
 func _process(_delta: float) -> void:
 	Steam.run_callbacks()
-
+	
+enum SteamInitStatus{
+	Success,
+	Failure,
+	CannotConnectToSteam,
+	ClientOutOfDate
+}
 
 func initialize_steam() -> void:
 	var initialize_response: Dictionary = Steam.steamInitEx()
-	print("Did Steam initialize?: %s " % initialize_response)
 	
-	if initialize_response['status'] > Steam.STEAM_API_INIT_RESULT_OK:
-		print("Failed to initialize Steam. Shutting down. %s" % initialize_response)
-		get_tree().quit()
+	var status : SteamInitStatus = initialize_response['status'] as SteamInitStatus;
+	var verbal : String = initialize_response['verbal'];
+	
+	if(status == SteamInitStatus.Success):
+		displayName = Steam.getPersonaName();
+		isOnline = Steam.loggedOn();
+		isOwned = Steam.isSubscribed();
+		steamId = Steam.getSteamID();
+		if isOwned == false:
+			print("User does not own this game");
+			#get_tree().quit()
 
-	# Gather additional data
-	is_online = Steam.loggedOn()
-	is_owned = Steam.isSubscribed()
-	steamId = Steam.getSteamID()
-	displayName = Steam.getPersonaName() + " " + instanceId;
-
-	# Check if account owns the game
-	if is_owned == false:
-		print("User does not own this game")
-		get_tree().quit()
-		
-	print("Steam initialized. Welcome " + displayName);
+	if(status == SteamInitStatus.Success):
+		print_rich("[b]Steam initialized. Welcome " + displayName);
+	else:
+		match(status):
+			SteamInitStatus.Failure:
+				print_rich("[b]Steam initialization failure:");
+			SteamInitStatus.CannotConnectToSteam:
+				print_rich("[b]Cannot connect to Steam:");
+			SteamInitStatus.ClientOutOfDate:
+				print_rich("[b]Steam client out of date:");
+	
+	print(verbal);		
+				
+				
+				
+				
+				
+				

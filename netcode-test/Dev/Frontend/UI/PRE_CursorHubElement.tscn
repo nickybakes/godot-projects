@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://dhegb6vyxgjc6"]
+
+[ext_resource type="Script" uid="uid://bvxfcpu055diw" path="res://Dev/Frontend/UI/CursorHubElement.gd" id="1_e3ono"]
+[ext_resource type="Texture2D" uid="uid://dh1hnai0m4bx0" path="res://icon.svg" id="2_ygx0c"]
+[ext_resource type="Script" uid="uid://btc1c226h3vp3" path="res://Dev/Frontend/App/AvatarDisplay.gd" id="3_da7sq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_s282h"]
+font_size = 21
+outline_size = 11
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mfcfy"]
+font_size = 78
+outline_size = 21
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Cursor Hub Element" type="Control" unique_id=1590757279 node_paths=PackedStringArray("colorBar", "nameLabel", "playerNumberLabel", "avatarDisplay", "lineTrackerStartPoint")]
+custom_minimum_size = Vector2(235, 127)
+layout_mode = 3
+anchor_left = 0.411
+anchor_top = 0.41900003
+anchor_right = 0.53300005
+anchor_bottom = 0.5361111
+offset_left = -0.11999512
+offset_top = -0.52001953
+offset_right = 0.6398926
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_e3ono")
+colorBar = NodePath("Color Bar")
+nameLabel = NodePath("Name Label")
+playerNumberLabel = NodePath("Player Number Label")
+avatarDisplay = NodePath("Avatar Display")
+lineTrackerStartPoint = NodePath("Line Tracker Start Point")
+metadata/_custom_type_script = "uid://bvxfcpu055diw"
+
+[node name="Color Bar" type="ColorRect" parent="." unique_id=1147522623]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Name Label" type="Label" parent="." unique_id=798249585]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.425
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 10.024998
+grow_horizontal = 2
+grow_vertical = 2
+text = "Bobby BodyOdor"
+label_settings = SubResource("LabelSettings_s282h")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="Player Number Label" type="Label" parent="." unique_id=680885999]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 7.5
+offset_top = -115.5
+offset_right = 116.5
+offset_bottom = 10.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "P2"
+label_settings = SubResource("LabelSettings_mfcfy")
+vertical_alignment = 1
+
+[node name="Avatar Display" type="TextureRect" parent="." unique_id=439552488]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.5
+offset_top = -92.5
+offset_right = -8.5
+offset_bottom = -10.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ygx0c")
+expand_mode = 1
+script = ExtResource("3_da7sq")
+
+[node name="Line Tracker Start Point" type="Control" parent="." unique_id=1052638779]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -48.5
+offset_bottom = -48.5
+grow_horizontal = 2
+grow_vertical = 2

@@ -26,9 +26,9 @@ func SteamLogInButton():
 	SetSteamView();
 
 func SetSteamView():
-	steamLoggedOutView.visible = (!SteamGlobal.is_online);
-	steamLoggedInView.visible = (SteamGlobal.is_online);
+	steamLoggedOutView.visible = (!SteamGlobal.isOnline);
+	steamLoggedInView.visible = (SteamGlobal.isOnline);
 	usernameLabel.text = SteamGlobal.displayName;
-	if(SteamGlobal.is_online):
+	if(SteamGlobal.isOnline):
 		lobbySearch.RequestLobbies();
 	pass

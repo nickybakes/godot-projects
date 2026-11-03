@@ -25,7 +25,8 @@ texture = ExtResource("2_arpy3")
 
 [node name="Text" type="Label3D" parent="Cursor Transform" unique_id=1732912915]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22550434, -1.6060162, 0.053711683)
-alpha_cut = 2
+render_priority = 2
+outline_render_priority = 1
 text = "P1"
 font_size = 307
 outline_size = 78

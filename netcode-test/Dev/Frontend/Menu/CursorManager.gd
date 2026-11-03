@@ -13,6 +13,8 @@ var cursorPath : String = "uid://ch7sfo3ux3n0v";
 
 @export var cursorCustomizationDirectory : CursorCustomizationDirectory;
 
+@export var hub : Hub;
+
 var aspectRatio : float;
 var normalizedCursorSpeed : float;
 
@@ -49,9 +51,11 @@ func PlayerRemoved(playerNumber : int, clientId : int, inputDevice : int):
 	
 func CursorAdded(playerNumber : int, cursor : Cursor):
 	cursors.set(playerNumber, cursor);
+	hub.AddElement(playerNumber);
 	
 func CursorRemoved(playerNumber : int):
 	cursors.erase(playerNumber);
+	hub.RemoveElement(playerNumber);
 	
 func RecreateCursors():
 	if(LobbyManager.Lobby):

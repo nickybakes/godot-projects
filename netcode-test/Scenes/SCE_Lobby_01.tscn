@@ -4,25 +4,28 @@
 [ext_resource type="Script" uid="uid://cot4hd21yd7ka" path="res://Dev/Backend/App/Scene.gd" id="1_gp2lw"]
 [ext_resource type="Script" uid="uid://c6t5j2q827qcr" path="res://Dev/Frontend/Lobby/LobbyView.gd" id="2_d28wa"]
 [ext_resource type="Script" uid="uid://ctgxxi7mqhyve" path="res://Dev/Frontend/Menu/CursorManager.gd" id="2_r5ok2"]
+[ext_resource type="PackedScene" uid="uid://dhegb6vyxgjc6" path="res://Dev/Frontend/UI/PRE_CursorHubElement.tscn" id="3_y7pk7"]
 [ext_resource type="Resource" uid="uid://dpwawajn4ovhe" path="res://Dev/Frontend/Customization/R_CursorCustomizationDirectory_01.tres" id="5_rsejo"]
+[ext_resource type="Material" uid="uid://dje6s1fpeyopb" path="res://Art/Materials/M_SkyHavana_01.tres" id="6_0ffwa"]
+[ext_resource type="Script" uid="uid://b3mping6psqq0" path="res://Dev/Frontend/Camera/CameraManager.gd" id="6_fbg8u"]
+[ext_resource type="Script" uid="uid://bsw5rk11juyn3" path="res://Dev/Frontend/UI/Hub.gd" id="6_kfure"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_c5qv8"]
 font_size = 54
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gp2lw"]
-
 [sub_resource type="Sky" id="Sky_d28wa"]
-sky_material = SubResource("ProceduralSkyMaterial_gp2lw")
+sky_material = ExtResource("6_0ffwa")
 
 [sub_resource type="Environment" id="Environment_d28wa"]
 background_mode = 2
 sky = SubResource("Sky_d28wa")
+sky_rotation = Vector3(0, -3.567453, 0)
 
 [node name="SCE_Lobby_01" type="Node3D" unique_id=1459873858]
 script = ExtResource("1_gp2lw")
 metadata/_custom_type_script = "uid://cot4hd21yd7ka"
 
-[node name="Menu Temp" type="Control" parent="." unique_id=298920046]
+[node name="Lobby View" type="Control" parent="." unique_id=298920046]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,14 +35,15 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("2_d28wa")
 
-[node name="Name Label" type="Label" parent="Menu Temp" unique_id=616428234]
+[node name="Name Label" type="Label" parent="Lobby View" unique_id=616428234]
+visible = false
 layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 83.33333
 text = "Player Name"
 label_settings = SubResource("LabelSettings_c5qv8")
 
-[node name="Inside Lobby Host" type="Control" parent="Menu Temp" unique_id=277915067]
+[node name="Inside Lobby Host" type="Control" parent="Lobby View" unique_id=277915067]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -47,16 +51,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Stop Host Button" type="Button" parent="Menu Temp/Inside Lobby Host" unique_id=171216021]
+[node name="Stop Host Button" type="Button" parent="Lobby View/Inside Lobby Host" unique_id=171216021]
 layout_mode = 0
 offset_left = 34.0
-offset_top = 886.0
-offset_right = 438.875
-offset_bottom = 1050.0
-theme_override_font_sizes/font_size = 54
+offset_top = 39.0
+offset_right = 300.625
+offset_bottom = 147.0
+theme_override_font_sizes/font_size = 45
 text = "Stop Host"
 
-[node name="Inside Lobby Member" type="Control" parent="Menu Temp" unique_id=90951677]
+[node name="Inside Lobby Member" type="Control" parent="Lobby View" unique_id=90951677]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -64,16 +68,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Leave Button" type="Button" parent="Menu Temp/Inside Lobby Member" unique_id=197739756]
+[node name="Leave Button" type="Button" parent="Lobby View/Inside Lobby Member" unique_id=197739756]
 layout_mode = 0
 offset_left = 34.0
-offset_top = 886.0
-offset_right = 438.875
-offset_bottom = 1050.0
-theme_override_font_sizes/font_size = 54
+offset_top = 39.0
+offset_right = 301.0
+offset_bottom = 147.0
+theme_override_font_sizes/font_size = 45
 text = "Leave"
 
-[node name="Inside Lobby" type="Control" parent="Menu Temp" unique_id=1555621572]
+[node name="Inside Lobby" type="Control" parent="Lobby View" unique_id=1555621572]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -82,7 +86,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Spawn Ball Button" type="Button" parent="Menu Temp/Inside Lobby" unique_id=2034910087]
+[node name="Spawn Ball Button" type="Button" parent="Lobby View/Inside Lobby" unique_id=2034910087]
+visible = false
 layout_mode = 0
 offset_left = 794.0
 offset_top = 868.0
@@ -91,10 +96,26 @@ offset_bottom = 1032.0
 theme_override_font_sizes/font_size = 54
 text = "Spawn Ball"
 
+[node name="Cursor Hub Element" parent="Lobby View" unique_id=1590757279 instance=ExtResource("3_y7pk7")]
+visible = false
+layout_mode = 1
+
+[node name="Cursor Hub" type="HBoxContainer" parent="Lobby View" unique_id=1063946410 node_paths=PackedStringArray("hubElementPrefab")]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+script = ExtResource("6_kfure")
+hubElementPrefab = NodePath("../Cursor Hub Element")
+
 [node name="Player Joiner" type="Node" parent="." unique_id=1136046608]
 script = ExtResource("1_5a6u1")
 
-[node name="CursorManager" type="Node3D" parent="." unique_id=1092410923]
+[node name="CursorManager" type="Node3D" parent="." unique_id=1092410923 node_paths=PackedStringArray("hub")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
 script = ExtResource("2_r5ok2")
 width = 25.0
@@ -104,9 +125,26 @@ cursorVerticalTime = 1.0
 cursorSpawnNormalizedHeight = 0.34
 cursorSpawnNormalizedLength = 0.67
 cursorCustomizationDirectory = ExtResource("5_rsejo")
+hub = NodePath("../Lobby View/Cursor Hub")
 metadata/_custom_type_script = "uid://ctgxxi7mqhyve"
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=416222106]
+[node name="Join Instructions" type="Node3D" parent="." unique_id=764865922]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4872144, -1.389)
+
+[node name="Label" type="Label3D" parent="Join Instructions" unique_id=2068097773]
+pixel_size = 0.002
+render_priority = -2
+outline_render_priority = -3
+text = "Press A or SPACE to join!"
+font_size = 95
+outline_size = 39
+
+[node name="CameraManager" type="Node3D" parent="." unique_id=711721173 node_paths=PackedStringArray("camera")]
+script = ExtResource("6_fbg8u")
+camera = NodePath("Camera3D")
+metadata/_custom_type_script = "uid://b3mping6psqq0"
+
+[node name="Camera3D" type="Camera3D" parent="CameraManager" unique_id=416222106]
 current = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=696283838]
@@ -116,6 +154,6 @@ environment = SubResource("Environment_d28wa")
 transform = Transform3D(0.85651755, -0.17360538, 0.4860441, -0.5129993, -0.18299296, 0.8386569, -0.05665271, -0.9676646, -0.24579616, 0, 0, 0)
 light_bake_mode = 0
 
-[connection signal="pressed" from="Menu Temp/Inside Lobby Host/Stop Host Button" to="Menu Temp" method="stopHostButton"]
-[connection signal="pressed" from="Menu Temp/Inside Lobby Member/Leave Button" to="Menu Temp" method="leaveLobbyButton"]
-[connection signal="pressed" from="Menu Temp/Inside Lobby/Spawn Ball Button" to="Menu Temp" method="spawnBallButton"]
+[connection signal="pressed" from="Lobby View/Inside Lobby Host/Stop Host Button" to="Lobby View" method="stopHostButton"]
+[connection signal="pressed" from="Lobby View/Inside Lobby Member/Leave Button" to="Lobby View" method="leaveLobbyButton"]
+[connection signal="pressed" from="Lobby View/Inside Lobby/Spawn Ball Button" to="Lobby View" method="spawnBallButton"]
