@@ -132,6 +132,7 @@ func RequestConnectionToHost(id : int, accountId : int):
 #	TODO: Do any checks that may refuse a connection;
 	var result = currentLobby.OnConnectionRequest(id);
 	if(result):
+		NewConnection(id, accountId);
 		rpc("NewConnection", id, accountId);
 		rpc_id(id, "OnHostAcceptsConnection", currentLobby.connections.values());
 	else:
@@ -139,7 +140,7 @@ func RequestConnectionToHost(id : int, accountId : int):
 	pass;
 
 @rpc("call_remote", "authority")
-func OnHostAcceptsConnection(connections : Array[Connection]):
+func OnHostAcceptsConnection(connections : Array):
 	setUpTime();
 	SyncConnections(connections);
 	currentLobby.connecting = false;
@@ -153,12 +154,12 @@ func OnHostDeclinesConnection():
 	CloseMultiplayer();
 	pass;
 	
-func SyncConnections(connections : Array[Connection]):
-	for connection in connections:
+func SyncConnections(connections : Array):
+	for connection in connections as Array[Connection]:
 		currentLobby.AddNewConnection(connection.id, connection.accountId);
 	pass;
 	
-@rpc("call_local", "authority")
+@rpc("call_remote", "authority")
 func NewConnection(connectionId : int, accountId : int):
 	currentLobby.AddNewConnection(connectionId, accountId);
 	pass;
