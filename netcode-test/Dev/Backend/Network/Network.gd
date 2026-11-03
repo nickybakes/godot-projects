@@ -104,6 +104,7 @@ func CancelConnecting():
 	CloseMultiplayer();
 	
 func CloseMultiplayer():
+	currentLobby.LeaveLobby();
 	if(multiplayer.multiplayer_peer != null):
 		multiplayer.multiplayer_peer.close();
 	multiplayer.multiplayer_peer = null;
@@ -155,16 +156,16 @@ func HostLobby(netType : NetworkType):
 	match(netType):
 		NetworkType.ENET:
 			currentLobby = ENetLobby.new();
-		#NetworkType.STEAM:
-			#Steam.createLobby(Steam.LOBBY_TYPE_PUBLIC, MAX_CONNECTIONS)
+		NetworkType.STEAM:
+			currentLobby = SteamLobby.new();
 	currentLobby.HostLobby();
 			
 func JoinLobby(netType : NetworkType):
 	match(netType):
 		NetworkType.ENET:
 			currentLobby = ENetLobby.new();
-		#NetworkType.STEAM:
-			#Steam.createLobby(Steam.LOBBY_TYPE_PUBLIC, MAX_CONNECTIONS)
+		NetworkType.STEAM:
+			currentLobby = SteamLobby.new();
 	currentLobby.JoinLobby();
 
 #endregion

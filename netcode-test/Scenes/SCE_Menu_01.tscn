@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cot4hd21yd7ka" path="res://Dev/Backend/App/Scene.gd" id="1_mldh5"]
 [ext_resource type="Script" uid="uid://bjseloqqmypie" path="res://Dev/Frontend/Menu/BaseMenuView.gd" id="2_mldh5"]
+[ext_resource type="Script" uid="uid://xyoknq0d35d7" path="res://Dev/Frontend/Menu/LobbySearch.gd" id="3_0bg6h"]
+[ext_resource type="Script" uid="uid://dkjhh34oxbjf7" path="res://Dev/Frontend/Menu/LobbySelection.gd" id="4_dgu85"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_c5qv8"]
 font_size = 54
@@ -20,7 +22,7 @@ script = ExtResource("1_mldh5")
 isBaseScene = true
 metadata/_custom_type_script = "uid://cot4hd21yd7ka"
 
-[node name="Menu Temp" type="Control" parent="." unique_id=298920046]
+[node name="Menu Temp" type="Control" parent="." unique_id=298920046 node_paths=PackedStringArray("usernameLabel", "steamLoggedOutView", "steamLoggedInView", "lobbySearch")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,6 +31,10 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("2_mldh5")
+usernameLabel = NodePath("Name Label")
+steamLoggedOutView = NodePath("Steam Logged Out View")
+steamLoggedInView = NodePath("Steam Logged In View")
+lobbySearch = NodePath("Steam Logged In View/Lobby Search Panel")
 
 [node name="Name Label" type="Label" parent="Menu Temp" unique_id=616428234]
 layout_mode = 0
@@ -44,6 +50,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Host Local Button" type="Button" parent="Menu Temp/Outside Lobby View" unique_id=1683915340]
 layout_mode = 0
@@ -63,6 +70,149 @@ offset_bottom = 522.0
 theme_override_font_sizes/font_size = 54
 text = "Join local"
 
+[node name="Steam Logged Out View" type="Control" parent="Menu Temp" unique_id=1975550333]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Steam Log In Button" type="Button" parent="Menu Temp/Steam Logged Out View" unique_id=1080329905]
+layout_mode = 0
+offset_left = 669.0
+offset_top = 357.0
+offset_right = 1244.125
+offset_bottom = 521.0
+theme_override_font_sizes/font_size = 54
+text = "Log Into Steam"
+
+[node name="Steam Logged In View" type="Control" parent="Menu Temp" unique_id=1007184067]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Host Steam Lobby Button" type="Button" parent="Menu Temp/Steam Logged In View" unique_id=1994945497]
+layout_mode = 0
+offset_left = 669.0
+offset_top = 136.0
+offset_right = 1244.0
+offset_bottom = 300.0
+theme_override_font_sizes/font_size = 54
+text = "Host Steam Lobby
+"
+
+[node name="Lobby Search Panel" type="Panel" parent="Menu Temp/Steam Logged In View" unique_id=981950264 node_paths=PackedStringArray("lobbySelectioinPrefab", "lobbyContainer", "refreshButton", "noLobbiesFoundLabel")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -394.0
+offset_top = -187.0
+offset_right = 401.0
+offset_bottom = 395.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_0bg6h")
+lobbySelectioinPrefab = NodePath("LobbySelection")
+lobbyContainer = NodePath("Lobby Search Scroll Container/Lobby Search VBox Container")
+refreshButton = NodePath("Refresh Button")
+noLobbiesFoundLabel = NodePath("No Lobbies Found Label")
+metadata/_custom_type_script = "uid://xyoknq0d35d7"
+
+[node name="LobbySelection" type="Panel" parent="Menu Temp/Steam Logged In View/Lobby Search Panel" unique_id=87522017 node_paths=PackedStringArray("nameLabel")]
+visible = false
+custom_minimum_size = Vector2(0, 66)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 66.0
+grow_horizontal = 2
+script = ExtResource("4_dgu85")
+nameLabel = NodePath("Name Label")
+metadata/_custom_type_script = "uid://dkjhh34oxbjf7"
+
+[node name="Name Label" type="Label" parent="Menu Temp/Steam Logged In View/Lobby Search Panel/LobbySelection" unique_id=1800212101]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -33.0
+offset_right = -98.5
+offset_bottom = 33.0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Lobby Namewda"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 5
+
+[node name="Join Button" type="Button" parent="Menu Temp/Steam Logged In View/Lobby Search Panel/LobbySelection" unique_id=442877158]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -101.5
+offset_top = -32.0
+offset_bottom = 32.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Join"
+
+[node name="Lobby Search Scroll Container" type="ScrollContainer" parent="Menu Temp/Steam Logged In View/Lobby Search Panel" unique_id=594463472]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Lobby Search VBox Container" type="VBoxContainer" parent="Menu Temp/Steam Logged In View/Lobby Search Panel/Lobby Search Scroll Container" unique_id=1681280665]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 2
+
+[node name="Refresh Button" type="Button" parent="Menu Temp/Steam Logged In View/Lobby Search Panel" unique_id=1799639107]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 0.5
+offset_right = 186.5
+offset_bottom = 75.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 48
+text = "Refresh"
+
+[node name="No Lobbies Found Label" type="Label" parent="Menu Temp/Steam Logged In View/Lobby Search Panel" unique_id=1922641711]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 63
+text = "No lobbies found!"
+
 [node name="Camera3D" type="Camera3D" parent="." unique_id=58828749]
 current = true
 
@@ -75,3 +225,7 @@ light_bake_mode = 0
 
 [connection signal="pressed" from="Menu Temp/Outside Lobby View/Host Local Button" to="Menu Temp" method="hostLocalButton"]
 [connection signal="pressed" from="Menu Temp/Outside Lobby View/Join Local Button" to="Menu Temp" method="joinLocalButton"]
+[connection signal="pressed" from="Menu Temp/Steam Logged Out View/Steam Log In Button" to="Menu Temp" method="SteamLogInButton"]
+[connection signal="pressed" from="Menu Temp/Steam Logged In View/Host Steam Lobby Button" to="Menu Temp" method="HostSteamLobbyButton"]
+[connection signal="pressed" from="Menu Temp/Steam Logged In View/Lobby Search Panel/LobbySelection/Join Button" to="Menu Temp/Steam Logged In View/Lobby Search Panel/LobbySelection" method="JoinButtonPressed"]
+[connection signal="pressed" from="Menu Temp/Steam Logged In View/Lobby Search Panel/Refresh Button" to="Menu Temp/Steam Logged In View/Lobby Search Panel" method="RefreshPressed"]

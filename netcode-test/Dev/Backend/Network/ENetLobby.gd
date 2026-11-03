@@ -28,8 +28,3 @@ func JoinLobby():
 	Network.Log(error_string(joinMessage));
 	Network.multiplayer.set_multiplayer_peer(peer);
 	pass;
-	
-func LeaveLobby():
-	Network.purposefulDisconnect = true;
-	Network.CloseMultiplayer();
-	pass;
