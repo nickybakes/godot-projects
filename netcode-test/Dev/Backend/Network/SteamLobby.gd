@@ -14,7 +14,6 @@ func _init() -> void:
 		
 
 func HostLobby():
-	Network.Log("Steam Lobby Host");
 	isHost = true;
 	startConnecting();
 	Steam.createLobby(Steam.LOBBY_TYPE_PUBLIC, MAX_CONNECTIONS);
@@ -26,12 +25,13 @@ func JoinLobby():
 	
 func LobbyCreated(connect : int, lobbyId : int):
 	SteamGlobal.steamLobbyId = lobbyId;
-	Network.OnHostSuccess();
 	var peer : SteamMultiplayerPeer = SteamMultiplayerPeer.new();
 	var lobbyName = str(LOBBY_SPECIAL_PREFIX, SteamGlobal.displayName);
 	Steam.setLobbyData(lobbyId, "name", lobbyName);
 	peer.create_host(0);
 	Network.multiplayer.set_multiplayer_peer(peer);
+	Network.Log("Steam Lobby Hosted");
+	Network.OnHostSuccess();
 	pass;
 	
 func LobbyJoined(lobbyId: int, _permissions: int, _locked: bool, response: int):
@@ -42,7 +42,8 @@ func LobbyJoined(lobbyId: int, _permissions: int, _locked: bool, response: int):
 		SteamGlobal.steamLobbyId = lobbyId;
 		Network.Log("Steam Lobby Joined");
 		var peer : SteamMultiplayerPeer = SteamMultiplayerPeer.new();
-		peer.create_client(SteamGlobal.steamId, 0);
+		var joinMessage : Error = peer.connect_to_lobby(lobbyId);
+		Network.Log(error_string(joinMessage));
 		Network.multiplayer.set_multiplayer_peer(peer);
 	else:
 		# Get the failure reason

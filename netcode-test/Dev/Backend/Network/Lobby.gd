@@ -5,7 +5,7 @@ const LOBBY_SPECIAL_PREFIX = "s10h56j792";
 
 var lobbyId;
 var connecting : bool;
-const maxTimeConnecting : float = 3;
+const maxTimeConnecting : float = 5;
 var timeConnecting : float = 0;
 var isHost : bool;
 var hostId : int;
