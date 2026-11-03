@@ -55,7 +55,7 @@ func OnHostSuccess():
 	myId = 1;
 	SpawnGameNetManager();
 	setUpTime();
-	rpc("NewConnection", 1, AccountManager.myAccountId);
+	NewConnection(1, AccountManager.myAccountId);
 	HostSuccess.emit();
 	purposefulDisconnect = false;
 	
@@ -132,16 +132,16 @@ func RequestConnectionToHost(id : int, accountId : int):
 #	TODO: Do any checks that may refuse a connection;
 	var result = currentLobby.OnConnectionRequest(id);
 	if(result):
-		rpc_id(id, "OnHostAcceptsConnection");
-		rpc_id(id, "SyncConnections", currentLobby.connections);
 		rpc("NewConnection", id, accountId);
+		rpc_id(id, "OnHostAcceptsConnection", currentLobby.connections);
 	else:
 		rpc_id(id, "OnHostDeclinesConnection");
 	pass;
 
 @rpc("call_remote", "authority")
-func OnHostAcceptsConnection():
+func OnHostAcceptsConnection(connections : Array[Connection]):
 	setUpTime();
+	SyncConnections(connections);
 	currentLobby.connecting = false;
 	SpawnGameNetManager();
 	ConnectionAccepted.emit();
@@ -153,7 +153,6 @@ func OnHostDeclinesConnection():
 	CloseMultiplayer();
 	pass;
 	
-@rpc("call_local", "authority")
 func SyncConnections(connections : Array[Connection]):
 	for connection in connections:
 		currentLobby.AddNewConnection(connection.id, connection.accountId);
