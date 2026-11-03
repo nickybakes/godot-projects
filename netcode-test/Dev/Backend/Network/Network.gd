@@ -133,7 +133,7 @@ func RequestConnectionToHost(id : int, accountId : int):
 	var result = currentLobby.OnConnectionRequest(id);
 	if(result):
 		rpc("NewConnection", id, accountId);
-		rpc_id(id, "OnHostAcceptsConnection", currentLobby.connections);
+		rpc_id(id, "OnHostAcceptsConnection", currentLobby.connections.values());
 	else:
 		rpc_id(id, "OnHostDeclinesConnection");
 	pass;
