@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bvxfcpu055diw" path="res://Dev/Frontend/UI/CursorHubElement.gd" id="1_e3ono"]
 [ext_resource type="Script" uid="uid://napor4at8qyp" path="res://Dev/Frontend/App/AccountDisplay.gd" id="2_e3ono"]
 [ext_resource type="Texture2D" uid="uid://dh1hnai0m4bx0" path="res://icon.svg" id="2_ygx0c"]
+[ext_resource type="PackedScene" uid="uid://gh0evqpprg0a" path="res://Dev/Frontend/Tracker Line/PRE_TrackerLine_01.tscn" id="4_ygx0c"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_s282h"]
 font_size = 21
@@ -14,7 +15,7 @@ font_size = 78
 outline_size = 21
 outline_color = Color(0, 0, 0, 1)
 
-[node name="Cursor Hub Element" type="Control" unique_id=1590757279 node_paths=PackedStringArray("colorBar", "playerNumberLabel", "lineTrackerStartPoint", "accountDisplay")]
+[node name="Cursor Hub Element" type="Control" unique_id=1590757279 node_paths=PackedStringArray("colorBar", "playerNumberLabel", "lineTrackerStartPoint", "accountDisplay", "trackerLine")]
 custom_minimum_size = Vector2(235, 127)
 layout_mode = 3
 anchor_left = 0.411
@@ -32,6 +33,7 @@ colorBar = NodePath("Color Bar")
 playerNumberLabel = NodePath("Player Number Label")
 lineTrackerStartPoint = NodePath("Line Tracker Start Point")
 accountDisplay = NodePath("Account Display")
+trackerLine = NodePath("PRE_TrackerLine_01")
 metadata/_custom_type_script = "uid://bvxfcpu055diw"
 
 [node name="Account Display" type="Node" parent="." unique_id=345427350 node_paths=PackedStringArray("avatarDisplay", "nameDisplay")]
@@ -98,14 +100,16 @@ grow_vertical = 2
 texture = ExtResource("2_ygx0c")
 expand_mode = 1
 
-[node name="Line Tracker Start Point" type="Control" parent="." unique_id=1052638779]
+[node name="Line Tracker Start Point" type="Control" parent="." unique_id=727064269]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_top = -48.5
-offset_bottom = -48.5
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="PRE_TrackerLine_01" parent="." unique_id=946806820 instance=ExtResource("4_ygx0c")]
+zDepth = 9.0
+endPoint3DOffset = Vector3(0.874, -1.625, 0)

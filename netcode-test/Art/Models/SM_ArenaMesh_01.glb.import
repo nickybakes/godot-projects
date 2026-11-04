@@ -1,15 +1,15 @@
 [remap]
 
-importer="scene"
+importer="ArrayMesh"
 importer_version=1
-type="PackedScene"
+type="ArrayMesh"
 uid="uid://c7s1apef4jbtx"
-path="res://.godot/imported/SM_ArenaMesh_01.glb-9ff9b1f2d877996a7370d56b97127fa0.scn"
+path="res://.godot/imported/SM_ArenaMesh_01.glb-9ff9b1f2d877996a7370d56b97127fa0.res"
 
 [deps]
 
 source_file="res://Art/Models/SM_ArenaMesh_01.glb"
-dest_files=["res://.godot/imported/SM_ArenaMesh_01.glb-9ff9b1f2d877996a7370d56b97127fa0.scn"]
+dest_files=["res://.godot/imported/SM_ArenaMesh_01.glb-9ff9b1f2d877996a7370d56b97127fa0.res"]
 
 [params]
 

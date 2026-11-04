@@ -1,6 +1,8 @@
 extends CanvasLayer
 class_name NetworkOverlayView
 
+static var LogPanel : Panel;
+
 @onready var pingLabel : Label = $"Ping Label"
 
 @onready var coverupPanel : Panel = $"Input Coverup Panel"
@@ -17,6 +19,8 @@ class_name NetworkOverlayView
 var currentPing = -999;
 
 func _ready():
+	LogPanel = logPanel;
+	logPanel.visible = false;
 	coverupPanel.visible = false;
 
 func ConnectionFailedMessage(message: String):
@@ -47,6 +51,11 @@ func DismissError():
 	
 func ToggleLog():
 	logPanel.visible = !logPanel.visible;
+	if(logPanel.visible):
+		InputOverlayView.LogPanel.visible = false;
+		await get_tree().create_timer(.01).timeout
+		logScrollContainer.set_deferred("scroll_vertical", logScrollContainer.get_v_scroll_bar().max_value)
+		
 	pass;
 	
 func TestLog():

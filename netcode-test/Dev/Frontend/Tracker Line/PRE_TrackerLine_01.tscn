@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://gh0evqpprg0a"]
+
+[ext_resource type="Script" uid="uid://dvf5o02toswha" path="res://Dev/Frontend/Tracker Line/TrackerLine.gd" id="1_cicx8"]
+[ext_resource type="Material" uid="uid://b6txbsbuneyon" path="res://Art/Materials/M_TrackerLine_01.tres" id="3_cc283"]
+[ext_resource type="ArrayMesh" uid="uid://cxtqsrkfsc2p4" path="res://Art/Models/SM_TrackerLine_End_01.glb" id="3_d40f2"]
+[ext_resource type="ArrayMesh" uid="uid://dp3i7tgvv3xm5" path="res://Art/Models/SM_TrackerLine_Mid_01.glb" id="4_shbg7"]
+[ext_resource type="ArrayMesh" uid="uid://b37ib7pdql2sp" path="res://Art/Models/SM_TrackerLine_Start_01.glb" id="5_d40f2"]
+
+[node name="PRE_TrackerLine_01" type="Node3D" unique_id=990403718 node_paths=PackedStringArray("start", "middle", "end")]
+script = ExtResource("1_cicx8")
+start = NodePath("Start")
+middle = NodePath("Middle")
+end = NodePath("End")
+zDepth = 6.0
+colors = Array[Color]([Color(1, 0.110000014, 0.110000014, 1), Color(0.08691403, 0.2881781, 1.1755697, 1), Color(1, 0.9647059, 0.03529412, 1), Color(0, 0.7372549, 0.14509805, 1), Color(0.98039216, 0.3764706, 0, 1), Color(0.39607844, 0.05490196, 0.61960787, 1), Color(1, 0, 0.7019608, 1), Color(0.007843138, 0.79607844, 0.92156863, 1)])
+metadata/_custom_type_script = "uid://dvf5o02toswha"
+
+[node name="End" type="MeshInstance3D" parent="." unique_id=802968272]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = ExtResource("3_cc283")
+cast_shadow = 0
+mesh = ExtResource("3_d40f2")
+
+[node name="Middle" type="MeshInstance3D" parent="." unique_id=360971473]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = ExtResource("3_cc283")
+cast_shadow = 0
+mesh = ExtResource("4_shbg7")
+
+[node name="Start" type="MeshInstance3D" parent="." unique_id=1979042401]
+material_override = ExtResource("3_cc283")
+cast_shadow = 0
+mesh = ExtResource("5_d40f2")

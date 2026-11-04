@@ -5,11 +5,16 @@ class_name CursorHubElement
 @export var playerNumberLabel : Label;
 @export var lineTrackerStartPoint : Control;
 @export var accountDisplay : AccountDisplay;
+@export var trackerLine : TrackerLine;
 
 func Setup(id : int):
 	super(id);
-	colorBar.modulate = CursorManager.Manager.GetColorFromPlayerNumber(id);
+	colorBar.modulate = CursorManager.Manager.cursorCustomizationDirectory.GetColorFromPlayerNumber(id);
 	playerNumberLabel.text = str("P", id);
+	
+	trackerLine.Setup(id - 1);
+	trackerLine.startPointTarget = lineTrackerStartPoint;
+	trackerLine.endPointTarget = CursorManager.Manager.cursors[id].transform;
 	
 	var playerToken : PlayerToken = LobbyManager.Lobby.GetPlayerTokenByPlayerNumber(id);
 	var connection : Connection = Network.currentLobby.connections[playerToken.ownerId];
@@ -17,3 +22,7 @@ func Setup(id : int):
 	accountDisplay.Setup(accountId);
 	
 	pass;
+
+
+func _process(delta: float) -> void:
+	trackerLine.FollowTarget(delta);

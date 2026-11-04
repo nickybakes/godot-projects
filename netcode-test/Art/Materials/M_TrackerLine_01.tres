@@ -1,0 +1,26 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://b6txbsbuneyon"]
+
+[ext_resource type="Shader" uid="uid://dmusmpex72sg4" path="res://Art/Shaders/S_TrackerLine_01.gdshader" id="1_6yrkv"]
+[ext_resource type="Texture2D" uid="uid://b4uncm6ps8o80" path="res://Art/Textures/T_Line_01.png" id="2_3hlu4"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_6yrkv")
+shader_parameter/sampleTexture = ExtResource("2_3hlu4")
+shader_parameter/color = Color(1, 0, 0, 1)
+shader_parameter/emissive = 1.215
+shader_parameter/brightness = 1.545
+shader_parameter/brightnessMask = 0.712
+shader_parameter/edgeAlpha = 0.47999998927104
+shader_parameter/midAlpha = 0.06999999843536
+shader_parameter/alphaEdge = -0.302
+shader_parameter/alphaEdgePower = 2.0
+shader_parameter/alphaMultiply = 1.0
+shader_parameter/heartbeatFade = 0.0
+shader_parameter/heartbeatAmount = 0.542
+shader_parameter/heartbeatSpeed = 50.0
+shader_parameter/heartbeatScale = 15.689
+shader_parameter/heartbeatEdge = 2.556
+shader_parameter/heartbeatOffset = 1.012
+shader_parameter/heartbeatOffSpeed = -40.0
+shader_parameter/heartbeatOffScale = 30.0

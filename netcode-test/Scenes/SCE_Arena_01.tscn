@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://b3mping6psqq0" path="res://Dev/Frontend/Camera/CameraManager.gd" id="4_d6cxq"]
 [ext_resource type="Script" uid="uid://cyp11trxkh8nd" path="res://Dev/Frontend/Interaction/InteractionManager.gd" id="4_nmwte"]
 [ext_resource type="Resource" uid="uid://c30op58wvx74q" path="res://Dev/Frontend/Interaction/R_InteractionTraits_01.tres" id="5_nmwte"]
-[ext_resource type="ArrayMesh" uid="uid://do1j6r1aif84d" path="res://Art/Models/SM_ArenaMesh_01.res" id="8_rkb0a"]
+[ext_resource type="ArrayMesh" uid="uid://c7s1apef4jbtx" path="res://Art/Models/SM_ArenaMesh_01.glb" id="8_h3ruc"]
 [ext_resource type="Material" uid="uid://dusafwqyxu7f8" path="res://Art/Materials/M_BoostPanel_01.tres" id="9_h3ruc"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_c5qv8"]
@@ -87,7 +87,7 @@ shadow_enabled = true
 
 [node name="Arena Mesh" type="MeshInstance3D" parent="." unique_id=1485065166]
 material_override = ExtResource("1_avklc")
-mesh = ExtResource("8_rkb0a")
+mesh = ExtResource("8_h3ruc")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Arena Mesh" unique_id=2000865703]
 

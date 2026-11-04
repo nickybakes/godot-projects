@@ -94,6 +94,3 @@ func SetTransformFromNormalizedPosition(normalizedPosition : Vector2, cursorTran
 	newPosition.z = position.z;
 	cursorTransform.position = newPosition;
 	cursorTransform.scale = Vector3(cursorScale, cursorScale, cursorScale);
-
-func GetColorFromPlayerNumber(playerNumber : int) -> Color:
-	return cursorCustomizationDirectory.cursorColors[(playerNumber - 1) % cursorCustomizationDirectory.cursorColors.size()];

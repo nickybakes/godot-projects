@@ -13,13 +13,12 @@ script = ExtResource("1_eiu6y")
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -673.0
-offset_top = 1020.0
-offset_right = -558.0
-offset_bottom = 1077.0
+offset_left = -317.0
+offset_right = -149.0
+offset_bottom = 57.0
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 35
-text = "Log"
+text = "Input Log"
 
 [node name="Test Log" type="Button" parent="." unique_id=1438603649]
 visible = false
@@ -41,8 +40,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -553.0
-offset_top = -205.0
+offset_top = -1023.0
 offset_right = -24.0
+offset_bottom = -818.0
 grow_horizontal = 0
 grow_vertical = 0
 

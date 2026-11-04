@@ -4,7 +4,6 @@
 [ext_resource type="Resource" uid="uid://bkj4hy78bq3cb" path="res://Dev/Frontend/Ball Controller/R_BallTraits_01.tres" id="2_1er7t"]
 [ext_resource type="Script" uid="uid://diamkkypctj6o" path="res://Dev/Frontend/Ball Visuals/BallVisuals.gd" id="2_3d8wc"]
 [ext_resource type="Material" uid="uid://di1to8x2plpx" path="res://Art/Materials/M_Ball_01.tres" id="2_i0e7p"]
-[ext_resource type="ArrayMesh" uid="uid://k16kwalmlv6u" path="res://Art/Models/SM_Ball_01.res" id="3_3d8wc"]
 [ext_resource type="Material" uid="uid://clerrjhlukxmf" path="res://Art/Materials/M_Outline_01.tres" id="4_jioly"]
 [ext_resource type="Resource" uid="uid://0aagooiulhx6" path="res://Dev/Frontend/Customization/R_BallCustomizationDirectory_01.tres" id="4_lr45t"]
 [ext_resource type="Resource" uid="uid://b3ori3ghnplsq" path="res://Dev/Frontend/Ball Visuals/R_BallVisualProfile_01.tres" id="5_6873s"]
@@ -21,14 +20,15 @@
 [ext_resource type="Script" uid="uid://bc4ag7pcktrlg" path="res://Dev/Frontend/Ball Controller/Ball States/Jump.gd" id="12_ilenv"]
 [ext_resource type="Script" uid="uid://bao3317lfi3tc" path="res://Dev/Frontend/Modular Character Controller/MCCTransition.gd" id="12_nefp1"]
 [ext_resource type="Script" uid="uid://c3t7bpre2tf53" path="res://Dev/Frontend/Modular Character Controller/StorageNode.gd" id="12_ods0j"]
-[ext_resource type="ArrayMesh" uid="uid://00w8rb42nln8" path="res://Art/Models/SM_Block_01a.res" id="12_v2vyv"]
 [ext_resource type="Script" uid="uid://cx8j2ywloqwq7" path="res://Dev/Frontend/Ball Controller/Rules/OnSurfaceRule.gd" id="13_2mr7f"]
 [ext_resource type="Script" uid="uid://b2jd3djd45lf3" path="res://Dev/Frontend/Ball Controller/Rules/InputRule.gd" id="13_ilenv"]
+[ext_resource type="ArrayMesh" uid="uid://c62f147t8g58f" path="res://Art/Models/SM_Ball_01.glb" id="13_n4m0h"]
 [ext_resource type="Material" uid="uid://c15ftcac4uccf" path="res://Art/Materials/M_Fire_Full.tres" id="13_wvtf1"]
 [ext_resource type="Script" uid="uid://nlxsi446gre7" path="res://Dev/Frontend/Ball Controller/Cooldown.gd" id="14_s4hg4"]
 [ext_resource type="Script" uid="uid://bya8tt6ubw05d" path="res://Dev/Frontend/Ball Controller/Ball States/Launch.gd" id="15_84w8q"]
 [ext_resource type="Script" uid="uid://dulfhx4ftd06" path="res://Dev/Frontend/Ball Controller/Rules/TraitRule.gd" id="15_ahjyt"]
 [ext_resource type="Script" uid="uid://uwmqq6cynemg" path="res://Dev/Frontend/Ball Controller/HitBox.gd" id="16_1vn2h"]
+[ext_resource type="ArrayMesh" uid="uid://ck0tlxxvnwves" path="res://Art/Models/SM_Block_01a.glb" id="17_icfwc"]
 [ext_resource type="Script" uid="uid://bajnp1ma0ic1l" path="res://Dev/Frontend/Ball Controller/HitRegion.gd" id="17_xnpby"]
 [ext_resource type="Script" uid="uid://dyuiu7ou3tkbr" path="res://Dev/Frontend/Modular Character Controller/StorageResource.gd" id="19_4jolm"]
 [ext_resource type="Script" uid="uid://xjddwtm4q0e2" path="res://Dev/Frontend/Ball Controller/StatFill.gd" id="19_mf80y"]
@@ -292,21 +292,21 @@ transform = Transform3D(0.9999999, 0, 0, 0, 0.9999998, 0, 0, 0, 0.99999994, 0, 0
 
 [node name="Ball Mesh" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Roller" unique_id=1877079017]
 material_override = ExtResource("2_i0e7p")
-mesh = ExtResource("3_3d8wc")
+mesh = ExtResource("13_n4m0h")
 
 [node name="Outline Mesh" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Roller" unique_id=88235204]
 material_override = ExtResource("4_jioly")
-mesh = ExtResource("3_3d8wc")
+mesh = ExtResource("13_n4m0h")
 
 [node name="Xray Mesh" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Roller" unique_id=1785291860]
 material_override = ExtResource("8_m53x3")
-mesh = ExtResource("3_3d8wc")
+mesh = ExtResource("13_n4m0h")
 
 [node name="Block Mesh" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Roller" unique_id=595999983]
 visible = false
 material_override = ExtResource("11_v2vyv")
 cast_shadow = 0
-mesh = ExtResource("12_v2vyv")
+mesh = ExtResource("17_icfwc")
 
 [node name="Physics Shape" type="CollisionShape3D" parent="." unique_id=1755982985]
 shape = SubResource("SphereShape3D_c5qv8")
