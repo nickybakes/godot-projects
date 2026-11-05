@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="HubProfile" format=3 uid="uid://dxbmthys0ijbe"]
+
+[ext_resource type="Script" uid="uid://dle35d6e3ylfe" path="res://Dev/Frontend/UI/HubProfile.gd" id="1_fxclh"]
+
+[resource]
+script = ExtResource("1_fxclh")
+separationAmounts = Array[int]([0, 220, 220, 220, 160, 120, 60, 20, 4])
+metadata/_custom_type_script = "uid://dle35d6e3ylfe"

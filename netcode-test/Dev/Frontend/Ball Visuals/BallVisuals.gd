@@ -5,6 +5,8 @@ class_name BallVisuals;
 @export var ballCustomizationDirectory : BallCustomizationDirectory;
 @export var profile : BallVisualProfile;
 
+var ballHubElement : BallHubElement;
+
 @export_category("Meshes")
 @export var ballMesh : MeshInstance3D;
 @export var outlineMesh : MeshInstance3D;

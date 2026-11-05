@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dhegb6vyxgjc6"]
 
 [ext_resource type="Script" uid="uid://bvxfcpu055diw" path="res://Dev/Frontend/UI/CursorHubElement.gd" id="1_e3ono"]
+[ext_resource type="Resource" uid="uid://dpwawajn4ovhe" path="res://Dev/Frontend/Customization/R_CursorCustomizationDirectory_01.tres" id="2_da7sq"]
 [ext_resource type="Script" uid="uid://napor4at8qyp" path="res://Dev/Frontend/App/AccountDisplay.gd" id="2_e3ono"]
 [ext_resource type="Texture2D" uid="uid://dh1hnai0m4bx0" path="res://icon.svg" id="2_ygx0c"]
 [ext_resource type="PackedScene" uid="uid://gh0evqpprg0a" path="res://Dev/Frontend/Tracker Line/PRE_TrackerLine_01.tscn" id="4_ygx0c"]
@@ -34,6 +35,7 @@ playerNumberLabel = NodePath("Player Number Label")
 lineTrackerStartPoint = NodePath("Line Tracker Start Point")
 accountDisplay = NodePath("Account Display")
 trackerLine = NodePath("PRE_TrackerLine_01")
+customization = ExtResource("2_da7sq")
 metadata/_custom_type_script = "uid://bvxfcpu055diw"
 
 [node name="Account Display" type="Node" parent="." unique_id=345427350 node_paths=PackedStringArray("avatarDisplay", "nameDisplay")]
@@ -111,5 +113,5 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="PRE_TrackerLine_01" parent="." unique_id=946806820 instance=ExtResource("4_ygx0c")]
-zDepth = 9.0
+visible = false
 endPoint3DOffset = Vector3(0.874, -1.625, 0)

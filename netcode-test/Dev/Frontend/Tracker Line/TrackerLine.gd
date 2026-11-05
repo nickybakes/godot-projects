@@ -17,16 +17,23 @@ var endPointTarget : Node3D;
 @export var endPoint2DOffset := Vector2.ZERO;
 
 @export var colors : Array[Color];
+@export var pulseTimeOffset : float = .25;
 
-func Setup(colorIndex : int):
+func Setup(colorIndex : int, playerNumber : int):
 	currentMaterial = middle.material_override.duplicate();
 	start.material_override = currentMaterial;
 	middle.material_override = currentMaterial;
 	end.material_override = currentMaterial;
 	SetColorIndex(colorIndex);
+	SetPulseOffset(playerNumber);
+	
+	reparent(CameraManager.CM.camera, false);
 	
 func SetColorIndex(colorIndex : int):
 	currentMaterial.set_shader_parameter("color", colors[colorIndex]);
+	
+func SetPulseOffset(playerNumber : int):
+	currentMaterial.set_shader_parameter("pulseOffset", (playerNumber - 1) * pulseTimeOffset);
 
 func FollowTarget(delta : float):
 	if(startPointTarget):
@@ -35,9 +42,15 @@ func FollowTarget(delta : float):
 		if(endPointTarget):
 			var endPos = CameraManager.CM.camera.unproject_position(endPointTarget.global_position + endPoint3DOffset);
 			endPos = CameraManager.CM.camera.project_position(endPos + endPoint2DOffset, zDepth);
+			
 			var direction = (endPos - startPos).normalized();
+			direction = direction.rotated(Vector3.DOWN, CameraManager.CM.camera.global_rotation.y);
+			direction = direction.rotated(Vector3.LEFT, CameraManager.CM.camera.global_rotation.x);
+			direction = direction.rotated(Vector3.FORWARD, CameraManager.CM.camera.global_rotation.z);
 			var targetAngle = atan2(-direction.x, direction.y)
-			rotation.z = (targetAngle);
+			rotation = Vector3.ZERO;
+			rotation.z = targetAngle;
+			
 			var distance = startPos.distance_to(endPos);
 			middle.scale.y = (distance * 2.0) - 1.0;
 			middle.position.y = (distance * .5);

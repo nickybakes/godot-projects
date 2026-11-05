@@ -3,11 +3,15 @@
 [ext_resource type="Script" uid="uid://cot4hd21yd7ka" path="res://Dev/Backend/App/Scene.gd" id="1_0hxaj"]
 [ext_resource type="Material" uid="uid://dsqom3ceceiyc" path="res://Art/Materials/M_DevEnv_01.tres" id="1_avklc"]
 [ext_resource type="Script" uid="uid://dwjf48i5tqrx3" path="res://Dev/Frontend/Game/GameManager.gd" id="2_n03q8"]
+[ext_resource type="Script" uid="uid://n8hbkua4cygf" path="res://Dev/Frontend/Game/GamerView.gd" id="3_fg3k8"]
 [ext_resource type="Script" uid="uid://lomqln3v0xvt" path="res://Dev/Frontend/Game/GameSceneSetup.gd" id="4_8lxd5"]
 [ext_resource type="Script" uid="uid://b3mping6psqq0" path="res://Dev/Frontend/Camera/CameraManager.gd" id="4_d6cxq"]
+[ext_resource type="PackedScene" uid="uid://csa3iitdf6l13" path="res://Dev/Frontend/UI/PRE_BallHubElement.tscn" id="4_hwi73"]
 [ext_resource type="Script" uid="uid://cyp11trxkh8nd" path="res://Dev/Frontend/Interaction/InteractionManager.gd" id="4_nmwte"]
 [ext_resource type="Resource" uid="uid://c30op58wvx74q" path="res://Dev/Frontend/Interaction/R_InteractionTraits_01.tres" id="5_nmwte"]
+[ext_resource type="Resource" uid="uid://dxbmthys0ijbe" path="res://Dev/Frontend/UI/R_HubProfile_01.tres" id="7_4puxp"]
 [ext_resource type="ArrayMesh" uid="uid://c7s1apef4jbtx" path="res://Art/Models/SM_ArenaMesh_01.glb" id="8_h3ruc"]
+[ext_resource type="Script" uid="uid://bsw5rk11juyn3" path="res://Dev/Frontend/UI/Hub.gd" id="9_2j8qv"]
 [ext_resource type="Material" uid="uid://dusafwqyxu7f8" path="res://Art/Materials/M_BoostPanel_01.tres" id="9_h3ruc"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_c5qv8"]
@@ -58,15 +62,6 @@ transparency = 0.58
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_c5qv8")
 
-[node name="GameManager" type="Node" parent="." unique_id=335467618]
-script = ExtResource("2_n03q8")
-metadata/_custom_type_script = "uid://dwjf48i5tqrx3"
-
-[node name="InteractionManager" type="Node" parent="." unique_id=641186659]
-script = ExtResource("4_nmwte")
-traits = ExtResource("5_nmwte")
-metadata/_custom_type_script = "uid://cyp11trxkh8nd"
-
 [node name="CameraManager" type="Node3D" parent="." unique_id=104827752 node_paths=PackedStringArray("camera")]
 transform = Transform3D(1, 0, 0, 0, 0.87630665, 0.4817537, 0, -0.4817537, 0.87630665, 0, 25.378, 38.496)
 script = ExtResource("4_d6cxq")
@@ -76,6 +71,44 @@ metadata/_custom_type_script = "uid://b3mping6psqq0"
 [node name="Camera3D" type="Camera3D" parent="CameraManager" unique_id=799328789]
 current = true
 fov = 28.6
+
+[node name="Gamer View" type="Control" parent="." unique_id=1179506821 node_paths=PackedStringArray("hub")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("3_fg3k8")
+hub = NodePath("Ball Hub")
+metadata/_custom_type_script = "uid://n8hbkua4cygf"
+
+[node name="Ball Hub Element" parent="Gamer View" unique_id=190371458 instance=ExtResource("4_hwi73")]
+visible = false
+layout_mode = 1
+
+[node name="Ball Hub" type="HBoxContainer" parent="Gamer View" unique_id=23730190 node_paths=PackedStringArray("hubElementPrefab")]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+script = ExtResource("9_2j8qv")
+hubElementPrefab = NodePath("../Ball Hub Element")
+hubProfile = ExtResource("7_4puxp")
+
+[node name="GameManager" type="Node" parent="." unique_id=335467618]
+script = ExtResource("2_n03q8")
+metadata/_custom_type_script = "uid://dwjf48i5tqrx3"
+
+[node name="InteractionManager" type="Node" parent="." unique_id=641186659]
+script = ExtResource("4_nmwte")
+traits = ExtResource("5_nmwte")
+metadata/_custom_type_script = "uid://cyp11trxkh8nd"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1796333799]
 environment = SubResource("Environment_n03q8")

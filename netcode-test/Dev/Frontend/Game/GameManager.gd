@@ -54,6 +54,7 @@ func SpawnPlayerBalls():
 
 func BallAdded(playerNumber : int, ball : NetBall):
 	balls.set(playerNumber, ball);
+	ball.ballController.visuals.ballHubElement = GamerView.View.hub.SpawnElement(playerNumber) as BallHubElement;
 	
 func BallRemoved(playerNumber : int):
 	balls.erase(playerNumber);

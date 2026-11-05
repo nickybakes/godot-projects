@@ -6,13 +6,15 @@ class_name CursorHubElement
 @export var lineTrackerStartPoint : Control;
 @export var accountDisplay : AccountDisplay;
 @export var trackerLine : TrackerLine;
+@export var customization : CursorCustomizationDirectory;
 
 func Setup(id : int):
 	super(id);
-	colorBar.modulate = CursorManager.Manager.cursorCustomizationDirectory.GetColorFromPlayerNumber(id);
+	colorBar.modulate = customization.GetColorFromPlayerNumber(id);
 	playerNumberLabel.text = str("P", id);
 	
-	trackerLine.Setup(id - 1);
+	trackerLine.visible = true;
+	trackerLine.Setup(id - 1, id);
 	trackerLine.startPointTarget = lineTrackerStartPoint;
 	trackerLine.endPointTarget = CursorManager.Manager.cursors[id].transform;
 	
@@ -26,3 +28,6 @@ func Setup(id : int):
 
 func _process(delta: float) -> void:
 	trackerLine.FollowTarget(delta);
+
+func _exit_tree() -> void:
+	trackerLine.queue_free();

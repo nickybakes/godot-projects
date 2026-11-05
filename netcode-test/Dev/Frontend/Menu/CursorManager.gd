@@ -51,7 +51,7 @@ func PlayerRemoved(playerNumber : int, clientId : int, inputDevice : int):
 	
 func CursorAdded(playerNumber : int, cursor : Cursor):
 	cursors.set(playerNumber, cursor);
-	hub.AddElement(playerNumber);
+	hub.SpawnElement(playerNumber);
 	
 func CursorRemoved(playerNumber : int):
 	cursors.erase(playerNumber);

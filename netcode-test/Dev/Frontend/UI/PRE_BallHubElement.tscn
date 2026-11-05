@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://csa3iitdf6l13"]
+
+[ext_resource type="Script" uid="uid://8jdgve60fqwx" path="res://Dev/Frontend/UI/BallHubElement.gd" id="1_j7jvt"]
+[ext_resource type="Script" uid="uid://napor4at8qyp" path="res://Dev/Frontend/App/AccountDisplay.gd" id="2_dv0he"]
+[ext_resource type="Resource" uid="uid://dpwawajn4ovhe" path="res://Dev/Frontend/Customization/R_CursorCustomizationDirectory_01.tres" id="2_wri1x"]
+[ext_resource type="Texture2D" uid="uid://dh1hnai0m4bx0" path="res://icon.svg" id="3_wri1x"]
+[ext_resource type="PackedScene" uid="uid://gh0evqpprg0a" path="res://Dev/Frontend/Tracker Line/PRE_TrackerLine_01.tscn" id="4_s68bp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_s282h"]
+font_size = 21
+outline_size = 11
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mfcfy"]
+font_size = 78
+outline_size = 21
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Ball Hub Element" type="Control" unique_id=190371458 node_paths=PackedStringArray("colorBar", "playerNumberLabel", "lineTrackerStartPoint", "accountDisplay", "trackerLine")]
+custom_minimum_size = Vector2(235, 127)
+layout_mode = 3
+anchor_left = 0.411
+anchor_top = 0.41900003
+anchor_right = 0.53300005
+anchor_bottom = 0.5361111
+offset_left = -0.11999512
+offset_top = -0.52001953
+offset_right = 0.6398926
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_j7jvt")
+colorBar = NodePath("Color Bar")
+playerNumberLabel = NodePath("Player Number Label")
+lineTrackerStartPoint = NodePath("Line Tracker Start Point")
+accountDisplay = NodePath("Account Display")
+trackerLine = NodePath("PRE_TrackerLine_01")
+customization = ExtResource("2_wri1x")
+metadata/_custom_type_script = "uid://8jdgve60fqwx"
+
+[node name="Account Display" type="Node" parent="." unique_id=345427350 node_paths=PackedStringArray("avatarDisplay", "nameDisplay")]
+script = ExtResource("2_dv0he")
+avatarDisplay = NodePath("../Avatar Display")
+nameDisplay = NodePath("../Name Label")
+metadata/_custom_type_script = "uid://napor4at8qyp"
+
+[node name="Color Bar" type="ColorRect" parent="." unique_id=1147522623]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Name Label" type="Label" parent="." unique_id=798249585]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.425
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 10.024998
+grow_horizontal = 2
+grow_vertical = 2
+text = "Bobby BodyOdor"
+label_settings = SubResource("LabelSettings_s282h")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="Player Number Label" type="Label" parent="." unique_id=680885999]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 7.5
+offset_top = -115.5
+offset_right = 116.5
+offset_bottom = 10.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "P2"
+label_settings = SubResource("LabelSettings_mfcfy")
+vertical_alignment = 1
+
+[node name="Avatar Display" type="TextureRect" parent="." unique_id=1270017855]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.5
+offset_top = -92.5
+offset_right = -8.5
+offset_bottom = -10.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_wri1x")
+expand_mode = 1
+
+[node name="Line Tracker Start Point" type="Control" parent="." unique_id=727064269]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PRE_TrackerLine_01" parent="." unique_id=946806820 instance=ExtResource("4_s68bp")]
+visible = false
+zDepth = 25.0

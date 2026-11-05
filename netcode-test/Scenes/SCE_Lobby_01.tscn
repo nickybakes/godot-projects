@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://c6t5j2q827qcr" path="res://Dev/Frontend/Lobby/LobbyView.gd" id="2_d28wa"]
 [ext_resource type="Script" uid="uid://ctgxxi7mqhyve" path="res://Dev/Frontend/Menu/CursorManager.gd" id="2_r5ok2"]
 [ext_resource type="PackedScene" uid="uid://dhegb6vyxgjc6" path="res://Dev/Frontend/UI/PRE_CursorHubElement.tscn" id="3_y7pk7"]
+[ext_resource type="Resource" uid="uid://dxbmthys0ijbe" path="res://Dev/Frontend/UI/R_HubProfile_01.tres" id="5_40un4"]
 [ext_resource type="Resource" uid="uid://dpwawajn4ovhe" path="res://Dev/Frontend/Customization/R_CursorCustomizationDirectory_01.tres" id="5_rsejo"]
 [ext_resource type="Material" uid="uid://dje6s1fpeyopb" path="res://Art/Materials/M_SkyHavana_01.tres" id="6_0ffwa"]
 [ext_resource type="Script" uid="uid://b3mping6psqq0" path="res://Dev/Frontend/Camera/CameraManager.gd" id="6_fbg8u"]
@@ -111,9 +112,18 @@ grow_vertical = 0
 alignment = 1
 script = ExtResource("6_kfure")
 hubElementPrefab = NodePath("../Cursor Hub Element")
+hubProfile = ExtResource("5_40un4")
 
 [node name="Player Joiner" type="Node" parent="." unique_id=1136046608]
 script = ExtResource("1_5a6u1")
+
+[node name="CameraManager" type="Node3D" parent="." unique_id=711721173 node_paths=PackedStringArray("camera")]
+script = ExtResource("6_fbg8u")
+camera = NodePath("Camera3D")
+metadata/_custom_type_script = "uid://b3mping6psqq0"
+
+[node name="Camera3D" type="Camera3D" parent="CameraManager" unique_id=416222106]
+current = true
 
 [node name="CursorManager" type="Node3D" parent="." unique_id=1092410923 node_paths=PackedStringArray("hub")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
@@ -138,14 +148,6 @@ outline_render_priority = -3
 text = "Press A or SPACE to join!"
 font_size = 95
 outline_size = 39
-
-[node name="CameraManager" type="Node3D" parent="." unique_id=711721173 node_paths=PackedStringArray("camera")]
-script = ExtResource("6_fbg8u")
-camera = NodePath("Camera3D")
-metadata/_custom_type_script = "uid://b3mping6psqq0"
-
-[node name="Camera3D" type="Camera3D" parent="CameraManager" unique_id=416222106]
-current = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=696283838]
 environment = SubResource("Environment_d28wa")
