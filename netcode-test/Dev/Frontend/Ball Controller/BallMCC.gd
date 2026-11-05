@@ -146,11 +146,12 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
 	currentState.Process(delta);
 	if(updateVisuals):
-		visuals.header.DisplayStamina(staminaStat.value, staminaStat.maxValue);
-		visuals.header.DisplayHealth(healthStat.value, healthStat.maxValue);
+		visuals.ballHubElement.DisplayStamina(staminaStat.value, staminaStat.maxValue);
+		visuals.ballHubElement.DisplayHealth(healthStat.value, healthStat.maxValue);
 		visuals.UpdateFireVisuals(fireStat.value, delta);
 		visuals.UpdateInvulnVisuals(invulnStat.value, delta);
 		currentState.ProcessVisuals(delta);
+		visuals.ballHubElement.trackerLine.goalAlphaMultiply = max(currentSpeed * visuals.profile.trackerLineSpeedAlphaMultiply, 1.0);
 
 func ProcessInteraction():
 	pass;

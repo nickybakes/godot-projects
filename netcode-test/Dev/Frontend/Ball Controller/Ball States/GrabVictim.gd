@@ -24,6 +24,9 @@ func ExitState():
 	cooldown.Restart();
 	parentIsDoneGrabbing = false;
 	
+func ExitStateVisuals():
+	exitVisualsParams['isVictim'] = true;
+	
 func ExitStatePhysics():
 	mcc.global_position = mcc.grabParent.global_position;
 	mcc.global_position.y += mcc.traits.grabVictimVerticalOffset;

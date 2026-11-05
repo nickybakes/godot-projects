@@ -29,3 +29,10 @@ class_name BallVisualProfile
 @export var eliminatedMessageTime : float = 4;
 @export var strikePriorityMessageTime : float = 1.5;
 @export var unblockableMessageTime : float = 1.5;
+
+@export_category("Tracker Line")
+@export var trackerLineSpeedAlphaMultiply : float = 1.0;
+@export var trackerLineStrikeHeartbeat : float = 2.0;
+@export var trackerLineGrabHeartbeat : float = 2.0;
+@export var trackerLineStrikeAlphaMultiply : float = 7.0;
+@export var trackerLineGrabAlphaMultiply : float = 10.0;

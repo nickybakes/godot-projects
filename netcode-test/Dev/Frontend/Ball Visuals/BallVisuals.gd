@@ -4,6 +4,7 @@ class_name BallVisuals;
 @export var ballController : BallMCC;
 @export var ballCustomizationDirectory : BallCustomizationDirectory;
 @export var profile : BallVisualProfile;
+@export var shadowDecal : Decal;
 
 var ballHubElement : BallHubElement;
 
@@ -13,6 +14,7 @@ var ballHubElement : BallHubElement;
 @export var xrayMesh : MeshInstance3D;
 @export var chargeAimMesh : MeshInstance3D;
 @export var blockMesh : MeshInstance3D;
+
 
 @export_category("Fire")
 @export var fireMeshes : Array[MeshInstance3D];
@@ -38,9 +40,6 @@ var messageTime : float = 0.0;
 @export var roller : Node3D;
 @export var fires : Node3D;
 
-const headerPrefab = preload("uid://u6oslcx36ah4");
-var header : BallHeader;
-
 func Setup(playerNumber : int):
 	var color = ballCustomizationDirectory.GetColorFromPlayerNumber(playerNumber);
 	var ballMaterial = ballCustomizationDirectory.ballMaterialBasic.duplicate();
@@ -64,12 +63,6 @@ func Setup(playerNumber : int):
 	StopGrabVisual();
 	StopGrabSuccessAimVisual();
 	HideMessages();
-	CreateHeader();
-	
-func CreateHeader():
-	header = headerPrefab.instantiate();
-	get_parent().add_child.call_deferred(header);
-	header.target = self;
 	
 func RollBall(currentSpeed : float, delta : float):
 	roller.rotate_object_local(Vector3.LEFT, currentSpeed * profile.rollSpeedScalar * delta);
@@ -161,6 +154,7 @@ func ShowEliminatedMessage():
 	messageTime = profile.eliminatedMessageTime;
 	HideMessages();
 	eliminatedVisual.visible = true;
+	ballHubElement.ShowEliminated();
 	
 func ShowStrikePriorityMessage():
 	messageTime = profile.strikePriorityMessageTime;
@@ -174,11 +168,13 @@ func ShowUnblockableMessage():
 	
 func HideBall():
 	spinner.visible = false;
-	header.visible = false;
+	ballHubElement.trackerLine.visible = false;
+	shadowDecal.visible = false;
 	
 func ShowBall():
 	spinner.visible = true;
-	header.visible = true;
+	ballHubElement.trackerLine.visible = true;
+	shadowDecal.visible = true;
 	
 func _process(delta: float) -> void:
 	messageTime = move_toward(messageTime, 0.0, delta);

@@ -30,6 +30,7 @@
 [ext_resource type="Script" uid="uid://uwmqq6cynemg" path="res://Dev/Frontend/Ball Controller/HitBox.gd" id="16_1vn2h"]
 [ext_resource type="ArrayMesh" uid="uid://ck0tlxxvnwves" path="res://Art/Models/SM_Block_01a.glb" id="17_icfwc"]
 [ext_resource type="Script" uid="uid://bajnp1ma0ic1l" path="res://Dev/Frontend/Ball Controller/HitRegion.gd" id="17_xnpby"]
+[ext_resource type="Texture2D" uid="uid://b4vs11vhj2yp6" path="res://Art/Textures/T_ShadowMask_01.png" id="18_n4m0h"]
 [ext_resource type="Script" uid="uid://dyuiu7ou3tkbr" path="res://Dev/Frontend/Modular Character Controller/StorageResource.gd" id="19_4jolm"]
 [ext_resource type="Script" uid="uid://xjddwtm4q0e2" path="res://Dev/Frontend/Ball Controller/StatFill.gd" id="19_mf80y"]
 [ext_resource type="Script" uid="uid://b3ldpufefysau" path="res://Dev/Frontend/Ball Controller/Ball States/Bounce.gd" id="19_s4hg4"]
@@ -119,11 +120,12 @@ slamRegion = NodePath("Ball Visuals/Ball Slam Region")
 statesParent = NodePath("States")
 metadata/_custom_type_script = "uid://cmlx0uqgnib0r"
 
-[node name="Ball Visuals" type="Node3D" parent="." unique_id=851201941 node_paths=PackedStringArray("ballController", "ballMesh", "outlineMesh", "xrayMesh", "chargeAimMesh", "blockMesh", "fireMeshes", "clashVisual", "grabVisual", "eliminatedVisual", "strikePriorityVisual", "unblockableVisual", "spinner", "pitcher", "stretcher", "roller", "fires")]
+[node name="Ball Visuals" type="Node3D" parent="." unique_id=851201941 node_paths=PackedStringArray("ballController", "shadowDecal", "ballMesh", "outlineMesh", "xrayMesh", "chargeAimMesh", "blockMesh", "fireMeshes", "clashVisual", "grabVisual", "eliminatedVisual", "strikePriorityVisual", "unblockableVisual", "spinner", "pitcher", "stretcher", "roller", "fires")]
 script = ExtResource("2_3d8wc")
 ballController = NodePath("..")
 ballCustomizationDirectory = ExtResource("4_lr45t")
 profile = ExtResource("5_6873s")
+shadowDecal = NodePath("Shadow Decal")
 ballMesh = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Roller/Ball Mesh")
 outlineMesh = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Roller/Outline Mesh")
 xrayMesh = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Roller/Xray Mesh")
@@ -142,6 +144,17 @@ roller = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Roller"
 fires = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Fire Meshes")
 metadata/_custom_type_script = "uid://diamkkypctj6o"
 
+[node name="Shadow Decal" type="Decal" parent="Ball Visuals" unique_id=1546061458]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -24.177639, 0)
+layers = 2
+size = Vector3(1.5, 48.56, 1.5)
+texture_albedo = ExtResource("18_n4m0h")
+modulate = Color(0, 0, 0, 1)
+albedo_mix = 0.79
+upper_fade = 0.033797033
+lower_fade = 0.058843788
+cull_mask = 1
+
 [node name="Ball Slam Region" type="Area3D" parent="Ball Visuals" unique_id=596412645 node_paths=PackedStringArray("ballController")]
 visible = false
 collision_layer = 8
@@ -157,6 +170,7 @@ shape = SubResource("CylinderShape3D_qm6jm")
 
 [node name="Slam Visual" type="MeshInstance3D" parent="Ball Visuals/Ball Slam Region" unique_id=1286316165]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.149, 0)
+layers = 2
 material_override = ExtResource("7_l67tw")
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_etr8x")
@@ -166,6 +180,7 @@ visible = false
 
 [node name="Label" type="Label3D" parent="Ball Visuals/Clash Visual" unique_id=1718508793]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.93949676, 0)
+layers = 4
 billboard = 1
 text = "CLASH!"
 font_size = 124
@@ -176,6 +191,7 @@ visible = false
 
 [node name="Label" type="Label3D" parent="Ball Visuals/Eliminated Visual" unique_id=630019328]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13155276, 0)
+layers = 4
 billboard = 1
 text = "KO"
 font = SubResource("FontVariation_icfwc")
@@ -187,6 +203,7 @@ visible = false
 
 [node name="Label" type="Label3D" parent="Ball Visuals/Strike Priority Visual" unique_id=1553012689]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.194988, 0)
+layers = 4
 billboard = 1
 text = "STRIKE PRIORITY"
 font_size = 124
@@ -199,6 +216,7 @@ visible = false
 
 [node name="Label" type="Label3D" parent="Ball Visuals/Unclockable Visual" unique_id=880221091]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0360186, 0)
+layers = 4
 billboard = 1
 text = "UNBLOCKABLE"
 font = SubResource("FontVariation_s6ais")
@@ -271,18 +289,21 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0
 
 [node name="Fire Mesh Level 1" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher/Fire Meshes" unique_id=967568471]
 transform = Transform3D(1.2159005, 0, 0, 0, 1.2159003, 0, 0, 0, 1.2159004, 0, 0, 0)
+layers = 2
 material_override = ExtResource("8_2dflj")
 cast_shadow = 0
 mesh = SubResource("SphereMesh_wvtf1")
 
 [node name="Fire Mesh Level 2" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher/Fire Meshes" unique_id=1212891910]
 transform = Transform3D(1.2159005, 0, 0, 0, 1.2159003, 0, 0, 0, 1.2159004, 0, 0, 0)
+layers = 2
 material_override = ExtResource("8_7kln7")
 cast_shadow = 0
 mesh = SubResource("SphereMesh_wvtf1")
 
 [node name="Fire Mesh Full" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher/Fire Meshes" unique_id=423124205]
 transform = Transform3D(1.2159005, 0, 0, 0, 1.2159003, 0, 0, 0, 1.2159004, 0, 0, 0)
+layers = 2
 material_override = ExtResource("13_wvtf1")
 cast_shadow = 0
 mesh = SubResource("SphereMesh_wvtf1")
@@ -291,19 +312,23 @@ mesh = SubResource("SphereMesh_wvtf1")
 transform = Transform3D(0.9999999, 0, 0, 0, 0.9999998, 0, 0, 0, 0.99999994, 0, 0, 0)
 
 [node name="Ball Mesh" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Roller" unique_id=1877079017]
+layers = 2
 material_override = ExtResource("2_i0e7p")
 mesh = ExtResource("13_n4m0h")
 
 [node name="Outline Mesh" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Roller" unique_id=88235204]
+layers = 2
 material_override = ExtResource("4_jioly")
 mesh = ExtResource("13_n4m0h")
 
 [node name="Xray Mesh" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Roller" unique_id=1785291860]
+layers = 2
 material_override = ExtResource("8_m53x3")
 mesh = ExtResource("13_n4m0h")
 
 [node name="Block Mesh" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Roller" unique_id=595999983]
 visible = false
+layers = 2
 material_override = ExtResource("11_v2vyv")
 cast_shadow = 0
 mesh = ExtResource("17_icfwc")
@@ -353,9 +378,10 @@ metadata/_custom_type_script = "uid://bspbsgt6kyqhv"
 [node name="Health Stat" type="Node" parent="." unique_id=1311019482]
 script = ExtResource("12_g4d1v")
 startingPercent = 1.0
-maxValue = 100.0
-fillSpeed = 1.5
-cooldownPerValueSpent = 4.0
+maxValue = 35.0
+fillSpeed = 0.25
+cooldownPerValueSpent = 8.0
+cooldownMax = 20.0
 metadata/_custom_type_script = "uid://bspbsgt6kyqhv"
 
 [node name="Fire Stat" type="Node" parent="." unique_id=1320798174]
@@ -508,7 +534,7 @@ metadata/_custom_type_script = "uid://qrcx4a8tcp7p"
 [node name="GrabRecovery" type="Node" parent="States" unique_id=1369986448 node_paths=PackedStringArray("transitions")]
 script = ExtResource("41_s6ais")
 codeName = "grabRecovery"
-transitions = [NodePath("../../Transitions/Combat/Grab Recovery End Transition")]
+transitions = [NodePath("../../Transitions/Combat/Grab Recovery End Transition"), NodePath("../../Transitions/Eliminated Transition")]
 metadata/_custom_type_script = "uid://dsx6o2x6cn87r"
 
 [node name="Eliminated" type="Node" parent="States" unique_id=810690370]

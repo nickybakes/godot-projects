@@ -1,22 +1,42 @@
 [gd_scene format=3 uid="uid://csa3iitdf6l13"]
 
 [ext_resource type="Script" uid="uid://8jdgve60fqwx" path="res://Dev/Frontend/UI/BallHubElement.gd" id="1_j7jvt"]
-[ext_resource type="Script" uid="uid://napor4at8qyp" path="res://Dev/Frontend/App/AccountDisplay.gd" id="2_dv0he"]
 [ext_resource type="Resource" uid="uid://dpwawajn4ovhe" path="res://Dev/Frontend/Customization/R_CursorCustomizationDirectory_01.tres" id="2_wri1x"]
-[ext_resource type="Texture2D" uid="uid://dh1hnai0m4bx0" path="res://icon.svg" id="3_wri1x"]
+[ext_resource type="Texture2D" uid="uid://b4vs11vhj2yp6" path="res://Art/Textures/T_ShadowMask_01.png" id="4_6gu6k"]
 [ext_resource type="PackedScene" uid="uid://gh0evqpprg0a" path="res://Dev/Frontend/Tracker Line/PRE_TrackerLine_01.tscn" id="4_s68bp"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_s282h"]
-font_size = 21
-outline_size = 11
-outline_color = Color(0, 0, 0, 1)
+[ext_resource type="FontFile" uid="uid://toyoa2sfe754" path="res://Art/Fonts/KeepCalm-Medium.ttf" id="5_wri1x"]
+[ext_resource type="Texture2D" uid="uid://dbv1sm6g3s8tj" path="res://Art/Sprites/SPR_Heart_01.png" id="6_wri1x"]
+[ext_resource type="Texture2D" uid="uid://bkgy8r6rib2wy" path="res://Art/Textures/T_FireIcon_01.png" id="7_s68bp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_mfcfy"]
-font_size = 78
-outline_size = 21
+font = ExtResource("5_wri1x")
+font_size = 51
+outline_size = 15
 outline_color = Color(0, 0, 0, 1)
 
-[node name="Ball Hub Element" type="Control" unique_id=190371458 node_paths=PackedStringArray("colorBar", "playerNumberLabel", "lineTrackerStartPoint", "accountDisplay", "trackerLine")]
+[sub_resource type="FontVariation" id="FontVariation_s68bp"]
+base_font = ExtResource("5_wri1x")
+variation_embolden = 0.28
+
+[sub_resource type="LabelSettings" id="LabelSettings_6gu6k"]
+font = SubResource("FontVariation_s68bp")
+font_size = 58
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="FontVariation" id="FontVariation_wri1x"]
+base_font = ExtResource("5_wri1x")
+variation_embolden = 0.34
+variation_transform = Transform2D(0.861, 0, 0, 1, 0, 0)
+spacing_glyph = -4
+
+[sub_resource type="LabelSettings" id="LabelSettings_wri1x"]
+font = SubResource("FontVariation_wri1x")
+font_size = 46
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Ball Hub Element" type="Control" unique_id=190371458 node_paths=PackedStringArray("colorBar", "playerNumberLabel", "alive", "eliminated", "lineTrackerStartPoint", "trackerLine", "healthLabel", "healthIcon", "staminaLabel", "staminaIcon")]
 custom_minimum_size = Vector2(235, 127)
 layout_mode = 3
 anchor_left = 0.411
@@ -30,76 +50,42 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_j7jvt")
-colorBar = NodePath("Color Bar")
+colorBar = NodePath("Color BG")
 playerNumberLabel = NodePath("Player Number Label")
-lineTrackerStartPoint = NodePath("Line Tracker Start Point")
-accountDisplay = NodePath("Account Display")
-trackerLine = NodePath("PRE_TrackerLine_01")
 customization = ExtResource("2_wri1x")
+alive = NodePath("Alive")
+eliminated = NodePath("Eliminated")
+lineTrackerStartPoint = NodePath("Line Tracker Start Point")
+trackerLine = NodePath("PRE_TrackerLine_01")
+healthLabel = NodePath("Alive/Health Label")
+healthIcon = NodePath("Alive/Heart")
+healthLabelScaleMax = 1.698
+healthLabelBlinkOff = 0.08
+healthLabelBlinkTime = 0.217
+staminaLabel = NodePath("Alive/Stamina Label")
+staminaIcon = NodePath("Alive/Stamina")
+staminaLabelScaleMin = 0.749
+staminaLabelBlinkOff = 0.08
+staminaLabelBlinkTime = 0.217
 metadata/_custom_type_script = "uid://8jdgve60fqwx"
 
-[node name="Account Display" type="Node" parent="." unique_id=345427350 node_paths=PackedStringArray("avatarDisplay", "nameDisplay")]
-script = ExtResource("2_dv0he")
-avatarDisplay = NodePath("../Avatar Display")
-nameDisplay = NodePath("../Name Label")
-metadata/_custom_type_script = "uid://napor4at8qyp"
-
-[node name="Color Bar" type="ColorRect" parent="." unique_id=1147522623]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 64.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="Name Label" type="Label" parent="." unique_id=798249585]
+[node name="Color BG" type="TextureRect" parent="." unique_id=1921094636]
+z_index = -2
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.425
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 10.024998
-grow_horizontal = 2
-grow_vertical = 2
-text = "Bobby BodyOdor"
-label_settings = SubResource("LabelSettings_s282h")
-horizontal_alignment = 1
-vertical_alignment = 1
-text_overrun_behavior = 3
-
-[node name="Player Number Label" type="Label" parent="." unique_id=680885999]
-layout_mode = 1
-anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 0.42100003
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 7.5
-offset_top = -115.5
-offset_right = 116.5
-offset_bottom = 10.5
+anchor_bottom = 0.42100003
+offset_left = -91.5
+offset_top = -87.467
+offset_right = 89.5
+offset_bottom = 93.533
 grow_horizontal = 2
 grow_vertical = 2
-text = "P2"
-label_settings = SubResource("LabelSettings_mfcfy")
-vertical_alignment = 1
-
-[node name="Avatar Display" type="TextureRect" parent="." unique_id=1270017855]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -90.5
-offset_top = -92.5
-offset_right = -8.5
-offset_bottom = -10.5
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("3_wri1x")
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("4_6gu6k")
 expand_mode = 1
 
 [node name="Line Tracker Start Point" type="Control" parent="." unique_id=727064269]
@@ -115,3 +101,158 @@ grow_vertical = 2
 [node name="PRE_TrackerLine_01" parent="." unique_id=946806820 instance=ExtResource("4_s68bp")]
 visible = false
 zDepth = 25.0
+
+[node name="Player Number Label" type="Label" parent="." unique_id=680885999]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.5
+offset_top = -30.5
+offset_right = 51.5
+offset_bottom = 95.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "P2"
+label_settings = SubResource("LabelSettings_mfcfy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Alive" type="Control" parent="." unique_id=1175906140]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+
+[node name="Heart" type="TextureRect" parent="Alive" unique_id=475150909]
+modulate = Color(0.9699343, 0.31882322, 0.4827001, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.42100003
+anchor_right = 0.5
+anchor_bottom = 0.42100003
+offset_left = -108.49998
+offset_top = -97.46701
+offset_right = -9.499977
+offset_bottom = 1.5329895
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.1243396, 1.1243396)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("6_wri1x")
+expand_mode = 1
+
+[node name="Heart Outline" type="TextureRect" parent="Alive/Heart" unique_id=743545358]
+modulate = Color(0.06879826, 0.06879829, 0.068798244, 1)
+z_index = -1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.42100003
+anchor_right = 0.5
+anchor_bottom = 0.42100003
+offset_left = -49.5
+offset_top = -41.679005
+offset_right = 49.5
+offset_bottom = 57.320995
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.149, 1.149)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("6_wri1x")
+expand_mode = 1
+
+[node name="Health Label" type="Label" parent="Alive" unique_id=1567131960]
+layout_mode = 1
+offset_left = -49.0
+offset_top = -79.0
+offset_right = 166.47827
+offset_bottom = 89.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "100"
+label_settings = SubResource("LabelSettings_6gu6k")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Stamina" type="TextureRect" parent="Alive" unique_id=47910861]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.42100003
+anchor_right = 0.5
+anchor_bottom = 0.42100003
+offset_left = 11.4999695
+offset_top = -81.46701
+offset_right = 110.49997
+offset_bottom = 17.53299
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8918967, 0.8918967)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("7_s68bp")
+expand_mode = 1
+
+[node name="Stamina Outline" type="TextureRect" parent="Alive/Stamina" unique_id=1033411652]
+modulate = Color(0, 0, 0, 1)
+z_index = -1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.42100003
+anchor_right = 0.5
+anchor_bottom = 0.42100003
+offset_left = -49.5
+offset_top = -41.679005
+offset_right = 49.5
+offset_bottom = 57.320995
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.117, 1.072)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("7_s68bp")
+expand_mode = 1
+
+[node name="Stamina Label" type="Label" parent="Alive" unique_id=324624548]
+layout_mode = 1
+offset_left = 70.99999
+offset_top = -52.0
+offset_right = 286.47827
+offset_bottom = 116.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "100"
+label_settings = SubResource("LabelSettings_wri1x")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Eliminated" type="Control" parent="." unique_id=508213355]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+
+[node name="Eliminated Label" type="Label" parent="Eliminated" unique_id=1859163144]
+layout_mode = 1
+offset_left = 10.0
+offset_top = -55.0
+offset_right = 225.47827
+offset_bottom = 113.0
+rotation = -0.11632598
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "KO"
+label_settings = SubResource("LabelSettings_6gu6k")
+horizontal_alignment = 1
+vertical_alignment = 1

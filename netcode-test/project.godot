@@ -121,6 +121,9 @@ _grab={
 
 [layer_names]
 
+3d_render/layer_1="Environment"
+3d_render/layer_2="Dynamic"
+3d_render/layer_3="VFX"
 3d_physics/layer_1="Surface"
 3d_physics/layer_2="Ball"
 3d_physics/layer_3="Ball Hitbox"

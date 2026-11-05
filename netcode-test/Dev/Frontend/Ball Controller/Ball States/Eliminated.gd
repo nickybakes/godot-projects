@@ -3,6 +3,7 @@ class_name Eliminated
 
 func StartState(params : Dictionary = {}):
 	mcc.interactive = false;
+	mcc.eliminated = true;
 	
 func StartStateVisuals(params : Dictionary = {}):
 	mcc.visuals.HideBall();

@@ -36,6 +36,7 @@ lineTrackerStartPoint = NodePath("Line Tracker Start Point")
 accountDisplay = NodePath("Account Display")
 trackerLine = NodePath("PRE_TrackerLine_01")
 customization = ExtResource("2_da7sq")
+speedAlphaMultiply = 20000.0
 metadata/_custom_type_script = "uid://bvxfcpu055diw"
 
 [node name="Account Display" type="Node" parent="." unique_id=345427350 node_paths=PackedStringArray("avatarDisplay", "nameDisplay")]

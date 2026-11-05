@@ -38,7 +38,6 @@ uniform float pulseOffset = 0.0;
 uniform float pulseBrightness = 1.0;
 uniform float pulseAlphaMultiply = 1.0;
 uniform float pulseFrontSlope = 1.0;
-uniform float pulseBackSlopeThreshold = 1.0;
 uniform float pulseBackSlope = 1.0;
 
 
@@ -64,19 +63,20 @@ void fragment() {
 	alphaBlendMask = saturate(alphaBlendMask);
 	float alpha = mix(edgeAlpha, midAlpha, 1.0 - alphaBlendMask);
 	
-	float pulseCalc = fract(TIME * pulseSpeed + (-1.0 * COLOR.y) * pulseScale - pulseOffset);
+	float pulseCalc = fract(TIME * pulseSpeed + (-1.0 * -UV.y) * pulseScale - pulseOffset);
+	
+	float pulseBack = 1.0 - pulseCalc;
+	pulseBack *= pulseBackSlope;
+	pulseBack = saturate(pulseBack);
+	pulseBack = 1.0 - pulseBack;
+	
 	pulseCalc *= pulseFrontSlope;
 	pulseCalc = 1.0 - pulseCalc;
 	pulseCalc = saturate(pulseCalc);
 	
-	if(pulseCalc < pulseBackSlopeThreshold){
-		pulseCalc = pulseBackSlopeThreshold - pulseCalc;
-		pulseCalc *= 1.0/pulseBackSlopeThreshold;
-		pulseCalc *= pulseBackSlope;
-		pulseCalc = abs(pulseCalc);
-	}
-	
+	pulseCalc = pulseCalc + pulseBack;
 	pulseCalc = saturate(pulseCalc);
+	
 	float pulseAlphaMultCalc = mix(1.0, pulseAlphaMultiply, pulseCalc);
 	
 	ALBEDO = colorCalc + (pulseBrightness * pulseCalc);

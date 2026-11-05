@@ -7,6 +7,9 @@ func StartStateVisuals(params : Dictionary = {}):
 	if(mcc.strikePrioritied):
 		mcc.visuals.ShowStrikePriorityMessage();
 		
+	mcc.visuals.ballHubElement.trackerLine.heartbeat = mcc.visuals.profile.trackerLineStrikeHeartbeat;
+	mcc.visuals.ballHubElement.trackerLine.alphaMultiply = mcc.visuals.profile.trackerLineStrikeAlphaMultiply;
+		
 	mcc.strikePrioritied = false;
 
 func StartStatePhysics(params : Dictionary = {}):

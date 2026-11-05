@@ -19,6 +19,16 @@ var endPointTarget : Node3D;
 @export var colors : Array[Color];
 @export var pulseTimeOffset : float = .25;
 
+@export var heartbeatTransitionSpeed : float = 1.0;
+@export var alphaMultiplyTransitionSpeed : float = 1.0;
+
+var heartbeat : float = 0.0;
+var goalHeartbeat : float = 0.0;
+
+var alphaMultiply : float = 1.0;
+var goalAlphaMultiply : float = 1.0;
+var maxAlphaMultiply : float = 10.0;
+
 func Setup(colorIndex : int, playerNumber : int):
 	currentMaterial = middle.material_override.duplicate();
 	start.material_override = currentMaterial;
@@ -34,6 +44,15 @@ func SetColorIndex(colorIndex : int):
 	
 func SetPulseOffset(playerNumber : int):
 	currentMaterial.set_shader_parameter("pulseOffset", (playerNumber - 1) * pulseTimeOffset);
+	
+	
+func _process(delta: float) -> void:
+	heartbeat = move_toward(heartbeat, goalHeartbeat, delta * heartbeatTransitionSpeed);
+	alphaMultiply = move_toward(alphaMultiply, goalAlphaMultiply, delta * alphaMultiplyTransitionSpeed);
+	if(visible):
+		currentMaterial.set_shader_parameter("heartbeatFade", clamp(heartbeat, 0.0, 1.0));
+		currentMaterial.set_shader_parameter("alphaMultiply", clamp(alphaMultiply, 0.0, maxAlphaMultiply));
+	
 
 func FollowTarget(delta : float):
 	if(startPointTarget):
