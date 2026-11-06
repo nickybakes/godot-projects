@@ -1,0 +1,40 @@
+[gd_resource type="ParticleProcessMaterial" format=3 uid="uid://bqdrcvha8cgay"]
+
+[sub_resource type="Curve" id="Curve_xkg10"]
+_limits = [0.0, 1.0, 0.0, 1.68]
+_data = [Vector2(0.2739692, 1), 0.0, 0.0, 0, 0, Vector2(1.68, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vktj5"]
+curve = SubResource("Curve_xkg10")
+
+[sub_resource type="Curve" id="Curve_n4wdr"]
+_limits = [0.0, 1.86, 0.0, 1.0]
+_data = [Vector2(0.2523077, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_n4wdr"]
+curve = SubResource("Curve_n4wdr")
+
+[resource]
+lifetime_randomness = 0.13
+particle_flag_align_y = true
+emission_shape = 2
+emission_sphere_radius = 0.69
+angle_min = -533.7
+angle_max = 433.7
+radial_velocity_min = -2.1300223
+radial_velocity_max = 3.7099776
+use_rotation_velocity_3d = true
+rotation_velocity_3d_min = Vector3(-100, -100, -100)
+rotation_velocity_3d_max = Vector3(100, 100, 100)
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -10.470002
+radial_accel_max = 9.149998
+scale_min = 0.79999995
+scale_max = 1.27
+scale_curve = SubResource("CurveTexture_n4wdr")
+color = Color(1, 0, 0, 1)
+alpha_curve = SubResource("CurveTexture_vktj5")
+hue_variation_min = -1.0
+hue_variation_max = 0.99999994

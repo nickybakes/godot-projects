@@ -5,7 +5,7 @@ var activator : int;
 var victims : Array[int];
 var directionsFromVictims : Array[Vector3];
 var activatorSpeed : float;
-var activatorFire : float;
+var activatorElectric : float;
 
 var alreadyActivated : bool = false;
 
@@ -25,11 +25,11 @@ func SetParams(params : Dictionary):
 		directionsFromVictims = params['directionsFromVictims'];
 	if(params.has('activatorSpeed')):
 		activatorSpeed = params['activatorSpeed'];
-	if(params.has('activatorFire')):
-		activatorFire = params['activatorFire'];
+	if(params.has('activatorElectric')):
+		activatorElectric = params['activatorElectric'];
 
 func GetParams() -> Dictionary:
-	return super().merged({"activator": activator, 'victims' : victims, 'directionsFromVictims' : directionsFromVictims, 'activatorSpeed' : activatorSpeed, 'activatorFire' : activatorFire});
+	return super().merged({"activator": activator, 'victims' : victims, 'directionsFromVictims' : directionsFromVictims, 'activatorSpeed' : activatorSpeed, 'activatorElectric' : activatorElectric});
 
 func Evaluate():
 	if(alreadyActivated):
@@ -86,11 +86,11 @@ func Evaluate():
 					
 				if(victimController.updatePhysics):
 					if(victimController.blocking):
-						victimController.BlockDamageFromStrike(activatorController, activatorSpeed, activatorFire);
+						victimController.BlockDamageFromStrike(activatorController, activatorSpeed, activatorElectric);
 						victimController.GetPhysics().BounceVelocity(-directionsFromVictims[i], activatorSpeed, victimController.traits.strikeBlockerBounceTraits);
 						pass;
 					else:
-						victimController.TakeDamageFromStrike(activatorController, activatorSpeed, activatorFire);
+						victimController.TakeDamageFromStrike(activatorController, activatorSpeed, activatorElectric);
 						victimController.ForceSetState("strikeVictim");
 						victimController.GetPhysics().BounceVelocity(-directionsFromVictims[i], activatorSpeed, victimController.traits.strikeVictimBounceTraits);
 						pass;

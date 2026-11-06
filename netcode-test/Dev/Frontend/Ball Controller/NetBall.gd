@@ -9,7 +9,7 @@ class_name NetBall
 @export var stateIndex : int;
 @export var stamina : float;
 @export var health : float;
-@export var fire : float;
+@export var electric : float;
 @export var invuln : float;
 
 var playerNumber : int;
@@ -51,7 +51,7 @@ func _process(delta: float) -> void:
 			ballController.DoStateTransitionByIndex(stateIndex);
 		ballController.staminaStat.value = lerp(ballController.staminaStat.value, stamina, .5);
 		ballController.healthStat.value = lerp(ballController.healthStat.value, health, .5);
-		ballController.fireStat.value = lerp(ballController.fireStat.value, fire, .5);
+		ballController.electricStat.value = lerp(ballController.electricStat.value, electric, .5);
 		ballController.invulnStat.value = lerp(ballController.invulnStat.value, invuln, .5);
 		if(is_zero_approx(invuln)):
 			ballController.invulnStat.value = 0;
@@ -62,7 +62,7 @@ func _process(delta: float) -> void:
 		stateIndex = ballController.currentState.stateIndex;
 		stamina = ballController.staminaStat.value;
 		health = ballController.healthStat.value;
-		fire = ballController.fireStat.value;
+		electric = ballController.electricStat.value;
 		invuln = ballController.invulnStat.value;
 	pass
 	

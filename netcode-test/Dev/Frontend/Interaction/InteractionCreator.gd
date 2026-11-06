@@ -18,7 +18,7 @@ static func NewStrikeAttempt(activatorController : BallMCC, victimControllers : 
 	interaction.victims = victimNumbers;
 	interaction.directionsFromVictims = directionsFromVictims;
 	interaction.activatorSpeed = activatorController.currentSpeed;
-	interaction.activatorFire = activatorController.fireStat.value;
+	interaction.activatorElectric = activatorController.electricStat.value;
 	
 	return interaction;
 	pass;
@@ -34,7 +34,7 @@ static func NewGrabAttempt(activatorController : BallMCC, victimControllers : Ar
 	interaction.activator = activatorController.playerNumber;
 	interaction.victims = victimNumbers;
 	interaction.activatorSpeed = activatorController.currentSpeed;
-	interaction.activatorFire = activatorController.fireStat.value;
+	interaction.activatorElectric = activatorController.electricStat.value;
 	interaction.angleOffset = _angleOffset;
 	
 	return interaction;

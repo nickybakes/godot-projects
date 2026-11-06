@@ -22,10 +22,10 @@ properties/4/replication_mode = 1
 properties/5/path = NodePath(".:health")
 properties/5/spawn = true
 properties/5/replication_mode = 1
-properties/6/path = NodePath(".:fire")
+properties/6/path = NodePath(".:invuln")
 properties/6/spawn = true
 properties/6/replication_mode = 1
-properties/7/path = NodePath(".:invuln")
+properties/7/path = NodePath(".:electric")
 properties/7/spawn = true
 properties/7/replication_mode = 1
 

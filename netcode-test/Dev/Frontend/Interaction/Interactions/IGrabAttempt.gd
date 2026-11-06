@@ -4,7 +4,7 @@ class_name IGrabAttempt
 var activator : int;
 var victims : Array[int];
 var activatorSpeed : float;
-var activatorFire : float;
+var activatorElectric : float;
 var angleOffset : float;
 
 var alreadyActivated : bool = false;
@@ -25,13 +25,13 @@ func SetParams(params : Dictionary):
 		victims = params['victims'];
 	if(params.has('activatorSpeed')):
 		activatorSpeed = params['activatorSpeed'];
-	if(params.has('activatorFire')):
-		activatorFire = params['activatorFire'];
+	if(params.has('activatorElectric')):
+		activatorElectric = params['activatorElectric'];
 	if(params.has('angleOffset')):
 		angleOffset = params['angleOffset'];
 
 func GetParams() -> Dictionary:
-	return super().merged({"activator": activator, 'victims' : victims, 'activatorSpeed' : activatorSpeed, 'activatorFire' : activatorFire, 'angleOffset' : angleOffset});
+	return super().merged({"activator": activator, 'victims' : victims, 'activatorSpeed' : activatorSpeed, 'activatorElectric' : activatorElectric, 'angleOffset' : angleOffset});
 
 func Evaluate():
 	if(alreadyActivated):
@@ -82,7 +82,7 @@ func Evaluate():
 					pass;	
 				
 				victimController.grabParent = activatorController;
-				victimController.grabParentFire = activatorFire;
+				victimController.grabParentElectric = activatorElectric;
 				victimController.grabVictimIndex = i;
 				victimController.grabVictimTotal = victims.size();
 				victimController.grabVictimAngleOffset = angleOffset;

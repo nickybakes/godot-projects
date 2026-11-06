@@ -13,7 +13,7 @@ class_name BallMCC
 @export_category("Stats")
 @export var staminaStat : StatRefill;
 @export var healthStat : StatRefill;
-@export var fireStat : StatFill;
+@export var electricStat : StatFill;
 @export var invulnStat : StatFill;
 
 @export_category("Hit Boxes and Regions")
@@ -34,7 +34,7 @@ var blocking : bool;
 var successfulBlock : bool;
 
 var grabParent : BallMCC;
-var grabParentFire : float;
+var grabParentElectric : float;
 var grabVictimIndex : int;
 var grabVictimTotal : int;
 var grabVictimAngleOffset : float;
@@ -99,32 +99,32 @@ func CalculateRequestedMoveDirection(delta : float):
 	if(inputDevice):
 		requestedMoveDirection = Vector3(inputDevice.moveInput.x, 0, -inputDevice.moveInput.y);
 
-func TakeDamageFromStrike(activator : BallMCC, activatorSpeed : float, activatorFire : float) -> float:
-	var damageCalc = DamageCalcStrike(activator, activatorSpeed, activatorFire);
+func TakeDamageFromStrike(activator : BallMCC, activatorSpeed : float, activatorElectric : float) -> float:
+	var damageCalc = DamageCalcStrike(activator, activatorSpeed, activatorElectric);
 	if(updatePhysics):
 		healthStat.Spend(damageCalc);
 	return damageCalc;
 	
-func BlockDamageFromStrike(activator : BallMCC, activatorSpeed : float, activatorFire : float) -> float:
+func BlockDamageFromStrike(activator : BallMCC, activatorSpeed : float, activatorElectric : float) -> float:
 	successfulBlock = true;
-	var damageCalc = DamageCalcStrike(activator, activatorSpeed, activatorFire);
+	var damageCalc = DamageCalcStrike(activator, activatorSpeed, activatorElectric);
 	# maybe track blocked damage?
 	#healthStat.Spend(0);
 	return damageCalc;
 	
-func TakeDamageFromGrab(activator : BallMCC, activatorFire : float) -> float:
-	var damageCalc = DamageCalcGrab(activator, activatorFire);
+func TakeDamageFromGrab(activator : BallMCC, activatorElectric : float) -> float:
+	var damageCalc = DamageCalcGrab(activator, activatorElectric);
 	if(updatePhysics):
 		healthStat.Spend(damageCalc);
 	return damageCalc;
 	
-func DamageCalcStrike(activator : BallMCC, activatorSpeed : float, activatorFire : float) -> float:
-	var damageCalc = (traits.baseStrikeDamage + (activatorFire * traits.strikeDamageFireMultScalar)) * (activatorSpeed * traits.strikeDamageSpeedScalar);
+func DamageCalcStrike(activator : BallMCC, activatorSpeed : float, activatorElectric : float) -> float:
+	var damageCalc = (traits.baseStrikeDamage + (activatorElectric * traits.strikeDamageElectricMultScalar)) * (activatorSpeed * traits.strikeDamageSpeedScalar);
 	damageCalc = clamp(damageCalc, 0.0, traits.maxStrikeDamage);
 	return damageCalc;
 	
-func DamageCalcGrab(activator : BallMCC, activatorFire : float) -> float:
-	var damageCalc = traits.baseGrabDamage + (activatorFire * traits.grabDamageFireMultScalar);
+func DamageCalcGrab(activator : BallMCC, activatorElectric : float) -> float:
+	var damageCalc = traits.baseGrabDamage + (activatorElectric * traits.grabDamageElectricMultScalar);
 	return damageCalc;
 
 func _ready() -> void:
@@ -148,7 +148,7 @@ func _process(delta: float) -> void:
 	if(updateVisuals):
 		visuals.ballHubElement.DisplayStamina(staminaStat.value, staminaStat.maxValue);
 		visuals.ballHubElement.DisplayHealth(healthStat.value, healthStat.maxValue);
-		visuals.UpdateFireVisuals(fireStat.value, delta);
+		visuals.UpdateElectricVisuals(electricStat.value / electricStat.maxValue, delta);
 		visuals.UpdateInvulnVisuals(invulnStat.value, delta);
 		currentState.ProcessVisuals(delta);
 		visuals.ballHubElement.trackerLine.goalAlphaMultiply = max(currentSpeed * visuals.profile.trackerLineSpeedAlphaMultiply, 1.0);

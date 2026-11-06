@@ -30,7 +30,7 @@ func ExitStateVisuals():
 func ExitStatePhysics():
 	mcc.global_position = mcc.grabParent.global_position;
 	mcc.global_position.y += mcc.traits.grabVictimVerticalOffset;
-	mcc.TakeDamageFromGrab(mcc.grabParent, mcc.grabParentFire);
+	mcc.TakeDamageFromGrab(mcc.grabParent, mcc.grabParentElectric);
 	
 	var bounceDirection = currentDirection;
 	bounceDirection.y *= -1.0;

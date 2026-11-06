@@ -102,7 +102,7 @@ func CheckStrikeRegion(delta : float) -> void:
 	isStrikeAttempt = false;
 	
 	if(mcc.strikeRegion.numBallsInside >= 1):
-		if(mcc.currentSpeed >= mcc.traits.minRequiredStrikeSpeed && mcc.fireStat.value > mcc.traits.minRequiredFireForStrike):
+		if(mcc.currentSpeed >= mcc.traits.minRequiredStrikeSpeed):
 			isStrikeAttempt = true;
 	pass;
 

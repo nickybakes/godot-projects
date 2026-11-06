@@ -9,8 +9,8 @@ class_name BallVisualProfile
 @export var maxRollStretch : float;
 @export var rollMinThin : float;
 
-@export_category("Fire")
-@export var fireRollSpeedScalar : float;
+@export_category("Electric")
+@export var electricRollSpeedScalar : float;
 
 @export_category("Invuln")
 @export var invulnBlinkSpeed : float;

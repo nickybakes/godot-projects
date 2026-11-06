@@ -13,8 +13,8 @@ class_name BallTraits
 @export var overSpeedDeceleration : float = 1.0;
 @export var basicBounceMoveControlCooldown : Curve
 
-@export_category("Fire")
-@export var fireBuildUpBySpeed : Curve
+@export_category("Electric")
+@export var electricBuildUpBySpeed : Curve
 
 @export_category("Jump")
 @export var jumpForce : float = 3;
@@ -54,13 +54,12 @@ class_name BallTraits
 
 @export_category("Strike")
 @export var maxNumOfStrikedBalls : int = 1;
-@export var minRequiredFireForStrike : float = 1;
 @export var minRequiredStrikeSpeed : float = 10;
 
 @export_group("Damage Calculation")
 @export var baseStrikeDamage : float = 4;
 @export var strikeDamageSpeedScalar : float = 10;
-@export var strikeDamageFireMultScalar : float = 1;
+@export var strikeDamageElectricMultScalar : float = 1;
 @export var maxStrikeDamage : float = 20;
 
 @export_group("Recovery")
@@ -91,7 +90,7 @@ class_name BallTraits
 
 @export_group("Damage Calculation")
 @export var baseGrabDamage : float = 10;
-@export var grabDamageFireMultScalar : float = 1;
+@export var grabDamageElectricMultScalar : float = 1;
 
 @export_group("Success")
 @export var grabVerticalSpeedOverTime : Curve;

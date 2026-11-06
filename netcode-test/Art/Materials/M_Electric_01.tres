@@ -1,0 +1,22 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://q75j7od38ghw"]
+
+[ext_resource type="Shader" uid="uid://5b8jukx5fhu3" path="res://Art/Shaders/S_Electric_01.gdshader" id="1_yocxe"]
+[ext_resource type="Texture2D" uid="uid://dri0dt1uwtc27" path="res://Art/Textures/T_FireNoise_03.png" id="2_sex7g"]
+[ext_resource type="Texture2D" uid="uid://tlq783wnpwk8" path="res://Art/Textures/T_Mask_01.png" id="2_yjy4r"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_yocxe")
+shader_parameter/color = Color(0, 1.259, 2.117, 1)
+shader_parameter/emissive = 1.0
+shader_parameter/noiseTexture = ExtResource("2_sex7g")
+shader_parameter/textureScale = Vector2(0.474, 0.47)
+shader_parameter/scrollSpeed = Vector2(0.2, -0.903)
+shader_parameter/noiseDeviation1 = 1.0
+shader_parameter/textureScale2 = Vector2(0, 0)
+shader_parameter/scrollSpeed2 = Vector2(0, 0)
+shader_parameter/noiseDeviation2 = 1.0
+shader_parameter/maskTexture = ExtResource("2_yjy4r")
+shader_parameter/maskPower = 0.938
+shader_parameter/maskMultiply = 1.72
+shader_parameter/alphaThreshold = 0.48999998904752

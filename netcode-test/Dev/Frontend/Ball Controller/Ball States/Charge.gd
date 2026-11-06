@@ -37,7 +37,6 @@ func Process(delta : float):
 func ProcessVisuals(delta : float):
 	mcc.visuals.RollBall(chargeAmount * mcc.visuals.profile.maxChargeRollSpeed, delta);
 	mcc.visuals.ChargeStretchBall(chargeAmount);
-	mcc.visuals.FaceFlamesBySpeed(100);
 	mcc.visuals.FaceDirection(chargeDirection, delta);
 	pass;
 

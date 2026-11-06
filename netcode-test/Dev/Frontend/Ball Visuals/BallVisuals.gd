@@ -16,13 +16,14 @@ var ballHubElement : BallHubElement;
 @export var chargeAimMesh : MeshInstance3D;
 @export var blockMesh : MeshInstance3D;
 
-
-@export_category("Fire")
-@export var fireMeshes : Array[MeshInstance3D];
-var firePercentSplit : float;
+@export_category("Electric")
+@export var electricParticles : GPUParticles3D;
 
 @export_category("Clash")
 @export var clashVisual : Node3D;
+
+@export_category("Strike")
+@export var strikeVisual : Node3D;
 
 @export_category("Grab")
 @export var grabVisual : Node3D;
@@ -39,7 +40,6 @@ var messageTime : float = 0.0;
 @export var pitcher : Node3D;
 @export var stretcher : Node3D;
 @export var roller : Node3D;
-@export var fires : Node3D;
 
 func Setup(playerNumber : int):
 	var color = ballCustomizationDirectory.GetColorFromPlayerNumber(playerNumber);
@@ -56,11 +56,14 @@ func Setup(playerNumber : int):
 	xrayMesh.material_override = xrayMaterial;
 	chargeAimMesh.material_override = chargeAimMaterial;
 	
-	firePercentSplit = ballController.fireStat.maxValue/(fireMeshes.size() + 1.0);
+	var electricColor = ballCustomizationDirectory.GetElectricColorFromPlayerNumber(playerNumber);
+	electricParticles.material_override = electricParticles.material_override.duplicate();
+	electricParticles.material_override.set_shader_parameter("color", electricColor);
 	
 	StopChargeVisual();
 	StopBlockVisual();
 	StopClashVisual();
+	StopStrikeVisual();
 	StopGrabVisual();
 	StopGrabSuccessAimVisual();
 	HideMessages();
@@ -82,8 +85,8 @@ func FaceDirection(direction : Vector3, delta : float):
 	SpinFaceDirection(Vector2(direction.x, direction.z));
 	PitchBall(direction.y * (PI * .5), delta)
 	
-func FaceFlamesBySpeed(currentSpeed : float):
-	fires.rotation.x = min(PI * .5, profile.fireRollSpeedScalar * currentSpeed);
+#func FaceElectricBySpeed(currentSpeed : float):
+	#electricMeshesParent.rotation.x = min(PI * .5, profile.electricRollSpeedScalar * currentSpeed);
 	
 func SpeedStretch(currentSpeed : float):
 	var t = currentSpeed * profile.rollStretchSpeedScalar;
@@ -100,9 +103,9 @@ func ChargeStretchBall(t : float):
 func SoarStretchBall(currentSpeed : float, delta : float):
 	stretcher.scale.z = clamp(stretcher.scale.z, 1.0, profile.maxStretch);
 	
-func UpdateFireVisuals(fireAmount : float, delta : float):
-	for i in fireMeshes.size():
-		fireMeshes[i].visible = fireAmount >= ((i + 1) * firePercentSplit) #&& fireAmount <= ((i + 2) * firePercentSplit)
+func UpdateElectricVisuals(electricPercentage : float, delta : float):
+	electricParticles.amount_ratio = electricPercentage;
+	pass;
 
 var blinkTime := 0.0;
 
@@ -132,6 +135,12 @@ func StartClashVisual():
 	
 func StopClashVisual():
 	clashVisual.visible = false;
+	
+func StartStrikeVisual():
+	strikeVisual.visible = true;
+	
+func StopStrikeVisual():
+	strikeVisual.visible = false;
 	
 func StartGrabVisual():
 	grabVisual.visible = true;
