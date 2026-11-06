@@ -23,4 +23,7 @@ unblockableMessageTime = 1.0
 trackerLineSpeedAlphaMultiply = 0.252
 trackerLineStrikeHeartbeat = 1.0
 trackerLineGrabHeartbeat = 1.0
+strikeCameraShake = 0.4
+grabCameraShake = 0.3
+eliminationCameraShake = 0.2
 metadata/_custom_type_script = "uid://cx0pe6ktsy0rm"

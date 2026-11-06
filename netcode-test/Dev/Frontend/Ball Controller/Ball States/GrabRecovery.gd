@@ -8,6 +8,7 @@ func StartStateVisuals(params : Dictionary = {}):
 	if(params.has('isVictim') && params['isVictim']):
 		mcc.visuals.ballHubElement.trackerLine.heartbeat = mcc.visuals.profile.trackerLineGrabHeartbeat;
 		mcc.visuals.ballHubElement.trackerLine.alphaMultiply = mcc.visuals.profile.trackerLineGrabAlphaMultiply;
+		CameraManager.CM.shaker.Shake(mcc.visuals.profile.grabCameraShake);
 
 
 func StartStatePhysics(params : Dictionary = {}):

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ShakeProfile" format=3 uid="uid://b0v7br2se1mvx"]
+
+[ext_resource type="Script" uid="uid://byjh7b524jyu0" path="res://Dev/Frontend/Objects/ShakeProfile.gd" id="1_vr8kh"]
+
+[resource]
+script = ExtResource("1_vr8kh")
+range = 1.0
+damping = 1.0
+maxAmount = 1.0
+speed = 100.0
+deviation = 50.0
+metadata/_custom_type_script = "uid://byjh7b524jyu0"

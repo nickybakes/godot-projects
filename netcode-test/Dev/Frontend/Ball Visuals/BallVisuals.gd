@@ -5,6 +5,7 @@ class_name BallVisuals;
 @export var ballCustomizationDirectory : BallCustomizationDirectory;
 @export var profile : BallVisualProfile;
 @export var shadowDecal : Decal;
+@export var cameraTarget : CameraTarget;
 
 var ballHubElement : BallHubElement;
 

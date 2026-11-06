@@ -4,11 +4,14 @@
 [ext_resource type="Material" uid="uid://dsqom3ceceiyc" path="res://Art/Materials/M_DevEnv_01.tres" id="1_avklc"]
 [ext_resource type="Script" uid="uid://dwjf48i5tqrx3" path="res://Dev/Frontend/Game/GameManager.gd" id="2_n03q8"]
 [ext_resource type="Script" uid="uid://n8hbkua4cygf" path="res://Dev/Frontend/Game/GamerView.gd" id="3_fg3k8"]
+[ext_resource type="Script" uid="uid://m3l5b2c2wr0k" path="res://Dev/Frontend/Camera/CameraFocuser.gd" id="4_2j8qv"]
 [ext_resource type="Script" uid="uid://lomqln3v0xvt" path="res://Dev/Frontend/Game/GameSceneSetup.gd" id="4_8lxd5"]
 [ext_resource type="Script" uid="uid://b3mping6psqq0" path="res://Dev/Frontend/Camera/CameraManager.gd" id="4_d6cxq"]
 [ext_resource type="PackedScene" uid="uid://csa3iitdf6l13" path="res://Dev/Frontend/UI/PRE_BallHubElement.tscn" id="4_hwi73"]
 [ext_resource type="Script" uid="uid://cyp11trxkh8nd" path="res://Dev/Frontend/Interaction/InteractionManager.gd" id="4_nmwte"]
 [ext_resource type="Resource" uid="uid://c30op58wvx74q" path="res://Dev/Frontend/Interaction/R_InteractionTraits_01.tres" id="5_nmwte"]
+[ext_resource type="Script" uid="uid://xs1d7ugew7bm" path="res://Dev/Frontend/Objects/Shaker.gd" id="5_pl38v"]
+[ext_resource type="Resource" uid="uid://b0v7br2se1mvx" path="res://Dev/Frontend/Camera/R_CameraShakeProfile_01.tres" id="6_dofbk"]
 [ext_resource type="Resource" uid="uid://dxbmthys0ijbe" path="res://Dev/Frontend/UI/R_HubProfile_01.tres" id="7_4puxp"]
 [ext_resource type="ArrayMesh" uid="uid://c7s1apef4jbtx" path="res://Art/Models/SM_ArenaMesh_01.glb" id="8_h3ruc"]
 [ext_resource type="Script" uid="uid://bsw5rk11juyn3" path="res://Dev/Frontend/UI/Hub.gd" id="9_2j8qv"]
@@ -20,6 +23,21 @@ bottom_radius = 1.0
 height = 0.2
 radial_segments = 32
 rings = 1
+
+[sub_resource type="Curve" id="Curve_2j8qv"]
+_limits = [-20.0, 37.43, 0.0, 1.0]
+_data = [Vector2(0, -13.473682), 0.0, 0.0, 0, 0, Vector2(0.18965517, -8.842106), 54.269005, 54.269005, 0, 0, Vector2(1, 22.316841), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_pl38v"]
+_limits = [-15.0, 14.526315, 0.0, 1.0]
+_data = [Vector2(0.04094827, 1.3171749), 0.0, 0.0, 0, 0, Vector2(0.7219828, -2.1016617), 0.0, 0.0, 0, 0, Vector2(0.9137931, -5.209696), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_dofbk"]
+_limits = [0.0, 1.0, 0.0, 2.0]
+_data = [Vector2(1.0215517, 0), 0.0, 0.39248118, 0, 0, Vector2(2, 1), 0.94354093, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0hxaj"]
 
@@ -57,20 +75,60 @@ spawnCircle = NodePath("../Spawn Circle")
 metadata/_custom_type_script = "uid://lomqln3v0xvt"
 
 [node name="Spawn Circle" type="MeshInstance3D" parent="." unique_id=353306037]
-transform = Transform3D(4.3446145, 0, 0, 0, 1, 0, 0, 0, 4.7269735, 0, 5.9825835, 3.0897965)
+transform = Transform3D(12.906522, 0, 0, 0, 1, 0, 0, 0, 10.430056, 0, 8.336867, -1.6211963)
 transparency = 0.58
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_c5qv8")
 
-[node name="CameraManager" type="Node3D" parent="." unique_id=104827752 node_paths=PackedStringArray("camera")]
-transform = Transform3D(1, 0, 0, 0, 0.87630665, 0.4817537, 0, -0.4817537, 0.87630665, 0, 25.378, 38.496)
+[node name="CameraManager" type="Node3D" parent="." unique_id=104827752 node_paths=PackedStringArray("camera", "focuser", "shaker")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 35.945)
 script = ExtResource("4_d6cxq")
-camera = NodePath("Camera3D")
+camera = NodePath("Camera Rotation/Camera Focuser/Camera Shaker/Camera3D")
+focuser = NodePath("Camera Rotation/Camera Focuser")
+shaker = NodePath("Camera Rotation/Camera Focuser/Camera Shaker")
 metadata/_custom_type_script = "uid://b3mping6psqq0"
 
-[node name="Camera3D" type="Camera3D" parent="CameraManager" unique_id=799328789]
+[node name="Camera Rotation" type="Node3D" parent="CameraManager" unique_id=1177322470]
+transform = Transform3D(1, 0, 0, 0, 0.87630665, 0.4817537, 0, -0.4817537, 0.87630665, 0, 0, 0)
+
+[node name="Camera Focuser" type="Node3D" parent="CameraManager/Camera Rotation" unique_id=1781294617 node_paths=PackedStringArray("cameraRotation", "mapCenter", "mapMax", "mapMin", "camMax", "camMin")]
+script = ExtResource("4_2j8qv")
+cameraRotation = NodePath("..")
+mapCenter = NodePath("../../../Map Center")
+mapMax = NodePath("../../../Map Max")
+mapMin = NodePath("../../../Map Min")
+camMax = NodePath("../../../Cam Max")
+camMin = NodePath("../../../Cam Min")
+radiusMultiplier = Vector3(1.174, 1.873, 1.174)
+zoomSizeCurve = SubResource("Curve_2j8qv")
+heightOffsetByZoomCurve = SubResource("Curve_pl38v")
+heightOffsetByTotalStrengthCurve = SubResource("Curve_dofbk")
+singleTargetHeightOffset = -2.053
+metadata/_custom_type_script = "uid://m3l5b2c2wr0k"
+
+[node name="Camera Shaker" type="Node3D" parent="CameraManager/Camera Rotation/Camera Focuser" unique_id=1471909736]
+script = ExtResource("5_pl38v")
+profile = ExtResource("6_dofbk")
+metadata/_custom_type_script = "uid://xs1d7ugew7bm"
+
+[node name="Camera3D" type="Camera3D" parent="CameraManager/Camera Rotation/Camera Focuser/Camera Shaker" unique_id=799328789]
 current = true
 fov = 28.6
+
+[node name="Map Center" type="Node3D" parent="." unique_id=1010154502]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.2074137, 0)
+
+[node name="Map Max" type="Node3D" parent="." unique_id=870761743]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.587, 17.073103, 15.297)
+
+[node name="Map Min" type="Node3D" parent="." unique_id=424086057]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.586566, 0.8503089, -15.296917)
+
+[node name="Cam Max" type="Node3D" parent="." unique_id=1585978797]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.714, 40, 15)
+
+[node name="Cam Min" type="Node3D" parent="." unique_id=1283171268]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.011, 6.318, -50)
 
 [node name="Gamer View" type="Control" parent="." unique_id=1179506821 node_paths=PackedStringArray("hub")]
 layout_mode = 3

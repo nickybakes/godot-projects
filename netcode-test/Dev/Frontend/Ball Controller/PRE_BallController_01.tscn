@@ -50,6 +50,7 @@
 [ext_resource type="Script" uid="uid://qrcx4a8tcp7p" path="res://Dev/Frontend/Ball Controller/Ball States/GrabVictim.gd" id="40_s6ais"]
 [ext_resource type="Script" uid="uid://dsx6o2x6cn87r" path="res://Dev/Frontend/Ball Controller/Ball States/GrabRecovery.gd" id="41_s6ais"]
 [ext_resource type="Script" uid="uid://der4ebc8wxlai" path="res://Dev/Frontend/Ball Controller/Ball States/Eliminated.gd" id="42_icfwc"]
+[ext_resource type="Script" uid="uid://fxck7cgoc485" path="res://Dev/Frontend/Camera/CameraTarget.gd" id="51_ej7s1"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_qm6jm"]
 height = 0.76220703
@@ -120,12 +121,18 @@ slamRegion = NodePath("Ball Visuals/Ball Slam Region")
 statesParent = NodePath("States")
 metadata/_custom_type_script = "uid://cmlx0uqgnib0r"
 
-[node name="Ball Visuals" type="Node3D" parent="." unique_id=851201941 node_paths=PackedStringArray("ballController", "shadowDecal", "ballMesh", "outlineMesh", "xrayMesh", "chargeAimMesh", "blockMesh", "fireMeshes", "clashVisual", "grabVisual", "eliminatedVisual", "strikePriorityVisual", "unblockableVisual", "spinner", "pitcher", "stretcher", "roller", "fires")]
+[node name="CameraTarget" type="Node3D" parent="." unique_id=1656971311]
+script = ExtResource("51_ej7s1")
+transitionSpeed = 0.5
+metadata/_custom_type_script = "uid://fxck7cgoc485"
+
+[node name="Ball Visuals" type="Node3D" parent="." unique_id=851201941 node_paths=PackedStringArray("ballController", "shadowDecal", "cameraTarget", "ballMesh", "outlineMesh", "xrayMesh", "chargeAimMesh", "blockMesh", "fireMeshes", "clashVisual", "grabVisual", "eliminatedVisual", "strikePriorityVisual", "unblockableVisual", "spinner", "pitcher", "stretcher", "roller", "fires")]
 script = ExtResource("2_3d8wc")
 ballController = NodePath("..")
 ballCustomizationDirectory = ExtResource("4_lr45t")
 profile = ExtResource("5_6873s")
 shadowDecal = NodePath("Shadow Decal")
+cameraTarget = NodePath("../CameraTarget")
 ballMesh = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Roller/Ball Mesh")
 outlineMesh = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Roller/Outline Mesh")
 xrayMesh = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Roller/Xray Mesh")

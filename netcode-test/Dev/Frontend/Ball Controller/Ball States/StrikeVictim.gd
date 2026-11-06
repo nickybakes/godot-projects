@@ -9,6 +9,9 @@ func StartStateVisuals(params : Dictionary = {}):
 		
 	mcc.visuals.ballHubElement.trackerLine.heartbeat = mcc.visuals.profile.trackerLineStrikeHeartbeat;
 	mcc.visuals.ballHubElement.trackerLine.alphaMultiply = mcc.visuals.profile.trackerLineStrikeAlphaMultiply;
+	
+	CameraManager.CM.shaker.Shake(mcc.visuals.profile.strikeCameraShake);
+
 		
 	mcc.strikePrioritied = false;
 

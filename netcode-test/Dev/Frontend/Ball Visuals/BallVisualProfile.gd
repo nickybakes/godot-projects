@@ -36,3 +36,8 @@ class_name BallVisualProfile
 @export var trackerLineGrabHeartbeat : float = 2.0;
 @export var trackerLineStrikeAlphaMultiply : float = 7.0;
 @export var trackerLineGrabAlphaMultiply : float = 10.0;
+
+@export_category("Camera Shake")
+@export var strikeCameraShake : float = .25;
+@export var grabCameraShake : float = .25;
+@export var eliminationCameraShake : float = .75;
