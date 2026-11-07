@@ -147,6 +147,7 @@ func _process(delta: float) -> void:
 	currentState.Process(delta);
 	if(updateVisuals):
 		visuals.ballHubElement.DisplayStamina(staminaStat.value, staminaStat.maxValue);
+		visuals.header.DisplayStamina(staminaStat.value, staminaStat.maxValue);
 		visuals.ballHubElement.DisplayHealth(healthStat.value, healthStat.maxValue);
 		visuals.UpdateElectricVisuals(electricStat.value / electricStat.maxValue, delta);
 		visuals.UpdateInvulnVisuals(invulnStat.value, delta);

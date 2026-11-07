@@ -21,8 +21,12 @@ class_name BallHubElement
 @export_range(0.0, 1.0, 0.01) var healthLabelBlinkOff = .15;
 @export_range(0.0, 1.0, 0.01) var healthLabelBlinkThreshold = .3;
 @export var healthLabelBlinkTime = 1.0;
+@export var healthColor : Gradient;
+@export var healthRotation : Curve;
 
 @export_group("Stamina")
+@export var staminaBar : TextureProgressBar;
+
 @export var staminaLabel : Label;
 @export var staminaIcon : CanvasItem;
 @export var staminaLabelScaleMin = .2;
@@ -54,16 +58,19 @@ func Setup(id : int):
 	pass;
 
 func DisplayStamina(value : float, max : float):
-	staminaLabel.text = GetPercentageString(value, max);
 	var p = value/max;
-	var newScale = lerp(staminaLabelScaleMin, staminaLabelScaleMax, p);
-	staminaLabel.scale.x = newScale;
-	staminaLabel.scale.y = newScale;
-	staminaIcon.self_modulate.v = p;
-	if(p <= staminaLabelBlinkThreshold):
-		staminaLabel.visible = staminaBlinkTimer >= staminaLabelBlinkTime * staminaLabelBlinkOff;
-	else:
-		staminaLabel.visible = true;
+	staminaBar.value = p;
+	#staminaLabel.text = GetPercentageString(value, max);
+	#var p = value/max;
+	#var newScale = lerp(staminaLabelScaleMin, staminaLabelScaleMax, p);
+	#staminaLabel.scale.x = newScale;
+	#staminaLabel.scale.y = newScale;
+	#staminaIcon.self_modulate.v = p;
+	#if(p <= staminaLabelBlinkThreshold):
+		#staminaLabel.visible = staminaBlinkTimer >= staminaLabelBlinkTime * staminaLabelBlinkOff;
+	#else:
+		#staminaLabel.visible = true;
+	pass;
 	
 
 func DisplayHealth(value : float, max : float):
@@ -72,7 +79,8 @@ func DisplayHealth(value : float, max : float):
 	var newScale = lerp(healthLabelScaleMax, healthLabelScaleMin, p);
 	healthLabel.scale.x = newScale;
 	healthLabel.scale.y = newScale;
-	healthIcon.self_modulate.v = p;
+	healthLabel.modulate = healthColor.sample(p);
+	healthLabel.rotation_degrees = healthRotation.sample(p);
 	if(p <= healthLabelBlinkThreshold):
 		healthLabel.visible = healthBlinkTimer >= healthLabelBlinkTime * healthLabelBlinkOff;
 	else:

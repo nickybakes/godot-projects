@@ -6,6 +6,7 @@ class_name BallVisuals;
 @export var profile : BallVisualProfile;
 @export var shadowDecal : Decal;
 @export var cameraTarget : CameraTarget;
+@export var header : BallHeader;
 
 var ballHubElement : BallHubElement;
 
@@ -59,6 +60,8 @@ func Setup(playerNumber : int):
 	var electricColor = ballCustomizationDirectory.GetElectricColorFromPlayerNumber(playerNumber);
 	electricParticles.material_override = electricParticles.material_override.duplicate();
 	electricParticles.material_override.set_shader_parameter("color", electricColor);
+	
+	header.target = ballController;
 	
 	StopChargeVisual();
 	StopBlockVisual();
@@ -180,11 +183,13 @@ func HideBall():
 	spinner.visible = false;
 	ballHubElement.trackerLine.visible = false;
 	shadowDecal.visible = false;
+	header.visible = false;
 	
 func ShowBall():
 	spinner.visible = true;
 	ballHubElement.trackerLine.visible = true;
 	shadowDecal.visible = true;
+	header.visible = true;
 	
 func _process(delta: float) -> void:
 	messageTime = move_toward(messageTime, 0.0, delta);

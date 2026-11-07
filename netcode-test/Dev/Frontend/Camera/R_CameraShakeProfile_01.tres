@@ -6,7 +6,7 @@
 script = ExtResource("1_vr8kh")
 range = 1.0
 damping = 1.0
-maxAmount = 1.0
+maxAmount = 0.8
 speed = 100.0
 deviation = 50.0
 metadata/_custom_type_script = "uid://byjh7b524jyu0"

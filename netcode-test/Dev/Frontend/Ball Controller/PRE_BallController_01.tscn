@@ -6,6 +6,7 @@
 [ext_resource type="Material" uid="uid://di1to8x2plpx" path="res://Art/Materials/M_Ball_01.tres" id="2_i0e7p"]
 [ext_resource type="Material" uid="uid://clerrjhlukxmf" path="res://Art/Materials/M_Outline_01.tres" id="4_jioly"]
 [ext_resource type="Resource" uid="uid://0aagooiulhx6" path="res://Dev/Frontend/Customization/R_BallCustomizationDirectory_01.tres" id="4_lr45t"]
+[ext_resource type="PackedScene" uid="uid://u6oslcx36ah4" path="res://Dev/Frontend/UI/PRE_BallHeader_01.tscn" id="4_qrgwy"]
 [ext_resource type="Resource" uid="uid://b3ori3ghnplsq" path="res://Dev/Frontend/Ball Visuals/R_BallVisualProfile_01.tres" id="5_6873s"]
 [ext_resource type="Material" uid="uid://ltb43n3t3x1i" path="res://Art/Materials/M_ChargeAim_01.tres" id="5_icp2y"]
 [ext_resource type="Script" uid="uid://cbhbr4ha54spr" path="res://Dev/Frontend/Ball Controller/BallPhysics.gd" id="7_jioly"]
@@ -129,13 +130,14 @@ script = ExtResource("51_ej7s1")
 transitionSpeed = 0.5
 metadata/_custom_type_script = "uid://fxck7cgoc485"
 
-[node name="Ball Visuals" type="Node3D" parent="." unique_id=851201941 node_paths=PackedStringArray("ballController", "shadowDecal", "cameraTarget", "ballMesh", "outlineMesh", "xrayMesh", "chargeAimMesh", "blockMesh", "electricParticles", "clashVisual", "strikeVisual", "grabVisual", "eliminatedVisual", "strikePriorityVisual", "unblockableVisual", "spinner", "pitcher", "stretcher", "roller")]
+[node name="Ball Visuals" type="Node3D" parent="." unique_id=851201941 node_paths=PackedStringArray("ballController", "shadowDecal", "cameraTarget", "header", "ballMesh", "outlineMesh", "xrayMesh", "chargeAimMesh", "blockMesh", "electricParticles", "clashVisual", "strikeVisual", "grabVisual", "eliminatedVisual", "strikePriorityVisual", "unblockableVisual", "spinner", "pitcher", "stretcher", "roller")]
 script = ExtResource("2_3d8wc")
 ballController = NodePath("..")
 ballCustomizationDirectory = ExtResource("4_lr45t")
 profile = ExtResource("5_6873s")
 shadowDecal = NodePath("Shadow Decal")
 cameraTarget = NodePath("../CameraTarget")
+header = NodePath("../PRE_BallHeader_01")
 ballMesh = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Roller/Ball Mesh")
 outlineMesh = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Roller/Outline Mesh")
 xrayMesh = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Roller/Xray Mesh")
@@ -337,6 +339,8 @@ material_override = ExtResource("11_v2vyv")
 cast_shadow = 0
 mesh = ExtResource("17_icfwc")
 
+[node name="PRE_BallHeader_01" parent="." unique_id=889174517 instance=ExtResource("4_qrgwy")]
+
 [node name="Physics Shape" type="CollisionShape3D" parent="." unique_id=1755982985]
 shape = SubResource("SphereShape3D_c5qv8")
 
@@ -374,8 +378,8 @@ metadata/_custom_type_script = "uid://cbhbr4ha54spr"
 [node name="Stamina Stat" type="Node" parent="." unique_id=57812921]
 script = ExtResource("12_g4d1v")
 startingPercent = 1.0
-maxValue = 6.0
-cooldownPerValueSpent = 2.2
+maxValue = 2.7
+cooldownPerValueSpent = 2.5
 cooldownMax = 2.0
 metadata/_custom_type_script = "uid://bspbsgt6kyqhv"
 
@@ -525,7 +529,7 @@ metadata/_custom_type_script = "uid://bgalco1514nhs"
 script = ExtResource("39_ih3ae")
 cooldown = NodePath("../../Cooldowns/Grab Cooldown")
 codeName = "grabSuccess"
-transitions = [NodePath("../../Transitions/Combat/Grab Success End Transition")]
+transitions = [NodePath("../../Transitions/Combat/Grab Success End Transition"), NodePath("../../Transitions/Combat/Grab Success End Failsafe Transition")]
 metadata/_custom_type_script = "uid://dx1ga7wg4n1io"
 
 [node name="GrabVictim" type="Node" parent="States" unique_id=292581875 node_paths=PackedStringArray("cooldown", "transitions")]
@@ -725,6 +729,12 @@ stateTransitionTo = NodePath("../../../States/GrabRecovery")
 rules = [NodePath("../../../Combat Rules/Grab Min Time Rule"), NodePath("../../../Generic Rules/On Floor Rule")]
 metadata/_custom_type_script = "uid://bao3317lfi3tc"
 
+[node name="Grab Success End Failsafe Transition" type="Node" parent="Transitions/Combat" unique_id=1352856464 node_paths=PackedStringArray("stateTransitionTo", "rules")]
+script = ExtResource("12_nefp1")
+stateTransitionTo = NodePath("../../../States/GrabRecovery")
+rules = [NodePath("../../../Combat Rules/Grab Max Time Failsafe Rule")]
+metadata/_custom_type_script = "uid://bao3317lfi3tc"
+
 [node name="Grab Victim End Transition" type="Node" parent="Transitions/Combat" unique_id=256451538 node_paths=PackedStringArray("stateTransitionTo", "rules")]
 script = ExtResource("12_nefp1")
 stateTransitionTo = NodePath("../../../States/GrabRecovery")
@@ -850,6 +860,14 @@ node = NodePath("../../Current Storage/Current State")
 property = "timeInState"
 comparisonType = 1
 traitProperty = "grabMinTime"
+metadata/_custom_type_script = "uid://dulfhx4ftd06"
+
+[node name="Grab Max Time Failsafe Rule" type="Node" parent="Combat Rules" unique_id=817959557 node_paths=PackedStringArray("node")]
+script = ExtResource("15_ahjyt")
+node = NodePath("../../Current Storage/Current State")
+property = "timeInState"
+comparisonType = 1
+traitProperty = "grabSuccessMaxTimeFailsafe"
 metadata/_custom_type_script = "uid://dulfhx4ftd06"
 
 [node name="Grab Recovery Time Rule" type="Node" parent="Combat Rules" unique_id=1043955105 node_paths=PackedStringArray("node")]

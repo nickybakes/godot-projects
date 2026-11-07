@@ -100,6 +100,7 @@ class_name BallTraits
 @export_range(-1, 1, .01) var grabDirectionMaxY : float = 0;
 @export var grabMinTime : float;
 @export var grabSuccessBounce : BallBounceTraits;
+@export var grabSuccessMaxTimeFailsafe : float = 5.0;
 
 @export_group("Victim")
 @export var grabVictimSuction : float = 10.0;
