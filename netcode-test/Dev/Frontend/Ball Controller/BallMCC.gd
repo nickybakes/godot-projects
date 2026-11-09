@@ -22,6 +22,7 @@ class_name BallMCC
 @export var strikeRegion : HitRegion;
 @export var grabRegion : HitRegion;
 @export var slamRegion : HitRegion;
+@export var autoAimRegion : HitRegion;
 
 var interactive : bool = true;
 
@@ -38,6 +39,8 @@ var grabParentElectric : float;
 var grabVictimIndex : int;
 var grabVictimTotal : int;
 var grabVictimAngleOffset : float;
+
+var autoAimCooldown : float;
 
 var strikePrioritied : bool
 
@@ -138,21 +141,21 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	CalculateBasicStats(delta);
-	grabRegion.ScaleBySpeed(currentSpeed);
+	autoAimCooldown += delta;
 	if(updatePhysics):
 		currentState.ProcessPhysics(delta);
 	pass;
 	
 func _process(delta: float) -> void:
 	currentState.Process(delta);
+	strikeRegion.ScaleRegion(currentSpeed, electricStat.percent);
+	grabRegion.ScaleRegion(currentSpeed, electricStat.percent);
+	autoAimRegion.ScaleRegion(currentSpeed, electricStat.percent);
 	if(updateVisuals):
-		visuals.ballHubElement.DisplayStamina(staminaStat.value, staminaStat.maxValue);
-		visuals.header.DisplayStamina(staminaStat.value, staminaStat.maxValue);
-		visuals.ballHubElement.DisplayHealth(healthStat.value, healthStat.maxValue);
-		visuals.UpdateElectricVisuals(electricStat.value / electricStat.maxValue, delta);
+		visuals.ballHubElement.DisplayStamina(staminaStat.percent);
+		visuals.header.DisplayStamina(staminaStat.percent);
+		visuals.ballHubElement.DisplayHealth(healthStat.percent);
+		visuals.UpdateElectricVisuals(electricStat.percent, delta);
 		visuals.UpdateInvulnVisuals(invulnStat.value, delta);
 		currentState.ProcessVisuals(delta);
 		visuals.ballHubElement.trackerLine.goalAlphaMultiply = max(currentSpeed * visuals.profile.trackerLineSpeedAlphaMultiply, 1.0);
-
-func ProcessInteraction():
-	pass;

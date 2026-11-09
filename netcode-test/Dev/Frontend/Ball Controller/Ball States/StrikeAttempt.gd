@@ -8,7 +8,8 @@ var activatorSpeed : float;
 
 func StartStatePhysics(params : Dictionary = {}):
 	cooldown.Restart();
-	
+	mcc.autoAimCooldown = 0;
+
 	mcc.GetPhysics().isStrikeAttempt = false;
 	mcc.GetPhysics().isDeflect = false;
 

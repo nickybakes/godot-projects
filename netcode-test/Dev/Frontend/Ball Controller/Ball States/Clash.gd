@@ -8,6 +8,7 @@ func ExitStateVisuals():
 	mcc.visuals.StopClashVisual();
 	
 func StartStatePhysics(params : Dictionary = {}):
+	mcc.autoAimCooldown = 0;
 	mcc.GetPhysics().BounceVelocity(-mcc.currentDirection, mcc.currentSpeed, mcc.traits.clashBounceTraits);
 	mcc.clash = false;
 	

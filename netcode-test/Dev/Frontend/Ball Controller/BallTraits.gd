@@ -13,6 +13,10 @@ class_name BallTraits
 @export var overSpeedDeceleration : float = 1.0;
 @export var basicBounceMoveControlCooldown : Curve
 
+@export_category("Auto Aim")
+@export var autoAimPowerBySpeedCurve : Curve;
+@export var autoAimCooldown : Curve;
+
 @export_category("Electric")
 @export var electricBuildUpBySpeed : Curve
 

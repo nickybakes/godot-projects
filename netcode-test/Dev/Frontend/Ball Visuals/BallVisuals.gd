@@ -106,8 +106,8 @@ func ChargeStretchBall(t : float):
 func SoarStretchBall(currentSpeed : float, delta : float):
 	stretcher.scale.z = clamp(stretcher.scale.z, 1.0, profile.maxStretch);
 	
-func UpdateElectricVisuals(electricPercentage : float, delta : float):
-	electricParticles.amount_ratio = electricPercentage;
+func UpdateElectricVisuals(percent : float, delta : float):
+	electricParticles.amount_ratio = percent;
 	pass;
 
 var blinkTime := 0.0;

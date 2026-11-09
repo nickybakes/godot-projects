@@ -49,12 +49,21 @@ func _process(delta: float) -> void:
 		if(currentStateIndex != stateIndex):
 			currentStateIndex = stateIndex;
 			ballController.DoStateTransitionByIndex(stateIndex);
+		
 		ballController.staminaStat.value = lerp(ballController.staminaStat.value, stamina, .5);
+		ballController.staminaStat.CalcPercent();
+		
 		ballController.healthStat.value = lerp(ballController.healthStat.value, health, .5);
+		ballController.healthStat.CalcPercent();
+		
 		ballController.electricStat.value = lerp(ballController.electricStat.value, electric, .5);
+		ballController.electricStat.CalcPercent();
+		
 		ballController.invulnStat.value = lerp(ballController.invulnStat.value, invuln, .5);
 		if(is_zero_approx(invuln)):
 			ballController.invulnStat.value = 0;
+		ballController.invulnStat.CalcPercent();
+		
 	else:
 		position = ballController.position;
 		velocity = ballController.velocity;

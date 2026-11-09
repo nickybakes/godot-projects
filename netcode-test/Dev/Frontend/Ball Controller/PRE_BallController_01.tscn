@@ -69,20 +69,54 @@ variation_embolden = 1.64
 variation_transform = Transform2D(0.842, 0, 0, 1, 0, 0)
 spacing_glyph = -18
 
+[sub_resource type="Curve" id="Curve_qrgwy"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_c74sw"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_c4qju"]
 radius = 0.633
+
+[sub_resource type="Curve" id="Curve_vktj5"]
+_limits = [1.0, 2.0, 8.0, 25.0]
+_data = [Vector2(8, 1), 0.0, 0.0, 0, 0, Vector2(25, 1.1857142), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_xkg10"]
+_limits = [1.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1.1714284), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="SphereMesh" id="SphereMesh_wvtf1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1vn2h"]
 radius = 0.5888672
 height = 1.5279236
 
+[sub_resource type="Curve" id="Curve_c332p"]
+_limits = [1.0, 2.0, 8.0, 25.0]
+_data = [Vector2(8, 1), 0.0, 0.0, 0, 0, Vector2(25, 1.3571428), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_ctju4"]
+_limits = [1.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1.3), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s6ais"]
-radius = 1.3813477
-height = 3.523468
+radius = 1.839
+height = 5.0834675
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ih3ae"]
 radius = 1.4213867
 height = 3.6120605
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qrgwy"]
+radius = 1.839
+height = 6.422
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_c5qv8"]
 top_radius = 0.374
@@ -93,8 +127,6 @@ rings = 0
 cap_top = false
 cap_bottom = false
 
-[sub_resource type="SphereMesh" id="SphereMesh_wvtf1"]
-
 [sub_resource type="QuadMesh" id="QuadMesh_s282h"]
 size = Vector2(0.602, 1.266)
 
@@ -103,7 +135,7 @@ size = Vector2(0.602, 1.266)
 [sub_resource type="SphereShape3D" id="SphereShape3D_mf80y"]
 radius = 0.6
 
-[node name="PRE_BallController_01" type="CharacterBody3D" unique_id=2124224045 node_paths=PackedStringArray("visuals", "defaultPhysics", "defaultState", "currentPhysicsStorage", "currentStateStorage", "staminaStat", "healthStat", "electricStat", "invulnStat", "hitbox", "deflectRegion", "strikeRegion", "grabRegion", "slamRegion", "statesParent")]
+[node name="PRE_BallController_01" type="CharacterBody3D" unique_id=2124224045 node_paths=PackedStringArray("visuals", "defaultPhysics", "defaultState", "currentPhysicsStorage", "currentStateStorage", "staminaStat", "healthStat", "electricStat", "invulnStat", "hitbox", "deflectRegion", "strikeRegion", "grabRegion", "slamRegion", "autoAimRegion", "statesParent")]
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_84w8q")
@@ -122,6 +154,7 @@ deflectRegion = NodePath("Ball Visuals/Visual Spinner/Visual Pitcher/Ball Deflec
 strikeRegion = NodePath("Ball Visuals/Visual Spinner/Visual Pitcher/Ball Strike Region")
 grabRegion = NodePath("Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region")
 slamRegion = NodePath("Ball Visuals/Ball Slam Region")
+autoAimRegion = NodePath("Ball Visuals/Visual Spinner/Visual Pitcher/Ball Auto Aim Region")
 statesParent = NodePath("States")
 metadata/_custom_type_script = "uid://cmlx0uqgnib0r"
 
@@ -145,7 +178,7 @@ chargeAimMesh = NodePath("Visual Spinner/Visual Pitcher/Charge Aim Mesh")
 blockMesh = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Visual Roller/Block Mesh")
 electricParticles = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Electric Particles")
 clashVisual = NodePath("Clash Visual")
-strikeVisual = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Strike Mesh")
+strikeVisual = NodePath("Visual Spinner/Visual Pitcher/Ball Strike Region/Strike Mesh")
 grabVisual = NodePath("Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual")
 eliminatedVisual = NodePath("Eliminated Visual")
 strikePriorityVisual = NodePath("Strike Priority Visual")
@@ -246,6 +279,8 @@ collision_layer = 8
 collision_mask = 4
 script = ExtResource("17_xnpby")
 ballController = NodePath("../../../..")
+speedScale = SubResource("Curve_qrgwy")
+electricScale = SubResource("Curve_c74sw")
 metadata/_custom_type_script = "uid://bajnp1ma0ic1l"
 
 [node name="Shape" type="CollisionShape3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Deflect Region" unique_id=1541166338]
@@ -258,7 +293,16 @@ collision_mask = 4
 script = ExtResource("17_xnpby")
 ballController = NodePath("../../../..")
 filterOutInvulnerableBalls = true
+speedScale = SubResource("Curve_vktj5")
+electricScale = SubResource("Curve_xkg10")
 metadata/_custom_type_script = "uid://bajnp1ma0ic1l"
+
+[node name="Strike Mesh" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Strike Region" unique_id=1953670642]
+transform = Transform3D(1.102, 0, 0, 0, -6.145821e-08, -1.102, 0, 1.406, -4.816995e-08, 0, 0, 0.08306098)
+layers = 2
+material_override = ExtResource("11_qrgwy")
+cast_shadow = 0
+mesh = SubResource("SphereMesh_wvtf1")
 
 [node name="Shape" type="CollisionShape3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Strike Region" unique_id=444436944]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -1.873555e-09, -0.36668152)
@@ -271,13 +315,13 @@ collision_mask = 4
 script = ExtResource("17_xnpby")
 ballController = NodePath("../../../..")
 filterOutInvulnerableBalls = true
-maxScale = 1.45
-minScaleSpeed = 8.0
-maxScaleSpeed = 25.0
+speedScale = SubResource("Curve_c332p")
+electricScale = SubResource("Curve_ctju4")
 metadata/_custom_type_script = "uid://bajnp1ma0ic1l"
 
 [node name="Shape" type="CollisionShape3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region" unique_id=1688676039]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.8015875e-08, -0.99890065)
+visible = false
 shape = SubResource("CapsuleShape3D_s6ais")
 
 [node name="Grab Visual" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region" unique_id=1027882142]
@@ -287,6 +331,25 @@ material_override = ExtResource("7_l67tw")
 cast_shadow = 0
 mesh = SubResource("CapsuleMesh_ih3ae")
 
+[node name="Ball Auto Aim Region" type="Area3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher" unique_id=86385115 node_paths=PackedStringArray("ballController")]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("17_xnpby")
+ballController = NodePath("../../../..")
+filterOutInvulnerableBalls = true
+angleScaleForSort = 1.7730000000000001
+speedScale = SubResource("Curve_c332p")
+electricScale = SubResource("Curve_ctju4")
+metadata/_custom_type_script = "uid://bajnp1ma0ic1l"
+
+[node name="Shape" type="CollisionShape3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Auto Aim Region" unique_id=759989603]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 5.6147798e-08, -1.8712573)
+shape = SubResource("CapsuleShape3D_s6ais")
+
+[node name="Shape2" type="CollisionShape3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Auto Aim Region" unique_id=910073564]
+transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 5.6147798e-08, -2.5713286)
+shape = SubResource("CapsuleShape3D_qrgwy")
+
 [node name="Charge Aim Mesh" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher" unique_id=283875934]
 transform = Transform3D(-1, -8.742278e-08, 3.821371e-15, 0, -4.371139e-08, -1, 8.742278e-08, -1, 4.371139e-08, -2.4041267e-08, -1.2020633e-08, -0.89000005)
 visible = false
@@ -295,13 +358,6 @@ cast_shadow = 0
 mesh = SubResource("CylinderMesh_c5qv8")
 
 [node name="Visual Stretcher" type="Node3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher" unique_id=884396108]
-
-[node name="Strike Mesh" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher" unique_id=1953670642]
-transform = Transform3D(1.2159005, 0, 0, 0, -6.7808045e-08, -1.2159004, 0, 1.5512674, -5.3148696e-08, 0, 0, 0.08306098)
-layers = 2
-material_override = ExtResource("11_qrgwy")
-cast_shadow = 0
-mesh = SubResource("SphereMesh_wvtf1")
 
 [node name="Electric Particles" type="GPUParticles3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher" unique_id=771244116]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
@@ -989,3 +1045,5 @@ metadata/_custom_type_script = "uid://b2jd3djd45lf3"
 [connection signal="area_exited" from="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Strike Region" to="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Strike Region" method="OnBallExitedThis"]
 [connection signal="area_entered" from="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region" to="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region" method="OnBallEnteredThis"]
 [connection signal="area_exited" from="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region" to="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region" method="OnBallExitedThis"]
+[connection signal="area_entered" from="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Auto Aim Region" to="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Auto Aim Region" method="OnBallEnteredThis"]
+[connection signal="area_exited" from="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Auto Aim Region" to="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Auto Aim Region" method="OnBallExitedThis"]

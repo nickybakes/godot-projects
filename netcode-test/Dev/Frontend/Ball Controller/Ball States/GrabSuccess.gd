@@ -30,6 +30,7 @@ func StartStatePhysics(params : Dictionary = {}):
 	
 func ExitStatePhysics():
 	cooldown.Restart();
+	mcc.autoAimCooldown = 0;
 	var bounceDirection = currentDirection;
 	bounceDirection.y *= -1.0;
 	mcc.GetPhysics().BounceVelocity(bounceDirection, currentSpeed, mcc.traits.grabSuccessBounce);

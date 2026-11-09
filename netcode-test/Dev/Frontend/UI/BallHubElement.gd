@@ -27,15 +27,6 @@ class_name BallHubElement
 @export_group("Stamina")
 @export var staminaBar : TextureProgressBar;
 
-@export var staminaLabel : Label;
-@export var staminaIcon : CanvasItem;
-@export var staminaLabelScaleMin = .2;
-@export var staminaLabelScaleMax = 1.0;
-@export_range(0.0, 1.0, 0.01) var staminaLabelBlinkOff = .15;
-@export_range(0.0, 1.0, 0.01) var staminaLabelBlinkThreshold = .3;
-@export var staminaLabelBlinkTime = 1.0;
-
-
 var healthBlinkTimer : float = 0.0;
 var staminaBlinkTimer : float = 0.0;
 var ballController : BallMCC;
@@ -57,37 +48,25 @@ func Setup(id : int):
 	
 	pass;
 
-func DisplayStamina(value : float, max : float):
-	var p = value/max;
-	staminaBar.value = p;
-	#staminaLabel.text = GetPercentageString(value, max);
-	#var p = value/max;
-	#var newScale = lerp(staminaLabelScaleMin, staminaLabelScaleMax, p);
-	#staminaLabel.scale.x = newScale;
-	#staminaLabel.scale.y = newScale;
-	#staminaIcon.self_modulate.v = p;
-	#if(p <= staminaLabelBlinkThreshold):
-		#staminaLabel.visible = staminaBlinkTimer >= staminaLabelBlinkTime * staminaLabelBlinkOff;
-	#else:
-		#staminaLabel.visible = true;
+func DisplayStamina(percent : float):
+	staminaBar.value = percent;
 	pass;
 	
 
-func DisplayHealth(value : float, max : float):
-	healthLabel.text = GetPercentageString(value, max);
-	var p = value/max;
-	var newScale = lerp(healthLabelScaleMax, healthLabelScaleMin, p);
+func DisplayHealth(percent : float):
+	healthLabel.text = GetPercentageString(percent);
+	var newScale = lerp(healthLabelScaleMax, healthLabelScaleMin, percent);
 	healthLabel.scale.x = newScale;
 	healthLabel.scale.y = newScale;
-	healthLabel.modulate = healthColor.sample(p);
-	healthLabel.rotation_degrees = healthRotation.sample(p);
-	if(p <= healthLabelBlinkThreshold):
+	healthLabel.modulate = healthColor.sample(percent);
+	healthLabel.rotation_degrees = healthRotation.sample(percent);
+	if(percent <= healthLabelBlinkThreshold):
 		healthLabel.visible = healthBlinkTimer >= healthLabelBlinkTime * healthLabelBlinkOff;
 	else:
 		healthLabel.visible = true;
 
-func GetPercentageString(value : float, max : float) -> String:
-	return "%.0f" % [(value/max) * 100.0];
+func GetPercentageString(percent : float) -> String:
+	return "%.0f" % [percent * 100.0];
 	
 func ShowAlive():
 	eliminated.visible = false;
@@ -104,10 +83,6 @@ func _process(delta: float) -> void:
 	healthBlinkTimer += delta;
 	if(healthBlinkTimer >= healthLabelBlinkTime):
 		healthBlinkTimer = 0.0;
-		
-	staminaBlinkTimer += delta;
-	if(staminaBlinkTimer >= staminaLabelBlinkTime):
-		staminaBlinkTimer = 0.0;
 	pass;
 
 func _exit_tree() -> void:

@@ -18,6 +18,8 @@ func ExitStateVisuals():
 
 func StartStatePhysics(params : Dictionary = {}):
 	cooldown.Restart();
+	mcc.autoAimCooldown = 0;
+
 	mcc.GetPhysics().BounceVelocity(mcc.currentFacingDirection, mcc.currentSpeed, mcc.traits.grabAttemptBoost);
 	mcc.staminaStat.Spend(mcc.traits.grabStaminaCost);
 	

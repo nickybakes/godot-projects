@@ -13,7 +13,7 @@
 
 [sub_resource type="Gradient" id="Gradient_6gu6k"]
 offsets = PackedFloat32Array(0, 0.2570533, 0.5423198, 1)
-colors = PackedColorArray(0.4627451, 0, 0, 1, 0.7176471, 0.11764706, 0.14117648, 1, 1, 0.84313726, 0, 1, 1, 1, 1, 1)
+colors = PackedColorArray(0.45861232, 0, 0.09211389, 1, 0.8823237, 0, 0.19727999, 1, 1, 0.92156863, 0, 1, 1, 1, 1, 1)
 
 [sub_resource type="Curve" id="Curve_6gu6k"]
 _limits = [-9.978741, 0.01, 0.0, 1.0]
@@ -65,7 +65,7 @@ font_size = 68
 outline_size = 20
 outline_color = Color(0, 0, 0, 1)
 
-[node name="Ball Hub Element" type="Control" unique_id=190371458 node_paths=PackedStringArray("colorBar", "playerNumberLabel", "alive", "eliminated", "lineTrackerStartPoint", "trackerLine", "healthLabel", "healthIcon", "staminaBar", "staminaLabel", "staminaIcon")]
+[node name="Ball Hub Element" type="Control" unique_id=190371458 node_paths=PackedStringArray("colorBar", "playerNumberLabel", "alive", "eliminated", "lineTrackerStartPoint", "trackerLine", "healthLabel", "healthIcon", "staminaBar")]
 custom_minimum_size = Vector2(235, 127)
 layout_mode = 3
 anchor_left = 0.411
@@ -94,11 +94,6 @@ healthLabelBlinkTime = 0.217
 healthColor = SubResource("Gradient_6gu6k")
 healthRotation = SubResource("Curve_6gu6k")
 staminaBar = NodePath("Alive/Stamina Bar")
-staminaLabel = NodePath("Eliminated/Stamina Label")
-staminaIcon = NodePath("Alive/Stamina")
-staminaLabelScaleMin = 0.749
-staminaLabelBlinkOff = 0.08
-staminaLabelBlinkTime = 0.217
 metadata/_custom_type_script = "uid://8jdgve60fqwx"
 
 [node name="Color BG" type="TextureRect" parent="." unique_id=1921094636]

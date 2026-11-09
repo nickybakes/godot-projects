@@ -13,6 +13,16 @@
 [ext_resource type="Resource" uid="uid://byxlk58ch56k7" path="res://Dev/Frontend/Ball Controller/Ball Bounce Traits/Strike Success.tres" id="8_pnx74"]
 [ext_resource type="Resource" uid="uid://bt1byfh6780lb" path="res://Dev/Frontend/Ball Controller/Ball Bounce Traits/Strike Victim.tres" id="9_37wd0"]
 
+[sub_resource type="Curve" id="Curve_c74sw"]
+_limits = [0.0, 1.0, 0.0, 5.0]
+_data = [Vector2(0.9803921, 0), 0.0, 0.0, 0, 0, Vector2(3.1652663, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_qrgwy"]
+_limits = [0.0, 7.0, 0.0, 40.0]
+_data = [Vector2(13.221289, 0), 0.0, 0.26250008, 0, 0, Vector2(40, 5.3), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="Curve" id="Curve_pqr02"]
 _limits = [0.0, 1.0, 0.0, 1.17]
 _data = [Vector2(0, 0.47857141), 0.0, 0.0, 0, 0, Vector2(0.93532944, 1), 0.0, 0.0, 0, 0]
@@ -44,6 +54,8 @@ overSpeedLimitDirectionalControl = 2.74
 overSpeedMoveControl = 10.0
 overSpeedDeceleration = 5.0
 basicBounceMoveControlCooldown = SubResource("Curve_pqr02")
+autoAimPowerBySpeedCurve = SubResource("Curve_qrgwy")
+autoAimCooldown = SubResource("Curve_c74sw")
 electricBuildUpBySpeed = SubResource("Curve_mf80y")
 jumpForce = 8.0
 jumpHover = 1.0

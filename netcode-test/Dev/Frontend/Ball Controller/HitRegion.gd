@@ -5,25 +5,54 @@ class_name HitRegion
 
 @export var filterOutInvulnerableBalls : bool;
 
-@export var minScale : float = 1.0 ;
-@export var maxScale : float = 1.0 ;
-@export var minScaleSpeed : float = 0.0 ;
-@export var maxScaleSpeed : float = 10.0 ;
+@export var angleScaleForSort : float = 5.0;
+
+@export var speedScale : Curve;
+@export var electricScale : Curve;
 
 var ballsInsideThisRegion : Array[BallMCC];
 var numBallsInside : int;
+
+var sortedBallsInsideThisRegion : Array[BallMCC];
 
 func _ready() -> void:
 	ballsInsideThisRegion = [];
 	numBallsInside = 0;
 	
-func ScaleBySpeed(speed : float):
-	var newScale = lerp(minScale, maxScale, clamp((speed - minScaleSpeed)/maxScaleSpeed, 0.0, 1.0));
+func ScaleRegion(speed : float, electric : float):
+	var newScale = speedScale.sample(speed) * electricScale.sample(electric);
 	scale = Vector3.ONE * newScale;
 	pass;
 	
 func GetOrderedBalls(maxNumberOfBalls : int):
 	pass;
+	
+	
+func SortByDistanceAndDirection(direction : Vector3) -> Array[BallMCC]:
+	var orderedList: Array[BallMCC] = [];
+	var unorderedScores : Array[Dictionary] = [];
+	
+	for i in ballsInsideThisRegion.size():
+		var ball = ballsInsideThisRegion[i];
+		var angle = direction.dot(ballController.global_position.direction_to(ball.global_position));
+		var distance = ballController.global_position.distance_to(ball.global_position);
+		var score = distance - (angle * angleScaleForSort);
+		unorderedScores.push_back({"score" : score, "index" : i});
+		
+	while(unorderedScores.size() > 0):
+		var smallestScore = INT64_MAX;
+		var indexInUnorderedScores = 0;
+		for i in unorderedScores.size():
+			if(unorderedScores[i].score < smallestScore):
+				smallestScore = unorderedScores[i].score;
+				indexInUnorderedScores = i;
+		orderedList.push_back(ballsInsideThisRegion[unorderedScores[indexInUnorderedScores].index]);
+		unorderedScores.remove_at(indexInUnorderedScores);
+	
+	sortedBallsInsideThisRegion = orderedList;
+	return orderedList;
+	pass;
+
 
 func OnBallEnteredThis(area : Area3D):
 	if(!ballController.updatePhysics):

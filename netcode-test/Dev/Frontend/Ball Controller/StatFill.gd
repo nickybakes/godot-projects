@@ -6,6 +6,8 @@ class_name StatFill
 var value : float;
 var cooldown : float;
 
+var percent : float;
+
 @export_range(0.0, 1.0, .01) var startingPercent : float = 0;
 @export var minValue : float = 0;
 @export var maxValue : float = 3;
@@ -22,6 +24,8 @@ func Process(delta : float):
 		cooldown = move_toward(cooldown, 0, delta);
 	else:
 		value = move_toward(value, minValue, depleteSpeed * delta);
+		
+	CalcPercent();
 	pass;
 
 func Add(amount : float) -> float:
@@ -32,4 +36,9 @@ func Add(amount : float) -> float:
 	if(value == maxValue && difference != 0):
 		cooldown = move_toward(cooldown, cooldownMax, cooldownForHittingMaxValue);
 	
+	CalcPercent();
+	
 	return difference;
+
+func CalcPercent():
+	percent = (value - minValue)/maxValue;

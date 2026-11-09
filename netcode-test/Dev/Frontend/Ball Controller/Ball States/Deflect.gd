@@ -3,6 +3,7 @@ class_name Deflect
 
 func StartStatePhysics(params : Dictionary = {}):
 	mcc.GetPhysics().isDeflect = false;
+	mcc.autoAimCooldown = 0;
 	
 	if(mcc.deflectRegion.numBallsInside >= 1):
 		var hitBall = mcc.deflectRegion.ballsInsideThisRegion[0];

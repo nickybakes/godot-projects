@@ -43,6 +43,7 @@ func MoveAndCollide(delta : float):
 				else:
 					BounceVelocity(collisionReflection, mcc.currentSpeed, mcc.traits.basicBounceTraits);
 				timeSinceBasicBounce = 0.0;
+				mcc.autoAimCooldown = 0;
 				isBasicBounce = true;
 		
 		if(!isBasicBounce):
@@ -65,6 +66,7 @@ func ProcessPhysics(delta : float, params : Dictionary = {}):
 	MovementControl(delta);
 	CheckStrikeRegion(delta);
 	CheckDeflectRegion(delta);
+	AutoAim(delta);
 	pass;
 	
 func GetSteepness() -> float:
@@ -105,6 +107,21 @@ func CheckStrikeRegion(delta : float) -> void:
 		if(mcc.currentSpeed >= mcc.traits.minRequiredStrikeSpeed):
 			isStrikeAttempt = true;
 	pass;
+	
+	
+func AutoAim(delta : float) -> void:
+	var orderedBalls : Array[BallMCC] = mcc.autoAimRegion.SortByDistanceAndDirection(mcc.currentFacingDirection);
+	
+	var aimPower = mcc.traits.autoAimPowerBySpeedCurve.sample(mcc.currentSpeed) * mcc.traits.autoAimCooldown.sample(mcc.autoAimCooldown);
+	
+	if(orderedBalls.size() > 0 && aimPower > 0):
+		var targetBall = orderedBalls[0];
+		var directionToTarget : Vector3 = mcc.global_position.direction_to(targetBall.global_position);
+		var angleTo = mcc.currentDirection.angle_to(directionToTarget);
+		var weight = (aimPower * delta)/angleTo;
+		var newDirection = mcc.currentDirection.slerp(directionToTarget, weight);
+		mcc.velocity = newDirection * mcc.currentSpeed;
+		pass;
 
 func MovementControl(delta : float):
 	var controlSurfacePower = 1.0 - GetSteepness();
