@@ -28,7 +28,7 @@ func SetOwner(newOwnerId : int):
 func OwnerDisconnected():
 	pass;
 
-func GetSpawnParams():
+func GetSpawnParams() -> Dictionary:
 	return spawnParams;
 
 func DoSpawnParams():

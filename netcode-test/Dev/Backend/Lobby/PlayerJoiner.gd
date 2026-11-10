@@ -18,6 +18,8 @@ func _exit_tree() -> void:
 func RequestPlayerJoin(clientId : int, inputDevice : int):
 	if(LobbyManager.Lobby.CanPlayerJoin()):
 		var spawnParams = {"playerNumber": LobbyManager.Lobby.GetNextAvailablePlayerNumber(), "deviceId": inputDevice};
+		var customizationParams = {"invertChargeAim" : false, "colorIndex": CustomizationManager.Manager.GetNextAvailableColor(0, 1)};
+		spawnParams.set("customization", customizationParams);
 		GameNetManager.GameNet.netObjectManager.SpawnNetObjectWithOwnerId(playerTokenPath, spawnParams, clientId);
 	else:
 		rpc_id(clientId, 'PlayerJoinRejected', inputDevice);

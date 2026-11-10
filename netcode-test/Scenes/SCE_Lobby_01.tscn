@@ -10,6 +10,7 @@
 [ext_resource type="Material" uid="uid://dje6s1fpeyopb" path="res://Art/Materials/M_SkyHavana_01.tres" id="6_0ffwa"]
 [ext_resource type="Script" uid="uid://b3mping6psqq0" path="res://Dev/Frontend/Camera/CameraManager.gd" id="6_fbg8u"]
 [ext_resource type="Script" uid="uid://bsw5rk11juyn3" path="res://Dev/Frontend/UI/Hub.gd" id="6_kfure"]
+[ext_resource type="Script" uid="uid://dhuxkgt2jqlqf" path="res://Dev/Frontend/Customization/CustomizationManager.gd" id="7_kfure"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_c5qv8"]
 font_size = 54
@@ -116,6 +117,11 @@ hubProfile = ExtResource("5_40un4")
 
 [node name="Player Joiner" type="Node" parent="." unique_id=1136046608]
 script = ExtResource("1_5a6u1")
+
+[node name="Customization Manager" type="Node" parent="." unique_id=626275827]
+script = ExtResource("7_kfure")
+cursorCustomization = ExtResource("5_rsejo")
+metadata/_custom_type_script = "uid://dhuxkgt2jqlqf"
 
 [node name="CameraManager" type="Node3D" parent="." unique_id=711721173 node_paths=PackedStringArray("camera")]
 script = ExtResource("6_fbg8u")

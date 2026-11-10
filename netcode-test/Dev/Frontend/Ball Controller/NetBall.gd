@@ -27,11 +27,12 @@ func DoSpawnParams():
 		velocity = spawnParams["velocity"];
 		ballController.velocity = velocity;
 		
-	ballController.playerNumber = playerNumber;
-	ballController.visuals.Setup(playerNumber);
-	ballController.updatePhysics = !isDummy;
 	playerToken = LobbyManager.Lobby.GetPlayerTokenByPlayerNumber(playerNumber);
 	ballController.playerToken = playerToken;
+	
+	ballController.playerNumber = playerNumber;
+	ballController.updatePhysics = !isDummy;
+	ballController.visuals.Setup(playerNumber);
 	
 	if(!isDummy):
 		inputDevice = playerToken.inputDevice;

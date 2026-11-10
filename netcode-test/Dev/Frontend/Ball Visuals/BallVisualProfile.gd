@@ -32,6 +32,7 @@ class_name BallVisualProfile
 
 @export_category("Tracker Line")
 @export var trackerLineSpeedAlphaMultiply : float = 1.0;
+@export var trackerLineSpeedAlphaMultiplyMax : float = 1.0;
 @export var trackerLineStrikeHeartbeat : float = 2.0;
 @export var trackerLineGrabHeartbeat : float = 2.0;
 @export var trackerLineStrikeAlphaMultiply : float = 7.0;

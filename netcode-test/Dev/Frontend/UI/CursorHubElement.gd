@@ -18,27 +18,33 @@ var previousCursorPosition := Vector2.ZERO;
 
 func Setup(id : int):
 	super(id);
-	colorBar.modulate = customization.GetColorFromPlayerNumber(id);
 	playerNumberLabel.text = str("P", id);
 	
 	cursor = CursorManager.Manager.cursors[id];
-	
-	trackerLine.visible = true;
-	trackerLine.Setup(id - 1, id);
-	trackerLine.startPointTarget = lineTrackerStartPoint;
-	trackerLine.endPointTarget = cursor.transform;
-	trackerLine.heartbeat = 1.0;
-	trackerLine.alphaMultiply = 8.0;
+	cursor.hubElement = self;
 	
 	playerToken = LobbyManager.Lobby.GetPlayerTokenByPlayerNumber(id);
 	var connection : Connection = Network.currentLobby.connections[playerToken.ownerId];
 	var accountId : int = connection.accountId;
 	accountDisplay.Setup(accountId);
 	
+	trackerLine.visible = true;
+	trackerLine.Setup(id);
+	trackerLine.startPointTarget = lineTrackerStartPoint;
+	trackerLine.endPointTarget = cursor.transform;
+	trackerLine.heartbeat = 1.0;
+	trackerLine.alphaMultiply = 8.0;
+	
+	UpdateColor();
+	
 	pass;
 
 func UpdateInvertChargeAim(inverted : bool):
 	invertChargeAim.visible = inverted;
+	
+func UpdateColor():
+	colorBar.modulate = customization.cursorColors[playerToken.customization.colorIndex];
+	trackerLine.SetColorIndex(playerToken.customization.colorIndex);
 
 func _process(delta: float) -> void:
 	if(!visible):

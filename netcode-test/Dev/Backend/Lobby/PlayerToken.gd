@@ -14,11 +14,17 @@ func DoSpawnParams() -> void:
 		playerNumber = spawnParams["playerNumber"];
 	if(spawnParams.has("deviceId")):
 		deviceId = spawnParams["deviceId"];
+	if(spawnParams.has("customization")):
+		customization.LoadFromParams(spawnParams["customization"]);
 	originalOwnerId = ownerId;
 	if(originalOwnerId == Network.myId):
 		inputDevice = InputManager.GetInputDevice(deviceId);
 		
 	Network.LogStr("Player joined: ", playerNumber);
+	
+func GetSpawnParams():
+	spawnParams.set("customization", customization.GetParams());
+	return spawnParams;
 
 func OwnerDisconnected():
 	if(LobbyManager.Lobby.CanPlayerLeave()):

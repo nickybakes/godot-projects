@@ -29,12 +29,11 @@ var alphaMultiply : float = 1.0;
 var goalAlphaMultiply : float = 1.0;
 var maxAlphaMultiply : float = 13.0;
 
-func Setup(colorIndex : int, playerNumber : int):
+func Setup(playerNumber : int):
 	currentMaterial = middle.material_override.duplicate();
 	start.material_override = currentMaterial;
 	middle.material_override = currentMaterial;
 	end.material_override = currentMaterial;
-	SetColorIndex(colorIndex);
 	SetPulseOffset(playerNumber);
 	
 	reparent(CameraManager.CM.camera, false);

@@ -41,7 +41,7 @@ lineTrackerStartPoint = NodePath("Line Tracker Start Point")
 accountDisplay = NodePath("Account Display")
 trackerLine = NodePath("PRE_TrackerLine_01")
 customization = ExtResource("2_da7sq")
-speedAlphaMultiply = 20000.0
+speedAlphaMultiply = 30000.0
 invertChargeAim = NodePath("Inverted Charge Aim")
 metadata/_custom_type_script = "uid://bvxfcpu055diw"
 

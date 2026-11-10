@@ -43,7 +43,7 @@ var messageTime : float = 0.0;
 @export var roller : Node3D;
 
 func Setup(playerNumber : int):
-	var color = ballCustomizationDirectory.GetColorFromPlayerNumber(playerNumber);
+	var color = ballCustomizationDirectory.ballColors[ballController.playerToken.customization.colorIndex];
 	var ballMaterial = ballCustomizationDirectory.ballMaterialBasic.duplicate();
 	var outlineMaterial = ballCustomizationDirectory.outlineMaterial.duplicate();
 	var xrayMaterial = ballCustomizationDirectory.xrayMaterial.duplicate();
@@ -57,7 +57,7 @@ func Setup(playerNumber : int):
 	xrayMesh.material_override = xrayMaterial;
 	chargeAimMesh.material_override = chargeAimMaterial;
 	
-	var electricColor = ballCustomizationDirectory.GetElectricColorFromPlayerNumber(playerNumber);
+	var electricColor = ballCustomizationDirectory.ballElectricColors[ballController.playerToken.customization.colorIndex];
 	electricParticles.material_override = electricParticles.material_override.duplicate();
 	electricParticles.material_override.set_shader_parameter("color", electricColor);
 	

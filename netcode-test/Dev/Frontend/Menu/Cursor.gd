@@ -8,9 +8,15 @@ class_name Cursor
 @export var normalizedPosition : Vector2;
 var currentNormalizedPosition : Vector2;
 
+var hubElement : CursorHubElement;
+
+var currentColorIndex : int = -1;
+
 var playerNumber : int;
 var playerToken : PlayerToken;
 var inputDevice : InputDevice;
+
+var requestedColorCycle : bool;
 
 func DoSpawnParams():
 	if(spawnParams.has("playerNumber")):
@@ -19,19 +25,24 @@ func DoSpawnParams():
 		normalizedPosition = spawnParams["normalizedPosition"];
 		currentNormalizedPosition = spawnParams["normalizedPosition"];
 		
+	if(CursorManager.Manager):
+		CursorManager.Manager.CursorAdded(playerNumber, self);
+		
 	text.text = str("P", playerNumber);	
 	
-	if(CursorManager.Manager):
-		sprite.modulate = CursorManager.Manager.cursorCustomizationDirectory.GetColorFromPlayerNumber(playerNumber);
-		CursorManager.Manager.CursorAdded(playerNumber, self);
+	playerToken = LobbyManager.Lobby.GetPlayerTokenByPlayerNumber(playerNumber);
+	
+	UpdateColor();
 	
 	if(!isDummy):
-		playerToken = LobbyManager.Lobby.GetPlayerTokenByPlayerNumber(playerNumber);
 		inputDevice = playerToken.inputDevice;
-	
+		
 	pass;
 
 func _process(delta: float) -> void:
+	if(!playerToken):
+		return;
+		
 	if(CursorManager.Manager != null):
 		if(isDummy):
 			currentNormalizedPosition = lerp(currentNormalizedPosition, normalizedPosition, .5);
@@ -41,8 +52,24 @@ func _process(delta: float) -> void:
 			if(inputDevice.inputBuffer.IsActionJustPressedThisFrame(Enums.InputAction.ToggleInvert, 1)):
 				playerToken.customization.invertChargeAim = !playerToken.customization.invertChargeAim;
 				pass;
+			if(!requestedColorCycle && inputDevice.inputBuffer.IsActionJustPressedThisFrame(Enums.InputAction.CycleColorNext, 1)):
+				requestedColorCycle = true;
+				CustomizationManager.Manager.CycleColor(playerToken.customization.colorIndex, 1, playerNumber);
+				pass;
+			if(!requestedColorCycle && inputDevice.inputBuffer.IsActionJustPressedThisFrame(Enums.InputAction.CycleColorPrev, 1)):
+				requestedColorCycle = true;
+				CustomizationManager.Manager.CycleColor(playerToken.customization.colorIndex, -1, playerNumber);
+				pass;
 			
 		CursorManager.Manager.SetTransformFromNormalizedPosition(currentNormalizedPosition, transform);
+		if(playerToken.customization.colorIndex != currentColorIndex):
+			UpdateColor();
+
+func UpdateColor():
+	if(CursorManager.Manager):
+		currentColorIndex = playerToken.customization.colorIndex;
+		sprite.modulate = CursorManager.Manager.cursorCustomizationDirectory.cursorColors[playerToken.customization.colorIndex];
+		hubElement.UpdateColor();
 
 func _exit_tree() -> void:
 	if(CursorManager.Manager != null):

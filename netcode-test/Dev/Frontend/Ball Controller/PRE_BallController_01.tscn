@@ -354,6 +354,7 @@ shape = SubResource("CapsuleShape3D_qrgwy")
 
 [node name="Charge Aim Mesh" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher" unique_id=283875934]
 transform = Transform3D(-1.293, -1.9523758e-07, 8.534105e-15, 0, -5.6518825e-08, -1.293, 1.9523758e-07, -1.293, 5.6518825e-08, 0, 0, -0.113952056)
+visible = false
 material_override = ExtResource("5_icp2y")
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_c5qv8")
@@ -362,6 +363,7 @@ mesh = SubResource("CylinderMesh_c5qv8")
 
 [node name="Electric Particles" type="GPUParticles3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher" unique_id=771244116]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+layers = 4
 material_override = ExtResource("15_vktj5")
 cast_shadow = 0
 gi_mode = 0

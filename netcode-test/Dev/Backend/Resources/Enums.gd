@@ -11,4 +11,6 @@ enum InputAction
 	EndGame,
 	Grab,
 	ToggleInvert,
+	CycleColorNext,
+	CycleColorPrev,
 }

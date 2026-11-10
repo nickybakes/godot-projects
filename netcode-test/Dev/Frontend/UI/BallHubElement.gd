@@ -12,7 +12,6 @@ class_name BallHubElement
 @export var lineTrackerStartPoint : Control;
 @export var trackerLine : TrackerLine;
 
-
 @export_group("Health")
 @export var healthLabel : Label;
 @export var healthIcon : CanvasItem;
@@ -36,25 +35,30 @@ var ballController : BallMCC;
 
 func Setup(id : int):
 	super(id);
-	colorBar.modulate = customization.GetColorFromPlayerNumber(id);
 	playerNumberLabel.text = str("P", id);
 	
 	ballController = GameManager.Manager.balls[id].ballController;
 	ballController.visuals.ballHubElement = self;
 	
 	trackerLine.visible = true;
-	trackerLine.Setup(id - 1, id);
+	trackerLine.Setup(id);
 	trackerLine.startPointTarget = lineTrackerStartPoint;
 	trackerLine.endPointTarget = ballController;
+	
+	UpdateColor();
 	
 	ShowAlive();
 	
 	pass;
+	
+	
+func UpdateColor():
+	colorBar.modulate = customization.cursorColors[ballController.playerToken.customization.colorIndex];
+	trackerLine.SetColorIndex(ballController.playerToken.customization.colorIndex);	
 
 func DisplayStamina(percent : float):
 	staminaBar.value = percent;
 	pass;
-	
 
 func DisplayHealth(percent : float):
 	healthLabel.text = GetPercentageString(percent);

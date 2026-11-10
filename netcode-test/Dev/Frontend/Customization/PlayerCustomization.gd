@@ -3,11 +3,15 @@ class_name PlayerCustomization
 
 @export var invertChargeAim : bool;
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+@export var colorIndex : int;
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func LoadFromParams(params : Dictionary):
+	if(params.has("invertChargeAim")):
+		invertChargeAim = params["invertChargeAim"];
+	if(params.has("colorIndex")):
+		colorIndex = params["colorIndex"];
+	pass;
+
+func GetParams() -> Dictionary:
+	return {"invertChargeAim" : invertChargeAim, "colorIndex" : colorIndex};
