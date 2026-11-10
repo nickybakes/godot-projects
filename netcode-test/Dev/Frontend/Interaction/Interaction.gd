@@ -22,7 +22,7 @@ func GetParams() -> Dictionary:
 	return {'timeStamp' : timeStamp, 'ownerId': ownerId, 'type': type};
 
 func GetLifeTime() -> float:
-	return ((NetTime.clock as float) - (timeStamp as float)) / 1000.0;
+	return ((NetTime.clock as float + (NetTime.clockLatency)) - (timeStamp as float)) / 1000.0;
 
 func Evaluate():
 	pass;
