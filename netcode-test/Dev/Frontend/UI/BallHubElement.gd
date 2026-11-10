@@ -27,6 +27,9 @@ class_name BallHubElement
 @export_group("Stamina")
 @export var staminaBar : TextureProgressBar;
 
+@export_group("Controls")
+@export var invertChargeAim : Control;
+
 var healthBlinkTimer : float = 0.0;
 var staminaBlinkTimer : float = 0.0;
 var ballController : BallMCC;
@@ -84,6 +87,9 @@ func _process(delta: float) -> void:
 	if(healthBlinkTimer >= healthLabelBlinkTime):
 		healthBlinkTimer = 0.0;
 	pass;
+	
+func UpdateInvertChargeAim(inverted : bool):
+	invertChargeAim.visible = inverted;
 
 func _exit_tree() -> void:
 	trackerLine.queue_free();

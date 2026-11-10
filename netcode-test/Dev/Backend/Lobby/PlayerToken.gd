@@ -5,6 +5,8 @@ var playerNumber : int;
 var deviceId : int;
 var originalOwnerId : int;
 
+@export var customization : PlayerCustomization;
+
 var inputDevice : InputDevice;
 
 func DoSpawnParams() -> void:

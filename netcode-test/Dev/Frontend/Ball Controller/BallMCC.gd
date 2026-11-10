@@ -24,9 +24,14 @@ class_name BallMCC
 @export var slamRegion : HitRegion;
 @export var autoAimRegion : HitRegion;
 
+@export_category("Cooldowns")
+@export var strikeCooldown : Cooldown;
+@export var deflectCooldown : Cooldown;
+
 var interactive : bool = true;
 
 var playerNumber : int;
+var playerToken : PlayerToken;
 var eliminated : bool;
 
 var clash : bool;
@@ -41,6 +46,7 @@ var grabVictimTotal : int;
 var grabVictimAngleOffset : float;
 
 var autoAimCooldown : float;
+var moveCooldown : float = 1.0;
 
 var strikePrioritied : bool
 
@@ -147,6 +153,9 @@ func _physics_process(delta: float) -> void:
 	pass;
 	
 func _process(delta: float) -> void:
+	
+	moveCooldown = move_toward(moveCooldown, 1.0, delta);
+	
 	currentState.Process(delta);
 	strikeRegion.ScaleRegion(currentSpeed, electricStat.percent);
 	grabRegion.ScaleRegion(currentSpeed, electricStat.percent);
@@ -155,6 +164,8 @@ func _process(delta: float) -> void:
 		visuals.ballHubElement.DisplayStamina(staminaStat.percent);
 		visuals.header.DisplayStamina(staminaStat.percent);
 		visuals.ballHubElement.DisplayHealth(healthStat.percent);
+		if(playerToken):
+			visuals.ballHubElement.UpdateInvertChargeAim(playerToken.customization.invertChargeAim);
 		visuals.UpdateElectricVisuals(electricStat.percent, delta);
 		visuals.UpdateInvulnVisuals(invulnStat.value, delta);
 		currentState.ProcessVisuals(delta);

@@ -4,8 +4,7 @@
 
 [resource]
 script = ExtResource("1_l4eks")
-minBounceSpeed = 10.0
-maxBounceSpeed = 30.0
-topDownSpeedScalar = 1.0
-verticalSpeedScalar = 1.0
+maxBounceSpeed = 23.0
+topDownSpeedScalar = 0.931
+verticalSpeedScalar = 1.591
 metadata/_custom_type_script = "uid://cwsqglbcgrd4x"

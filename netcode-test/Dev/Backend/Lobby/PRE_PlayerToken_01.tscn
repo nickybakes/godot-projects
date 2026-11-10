@@ -1,11 +1,20 @@
 [gd_scene format=3 uid="uid://4buqgu3qs5hk"]
 
 [ext_resource type="Script" uid="uid://dj210ni2xwg7c" path="res://Dev/Backend/Lobby/PlayerToken.gd" id="1_60ynm"]
+[ext_resource type="Script" uid="uid://bocyvxxykhdrl" path="res://Dev/Frontend/Customization/PlayerCustomization.gd" id="2_k0tc8"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_k0tc8"]
+properties/0/path = NodePath("PlayerCustomization:invertChargeAim")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
-[node name="PRE_PlayerToken_01" type="MultiplayerSynchronizer" unique_id=1746111620]
+[node name="PRE_PlayerToken_01" type="MultiplayerSynchronizer" unique_id=1746111620 node_paths=PackedStringArray("customization")]
 root_path = NodePath(".")
 replication_config = SubResource("SceneReplicationConfig_k0tc8")
 script = ExtResource("1_60ynm")
+customization = NodePath("PlayerCustomization")
 metadata/_custom_type_script = "uid://dj210ni2xwg7c"
+
+[node name="PlayerCustomization" type="Node" parent="." unique_id=605588264]
+script = ExtResource("2_k0tc8")
+metadata/_custom_type_script = "uid://bocyvxxykhdrl"

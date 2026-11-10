@@ -127,7 +127,7 @@ func MovementControl(delta : float):
 	var controlSurfacePower = 1.0 - GetSteepness();
 	var basicBounceControlDamp = mcc.traits.basicBounceMoveControlCooldown.sample(timeSinceBasicBounce);
 	
-	var moveControl = mcc.traits.moveControl * basicBounceControlDamp;
+	var moveControl = mcc.traits.moveControl * basicBounceControlDamp * mcc.moveCooldown;
 	var moveSpeed = mcc.traits.moveSpeed;
 	
 	if mcc.requestedMoveDirection:

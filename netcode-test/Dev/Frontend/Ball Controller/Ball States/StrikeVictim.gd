@@ -18,6 +18,7 @@ func StartStateVisuals(params : Dictionary = {}):
 func StartStatePhysics(params : Dictionary = {}):
 	mcc.invulnStat.Add(1.0);
 	cooldown.Restart();
+	mcc.deflectCooldown.Restart();
 	
 func ProcessPhysics(delta : float):
 	super(delta);

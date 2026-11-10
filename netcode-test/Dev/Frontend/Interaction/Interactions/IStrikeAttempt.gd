@@ -81,15 +81,13 @@ func Evaluate():
 		for i in victims.size():
 			if(!clashVictims.has(victims[i])):
 				var victimController = GameManager.Manager.balls[victims[i]].ballController;
-				if(victimController.invulnStat.value > 0):
-					continue;
 					
 				if(victimController.updatePhysics):
 					if(victimController.blocking):
 						victimController.BlockDamageFromStrike(activatorController, activatorSpeed, activatorElectric);
 						victimController.GetPhysics().BounceVelocity(-directionsFromVictims[i], activatorSpeed, victimController.traits.strikeBlockerBounceTraits);
 						pass;
-					else:
+					elif(victimController.invulnStat.value == 0):
 						victimController.TakeDamageFromStrike(activatorController, activatorSpeed, activatorElectric);
 						victimController.ForceSetState("strikeVictim");
 						victimController.GetPhysics().BounceVelocity(-directionsFromVictims[i], activatorSpeed, victimController.traits.strikeVictimBounceTraits);
@@ -106,4 +104,10 @@ func Evaluate():
 		
 		totalVictims = max(totalVictims, 1);
 		if(activatorController.updatePhysics):
+			#print(activatorSpeed);
+			#print((totalHit as float)/(totalVictims as float));
+			#print(totalDirection.normalized());
+			#print("total victims: ", totalVictims);
+			#print("total blocked: ", totalBlocked);
+			#print("total hit: ", totalHit);
 			activatorController.GetPhysics().BounceVerlocityLerpTraits(totalDirection.normalized(), activatorSpeed, activatorController.traits.strikeFailedBounceTraits, activatorController.traits.strikeSuccessBounceTraits, (totalHit as float)/(totalVictims as float));

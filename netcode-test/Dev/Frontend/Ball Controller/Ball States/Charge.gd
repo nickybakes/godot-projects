@@ -25,6 +25,7 @@ func ExitStatePhysics():
 	exitPhysicsParams.set('direction', chargeDirection)
 	var speed = lerp(mcc.traits.minLaunchSpeed, mcc.traits.maxLaunchSpeed, chargeAmount)
 	exitPhysicsParams.set('speed', speed);
+	mcc.moveCooldown = 0;
 	
 func Process(delta : float):
 	super(delta);
@@ -32,6 +33,11 @@ func Process(delta : float):
 	chargeDirection.x = mcc.requestedMoveDirection.x;
 	chargeDirection.y = lerp(-1.0, mcc.traits.chargeDirectionMaxY, inputLength);
 	chargeDirection.z = mcc.requestedMoveDirection.z;
+	
+	if(mcc.playerToken.customization.invertChargeAim):
+		chargeDirection.x *= -1.0;
+		chargeDirection.z *= -1.0;
+	
 	chargeAmount = clamp(timeInState / mcc.traits.timeTilMaxCharge, 0.0, 1.0);
 	
 func ProcessVisuals(delta : float):

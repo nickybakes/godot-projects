@@ -45,7 +45,7 @@ point_count = 3
 
 [resource]
 script = ExtResource("1_nmqsg")
-gravity = 20.0
+gravity = 25.0
 moveSpeed = 10.0
 moveControl = 30.0
 deceleration = 5.0
@@ -59,7 +59,7 @@ autoAimCooldown = SubResource("Curve_c74sw")
 electricBuildUpBySpeed = SubResource("Curve_mf80y")
 jumpForce = 8.0
 jumpHover = 1.0
-jumpInitialStaminaCost = 0.75
+jumpInitialStaminaCost = 0.55
 jumpHoverStaminaCost = 0.5
 maxJumpTime = 1.5
 basicBounceMinDotProduct = 0.67

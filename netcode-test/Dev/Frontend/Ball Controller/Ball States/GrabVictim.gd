@@ -15,6 +15,10 @@ func StartState(params : Dictionary = {}):
 	parentIsDoneGrabbing = false;
 	currentSpeed = 0;
 	currentDirection = Vector3.UP;
+
+func StartStatePhysics(params : Dictionary = {}):
+	mcc.deflectCooldown.Restart();
+	
 	
 func ExitState():
 	super();

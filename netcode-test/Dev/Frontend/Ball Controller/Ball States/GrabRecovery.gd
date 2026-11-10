@@ -15,6 +15,8 @@ func StartStatePhysics(params : Dictionary = {}):
 	if(params.has('velocity')):
 		velocity = params['velocity'];
 	velocitySet = false;
+	mcc.deflectCooldown.Restart();
+
 
 func ProcessPhysics(delta : float):
 	super(delta);

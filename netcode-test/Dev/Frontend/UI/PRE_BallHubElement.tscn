@@ -65,7 +65,12 @@ font_size = 68
 outline_size = 20
 outline_color = Color(0, 0, 0, 1)
 
-[node name="Ball Hub Element" type="Control" unique_id=190371458 node_paths=PackedStringArray("colorBar", "playerNumberLabel", "alive", "eliminated", "lineTrackerStartPoint", "trackerLine", "healthLabel", "healthIcon", "staminaBar")]
+[sub_resource type="LabelSettings" id="LabelSettings_c5qv8"]
+font_size = 22
+outline_size = 7
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Ball Hub Element" type="Control" unique_id=190371458 node_paths=PackedStringArray("colorBar", "playerNumberLabel", "alive", "eliminated", "lineTrackerStartPoint", "trackerLine", "healthLabel", "healthIcon", "staminaBar", "invertChargeAim")]
 custom_minimum_size = Vector2(235, 127)
 layout_mode = 3
 anchor_left = 0.411
@@ -94,6 +99,7 @@ healthLabelBlinkTime = 0.217
 healthColor = SubResource("Gradient_6gu6k")
 healthRotation = SubResource("Curve_6gu6k")
 staminaBar = NodePath("Alive/Stamina Bar")
+invertChargeAim = NodePath("Inverted Charge Aim")
 metadata/_custom_type_script = "uid://8jdgve60fqwx"
 
 [node name="Color BG" type="TextureRect" parent="." unique_id=1921094636]
@@ -315,3 +321,16 @@ text = "100"
 label_settings = SubResource("LabelSettings_wri1x")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Inverted Charge Aim" type="Label" parent="." unique_id=66178520]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = -25.0
+offset_right = 88.0
+offset_bottom = 6.0
+grow_vertical = 0
+text = "Invert"
+label_settings = SubResource("LabelSettings_c5qv8")

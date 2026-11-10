@@ -5,6 +5,8 @@ class_name StrikeRecovery
 
 func ExitStatePhysics():
 	cooldown.Restart();
+	mcc.deflectCooldown.Restart();
+
 
 func ProcessPhysics(delta : float):
 	super(delta);

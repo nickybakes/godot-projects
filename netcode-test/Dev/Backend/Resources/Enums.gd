@@ -10,4 +10,5 @@ enum InputAction
 	Block,
 	EndGame,
 	Grab,
+	ToggleInvert,
 }

@@ -27,7 +27,7 @@ var goalHeartbeat : float = 0.0;
 
 var alphaMultiply : float = 1.0;
 var goalAlphaMultiply : float = 1.0;
-var maxAlphaMultiply : float = 10.0;
+var maxAlphaMultiply : float = 13.0;
 
 func Setup(colorIndex : int, playerNumber : int):
 	currentMaterial = middle.material_override.duplicate();

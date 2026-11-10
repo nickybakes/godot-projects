@@ -16,7 +16,7 @@ func ProcessVisuals(delta : float):
 	mcc.visuals.RollBall(mcc.currentSpeed, delta);
 	mcc.visuals.PitchBall(mcc.currentDirection.y * (PI * .5), delta);
 	mcc.visuals.SpeedStretch(mcc.currentSpeed);
-	if(mcc.currentSpeed >= mcc.traits.minRequiredStrikeSpeed):
+	if(mcc.currentSpeed >= mcc.traits.minRequiredStrikeSpeed && mcc.strikeCooldown.IsCooledDown() && mcc.invulnStat.value == 0.0):
 		mcc.visuals.StartStrikeVisual();
 	else:
 		mcc.visuals.StopStrikeVisual();

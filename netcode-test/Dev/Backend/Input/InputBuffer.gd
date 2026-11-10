@@ -8,7 +8,7 @@ var inputs_released_this_frame := []
 var inputs_released := []
 var inputs_held_time := []
 var inputs_is_held := []
-var inputs := ["_join", "_jump", "_leave", "_startgame", "_charge", "_block", "_endgame", "_grab"]
+var inputs := ["_join", "_jump", "_leave", "_startgame", "_charge", "_block", "_endgame", "_grab", "_toggleinvert"]
 
 func _init() -> void:
 	for i in inputs.size():
@@ -47,14 +47,14 @@ func get_movement_direction() -> Vector2:
 func IsActionJustPressed(input : Enums.InputAction) -> bool:
 	return inputs_pressed[input] < MAX_INPUT_BUFFER_TIME
 	
-func IsActionJustPressedThisFrame(input : Enums.InputAction) -> bool:
-	return inputs_pressed_this_frame[input] > 0;
+func IsActionJustPressedThisFrame(input : Enums.InputAction, frameNum : int = 0) -> bool:
+	return inputs_pressed_this_frame[input] > frameNum;
 	
 func IsActionJustReleased(input : Enums.InputAction) -> bool:
 	return inputs_released[input] < MAX_INPUT_BUFFER_TIME
 	
-func IsActionJustReleasedThisFrame(input : Enums.InputAction) -> bool:
-	return inputs_released_this_frame[input] > 0;
+func IsActionJustReleasedThisFrame(input : Enums.InputAction, frameNum : int = 0) -> bool:
+	return inputs_released_this_frame[input] > frameNum;
 	
 func IsActionPressed(input : Enums.InputAction) -> bool:
 	return inputs_is_held[input]

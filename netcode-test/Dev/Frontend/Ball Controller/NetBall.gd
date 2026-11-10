@@ -30,9 +30,10 @@ func DoSpawnParams():
 	ballController.playerNumber = playerNumber;
 	ballController.visuals.Setup(playerNumber);
 	ballController.updatePhysics = !isDummy;
+	playerToken = LobbyManager.Lobby.GetPlayerTokenByPlayerNumber(playerNumber);
+	ballController.playerToken = playerToken;
 	
 	if(!isDummy):
-		playerToken = LobbyManager.Lobby.GetPlayerTokenByPlayerNumber(playerNumber);
 		inputDevice = playerToken.inputDevice;
 		ballController.inputDevice = inputDevice;
 		
@@ -73,8 +74,15 @@ func _process(delta: float) -> void:
 		health = ballController.healthStat.value;
 		electric = ballController.electricStat.value;
 		invuln = ballController.invulnStat.value;
+		if(inputDevice != null && playerToken):
+			if(inputDevice.inputBuffer.IsActionJustPressedThisFrame(Enums.InputAction.ToggleInvert, 1)):
+				playerToken.customization.invertChargeAim = !playerToken.customization.invertChargeAim;
+				pass;
 	pass
 	
+func OwnerDisconnected():
+	ballController.updatePhysics = !isDummy;
+	pass;
 	
 func _exit_tree() -> void:
 	if(GameManager.Manager != null):
