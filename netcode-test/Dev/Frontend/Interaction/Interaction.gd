@@ -27,14 +27,15 @@ func GetParams() -> Dictionary:
 func GetLifeTime() -> float:
 	if(ownerId == Network.myId):
 		return ((NetTime.clock - (latency * 4.0)) - (timeStamp)) as float / 1000.0;
-	elif ownerId != 1:
-		return ((NetTime.clock + ((latency) + (NetTime.clockLatency))) - (timeStamp)) as float / 1000.0;
 	else:
-		return ((NetTime.clock + (NetTime.clockLatency * 4.0)) - (timeStamp)) as float / 1000.0;
+		return ((NetTime.clock + ((latency) + (NetTime.clockLatency))) - (timeStamp)) as float / 1000.0;
 	#if(ownerId == Network.myId):
 		#return ((NetTime.clock - (latency * 4.0)) - (timeStamp)) as float / 1000.0;
-	#else:
+	#elif ownerId != 1:
 		#return ((NetTime.clock + ((latency) + (NetTime.clockLatency))) - (timeStamp)) as float / 1000.0;
+	#else:
+		#return ((NetTime.clock + (NetTime.clockLatency * 4.0)) - (timeStamp)) as float / 1000.0;
+
 
 func Evaluate():
 	pass;

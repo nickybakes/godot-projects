@@ -13,7 +13,8 @@ class_name BallVisualProfile
 @export var electricRollSpeedScalar : float;
 
 @export_category("Invuln")
-@export var invulnBlinkSpeed : float;
+@export_range(0.0, 1.0, 0.01) var invulnBlinkOff : float = .15;
+@export var invulnBlinkTime : float = 1.0;
 
 @export_category("Charge")
 @export var maxStretchCharge : float;

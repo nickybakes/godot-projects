@@ -42,6 +42,8 @@ var messageTime : float = 0.0;
 @export var stretcher : Node3D;
 @export var roller : Node3D;
 
+var invulnBlinkTimer : float = 0.0;
+
 func Setup(playerNumber : int):
 	var color = ballCustomizationDirectory.ballColors[ballController.playerToken.customization.colorIndex];
 	var ballMaterial = ballCustomizationDirectory.ballMaterialBasic.duplicate();
@@ -110,15 +112,15 @@ func UpdateElectricVisuals(percent : float, delta : float):
 	electricParticles.amount_ratio = percent;
 	pass;
 
-var blinkTime := 0.0;
-
 func UpdateInvulnVisuals(invulnAmount : float, delta : float):
 	if(is_zero_approx(invulnAmount)):
 		stretcher.visible = true;
 	else:
-		blinkTime += delta * invulnAmount * profile.invulnBlinkSpeed;
-		if(blinkTime > 1.0):
-			stretcher.visible = !stretcher.visible;
+		invulnBlinkTimer += delta;
+		if(invulnBlinkTimer >= profile.invulnBlinkTime):
+			invulnBlinkTimer = 0.0;
+		
+		stretcher.visible = invulnBlinkTimer >= profile.invulnBlinkTime * profile.invulnBlinkOff;
 	pass;
 
 func StartChargeVisual():
