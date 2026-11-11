@@ -34,7 +34,6 @@ func _physics_process(delta: float) -> void:
 func receiveServerTime(serverTicksMsec : int, clientTicksMsec : int):
 	latency = (Time.get_ticks_msec() - clientTicksMsec) / 2;
 	clock = serverTicksMsec + latency;
-	clockLatency = latency;
 	
 func receiveLatency(clientTicksMsec : int):
 	latencyArray.append((Time.get_ticks_msec() - clientTicksMsec) / 2);
@@ -49,6 +48,7 @@ func receiveLatency(clientTicksMsec : int):
 				totalLatency += latencyArray[i];
 		deltaLatency = (totalLatency / latencyArray.size()) - latency;
 		latency = totalLatency / latencyArray.size();
+		clockLatency = latency;
 		latencyArray.clear();
 	pass;
 	
