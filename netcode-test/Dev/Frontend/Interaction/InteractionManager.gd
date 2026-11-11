@@ -34,7 +34,7 @@ func SendClientsInteraction(params : Dictionary):
 	#print(NetTime.clockLatency);
 	loggedInteractions.push_back(ParseNewInteraction(params));
 	OrderInteractionsByTime();
-	EvaluateInteractions();
+	#EvaluateInteractions();
 	#print("Done first eval");
 	pass;
 	

@@ -11,12 +11,15 @@ var deltaLatency : float = 0;
 static var clock : int = 0;
 static var clockLatency : int = 0;
 
+var firstLatencySet : bool = false;
+
 func _ready() -> void:
 	fetchServerTime();
 	var timer = Timer.new();
 	timer.wait_time = timeBetweenFetch;
 	timer.autostart = true;
 	timer.timeout.connect(determineLatency);
+	timer.timeout.connect(fetchServerTime);
 	self.add_child(timer);
 	pass;
 	
@@ -32,7 +35,9 @@ func _physics_process(delta: float) -> void:
 	pass;	
 
 func receiveServerTime(serverTicksMsec : int, clientTicksMsec : int):
-	latency = (Time.get_ticks_msec() - clientTicksMsec) / 2;
+	if(!firstLatencySet):
+		latency = (Time.get_ticks_msec() - clientTicksMsec) / 2;
+		firstLatencySet = true;
 	clock = serverTicksMsec + latency;
 	
 func receiveLatency(clientTicksMsec : int):
