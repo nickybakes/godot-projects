@@ -1,10 +1,8 @@
 extends BallState
 class_name StrikeRecovery
 
-@export var cooldown : Cooldown;
-
 func ExitStatePhysics():
-	cooldown.Restart();
+	mcc.strikeCooldown.Restart();
 	mcc.deflectCooldown.Restart();
 
 

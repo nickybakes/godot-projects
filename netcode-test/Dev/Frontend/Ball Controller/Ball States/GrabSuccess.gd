@@ -1,8 +1,6 @@
 extends BallState
 class_name GrabSuccess
 
-@export var cooldown : Cooldown;
-
 var aimDirection := Vector3.DOWN;
 var visualDirection := Vector3.DOWN;
 
@@ -29,7 +27,7 @@ func StartStatePhysics(params : Dictionary = {}):
 	pass;
 	
 func ExitStatePhysics():
-	cooldown.Restart();
+	mcc.grabCooldown.Restart();
 	mcc.autoAimCooldown = 0;
 	var bounceDirection = currentDirection;
 	bounceDirection.y *= -1.0;

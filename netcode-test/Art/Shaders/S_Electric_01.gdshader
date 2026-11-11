@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode blend_mix, unshaded, cull_disabled, depth_prepass_alpha;
+render_mode blend_mix, unshaded, cull_disabled, alpha_to_coverage, depth_prepass_alpha;
 #include "SI_Util_01.gdshaderinc"
 #include "SI_Fire_01.gdshaderinc"
 
@@ -50,7 +50,7 @@ void fragment() {
 	mask = saturate(mask);
 	
 	float alpha = mask - (1.0 - sample);
-	alpha = alpha - alphaThreshold;
+	//alpha = alpha - alphaThreshold;
 	alpha = saturate(alpha);
 	
 	float blurAlpha = blurSample;
@@ -66,4 +66,5 @@ void fragment() {
 	
 	ALBEDO = finalColor;
 	ALPHA = COLOR.a * alpha;
+	ALPHA_SCISSOR_THRESHOLD = alphaThreshold;
 }

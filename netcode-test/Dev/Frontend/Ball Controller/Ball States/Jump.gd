@@ -1,10 +1,8 @@
 extends BallState
 class_name Jump
 
-@export var cooldown : Cooldown;
-
 func ExitStatePhysics():
-	cooldown.Restart();
+	mcc.jumpCooldown.Restart();
 
 func StartStatePhysics(params : Dictionary = {}):
 	super(params);

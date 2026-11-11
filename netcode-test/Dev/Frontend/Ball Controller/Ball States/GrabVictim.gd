@@ -1,8 +1,6 @@
 extends BallState
 class_name GrabVictim
 
-@export var cooldown : Cooldown;
-
 var parentIsDoneGrabbing;
 
 var currentDirection : Vector3;
@@ -25,7 +23,7 @@ func ExitState():
 	
 	mcc.interactive = true;
 	mcc.invulnStat.Add(1.0);
-	cooldown.Restart();
+	mcc.grabCooldown.Restart();
 	parentIsDoneGrabbing = false;
 	
 func ExitStateVisuals():

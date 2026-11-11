@@ -1,8 +1,6 @@
 extends BallState
 class_name Charge
 
-@export var cooldown : Cooldown;
-
 var chargeDirection := Vector3.DOWN;
 var chargeAmount : float;
 var staminaSpent : float;
@@ -19,7 +17,7 @@ func ExitStateVisuals():
 	pass;
 	
 func ExitStatePhysics():
-	cooldown.Restart();
+	mcc.chargeCooldown.Restart();
 	if(staminaSpent < mcc.traits.chargeMinStaminaCost):
 		mcc.staminaStat.Spend(max(mcc.traits.chargeMinStaminaCost - staminaSpent, 0))
 	exitPhysicsParams.set('direction', chargeDirection)

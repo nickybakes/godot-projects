@@ -4,10 +4,8 @@ class_name StrikeAttempt
 var victims : Array[BallMCC];
 var activatorSpeed : float;
 
-@export var cooldown : Cooldown;
-
 func StartStatePhysics(params : Dictionary = {}):
-	cooldown.Restart();
+	mcc.strikeCooldown.Restart();
 	mcc.deflectCooldown.Restart();
 	mcc.autoAimCooldown = 0;
 
@@ -32,7 +30,7 @@ func StartStatePhysics(params : Dictionary = {}):
 func ExitStatePhysics():
 	exitPhysicsParams.set('victims', victims);
 	exitPhysicsParams.set('activatorSpeed', activatorSpeed);
-	cooldown.Restart();
+	mcc.strikeCooldown.Restart();
 	mcc.GetPhysics().isStrikeAttempt = false;
 	mcc.GetPhysics().isDeflect = false;
 	mcc.clash = false;

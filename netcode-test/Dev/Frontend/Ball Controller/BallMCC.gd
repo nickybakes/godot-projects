@@ -25,8 +25,13 @@ class_name BallMCC
 @export var autoAimRegion : HitRegion;
 
 @export_category("Cooldowns")
+@export var jumpCooldown : Cooldown;
+@export var chargeCooldown : Cooldown;
+@export var blockCooldown : Cooldown;
+@export var removeBlockCooldown : Cooldown;
 @export var strikeCooldown : Cooldown;
 @export var deflectCooldown : Cooldown;
+@export var grabCooldown : Cooldown;
 
 var interactive : bool = true;
 

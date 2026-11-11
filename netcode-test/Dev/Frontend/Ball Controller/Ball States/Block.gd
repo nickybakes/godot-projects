@@ -1,9 +1,6 @@
 extends BallState
 class_name Block
 
-@export var cooldown : Cooldown;
-@export var removeBlockCooldown : Cooldown;
-
 func StartStateVisuals(params : Dictionary = {}):
 	mcc.visuals.StartBlockVisual();
 	
@@ -11,13 +8,13 @@ func ExitStateVisuals():
 	mcc.visuals.StopBlockVisual();
 	
 func StartStatePhysics(params : Dictionary = {}):
-	removeBlockCooldown.Restart();
+	mcc.removeBlockCooldown.Restart();
 	mcc.blocking = true;
 	pass;
 
 func ExitStatePhysics():
 	mcc.blocking = false;
-	cooldown.Restart();
+	mcc.blockCooldown.Restart();
 	
 func ExitState():
 	super();
@@ -27,7 +24,7 @@ func ProcessPhysics(delta : float):
 	super(delta);
 	
 	if(mcc.successfulBlock):
-		removeBlockCooldown.Restart();
+		mcc.removeBlockCooldown.Restart();
 		mcc.successfulBlock = false;
 	
 	mcc.staminaStat.Process(delta * mcc.traits.blockStaminaSpeedBoost);

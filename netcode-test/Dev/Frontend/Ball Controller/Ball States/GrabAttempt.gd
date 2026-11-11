@@ -1,8 +1,6 @@
 extends BallState
 class_name GrabAttempt
 
-@export var cooldown : Cooldown;
-
 var victims : Array[BallMCC];
 var failure : bool
 
@@ -17,7 +15,7 @@ func ExitStateVisuals():
 	visualsShowing = false;
 
 func StartStatePhysics(params : Dictionary = {}):
-	cooldown.Restart();
+	mcc.grabCooldown.Restart();
 	mcc.autoAimCooldown = 0;
 
 	mcc.GetPhysics().BounceVelocity(mcc.currentFacingDirection, mcc.currentSpeed, mcc.traits.grabAttemptBoost);
@@ -41,7 +39,7 @@ func StartStatePhysics(params : Dictionary = {}):
 	pass;
 	
 func ExitStatePhysics():
-	cooldown.Restart();
+	mcc.grabCooldown.Restart();
 	
 func ProcessVisuals(delta : float):
 	if(timeInState >= mcc.visuals.profile.grabVisualTimeMax && visualsShowing):

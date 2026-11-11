@@ -1,7 +1,7 @@
 class_name InteractionCreator
 
 static func NewBasic() -> Dictionary:
-	return {"timeStamp": NetTime.clock - NetTime.clockLatency, "ownerId" : Network.myId};
+	return {"timeStamp": NetTime.clock, "latency": NetTime.clockLatency, "ownerId" : Network.myId};
 	pass;
 	
 static func NewStrikeAttempt(activatorController : BallMCC, victimControllers : Array[BallMCC]) -> IStrikeAttempt:

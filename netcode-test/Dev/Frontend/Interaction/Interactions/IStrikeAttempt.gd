@@ -70,6 +70,12 @@ func Evaluate():
 	if(GetLifeTime() > InteractionManager.Manager.traits.strikeBuffer):
 		alreadyActivated = true;
 		if(clashVictims.size() > 0):
+			for clashVictim in clashVictims:
+				var victimController = GameManager.Manager.balls[clashVictim].ballController;
+				
+				if(victimController.updatePhysics && victimController.currentState.codeName != "clash"):
+					victimController.ForceSetState("clash");
+					pass;
 			return;
 			
 		var totalDirection = Vector3.ZERO;
@@ -111,3 +117,4 @@ func Evaluate():
 			#print("total blocked: ", totalBlocked);
 			#print("total hit: ", totalHit);
 			activatorController.GetPhysics().BounceVerlocityLerpTraits(totalDirection.normalized(), activatorSpeed, activatorController.traits.strikeFailedBounceTraits, activatorController.traits.strikeSuccessBounceTraits, (totalHit as float)/(totalVictims as float));
+			activatorController.ForceSetState("strikeRecovery");

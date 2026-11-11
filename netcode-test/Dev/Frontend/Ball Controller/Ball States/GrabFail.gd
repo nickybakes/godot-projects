@@ -1,13 +1,11 @@
 extends BallState
 class_name GrabFail
 
-@export var cooldown : Cooldown;
-
 func StartStatePhysics(params : Dictionary = {}):
 	pass;
 	
 func ExitStatePhysics():
-	cooldown.Restart();
+	mcc.grabCooldown.Restart();
 
 func ProcessPhysics(delta : float):
 	super(delta);

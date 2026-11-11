@@ -1,6 +1,7 @@
 class_name Interaction
 
 var timeStamp : int;
+var latency : int;
 var ownerId : int;
 var type : String;
 
@@ -15,14 +16,19 @@ func SetParams(params : Dictionary):
 		timeStamp = params['timeStamp'];
 	if(params.has('ownerId')):
 		ownerId = params['ownerId'];
+	if(params.has('latency')):
+		latency = params['latency'];
 	if(params.has('type')):
 		type = params['type'];
 
 func GetParams() -> Dictionary:
-	return {'timeStamp' : timeStamp, 'ownerId': ownerId, 'type': type};
+	return {'timeStamp' : timeStamp, 'latency': latency, 'ownerId': ownerId, 'type': type};
 
 func GetLifeTime() -> float:
-	return ((NetTime.clock as float + (NetTime.clockLatency)) - (timeStamp as float)) / 1000.0;
+	if(ownerId == Network.myId):
+		return ((NetTime.clock as float - (latency)) - (timeStamp as float)) / 1000.0;
+	else:
+		return ((NetTime.clock as float + (latency + NetTime.clockLatency)) - (timeStamp as float)) / 1000.0;
 
 func Evaluate():
 	pass;

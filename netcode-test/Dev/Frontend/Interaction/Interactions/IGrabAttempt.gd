@@ -59,6 +59,12 @@ func Evaluate():
 	if(GetLifeTime() > InteractionManager.Manager.traits.grabBuffer):
 		alreadyActivated = true;
 		if(clashVictims.size() > 0):
+			for clashVictim in clashVictims:
+				var victimController = GameManager.Manager.balls[clashVictim].ballController;
+				
+				if(victimController.updatePhysics && victimController.currentState.codeName != "clash"):
+					victimController.ForceSetState("clash");
+					pass;
 			return;
 			
 		if(outPrioritied):

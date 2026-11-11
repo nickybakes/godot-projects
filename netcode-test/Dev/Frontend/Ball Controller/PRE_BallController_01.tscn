@@ -135,7 +135,7 @@ size = Vector2(0.602, 1.266)
 [sub_resource type="SphereShape3D" id="SphereShape3D_mf80y"]
 radius = 0.6
 
-[node name="PRE_BallController_01" type="CharacterBody3D" unique_id=2124224045 node_paths=PackedStringArray("visuals", "defaultPhysics", "defaultState", "currentPhysicsStorage", "currentStateStorage", "staminaStat", "healthStat", "electricStat", "invulnStat", "hitbox", "deflectRegion", "strikeRegion", "grabRegion", "slamRegion", "autoAimRegion", "strikeCooldown", "deflectCooldown", "statesParent")]
+[node name="PRE_BallController_01" type="CharacterBody3D" unique_id=2124224045 node_paths=PackedStringArray("visuals", "defaultPhysics", "defaultState", "currentPhysicsStorage", "currentStateStorage", "staminaStat", "healthStat", "electricStat", "invulnStat", "hitbox", "deflectRegion", "strikeRegion", "grabRegion", "slamRegion", "autoAimRegion", "jumpCooldown", "chargeCooldown", "blockCooldown", "removeBlockCooldown", "strikeCooldown", "deflectCooldown", "grabCooldown", "statesParent")]
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_84w8q")
@@ -155,8 +155,13 @@ strikeRegion = NodePath("Ball Visuals/Visual Spinner/Visual Pitcher/Ball Strike 
 grabRegion = NodePath("Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region")
 slamRegion = NodePath("Ball Visuals/Ball Slam Region")
 autoAimRegion = NodePath("Ball Visuals/Visual Spinner/Visual Pitcher/Ball Auto Aim Region")
+jumpCooldown = NodePath("Cooldowns/Jump Cooldown")
+chargeCooldown = NodePath("Cooldowns/Charge Cooldown")
+blockCooldown = NodePath("Cooldowns/Block Cooldown")
+removeBlockCooldown = NodePath("Cooldowns/Remove Block Cooldown")
 strikeCooldown = NodePath("Cooldowns/Strike Cooldown")
 deflectCooldown = NodePath("Cooldowns/Deflect Cooldown")
+grabCooldown = NodePath("Cooldowns/Grab Cooldown")
 statesParent = NodePath("States")
 metadata/_custom_type_script = "uid://cmlx0uqgnib0r"
 
@@ -509,16 +514,14 @@ codeName = "roll"
 transitions = [NodePath("../../Transitions/Movement/Charge Transition"), NodePath("../../Transitions/Movement/Jump Transition"), NodePath("../../Transitions/Movement/Block Start Transition"), NodePath("../../Transitions/Combat/Grab Attempt Start Transition"), NodePath("../../Transitions/Combat/Strike Attempt Transition"), NodePath("../../Transitions/Movement/Deflect Start Transition"), NodePath("../../Transitions/Eliminated Transition")]
 metadata/_custom_type_script = "uid://decpb0lh7o7qx"
 
-[node name="Jump" type="Node" parent="States" unique_id=547728586 node_paths=PackedStringArray("cooldown", "transitions")]
+[node name="Jump" type="Node" parent="States" unique_id=547728586 node_paths=PackedStringArray("transitions")]
 script = ExtResource("12_ilenv")
-cooldown = NodePath("../../Cooldowns/Jump Cooldown")
 codeName = "jump"
 transitions = [NodePath("../../Transitions/Movement/Force End Jump Transition"), NodePath("../../Transitions/Movement/Force End Jump Transition 2"), NodePath("../../Transitions/Movement/End Jump Transition"), NodePath("../../Transitions/Movement/Charge Transition"), NodePath("../../Transitions/Movement/Block Start Transition")]
 metadata/_custom_type_script = "uid://bc4ag7pcktrlg"
 
-[node name="Charge" type="Node" parent="States" unique_id=1096450482 node_paths=PackedStringArray("cooldown", "transitions")]
+[node name="Charge" type="Node" parent="States" unique_id=1096450482 node_paths=PackedStringArray("transitions")]
 script = ExtResource("12_apf2q")
-cooldown = NodePath("../../Cooldowns/Charge Cooldown")
 codeName = "charge"
 transitions = [NodePath("../../Transitions/Movement/Force Launch Transition"), NodePath("../../Transitions/Movement/Launch Transition")]
 metadata/_custom_type_script = "uid://bxuank2e18mxg"
@@ -534,10 +537,8 @@ script = ExtResource("19_s4hg4")
 codeName = "bounce"
 metadata/_custom_type_script = "uid://b3ldpufefysau"
 
-[node name="Block" type="Node" parent="States" unique_id=396913574 node_paths=PackedStringArray("cooldown", "removeBlockCooldown", "transitions")]
+[node name="Block" type="Node" parent="States" unique_id=396913574 node_paths=PackedStringArray("transitions")]
 script = ExtResource("22_g6j7v")
-cooldown = NodePath("../../Cooldowns/Block Cooldown")
-removeBlockCooldown = NodePath("../../Cooldowns/Remove Block Cooldown")
 codeName = "block"
 transitions = [NodePath("../../Transitions/Movement/Block Stop Transition")]
 metadata/_custom_type_script = "uid://bahf8h0o6ombf"
@@ -554,51 +555,44 @@ codeName = "clash"
 transitions = [NodePath("../../Transitions/Combat/Clash End Transition")]
 metadata/_custom_type_script = "uid://vcf8he70glst"
 
-[node name="StrikeAttempt" type="Node" parent="States" unique_id=1221542155 node_paths=PackedStringArray("cooldown", "transitions")]
+[node name="StrikeAttempt" type="Node" parent="States" unique_id=1221542155 node_paths=PackedStringArray("transitions")]
 script = ExtResource("29_c4qju")
-cooldown = NodePath("../../Cooldowns/Strike Cooldown")
 codeName = "strikeAttempt"
-transitions = [NodePath("../../Transitions/Combat/Clash Strike Start Transition"), NodePath("../../Transitions/Combat/Strike Recovery Start Transition")]
+transitions = [NodePath("../../Transitions/Combat/Interaction Attempt Failsafe Transition")]
 metadata/_custom_type_script = "uid://bern5mlba1p1h"
 
-[node name="StrikeRecovery" type="Node" parent="States" unique_id=763220211 node_paths=PackedStringArray("cooldown", "transitions")]
+[node name="StrikeRecovery" type="Node" parent="States" unique_id=763220211 node_paths=PackedStringArray("transitions")]
 script = ExtResource("34_qm6jm")
-cooldown = NodePath("../../Cooldowns/Strike Cooldown")
 codeName = "strikeRecovery"
 transitions = [NodePath("../../Transitions/Combat/Strike Recovery End Transition")]
 metadata/_custom_type_script = "uid://xaqfhlgrrlor"
 
-[node name="StrikeVictim" type="Node" parent="States" unique_id=362616550 node_paths=PackedStringArray("cooldown", "transitions")]
+[node name="StrikeVictim" type="Node" parent="States" unique_id=362616550 node_paths=PackedStringArray("transitions")]
 script = ExtResource("33_ial18")
-cooldown = NodePath("../../Cooldowns/Strike Cooldown")
 codeName = "strikeVictim"
 transitions = [NodePath("../../Transitions/Combat/Strike Victim End Transition"), NodePath("../../Transitions/Movement/Deflect Start Transition"), NodePath("../../Transitions/Eliminated Transition")]
 metadata/_custom_type_script = "uid://c0v8bxb3qmsi1"
 
-[node name="GrabAttempt" type="Node" parent="States" unique_id=686585411 node_paths=PackedStringArray("cooldown", "transitions")]
+[node name="GrabAttempt" type="Node" parent="States" unique_id=686585411 node_paths=PackedStringArray("transitions")]
 script = ExtResource("37_j4t0d")
-cooldown = NodePath("../../Cooldowns/Grab Cooldown")
 codeName = "grabAttempt"
-transitions = [NodePath("../../Transitions/Combat/Grab Fail Start Transition"), NodePath("../../Transitions/Combat/Clash Grab Start Transition")]
+transitions = [NodePath("../../Transitions/Combat/Interaction Attempt Failsafe Transition")]
 metadata/_custom_type_script = "uid://brxc7dl88bas3"
 
-[node name="GrabFail" type="Node" parent="States" unique_id=25406752 node_paths=PackedStringArray("cooldown", "transitions")]
+[node name="GrabFail" type="Node" parent="States" unique_id=25406752 node_paths=PackedStringArray("transitions")]
 script = ExtResource("38_gryrd")
-cooldown = NodePath("../../Cooldowns/Grab Cooldown")
 codeName = "grabFail"
 transitions = [NodePath("../../Transitions/Combat/Grab Fail End Transition")]
 metadata/_custom_type_script = "uid://bgalco1514nhs"
 
-[node name="GrabSuccess" type="Node" parent="States" unique_id=1516371310 node_paths=PackedStringArray("cooldown", "transitions")]
+[node name="GrabSuccess" type="Node" parent="States" unique_id=1516371310 node_paths=PackedStringArray("transitions")]
 script = ExtResource("39_ih3ae")
-cooldown = NodePath("../../Cooldowns/Grab Cooldown")
 codeName = "grabSuccess"
 transitions = [NodePath("../../Transitions/Combat/Grab Success End Transition"), NodePath("../../Transitions/Combat/Grab Success End Failsafe Transition")]
 metadata/_custom_type_script = "uid://dx1ga7wg4n1io"
 
-[node name="GrabVictim" type="Node" parent="States" unique_id=292581875 node_paths=PackedStringArray("cooldown", "transitions")]
+[node name="GrabVictim" type="Node" parent="States" unique_id=292581875 node_paths=PackedStringArray("transitions")]
 script = ExtResource("40_s6ais")
-cooldown = NodePath("../../Cooldowns/Grab Cooldown")
 codeName = "grabVictim"
 transitions = [NodePath("../../Transitions/Combat/Grab Victim End Transition"), NodePath("../../Transitions/Eliminated Transition")]
 metadata/_custom_type_script = "uid://qrcx4a8tcp7p"
@@ -762,6 +756,12 @@ property = "timeInState"
 comparisonType = 1
 traitProperty = "fallbackMaxTimeInState"
 metadata/_custom_type_script = "uid://dulfhx4ftd06"
+
+[node name="Interaction Attempt Failsafe Transition" type="Node" parent="Transitions/Combat" unique_id=1612700204 node_paths=PackedStringArray("stateTransitionTo", "rules")]
+script = ExtResource("12_nefp1")
+stateTransitionTo = NodePath("../../../States/Roll")
+rules = [NodePath("../../../Combat Rules/Interaction Attempt Max Time Failsafe Rule")]
+metadata/_custom_type_script = "uid://bao3317lfi3tc"
 
 [node name="Grab Attempt Start Transition" type="Node" parent="Transitions/Combat" unique_id=1802028327 node_paths=PackedStringArray("stateTransitionTo", "rules")]
 script = ExtResource("12_nefp1")
@@ -932,6 +932,14 @@ node = NodePath("../../Current Storage/Current State")
 property = "timeInState"
 comparisonType = 1
 traitProperty = "grabSuccessMaxTimeFailsafe"
+metadata/_custom_type_script = "uid://dulfhx4ftd06"
+
+[node name="Interaction Attempt Max Time Failsafe Rule" type="Node" parent="Combat Rules" unique_id=1823617833 node_paths=PackedStringArray("node")]
+script = ExtResource("15_ahjyt")
+node = NodePath("../../Current Storage/Current State")
+property = "timeInState"
+comparisonType = 1
+traitProperty = "interactionAttemptMaxTime"
 metadata/_custom_type_script = "uid://dulfhx4ftd06"
 
 [node name="Grab Recovery Time Rule" type="Node" parent="Combat Rules" unique_id=1043955105 node_paths=PackedStringArray("node")]

@@ -122,6 +122,7 @@ class_name BallTraits
 
 @export_category("Misc")
 @export var fallbackMaxTimeInState : float = 8;
+@export var interactionAttemptMaxTime : float = 3;
 
 var zero := 0.0;
 var one := 1.0;

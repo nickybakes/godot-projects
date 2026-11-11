@@ -1,8 +1,6 @@
 extends BallState
 class_name StrikeVictim
 
-@export var cooldown : Cooldown;
-
 func StartStateVisuals(params : Dictionary = {}):
 	if(mcc.strikePrioritied):
 		mcc.visuals.ShowStrikePriorityMessage();
@@ -17,7 +15,7 @@ func StartStateVisuals(params : Dictionary = {}):
 
 func StartStatePhysics(params : Dictionary = {}):
 	mcc.invulnStat.Add(1.0);
-	cooldown.Restart();
+	mcc.strikeCooldown.Restart();
 	mcc.deflectCooldown.Restart();
 	
 func ProcessPhysics(delta : float):
