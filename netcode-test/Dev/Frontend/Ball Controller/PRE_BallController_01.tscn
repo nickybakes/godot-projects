@@ -576,7 +576,7 @@ metadata/_custom_type_script = "uid://c0v8bxb3qmsi1"
 [node name="GrabAttempt" type="Node" parent="States" unique_id=686585411 node_paths=PackedStringArray("transitions")]
 script = ExtResource("37_j4t0d")
 codeName = "grabAttempt"
-transitions = [NodePath("../../Transitions/Combat/Interaction Attempt Failsafe Transition")]
+transitions = [NodePath("../../Transitions/Combat/Grab Fail Start Transition"), NodePath("../../Transitions/Combat/Interaction Attempt Failsafe Transition")]
 metadata/_custom_type_script = "uid://brxc7dl88bas3"
 
 [node name="GrabFail" type="Node" parent="States" unique_id=25406752 node_paths=PackedStringArray("transitions")]
