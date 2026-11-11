@@ -35,6 +35,7 @@ func SendClientsInteraction(params : Dictionary):
 	loggedInteractions.push_back(ParseNewInteraction(params));
 	OrderInteractionsByTime();
 	EvaluateInteractions();
+	print("Done first eval");
 	pass;
 	
 func OrderInteractionsByTime():

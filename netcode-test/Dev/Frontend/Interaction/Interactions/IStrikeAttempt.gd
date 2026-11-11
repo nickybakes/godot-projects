@@ -69,6 +69,11 @@ func Evaluate():
 	
 	if(GetLifeTime() > InteractionManager.Manager.traits.strikeBuffer):
 		alreadyActivated = true;
+		
+		var diff = NetTime.clock - timeStamp;
+		print(ownerId == Network.myId);
+		print("clock: ", NetTime.clock, " diff: ", diff, " lifetime: ", GetLifeTime());
+		
 		if(clashVictims.size() > 0):
 			for clashVictim in clashVictims:
 				var victimController = GameManager.Manager.balls[clashVictim].ballController;
