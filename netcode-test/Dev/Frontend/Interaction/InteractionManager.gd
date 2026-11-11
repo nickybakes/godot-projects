@@ -29,13 +29,13 @@ func SendHostInteraction(params : Dictionary):
 
 @rpc("authority", "call_local")
 func SendClientsInteraction(params : Dictionary):
-	print(params);
-	print(NetTime.clock);
-	print(NetTime.clockLatency);
+	#print(params);
+	#print(NetTime.clock);
+	#print(NetTime.clockLatency);
 	loggedInteractions.push_back(ParseNewInteraction(params));
 	OrderInteractionsByTime();
 	EvaluateInteractions();
-	print("Done first eval");
+	#print("Done first eval");
 	pass;
 	
 func OrderInteractionsByTime():
