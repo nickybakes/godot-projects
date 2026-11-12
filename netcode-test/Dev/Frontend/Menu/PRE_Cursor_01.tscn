@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d28wm3il6twd0" path="res://Dev/Frontend/Menu/Cursor.gd" id="1_wjgwl"]
 [ext_resource type="Texture2D" uid="uid://b8874osmtpjdw" path="res://Art/Sprites/SPR_Pointer_01.png" id="2_arpy3"]
+[ext_resource type="FontFile" uid="uid://toyoa2sfe754" path="res://Art/Fonts/KeepCalm-Medium.ttf" id="3_arpy3"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_6bq70"]
 properties/0/path = NodePath(".:normalizedPosition")
@@ -28,6 +29,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22550434, -1.6060162, 0.053
 render_priority = 2
 outline_render_priority = 1
 text = "P1"
-font_size = 307
-outline_size = 78
+font = ExtResource("3_arpy3")
+font_size = 284
+outline_size = 75
 horizontal_alignment = 0

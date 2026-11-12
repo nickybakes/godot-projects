@@ -66,6 +66,7 @@ outline_size = 20
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_c5qv8"]
+font = ExtResource("5_wri1x")
 font_size = 22
 outline_size = 7
 outline_color = Color(0, 0, 0, 1)
@@ -329,8 +330,9 @@ anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 25.0
 offset_top = -25.0
-offset_right = 88.0
-offset_bottom = 6.0
+offset_right = 93.0
+offset_bottom = 4.0
 grow_vertical = 0
 text = "Invert"
 label_settings = SubResource("LabelSettings_c5qv8")
+vertical_alignment = 2

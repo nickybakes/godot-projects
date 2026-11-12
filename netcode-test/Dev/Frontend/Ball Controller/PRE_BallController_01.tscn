@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://cbhbr4ha54spr" path="res://Dev/Frontend/Ball Controller/BallPhysics.gd" id="7_jioly"]
 [ext_resource type="Material" uid="uid://d4i6d6wxg2j5m" path="res://Art/Materials/M_HitRegion_01.tres" id="7_l67tw"]
 [ext_resource type="Material" uid="uid://dqrlfdt0mxo4s" path="res://Art/Materials/M_Xray_01.tres" id="8_m53x3"]
+[ext_resource type="FontFile" uid="uid://toyoa2sfe754" path="res://Art/Fonts/KeepCalm-Medium.ttf" id="10_vb6wf"]
 [ext_resource type="Material" uid="uid://mi3rb0advqsw" path="res://Art/Materials/M_HitRegion_01a.tres" id="11_bjlbd"]
 [ext_resource type="Material" uid="uid://bnwwedt8ua82h" path="res://Art/Materials/M_Strike_01.tres" id="11_qrgwy"]
 [ext_resource type="Material" uid="uid://okolx5gyqwo1" path="res://Art/Materials/M_Block_01.tres" id="11_v2vyv"]
@@ -70,6 +71,7 @@ height = 0.762
 variation_embolden = 1.64
 
 [sub_resource type="FontVariation" id="FontVariation_s6ais"]
+base_font = ExtResource("10_vb6wf")
 variation_transform = Transform2D(0.842, 0, 0, 1, 0, 0)
 spacing_glyph = -18
 
@@ -304,7 +306,7 @@ grabHandMesh_r = NodePath("Visual Spinner/Visual Pitcher/Ball Grab Region/Grab V
 grabAnimationName = "grabAttempt"
 eliminatedVisual = NodePath("Eliminated Visual")
 strikePriorityVisual = NodePath("Strike Priority Visual")
-unblockableVisual = NodePath("Unclockable Visual")
+unblockableVisual = NodePath("Unblockable Visual")
 spinner = NodePath("Visual Spinner")
 pitcher = NodePath("Visual Spinner/Visual Pitcher")
 stretcher = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher")
@@ -349,7 +351,9 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.93949676, 0)
 layers = 4
 billboard = 1
+no_depth_test = true
 text = "CLASH!"
+font = ExtResource("10_vb6wf")
 font_size = 124
 outline_size = 65
 
@@ -360,6 +364,7 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13155276, 0)
 layers = 4
 billboard = 1
+no_depth_test = true
 text = "KO"
 font = SubResource("FontVariation_icfwc")
 font_size = 288
@@ -369,25 +374,28 @@ outline_size = 100
 visible = false
 
 [node name="Label" type="Label3D" parent="Ball Visuals/Strike Priority Visual" unique_id=1553012689]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.194988, 0)
+transform = Transform3D(1, 0, 0, 0, 0.9757685, 0, 0, 0, 1, 0, 1.304908, 0)
 layers = 4
 billboard = 1
+no_depth_test = true
 text = "STRIKE PRIORITY"
+font = ExtResource("10_vb6wf")
 font_size = 124
 outline_size = 65
-line_spacing = -60.0
+line_spacing = -6.106
 autowrap_mode = 2
 
-[node name="Unclockable Visual" type="Node3D" parent="Ball Visuals" unique_id=524389730]
+[node name="Unblockable Visual" type="Node3D" parent="Ball Visuals" unique_id=524389730]
 visible = false
 
-[node name="Label" type="Label3D" parent="Ball Visuals/Unclockable Visual" unique_id=880221091]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0360186, 0)
+[node name="Label" type="Label3D" parent="Ball Visuals/Unblockable Visual" unique_id=880221091]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95180285, 0)
 layers = 4
 billboard = 1
+no_depth_test = true
 text = "UNBLOCKABLE"
 font = SubResource("FontVariation_s6ais")
-font_size = 124
+font_size = 115
 outline_size = 65
 line_spacing = -60.0
 autowrap_mode = 2

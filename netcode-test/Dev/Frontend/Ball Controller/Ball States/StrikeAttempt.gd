@@ -5,7 +5,6 @@ var victims : Array[BallMCC];
 var activatorSpeed : float;
 
 func StartStatePhysics(params : Dictionary = {}):
-	mcc.strikeCooldown.Restart();
 	mcc.deflectCooldown.Restart();
 	mcc.autoAimCooldown = 0;
 

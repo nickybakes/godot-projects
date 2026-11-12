@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://b3mping6psqq0" path="res://Dev/Frontend/Camera/CameraManager.gd" id="6_fbg8u"]
 [ext_resource type="Script" uid="uid://bsw5rk11juyn3" path="res://Dev/Frontend/UI/Hub.gd" id="6_kfure"]
 [ext_resource type="Script" uid="uid://dhuxkgt2jqlqf" path="res://Dev/Frontend/Customization/CustomizationManager.gd" id="7_kfure"]
+[ext_resource type="FontFile" uid="uid://toyoa2sfe754" path="res://Art/Fonts/KeepCalm-Medium.ttf" id="11_i0gx5"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_c5qv8"]
 font_size = 54
@@ -152,6 +153,7 @@ pixel_size = 0.002
 render_priority = -2
 outline_render_priority = -3
 text = "Press A or SPACE to join!"
+font = ExtResource("11_i0gx5")
 font_size = 95
 outline_size = 39
 

@@ -4,19 +4,23 @@
 [ext_resource type="Resource" uid="uid://dpwawajn4ovhe" path="res://Dev/Frontend/Customization/R_CursorCustomizationDirectory_01.tres" id="2_da7sq"]
 [ext_resource type="Script" uid="uid://napor4at8qyp" path="res://Dev/Frontend/App/AccountDisplay.gd" id="2_e3ono"]
 [ext_resource type="Texture2D" uid="uid://dh1hnai0m4bx0" path="res://icon.svg" id="2_ygx0c"]
+[ext_resource type="FontFile" uid="uid://toyoa2sfe754" path="res://Art/Fonts/KeepCalm-Medium.ttf" id="4_kuw2l"]
 [ext_resource type="PackedScene" uid="uid://gh0evqpprg0a" path="res://Dev/Frontend/Tracker Line/PRE_TrackerLine_01.tscn" id="4_ygx0c"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_s282h"]
+font = ExtResource("4_kuw2l")
 font_size = 21
 outline_size = 11
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_mfcfy"]
+font = ExtResource("4_kuw2l")
 font_size = 78
 outline_size = 21
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_da7sq"]
+font = ExtResource("4_kuw2l")
 font_size = 25
 outline_size = 7
 outline_color = Color(0, 0, 0, 1)
@@ -67,7 +71,7 @@ anchors_preset = -1
 anchor_top = 0.425
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 10.024998
+offset_top = 16.024998
 grow_horizontal = 2
 grow_vertical = 2
 text = "Bobby BodyOdor"
@@ -84,7 +88,7 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 7.5
-offset_top = -115.5
+offset_top = -94.5
 offset_right = 116.5
 offset_bottom = 10.5
 grow_horizontal = 2
