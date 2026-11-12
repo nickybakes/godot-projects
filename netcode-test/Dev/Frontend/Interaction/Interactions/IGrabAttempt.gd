@@ -11,6 +11,8 @@ var alreadyActivated : bool = false;
 var outPrioritied : bool = false;
 var striker : int = -1;
 
+var firstEvalDone : bool = false;
+
 var clashVictims : Array[int] = [];
 
 func _init(params : Dictionary) -> void:
@@ -55,9 +57,15 @@ func Evaluate():
 			
 	if(outPrioritied):
 		GameManager.Manager.balls[activator].ballController.clash = false;
+		
+	if(!firstEvalDone):
+		firstEvalDone = true;
+		StartGrabVictimVisual();
+				
 	
 	if(GetLifeTime() > InteractionManager.Manager.traits.grabBuffer):
 		alreadyActivated = true;
+		StopGrabVictimVisual();
 		if(clashVictims.size() > 0):
 			for clashVictim in clashVictims:
 				var victimController = GameManager.Manager.balls[clashVictim].ballController;
@@ -97,3 +105,32 @@ func Evaluate():
 					pass;
 				pass;
 				
+
+
+func StartGrabVictimVisual():
+	if(clashVictims.size() > 0 || outPrioritied):
+		return;
+	for i in victims.size():
+		var victimController = GameManager.Manager.balls[victims[i]].ballController;
+		victimController.visuals.StartGrabVictimVisual(activator);
+	pass;
+	
+func StopGrabVictimVisual():
+	for i in victims.size():
+		var victimController = GameManager.Manager.balls[victims[i]].ballController;
+		victimController.visuals.StopGrabVictimVisual(activator);
+	pass;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

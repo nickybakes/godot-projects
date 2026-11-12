@@ -91,6 +91,7 @@ class_name BallTraits
 @export var grabAttemptSuccessDeceleration : float = 5.0;
 @export var grabAttemptSuccessTurnPower : float = 5.0;
 @export var grabAttemptSuccessMinSpeed : float = 10.0;
+@export var grabAttemptSuccessMaxSpeed : float = 30.0;
 @export var grabStaminaCost : float = .5;
 @export var grabCheckDelay : float = .1;
 @export var grabCheckDuration : float = .1;

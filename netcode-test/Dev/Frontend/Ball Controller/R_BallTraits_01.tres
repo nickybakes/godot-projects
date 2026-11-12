@@ -15,7 +15,7 @@
 
 [sub_resource type="Curve" id="Curve_c74sw"]
 _limits = [0.0, 1.0, 0.0, 5.0]
-_data = [Vector2(0.6823027, 0), 0.0, 0.36938524, 0, 0, Vector2(3.1652663, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0.6823027, 0), 0.0, 0.36938524, 0, 0, Vector2(2.2601278, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_qrgwy"]
@@ -86,7 +86,10 @@ strikeBlockerBounceTraits = ExtResource("6_qwdnp")
 clashBounceTraits = ExtResource("3_lfl6j")
 grabAttemptBoost = ExtResource("5_qwdnp")
 grabAttemptDeceleration = 20.0
+grabAttemptSuccessDeceleration = 40.0
 grabAttemptSuccessTurnPower = 10.0
+grabAttemptSuccessMinSpeed = 0.0
+grabAttemptSuccessMaxSpeed = 5.0
 grabStaminaCost = 0.3
 grabCheckDelay = 0.0
 grabCheckDuration = 0.2

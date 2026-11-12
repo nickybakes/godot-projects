@@ -80,5 +80,5 @@ void fragment() {
 	float pulseAlphaMultCalc = mix(1.0, pulseAlphaMultiply, pulseCalc);
 	
 	ALBEDO = colorCalc + (pulseBrightness * pulseCalc);
-	ALPHA = sample * alpha * alphaMultiply * pulseAlphaMultCalc;
+	ALPHA = saturate(sample * alpha * alphaMultiply * pulseAlphaMultCalc);
 }

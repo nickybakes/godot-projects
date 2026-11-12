@@ -33,6 +33,12 @@ var ballHubElement : BallHubElement;
 @export var grabHandMesh_r : MeshInstance3D;
 @export var grabAnimationName : String;
 
+@export_category("Grab Victim")
+@export var grabVictimVisual : Node3D;
+@export var grabVictimHandMesh_l : MeshInstance3D;
+@export var grabVictimHandMesh_r : MeshInstance3D;
+
+
 @export_category("Messages")
 @export var eliminatedVisual : Node3D;
 @export var strikePriorityVisual : Node3D;
@@ -65,6 +71,8 @@ func Setup(playerNumber : int):
 	
 	grabHandMesh_l.material_override = ballMaterial;
 	grabHandMesh_r.material_override = ballMaterial;
+	grabVictimHandMesh_l.material_override = ballMaterial.duplicate();
+	grabVictimHandMesh_r.material_override = grabVictimHandMesh_l.material_override;
 	
 	var electricColor = ballCustomizationDirectory.ballElectricColors[ballController.playerToken.customization.colorIndex];
 	electricParticles.material_override = electricParticles.material_override.duplicate();
@@ -78,6 +86,7 @@ func Setup(playerNumber : int):
 	StopStrikeVisual();
 	StopGrabVisual();
 	StopGrabSuccessAimVisual();
+	StopGrabVictimVisual(grabberPlayerNumber);
 	HideMessages();
 	
 func RollBall(currentSpeed : float, delta : float):
@@ -164,6 +173,22 @@ func StopGrabVisual():
 	grabAnimator.stop();
 	grabAnimator.active = false;
 	
+var grabberPlayerNumber : int = -1;
+var grabVictimVisualStopFailsafeTime : float = 1.5;
+var grabVictimVisualTime : float;
+	
+func StartGrabVictimVisual(_grabberPlayerNumber : int):
+	grabVictimVisual.visible = true;
+	grabberPlayerNumber = _grabberPlayerNumber;
+	var grabberPlayer = GameManager.Manager.balls[grabberPlayerNumber].ballController;
+	var color = ballCustomizationDirectory.ballColors[grabberPlayer.playerToken.customization.colorIndex];
+	grabVictimHandMesh_l.material_override.set_shader_parameter("color", color);
+	grabVictimVisualTime = 0.0;
+	
+func StopGrabVictimVisual(_grabberPlayerNumber : int):
+	if(grabberPlayerNumber == _grabberPlayerNumber):
+		grabberPlayerNumber = -1;
+		grabVictimVisual.visible = false;
 	
 func StartGrabSuccessAimVisual():
 	chargeAimMesh.visible = true;
@@ -209,4 +234,6 @@ func _process(delta: float) -> void:
 	if(messageTime == 0):
 		HideMessages();
 	
-	
+	grabVictimVisualTime += delta;
+	if(grabberPlayerNumber != -1 && grabVictimVisualTime > grabVictimVisualStopFailsafeTime):
+		StopGrabVictimVisual(grabberPlayerNumber);

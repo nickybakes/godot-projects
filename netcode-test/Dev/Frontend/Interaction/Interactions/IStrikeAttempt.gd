@@ -57,6 +57,7 @@ func Evaluate():
 							grabberController.strikePrioritied = false;
 						else:
 							possibleGrab.outPrioritied = true;
+							possibleGrab.StopGrabVictimVisual();
 							possibleGrab.striker = activator;
 							var grabberController = GameManager.Manager.balls[possibleGrab.activator].ballController;
 							grabberController.strikePrioritied = true;

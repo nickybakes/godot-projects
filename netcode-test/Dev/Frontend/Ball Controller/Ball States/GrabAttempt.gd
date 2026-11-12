@@ -46,11 +46,16 @@ func ProcessPhysics(delta : float):
 			if(startNewStep):
 				if(victims.size() > 0):
 					InteractionManager.Manager.SendInteraction(InteractionCreator.NewGrabAttempt(mcc, victims, randomAngleOffset));
+					if(mcc.currentSpeed > mcc.traits.grabAttemptSuccessMaxSpeed):
+						mcc.velocity = mcc.currentDirection * mcc.traits.grabAttemptSuccessMaxSpeed;
 			pass;
 	
 	if(victims.size() > 0):
-		var targetBall = victims[0];
-		mcc.GetPhysics().TurnVelocityTowardsTarget(targetBall.global_position, mcc.traits.grabAttemptSuccessTurnPower, delta);
+		var targetPosition = Vector3.ZERO;
+		for target in victims:
+			targetPosition += target.global_position;
+		targetPosition /= victims.size();
+		mcc.GetPhysics().TurnVelocityTowardsTarget(targetPosition, mcc.traits.grabAttemptSuccessTurnPower, delta);
 		if(mcc.currentSpeed > mcc.traits.grabAttemptSuccessMinSpeed):
 			mcc.GetPhysics().DecelerateTopDown(delta, mcc.traits.grabAttemptSuccessDeceleration);
 			mcc.velocity.y = move_toward(mcc.velocity.y, 0, mcc.traits.grabAttemptSuccessDeceleration * delta)

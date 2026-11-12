@@ -113,8 +113,8 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1.203125), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s6ais"]
-radius = 2.6010742
-height = 5.927063
+radius = 2.2179146
+height = 4.435829
 
 [sub_resource type="Animation" id="Animation_xkg10"]
 length = 0.001
@@ -283,7 +283,7 @@ script = ExtResource("51_ej7s1")
 transitionSpeed = 0.5
 metadata/_custom_type_script = "uid://fxck7cgoc485"
 
-[node name="Ball Visuals" type="Node3D" parent="." unique_id=851201941 node_paths=PackedStringArray("ballController", "shadowDecal", "cameraTarget", "header", "ballMesh", "outlineMesh", "xrayMesh", "chargeAimMesh", "blockMesh", "electricParticles", "clashVisual", "strikeVisual", "grabVisual", "grabAnimator", "grabHandMesh_l", "grabHandMesh_r", "eliminatedVisual", "strikePriorityVisual", "unblockableVisual", "spinner", "pitcher", "stretcher", "roller")]
+[node name="Ball Visuals" type="Node3D" parent="." unique_id=851201941 node_paths=PackedStringArray("ballController", "shadowDecal", "cameraTarget", "header", "ballMesh", "outlineMesh", "xrayMesh", "chargeAimMesh", "blockMesh", "electricParticles", "clashVisual", "strikeVisual", "grabVisual", "grabAnimator", "grabHandMesh_l", "grabHandMesh_r", "grabVictimVisual", "grabVictimHandMesh_l", "grabVictimHandMesh_r", "eliminatedVisual", "strikePriorityVisual", "unblockableVisual", "spinner", "pitcher", "stretcher", "roller")]
 script = ExtResource("2_3d8wc")
 ballController = NodePath("..")
 ballCustomizationDirectory = ExtResource("4_lr45t")
@@ -301,9 +301,12 @@ clashVisual = NodePath("Clash Visual")
 strikeVisual = NodePath("Visual Spinner/Visual Pitcher/Ball Strike Region/Strike Mesh")
 grabVisual = NodePath("Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual")
 grabAnimator = NodePath("Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual/Grab Animator")
-grabHandMesh_l = NodePath("Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual/Grab Hand L/Mesh")
-grabHandMesh_r = NodePath("Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual/Grab Hand R/Mesh")
+grabHandMesh_l = NodePath("Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual/Grab Hand L/Grab Hand L Mesh")
+grabHandMesh_r = NodePath("Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual/Grab Hand R/Grab Hand R Mesh")
 grabAnimationName = "grabAttempt"
+grabVictimVisual = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Grab Hand Victim Visual")
+grabVictimHandMesh_l = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Grab Hand Victim Visual/Grab Hand Victim L/Grab Hand Victim L Mesh")
+grabVictimHandMesh_r = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Grab Hand Victim Visual/Grab Hand Victim R/Grab Hand Victim R Mesh")
 eliminatedVisual = NodePath("Eliminated Visual")
 strikePriorityVisual = NodePath("Strike Priority Visual")
 unblockableVisual = NodePath("Unblockable Visual")
@@ -450,7 +453,7 @@ electricScale = SubResource("Curve_ctju4")
 metadata/_custom_type_script = "uid://bajnp1ma0ic1l"
 
 [node name="Shape" type="CollisionShape3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region" unique_id=1688676039]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 5.339932e-08, -1.8083794)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 2.080737e-08, -1.0627625)
 shape = SubResource("CapsuleShape3D_s6ais")
 
 [node name="Grab Visual" type="Node3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region" unique_id=783329987]
@@ -474,7 +477,7 @@ mesh = SubResource("SphereMesh_c5qv8")
 transform = Transform3D(0.5165771, 0, 0.8562409, 0, 1, 0, -0.8562409, 0, 0.5165771, 0.5070872, 2.0624445e-07, 0.4359264)
 visible = false
 
-[node name="Mesh" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual/Grab Hand L" unique_id=1027882142]
+[node name="Grab Hand L Mesh" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual/Grab Hand L" unique_id=1027882142]
 material_override = ExtResource("2_i0e7p")
 cast_shadow = 0
 mesh = ExtResource("12_c74sw")
@@ -488,7 +491,7 @@ mesh = ExtResource("12_c74sw")
 transform = Transform3D(-0.6507743, 5.6892496e-08, -0.75927126, 8.742278e-08, 1, 0, -0.75927126, 6.63776e-08, 0.6507743, -0.6191883, 0, 0.33900008)
 visible = false
 
-[node name="Mesh" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual/Grab Hand R" unique_id=555342478]
+[node name="Grab Hand R Mesh" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual/Grab Hand R" unique_id=555342478]
 material_override = ExtResource("2_i0e7p")
 cast_shadow = 0
 mesh = ExtResource("12_c74sw")
@@ -537,6 +540,34 @@ lifetime = 0.28
 transform_align = 3
 process_material = ExtResource("16_c74sw")
 draw_pass_1 = SubResource("QuadMesh_s282h")
+
+[node name="Grab Hand Victim Visual" type="Node3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher" unique_id=406777377]
+
+[node name="Grab Hand Victim L" type="Node3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher/Grab Hand Victim Visual" unique_id=1187443453]
+transform = Transform3D(-1.0036472, 0, 0.61674654, 0, 1.178, 0, -0.61674654, 0, -1.0036472, -0.5009865, 2.7595507e-07, 0.829439)
+
+[node name="Grab Hand Victim L Mesh" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher/Grab Hand Victim Visual/Grab Hand Victim L" unique_id=1511229655]
+material_override = ExtResource("2_i0e7p")
+cast_shadow = 0
+mesh = ExtResource("12_c74sw")
+
+[node name="Outline" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher/Grab Hand Victim Visual/Grab Hand Victim L" unique_id=1320546552]
+material_override = ExtResource("13_vktj5")
+cast_shadow = 0
+mesh = ExtResource("12_c74sw")
+
+[node name="Grab Hand Victim R" type="Node3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher/Grab Hand Victim Visual" unique_id=40530562]
+transform = Transform3D(1.0295112, -1.5545189e-07, -0.57253003, 1.7787306e-07, 1.178, -7.274037e-15, -0.57253003, 8.644967e-08, -1.0295112, 0.5676737, 0, 0.75491804)
+
+[node name="Grab Hand Victim R Mesh" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher/Grab Hand Victim Visual/Grab Hand Victim R" unique_id=1920655904]
+material_override = ExtResource("2_i0e7p")
+cast_shadow = 0
+mesh = ExtResource("12_c74sw")
+
+[node name="Outline" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher/Grab Hand Victim Visual/Grab Hand Victim R" unique_id=1032381743]
+material_override = ExtResource("13_vktj5")
+cast_shadow = 0
+mesh = ExtResource("12_c74sw")
 
 [node name="Visual Roller" type="Node3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Visual Stretcher" unique_id=1061095184]
 transform = Transform3D(0.9999999, 0, 0, 0, 0.9999998, 0, 0, 0, 0.99999994, 0, 0, 0)
