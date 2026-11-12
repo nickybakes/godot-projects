@@ -88,8 +88,13 @@ class_name BallTraits
 @export var maxNumOfGrabbedBalls : int = 8;
 @export var grabAttemptBoost : BallBounceTraits;
 @export var grabAttemptDeceleration : float = 5.0;
+@export var grabAttemptSuccessDeceleration : float = 5.0;
+@export var grabAttemptSuccessTurnPower : float = 5.0;
+@export var grabAttemptSuccessMinSpeed : float = 10.0;
 @export var grabStaminaCost : float = .5;
-@export var grabCheckTime : float = .25;
+@export var grabCheckDelay : float = .1;
+@export var grabCheckDuration : float = .1;
+@export var grabAttemptDuration : float = .4;
 @export var grabRecoveryTime : float = .25;
 
 @export_group("Damage Calculation")
@@ -107,7 +112,6 @@ class_name BallTraits
 @export var grabSuccessMaxTimeFailsafe : float = 5.0;
 
 @export_group("Victim")
-@export var grabVictimSuction : float = 10.0;
 @export var grabVictimTopDownOffset : float = 3.0;
 @export var grabVictimVerticalOffset : float = 3.0;
 @export_range(0.0, 1.0, 0.01) var grabVictimBounceAngleMix : float = .5;

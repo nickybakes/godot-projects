@@ -116,11 +116,7 @@ func AutoAim(delta : float) -> void:
 	
 	if(orderedBalls.size() > 0 && aimPower > 0):
 		var targetBall = orderedBalls[0];
-		var directionToTarget : Vector3 = mcc.global_position.direction_to(targetBall.global_position);
-		var angleTo = mcc.currentDirection.angle_to(directionToTarget);
-		var weight = (aimPower * delta)/angleTo;
-		var newDirection = mcc.currentDirection.slerp(directionToTarget, weight);
-		mcc.velocity = newDirection * mcc.currentSpeed;
+		TurnVelocityTowardsTarget(targetBall.global_position, aimPower, delta);
 		pass;
 
 func MovementControl(delta : float):
@@ -148,10 +144,21 @@ func MovementControl(delta : float):
 		mcc.velocity.z = move_toward(mcc.velocity.z, mcc.requestedMoveDirection.z * moveSpeed, moveControl * controlSurfacePower * delta);
 	
 
+func TurnVelocityTowardsTarget(target : Vector3, turnPower : float, delta : float):
+	if(is_zero_approx(mcc.currentSpeed)):
+		return;
+		
+	var directionToTarget : Vector3 = mcc.global_position.direction_to(target);
+	var angleTo = mcc.currentDirection.angle_to(directionToTarget);
+	var weight = (turnPower * delta)/angleTo;
+	var newDirection = mcc.currentDirection.slerp(directionToTarget, weight);
+	mcc.velocity = newDirection * mcc.currentSpeed;
+	pass;
+	
+	
 func BounceVelocity(newDirection : Vector3, speed : float, bounceTraits : BallBounceTraits):
 	BounceVelocitySpecific(newDirection, speed, bounceTraits.minBounceSpeed, bounceTraits.maxBounceSpeed, bounceTraits.topDownSpeedScalar, bounceTraits.verticalSpeedScalar);
 	pass;
-
 
 func BounceVerlocityLerpTraits(newDirection : Vector3, speed : float, bounceA : BallBounceTraits, bounceB : BallBounceTraits, t : float):
 	var minBounceSpeed = lerp(bounceA.minBounceSpeed, bounceB.minBounceSpeed, t);

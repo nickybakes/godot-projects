@@ -2,53 +2,62 @@ extends BallState
 class_name GrabAttempt
 
 var victims : Array[BallMCC];
-var failure : bool
 
-var visualsShowing : bool;
+var subState : SubState;
+
+var randomAngleOffset : float;
 
 func StartStateVisuals(params : Dictionary = {}):
 	mcc.visuals.StartGrabVisual();
-	visualsShowing = true;
 	
 func ExitStateVisuals():
 	mcc.visuals.StopGrabVisual();
-	visualsShowing = false;
 
 func StartStatePhysics(params : Dictionary = {}):
 	mcc.grabCooldown.Restart();
-	mcc.autoAimCooldown = 0;
+	mcc.strikeCooldown.Restart();
+	
+	subState = SubState.new([mcc.traits.grabCheckDelay, mcc.traits.grabCheckDuration]);
 
 	mcc.GetPhysics().BounceVelocity(mcc.currentFacingDirection, mcc.currentSpeed, mcc.traits.grabAttemptBoost);
 	mcc.staminaStat.Spend(mcc.traits.grabStaminaCost);
 	
-	failure = false;
-	
 	victims = [];
 	
-	if(mcc.grabRegion.ballsInsideThisRegion.size() == 0):
-		failure = true;
-		return;
-	
-	for i in min(mcc.grabRegion.ballsInsideThisRegion.size(), mcc.traits.maxNumOfGrabbedBalls):
-		var hitBall = mcc.grabRegion.ballsInsideThisRegion[i];
-		victims.push_back(hitBall);
-	
-	var randomAngleOffset = randf();
-	
-	InteractionManager.Manager.SendInteraction(InteractionCreator.NewGrabAttempt(mcc, victims, randomAngleOffset));
+	randomAngleOffset = randf();
 	pass;
 	
 func ExitStatePhysics():
 	mcc.grabCooldown.Restart();
-	
-func ProcessVisuals(delta : float):
-	if(timeInState >= mcc.visuals.profile.grabVisualTimeMax && visualsShowing):
-		mcc.visuals.StopGrabVisual();
-		visualsShowing = false;
+	mcc.autoAimCooldown = 0;
 
 func ProcessPhysics(delta : float):
 	super(delta);
-	if(failure):
+	
+	var startNewStep : bool = subState.Update(delta);
+	match(subState.currentIndex):
+		1:
+			for i in min(mcc.grabRegion.ballsInsideThisRegion.size(), mcc.traits.maxNumOfGrabbedBalls):
+				var hitBall = mcc.grabRegion.ballsInsideThisRegion[i];
+				if(!victims.has(hitBall)):
+					victims.push_back(hitBall);
+			pass;
+		2:
+			if(startNewStep):
+				if(victims.size() > 0):
+					InteractionManager.Manager.SendInteraction(InteractionCreator.NewGrabAttempt(mcc, victims, randomAngleOffset));
+			pass;
+	
+	if(victims.size() > 0):
+		var targetBall = victims[0];
+		mcc.GetPhysics().TurnVelocityTowardsTarget(targetBall.global_position, mcc.traits.grabAttemptSuccessTurnPower, delta);
+		if(mcc.currentSpeed > mcc.traits.grabAttemptSuccessMinSpeed):
+			mcc.GetPhysics().DecelerateTopDown(delta, mcc.traits.grabAttemptSuccessDeceleration);
+			mcc.velocity.y = move_toward(mcc.velocity.y, 0, mcc.traits.grabAttemptSuccessDeceleration * delta)
+	else:
 		mcc.GetPhysics().DecelerateTopDown(delta, mcc.traits.grabAttemptDeceleration);
 		mcc.velocity.y = move_toward(mcc.velocity.y, 0, mcc.traits.grabAttemptDeceleration * delta)
-		mcc.GetPhysics().MoveAndCollide(delta);
+		mcc.GetPhysics().AutoAim(delta);
+		pass;
+		
+	mcc.GetPhysics().MoveAndCollide(delta);

@@ -11,6 +11,7 @@ class_name NetBall
 @export var health : float;
 @export var electric : float;
 @export var invuln : float;
+@export var strikeCooldown : float;
 
 var playerNumber : int;
 var playerToken : PlayerToken;
@@ -66,6 +67,10 @@ func _process(delta: float) -> void:
 			ballController.invulnStat.value = 0;
 		ballController.invulnStat.CalcPercent();
 		
+		ballController.strikeCooldown.value = lerp(ballController.strikeCooldown.value, strikeCooldown, .5);
+		if(is_zero_approx(strikeCooldown)):
+			ballController.strikeCooldown.value = 0;
+		
 	else:
 		position = ballController.position;
 		velocity = ballController.velocity;
@@ -75,6 +80,7 @@ func _process(delta: float) -> void:
 		health = ballController.healthStat.value;
 		electric = ballController.electricStat.value;
 		invuln = ballController.invulnStat.value;
+		strikeCooldown = ballController.strikeCooldown.value;
 		if(inputDevice != null && playerToken):
 			if(inputDevice.inputBuffer.IsActionJustPressedThisFrame(Enums.InputAction.ToggleInvert, 1)):
 				playerToken.customization.invertChargeAim = !playerToken.customization.invertChargeAim;

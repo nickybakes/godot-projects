@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://b23s3gvugcel7"]
+
+[ext_resource type="Shader" uid="uid://y56l857exwne" path="res://Art/Shaders/S_Outline_01.gdshader" id="1_jttki"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_jttki")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/brightness = 0.0
+shader_parameter/outlineThickness = 0.044

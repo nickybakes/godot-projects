@@ -28,6 +28,9 @@ properties/6/replication_mode = 1
 properties/7/path = NodePath(".:electric")
 properties/7/spawn = true
 properties/7/replication_mode = 1
+properties/8/path = NodePath(".:strikeCooldown")
+properties/8/spawn = true
+properties/8/replication_mode = 1
 
 [node name="PRE_NetBall_01" type="MultiplayerSynchronizer" unique_id=732516578 node_paths=PackedStringArray("ballController")]
 root_path = NodePath(".")

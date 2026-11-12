@@ -28,6 +28,10 @@ var ballHubElement : BallHubElement;
 
 @export_category("Grab")
 @export var grabVisual : Node3D;
+@export var grabAnimator : AnimationPlayer;
+@export var grabHandMesh_l : MeshInstance3D;
+@export var grabHandMesh_r : MeshInstance3D;
+@export var grabAnimationName : String;
 
 @export_category("Messages")
 @export var eliminatedVisual : Node3D;
@@ -58,6 +62,9 @@ func Setup(playerNumber : int):
 	outlineMesh.material_override = outlineMaterial;
 	xrayMesh.material_override = xrayMaterial;
 	chargeAimMesh.material_override = chargeAimMaterial;
+	
+	grabHandMesh_l.material_override = ballMaterial;
+	grabHandMesh_r.material_override = ballMaterial;
 	
 	var electricColor = ballCustomizationDirectory.ballElectricColors[ballController.playerToken.customization.colorIndex];
 	electricParticles.material_override = electricParticles.material_override.duplicate();
@@ -149,9 +156,13 @@ func StopStrikeVisual():
 	
 func StartGrabVisual():
 	grabVisual.visible = true;
+	grabAnimator.active = true;
+	grabAnimator.play(grabAnimationName);
 	
 func StopGrabVisual():
 	grabVisual.visible = false;
+	grabAnimator.stop();
+	grabAnimator.active = false;
 	
 	
 func StartGrabSuccessAimVisual():

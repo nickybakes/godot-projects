@@ -9,13 +9,16 @@
 [ext_resource type="PackedScene" uid="uid://u6oslcx36ah4" path="res://Dev/Frontend/UI/PRE_BallHeader_01.tscn" id="4_qrgwy"]
 [ext_resource type="Resource" uid="uid://b3ori3ghnplsq" path="res://Dev/Frontend/Ball Visuals/R_BallVisualProfile_01.tres" id="5_6873s"]
 [ext_resource type="Material" uid="uid://ltb43n3t3x1i" path="res://Art/Materials/M_ChargeAim_01.tres" id="5_icp2y"]
+[ext_resource type="Animation" uid="uid://cg223axxpxyr" path="res://Art/Animations/A_GrabAttempt_01.tres" id="7_bjlbd"]
 [ext_resource type="Script" uid="uid://cbhbr4ha54spr" path="res://Dev/Frontend/Ball Controller/BallPhysics.gd" id="7_jioly"]
 [ext_resource type="Material" uid="uid://d4i6d6wxg2j5m" path="res://Art/Materials/M_HitRegion_01.tres" id="7_l67tw"]
 [ext_resource type="Material" uid="uid://dqrlfdt0mxo4s" path="res://Art/Materials/M_Xray_01.tres" id="8_m53x3"]
+[ext_resource type="Material" uid="uid://mi3rb0advqsw" path="res://Art/Materials/M_HitRegion_01a.tres" id="11_bjlbd"]
 [ext_resource type="Material" uid="uid://bnwwedt8ua82h" path="res://Art/Materials/M_Strike_01.tres" id="11_qrgwy"]
 [ext_resource type="Material" uid="uid://okolx5gyqwo1" path="res://Art/Materials/M_Block_01.tres" id="11_v2vyv"]
 [ext_resource type="Script" uid="uid://decpb0lh7o7qx" path="res://Dev/Frontend/Ball Controller/Ball States/Roll.gd" id="12_84w8q"]
 [ext_resource type="Script" uid="uid://bxuank2e18mxg" path="res://Dev/Frontend/Ball Controller/Ball States/Charge.gd" id="12_apf2q"]
+[ext_resource type="ArrayMesh" uid="uid://j8xbd3u5girv" path="res://Art/Models/SM_Hand_Grab_01.glb" id="12_c74sw"]
 [ext_resource type="Script" uid="uid://bspbsgt6kyqhv" path="res://Dev/Frontend/Ball Controller/StatRefill.gd" id="12_g4d1v"]
 [ext_resource type="Script" uid="uid://bc4ag7pcktrlg" path="res://Dev/Frontend/Ball Controller/Ball States/Jump.gd" id="12_ilenv"]
 [ext_resource type="Script" uid="uid://bao3317lfi3tc" path="res://Dev/Frontend/Modular Character Controller/MCCTransition.gd" id="12_nefp1"]
@@ -23,6 +26,7 @@
 [ext_resource type="Script" uid="uid://cx8j2ywloqwq7" path="res://Dev/Frontend/Ball Controller/Rules/OnSurfaceRule.gd" id="13_2mr7f"]
 [ext_resource type="Script" uid="uid://b2jd3djd45lf3" path="res://Dev/Frontend/Ball Controller/Rules/InputRule.gd" id="13_ilenv"]
 [ext_resource type="ArrayMesh" uid="uid://c62f147t8g58f" path="res://Art/Models/SM_Ball_01.glb" id="13_n4m0h"]
+[ext_resource type="Material" uid="uid://b23s3gvugcel7" path="res://Art/Materials/M_Outline_01a.tres" id="13_vktj5"]
 [ext_resource type="Script" uid="uid://nlxsi446gre7" path="res://Dev/Frontend/Ball Controller/Cooldown.gd" id="14_s4hg4"]
 [ext_resource type="Script" uid="uid://bya8tt6ubw05d" path="res://Dev/Frontend/Ball Controller/Ball States/Launch.gd" id="15_84w8q"]
 [ext_resource type="Script" uid="uid://dulfhx4ftd06" path="res://Dev/Frontend/Ball Controller/Rules/TraitRule.gd" id="15_ahjyt"]
@@ -98,25 +102,132 @@ height = 1.5279236
 
 [sub_resource type="Curve" id="Curve_c332p"]
 _limits = [1.0, 2.0, 8.0, 25.0]
-_data = [Vector2(8, 1), 0.0, 0.0, 0, 0, Vector2(25, 1.3571428), 0.0, 0.0, 0, 0]
+_data = [Vector2(8, 1), 0.0, 0.0, 0, 0, Vector2(25, 1.2760417), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_ctju4"]
 _limits = [1.0, 2.0, 0.0, 1.0]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1.3), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1.203125), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s6ais"]
-radius = 1.839
-height = 5.0834675
+radius = 2.6010742
+height = 5.927063
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_ih3ae"]
-radius = 1.4213867
-height = 3.6120605
+[sub_resource type="Animation" id="Animation_xkg10"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Grab Hand L:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.5070872, 2.0624445e-07, 0.4359264)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Grab Hand L:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.0279479, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Grab Hand R:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.6191883, 0, 0.33900008)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Grab Hand R:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 2.2794, 3.1415927)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Grab Hand L:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Grab Hand R:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Grab Area Mesh Container/Grab Area Mesh:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Grab Area Mesh Container:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qrgwy"]
-radius = 1.839
-height = 6.422
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bjlbd"]
+_data = {
+&"RESET": SubResource("Animation_xkg10"),
+&"grabAttempt": ExtResource("7_bjlbd")
+}
+
+[sub_resource type="SphereMesh" id="SphereMesh_c5qv8"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xkg10"]
+radius = 2.9389648
+height = 6.8652344
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_5vxlf"]
+height = 2.4416504
+radius = 3.7871094
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_c5qv8"]
 top_radius = 0.21
@@ -170,7 +281,7 @@ script = ExtResource("51_ej7s1")
 transitionSpeed = 0.5
 metadata/_custom_type_script = "uid://fxck7cgoc485"
 
-[node name="Ball Visuals" type="Node3D" parent="." unique_id=851201941 node_paths=PackedStringArray("ballController", "shadowDecal", "cameraTarget", "header", "ballMesh", "outlineMesh", "xrayMesh", "chargeAimMesh", "blockMesh", "electricParticles", "clashVisual", "strikeVisual", "grabVisual", "eliminatedVisual", "strikePriorityVisual", "unblockableVisual", "spinner", "pitcher", "stretcher", "roller")]
+[node name="Ball Visuals" type="Node3D" parent="." unique_id=851201941 node_paths=PackedStringArray("ballController", "shadowDecal", "cameraTarget", "header", "ballMesh", "outlineMesh", "xrayMesh", "chargeAimMesh", "blockMesh", "electricParticles", "clashVisual", "strikeVisual", "grabVisual", "grabAnimator", "grabHandMesh_l", "grabHandMesh_r", "eliminatedVisual", "strikePriorityVisual", "unblockableVisual", "spinner", "pitcher", "stretcher", "roller")]
 script = ExtResource("2_3d8wc")
 ballController = NodePath("..")
 ballCustomizationDirectory = ExtResource("4_lr45t")
@@ -187,6 +298,10 @@ electricParticles = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Ele
 clashVisual = NodePath("Clash Visual")
 strikeVisual = NodePath("Visual Spinner/Visual Pitcher/Ball Strike Region/Strike Mesh")
 grabVisual = NodePath("Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual")
+grabAnimator = NodePath("Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual/Grab Animator")
+grabHandMesh_l = NodePath("Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual/Grab Hand L/Mesh")
+grabHandMesh_r = NodePath("Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual/Grab Hand R/Mesh")
+grabAnimationName = "grabAttempt"
 eliminatedVisual = NodePath("Eliminated Visual")
 strikePriorityVisual = NodePath("Strike Priority Visual")
 unblockableVisual = NodePath("Unclockable Visual")
@@ -327,16 +442,53 @@ electricScale = SubResource("Curve_ctju4")
 metadata/_custom_type_script = "uid://bajnp1ma0ic1l"
 
 [node name="Shape" type="CollisionShape3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region" unique_id=1688676039]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.8015875e-08, -0.99890065)
-visible = false
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 5.339932e-08, -1.8083794)
 shape = SubResource("CapsuleShape3D_s6ais")
 
-[node name="Grab Visual" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region" unique_id=1027882142]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.7421591e-08, -0.98541176)
+[node name="Grab Visual" type="Node3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region" unique_id=783329987]
+transform = Transform3D(-1.338, 0, -2.020324e-07, 0, 1.338, 0, 2.020324e-07, 0, -1.338, 0, 0, 0)
+
+[node name="Grab Animator" type="AnimationPlayer" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual" unique_id=362556587]
+libraries/ = SubResource("AnimationLibrary_bjlbd")
+playback_auto_capture = false
+
+[node name="Grab Area Mesh Container" type="Node3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual" unique_id=588181528]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.582)
+
+[node name="Grab Area Mesh" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual/Grab Area Mesh Container" unique_id=1615397434]
+transform = Transform3D(2.078, 0, 4.1927846e-14, 0, 2.854, 0, -3.0527704e-14, 0, 2.854, 0, 0, 0)
 visible = false
-material_override = ExtResource("7_l67tw")
+material_override = ExtResource("11_bjlbd")
 cast_shadow = 0
-mesh = SubResource("CapsuleMesh_ih3ae")
+mesh = SubResource("SphereMesh_c5qv8")
+
+[node name="Grab Hand L" type="Node3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual" unique_id=398908047]
+transform = Transform3D(0.5165771, 0, 0.8562409, 0, 1, 0, -0.8562409, 0, 0.5165771, 0.5070872, 2.0624445e-07, 0.4359264)
+visible = false
+
+[node name="Mesh" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual/Grab Hand L" unique_id=1027882142]
+material_override = ExtResource("2_i0e7p")
+cast_shadow = 0
+mesh = ExtResource("12_c74sw")
+
+[node name="Outline" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual/Grab Hand L" unique_id=1812907719]
+material_override = ExtResource("13_vktj5")
+cast_shadow = 0
+mesh = ExtResource("12_c74sw")
+
+[node name="Grab Hand R" type="Node3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual" unique_id=125287767]
+transform = Transform3D(-0.6507743, 5.6892496e-08, -0.75927126, 8.742278e-08, 1, 0, -0.75927126, 6.63776e-08, 0.6507743, -0.6191883, 0, 0.33900008)
+visible = false
+
+[node name="Mesh" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual/Grab Hand R" unique_id=555342478]
+material_override = ExtResource("2_i0e7p")
+cast_shadow = 0
+mesh = ExtResource("12_c74sw")
+
+[node name="Outline" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual/Grab Hand R" unique_id=2037750356]
+material_override = ExtResource("13_vktj5")
+cast_shadow = 0
+mesh = ExtResource("12_c74sw")
 
 [node name="Ball Auto Aim Region" type="Area3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher" unique_id=86385115 node_paths=PackedStringArray("ballController")]
 collision_layer = 8
@@ -350,12 +502,12 @@ electricScale = SubResource("Curve_ctju4")
 metadata/_custom_type_script = "uid://bajnp1ma0ic1l"
 
 [node name="Shape" type="CollisionShape3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Auto Aim Region" unique_id=759989603]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 5.6147798e-08, -1.8712573)
-shape = SubResource("CapsuleShape3D_s6ais")
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 7.772603e-08, -2.3649096)
+shape = SubResource("CapsuleShape3D_xkg10")
 
-[node name="Shape2" type="CollisionShape3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Auto Aim Region" unique_id=910073564]
-transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 5.6147798e-08, -2.5713286)
-shape = SubResource("CapsuleShape3D_qrgwy")
+[node name="Shape3" type="CollisionShape3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Auto Aim Region" unique_id=1315785875]
+transform = Transform3D(1, 0, 0, 0, 1.3113416e-07, 1, 0, -1, 1.3113416e-07, 0, 4.4318192e-08, -4.063678)
+shape = SubResource("CylinderShape3D_5vxlf")
 
 [node name="Charge Aim Mesh" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher" unique_id=283875934]
 transform = Transform3D(-1.293, -1.9523758e-07, 8.534105e-15, 0, -5.6518825e-08, -1.293, 1.9523758e-07, -1.293, 5.6518825e-08, 0, 0, -0.113952056)
@@ -576,7 +728,7 @@ metadata/_custom_type_script = "uid://c0v8bxb3qmsi1"
 [node name="GrabAttempt" type="Node" parent="States" unique_id=686585411 node_paths=PackedStringArray("transitions")]
 script = ExtResource("37_j4t0d")
 codeName = "grabAttempt"
-transitions = [NodePath("../../Transitions/Combat/Grab Fail Start Transition"), NodePath("../../Transitions/Combat/Interaction Attempt Failsafe Transition")]
+transitions = [NodePath("../../Transitions/Combat/Grab Attempt End Transition")]
 metadata/_custom_type_script = "uid://brxc7dl88bas3"
 
 [node name="GrabFail" type="Node" parent="States" unique_id=25406752 node_paths=PackedStringArray("transitions")]
@@ -717,18 +869,6 @@ script = ExtResource("12_nefp1")
 stateTransitionTo = NodePath("../../../States/Roll")
 metadata/_custom_type_script = "uid://bao3317lfi3tc"
 
-[node name="Clash Strike Start Transition" type="Node" parent="Transitions/Combat" unique_id=151579272 node_paths=PackedStringArray("stateTransitionTo", "rules")]
-script = ExtResource("12_nefp1")
-stateTransitionTo = NodePath("../../../States/Clash")
-rules = [NodePath("../../../Combat Rules/Strike Buffer Time Max Rule"), NodePath("../../../Generic Rules/Is Clash Rule")]
-metadata/_custom_type_script = "uid://bao3317lfi3tc"
-
-[node name="Clash Grab Start Transition" type="Node" parent="Transitions/Combat" unique_id=455747622 node_paths=PackedStringArray("stateTransitionTo", "rules")]
-script = ExtResource("12_nefp1")
-stateTransitionTo = NodePath("../../../States/Clash")
-rules = [NodePath("../../../Combat Rules/Grab Buffer Time Max Rule"), NodePath("../../../Generic Rules/Is Clash Rule")]
-metadata/_custom_type_script = "uid://bao3317lfi3tc"
-
 [node name="Clash End Transition" type="Node" parent="Transitions/Combat" unique_id=293215912 node_paths=PackedStringArray("stateTransitionTo", "rules")]
 script = ExtResource("12_nefp1")
 stateTransitionTo = NodePath("../../../States/Roll")
@@ -769,22 +909,16 @@ stateTransitionTo = NodePath("../../../States/GrabAttempt")
 rules = [NodePath("../../../Input Rules/Grab Pressed This Frame"), NodePath("../../../Cooldown Rules/Grab Cooled Down"), NodePath("../../../Combat Rules/No Invuln Rule")]
 metadata/_custom_type_script = "uid://bao3317lfi3tc"
 
-[node name="Grab Fail Start Transition" type="Node" parent="Transitions/Combat" unique_id=1484076203 node_paths=PackedStringArray("stateTransitionTo", "rules")]
+[node name="Grab Attempt End Transition" type="Node" parent="Transitions/Combat" unique_id=1484076203 node_paths=PackedStringArray("stateTransitionTo", "rules")]
 script = ExtResource("12_nefp1")
-stateTransitionTo = NodePath("../../../States/GrabFail")
-rules = [NodePath("../../../Combat Rules/Grab Buffer Time Max Rule"), NodePath("../../../Combat Rules/Is Grab Failure")]
+stateTransitionTo = NodePath("../../../States/Roll")
+rules = [NodePath("../../../Combat Rules/Grab Attempt Time Max Rule")]
 metadata/_custom_type_script = "uid://bao3317lfi3tc"
 
 [node name="Grab Fail End Transition" type="Node" parent="Transitions/Combat" unique_id=1316615060 node_paths=PackedStringArray("stateTransitionTo", "rules")]
 script = ExtResource("12_nefp1")
 stateTransitionTo = NodePath("../../../States/Roll")
 rules = [NodePath("../../../Combat Rules/Grab Fail Recovery Rule")]
-metadata/_custom_type_script = "uid://bao3317lfi3tc"
-
-[node name="Grab Success Start Transition" type="Node" parent="Transitions/Combat" unique_id=880815304 node_paths=PackedStringArray("stateTransitionTo", "rules")]
-script = ExtResource("12_nefp1")
-stateTransitionTo = NodePath("../../../States/GrabSuccess")
-rules = [NodePath("../../../Combat Rules/Grab Buffer Time Max Rule")]
 metadata/_custom_type_script = "uid://bao3317lfi3tc"
 
 [node name="Grab Success End Transition" type="Node" parent="Transitions/Combat" unique_id=416284296 node_paths=PackedStringArray("stateTransitionTo", "rules")]
@@ -950,14 +1084,13 @@ comparisonType = 1
 traitProperty = "grabRecoveryTime"
 metadata/_custom_type_script = "uid://dulfhx4ftd06"
 
-[node name="Grab Buffer Time Max Rule" type="Node" parent="Combat Rules" unique_id=972099280 node_paths=PackedStringArray("node", "node2")]
-script = ExtResource("35_o2kvp")
+[node name="Grab Attempt Time Max Rule" type="Node" parent="Combat Rules" unique_id=835727398 node_paths=PackedStringArray("node")]
+script = ExtResource("15_ahjyt")
 node = NodePath("../../Current Storage/Current State")
 property = "timeInState"
 comparisonType = 1
-node2 = NodePath("../../Current Storage/Interactions Traits")
-property2 = "grabBuffer"
-metadata/_custom_type_script = "uid://iw8oc28ys4uf"
+traitProperty = "grabAttemptDuration"
+metadata/_custom_type_script = "uid://dulfhx4ftd06"
 
 [node name="No Invuln Rule" type="Node" parent="Combat Rules" unique_id=1947464689 node_paths=PackedStringArray("node")]
 script = ExtResource("15_ahjyt")
@@ -1013,7 +1146,7 @@ metadata/_custom_type_script = "uid://cer4nd24f3oe8"
 
 [node name="Grab Cooled Down" type="Node" parent="Cooldown Rules" unique_id=552282338 node_paths=PackedStringArray("cooldown")]
 script = ExtResource("23_thta1")
-cooldown = NodePath("../../Cooldowns/Block Cooldown")
+cooldown = NodePath("../../Cooldowns/Grab Cooldown")
 metadata/_custom_type_script = "uid://cer4nd24f3oe8"
 
 [node name="Input Rules" type="Node" parent="." unique_id=1738338588]
