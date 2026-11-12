@@ -457,7 +457,7 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 2
 shape = SubResource("CapsuleShape3D_s6ais")
 
 [node name="Grab Visual" type="Node3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region" unique_id=783329987]
-transform = Transform3D(-1.338, 0, -2.020324e-07, 0, 1.338, 0, 2.020324e-07, 0, -1.338, 0, 0, 0)
+transform = Transform3D(-1.211, 0, -1.8285591e-07, 0, 1.211, 0, 1.8285591e-07, 0, -1.211, 0, 0, 0)
 
 [node name="Grab Animator" type="AnimationPlayer" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual" unique_id=362556587]
 libraries/ = SubResource("AnimationLibrary_bjlbd")

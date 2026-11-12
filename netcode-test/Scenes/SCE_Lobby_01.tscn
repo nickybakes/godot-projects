@@ -152,6 +152,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4872144, -1.389)
 pixel_size = 0.002
 render_priority = -2
 outline_render_priority = -3
+outline_modulate = Color(0.12, 0.12, 0.12, 1)
 text = "Press A or SPACE to join!"
 font = ExtResource("11_i0gx5")
 font_size = 95

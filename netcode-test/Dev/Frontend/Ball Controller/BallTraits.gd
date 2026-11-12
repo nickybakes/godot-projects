@@ -88,8 +88,7 @@ class_name BallTraits
 @export var maxNumOfGrabbedBalls : int = 8;
 @export var grabAttemptBoost : BallBounceTraits;
 @export var grabAttemptDeceleration : float = 5.0;
-@export var grabAttemptSuccessDeceleration : float = 5.0;
-@export var grabAttemptSuccessTurnPower : float = 5.0;
+@export var grabAttemptSuccessSpeed : float = 10.0;
 @export var grabAttemptSuccessMinSpeed : float = 10.0;
 @export var grabAttemptSuccessMaxSpeed : float = 30.0;
 @export var grabStaminaCost : float = .5;
