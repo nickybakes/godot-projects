@@ -5,8 +5,10 @@
 [ext_resource type="Script" uid="uid://xyoknq0d35d7" path="res://Dev/Frontend/Menu/LobbySearch.gd" id="3_0bg6h"]
 [ext_resource type="Script" uid="uid://napor4at8qyp" path="res://Dev/Frontend/App/AccountDisplay.gd" id="3_vhhxt"]
 [ext_resource type="Script" uid="uid://dkjhh34oxbjf7" path="res://Dev/Frontend/Menu/LobbySelection.gd" id="4_dgu85"]
+[ext_resource type="FontFile" uid="uid://toyoa2sfe754" path="res://Art/Fonts/KeepCalm-Medium.ttf" id="4_ykx5s"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_c5qv8"]
+font = ExtResource("4_ykx5s")
 font_size = 54
 outline_size = 13
 outline_color = Color(0, 0, 0, 1)
@@ -47,8 +49,9 @@ metadata/_custom_type_script = "uid://napor4at8qyp"
 
 [node name="Display Name Label" type="Label" parent="Menu Temp/My Account Display" unique_id=616428234]
 offset_left = 103.0
+offset_top = 12.0
 offset_right = 1920.0
-offset_bottom = 83.33333
+offset_bottom = 91.0
 text = "Player Name"
 label_settings = SubResource("LabelSettings_c5qv8")
 vertical_alignment = 1

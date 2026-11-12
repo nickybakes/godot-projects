@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://yxj7fosutcr3"]
+
+[ext_resource type="Script" uid="uid://b0in41ryb0r4m" path="res://Dev/Backend/App/AppGlobal.gd" id="1_f31ff"]
+[ext_resource type="PackedScene" uid="uid://ch1hmancbl6v" path="res://Dev/Frontend/App/PRE_AppOverlayView_01.tscn" id="2_oecjv"]
+
+[node name="App Manager" type="Node" unique_id=1545948468]
+script = ExtResource("1_f31ff")
+
+[node name="App Overlay View" parent="." unique_id=851211738 instance=ExtResource("2_oecjv")]

@@ -17,7 +17,6 @@ maxStretchCharge = 2.017
 minThinCharge = 0.783
 maxOffsetCharge = 0.5
 maxChargeRollSpeed = 15.0
-grabVisualTimeMax = 0.125
 grabAimTopDownAngleScalar = 2.471
 strikePriorityMessageTime = 1.0
 unblockableMessageTime = 1.0

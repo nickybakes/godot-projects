@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://ch1hmancbl6v"]
+
+[ext_resource type="Script" uid="uid://bm77dghsuy3eb" path="res://Dev/Frontend/App/AppOverlayView.gd" id="1_y7gkj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_c5qv8"]
+font_size = 120
+outline_size = 33
+outline_color = Color(0, 0, 0, 1)
+
+[node name="App Overlay View" type="CanvasLayer" unique_id=851211738 node_paths=PackedStringArray("windowModeLabel")]
+script = ExtResource("1_y7gkj")
+windowModeMessageTimeMax = 0.8
+windowModeMessageFadeTime = 0.25
+windowModeLabel = NodePath("Label")
+
+[node name="Label" type="Label" parent="." unique_id=1078416700]
+anchors_preset = -1
+anchor_right = 1.0
+offset_bottom = 251.0
+grow_horizontal = 2
+text = "Fullscreen Exclusive"
+label_settings = SubResource("LabelSettings_c5qv8")
+horizontal_alignment = 1
+vertical_alignment = 2

@@ -34,13 +34,12 @@ _data = [Vector2(16.160458, 0), 0.0, 0.0, 0, 0, Vector2(27.965614, 5.673913), 0.
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_qwdnp"]
-_limits = [0.0, 1.0, 0.0, 1.9971266]
-_data = [Vector2(0.92395806, 0), 0.0, 1.1631016, 0, 0, Vector2(1.0559521, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0.327756, 0), 0.0, 1.1631016, 0, 0, Vector2(0.45448828, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_gryrd"]
 _limits = [-60.0, 30.0, 0.0, 1.5]
-_data = [Vector2(0.4741379, 0), 0.0, 16.597775, 0, 0, Vector2(0.7397727, 27.486034), 0.0, 0.0, 0, 0, Vector2(1.2579545, -60), -113.611755, 0.0, 0, 0]
+_data = [Vector2(0.11816194, 0), 0.0, 16.597775, 0, 0, Vector2(0.32822758, 27.486034), 0.0, 0.0, 0, 0, Vector2(0.68599564, -60), -113.611755, 0.0, 0, 0]
 point_count = 3
 
 [resource]
@@ -86,8 +85,6 @@ strikeBlockerBounceTraits = ExtResource("6_qwdnp")
 clashBounceTraits = ExtResource("3_lfl6j")
 grabAttemptBoost = ExtResource("5_qwdnp")
 grabAttemptDeceleration = 20.0
-grabAttemptSuccessDeceleration = 40.0
-grabAttemptSuccessTurnPower = 10.0
 grabAttemptSuccessMinSpeed = 0.0
 grabAttemptSuccessMaxSpeed = 20.0
 grabStaminaCost = 0.3
@@ -97,9 +94,9 @@ grabRecoveryTime = 0.6
 baseGrabDamage = 7.0
 grabVerticalSpeedOverTime = SubResource("Curve_gryrd")
 grabAimPowerOverTime = SubResource("Curve_qwdnp")
-grabAimingTime = 0.9
+grabAimingTime = 0.3
 grabDirectionMaxY = -0.64
-grabMinTime = 0.7
+grabMinTime = 0.3
 grabSuccessBounce = ExtResource("6_gmawk")
 grabVictimTopDownOffset = 0.5
 grabVictimVerticalOffset = -0.5

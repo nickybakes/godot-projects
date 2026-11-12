@@ -23,7 +23,6 @@ class_name BallVisualProfile
 @export var maxChargeRollSpeed : float;
 
 @export_category("Grab")
-@export var grabVisualTimeMax : float;
 @export var grabAimTopDownAngleScalar : float = 4;
 
 @export_category("Messages")
