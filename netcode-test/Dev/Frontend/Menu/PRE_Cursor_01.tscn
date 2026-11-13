@@ -9,27 +9,57 @@ properties/0/path = NodePath(".:normalizedPosition")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
-[node name="PRE_Cursor_01" type="MultiplayerSynchronizer" unique_id=713730899 node_paths=PackedStringArray("transform", "sprite", "text")]
+[sub_resource type="FontVariation" id="FontVariation_arpy3"]
+base_font = ExtResource("3_arpy3")
+variation_embolden = 1.01
+spacing_glyph = 24
+
+[node name="PRE_Cursor_01" type="MultiplayerSynchronizer" unique_id=713730899 node_paths=PackedStringArray("transform", "sprite", "text", "textShadow")]
 root_path = NodePath(".")
 replication_config = SubResource("SceneReplicationConfig_6bq70")
 script = ExtResource("1_wjgwl")
 transform = NodePath("Cursor Transform")
 sprite = NodePath("Cursor Transform/Sprite")
 text = NodePath("Cursor Transform/Text")
+textShadow = NodePath("Cursor Transform/Text Shadow")
 metadata/_custom_type_script = "uid://d28wm3il6twd0"
 
 [node name="Cursor Transform" type="Node3D" parent="." unique_id=1560013998]
 
 [node name="Sprite" type="Sprite3D" parent="Cursor Transform" unique_id=1977165846]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.037841, -1.1037508, 0)
+render_priority = 6
+texture = ExtResource("2_arpy3")
+
+[node name="Sprite Outline" type="Sprite3D" parent="Cursor Transform" unique_id=493394169]
+transform = Transform3D(1.114, 0, 0, 0, 1.114, 0, 0, 0, 1.114, 1.111307, -1.1037508, 0)
+modulate = Color(0, 0, 0, 1)
+render_priority = 5
+texture = ExtResource("2_arpy3")
+
+[node name="Shadow" type="Sprite3D" parent="Cursor Transform" unique_id=833425171]
+transform = Transform3D(1.114, 0, 0, 0, 1.114, 0, 0, 0, 1.114, 1.233, -1.233, 0)
+modulate = Color(0, 0, 0, 1)
+render_priority = 5
 texture = ExtResource("2_arpy3")
 
 [node name="Text" type="Label3D" parent="Cursor Transform" unique_id=1732912915]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22550434, -1.6060162, 0.053711683)
-render_priority = 2
-outline_render_priority = 1
+transform = Transform3D(1.058, 0, 0, 0, 1.058, 0, 0, 0, 1.058, 0.09229559, -1.6463015, 0.053711683)
+render_priority = 10
+outline_render_priority = 9
 text = "P1"
-font = ExtResource("3_arpy3")
+font = SubResource("FontVariation_arpy3")
+font_size = 284
+outline_size = 75
+horizontal_alignment = 0
+
+[node name="Text Shadow" type="Label3D" parent="Cursor Transform" unique_id=1334837978]
+transform = Transform3D(1.058, 0, 0, 0, 1.058, 0, 0, 0, 1.058, 0.22479126, -1.7422854, 0.054)
+render_priority = 8
+outline_render_priority = 7
+modulate = Color(0, 0, 0, 1)
+text = "P1"
+font = SubResource("FontVariation_arpy3")
 font_size = 284
 outline_size = 75
 horizontal_alignment = 0

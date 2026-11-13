@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dvb4ywliiwj6f"]
+
+[ext_resource type="Shader" uid="uid://0csqqut6ki5h" path="res://Art/Shaders/S_BasicColor_01.gdshader" id="1_1buqd"]
+
+[resource]
+render_priority = -6
+shader = ExtResource("1_1buqd")
+shader_parameter/color = Color(0.84, 0.42839998, 0.5793201, 1)
+shader_parameter/alpha = 0.82999998144784

@@ -13,10 +13,11 @@ script = ExtResource("1_eiu6y")
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -317.0
-offset_right = -149.0
+offset_left = -387.99988
+offset_right = -219.99988
 offset_bottom = 57.0
 grow_horizontal = 0
+scale = Vector2(0.75, 0.75)
 theme_override_font_sizes/font_size = 35
 text = "Input Log"
 

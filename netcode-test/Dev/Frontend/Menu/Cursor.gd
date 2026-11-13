@@ -4,6 +4,7 @@ class_name Cursor
 @export var transform: Node3D
 @export var sprite: Sprite3D
 @export var text: Label3D
+@export var textShadow: Label3D
 
 @export var normalizedPosition : Vector2;
 var currentNormalizedPosition : Vector2;
@@ -27,8 +28,10 @@ func DoSpawnParams():
 		
 	if(CursorManager.Manager):
 		CursorManager.Manager.CursorAdded(playerNumber, self);
-		
-	text.text = str("P", playerNumber);	
+		CursorManager.Manager.SetTransformFromNormalizedPosition(currentNormalizedPosition, transform);
+			
+	text.text = str("P", playerNumber);
+	textShadow.text = text.text;
 	
 	playerToken = LobbyManager.Lobby.GetPlayerTokenByPlayerNumber(playerNumber);
 	
@@ -42,7 +45,7 @@ func DoSpawnParams():
 func _process(delta: float) -> void:
 	if(!playerToken):
 		return;
-		
+				
 	if(CursorManager.Manager != null):
 		if(isDummy):
 			currentNormalizedPosition = lerp(currentNormalizedPosition, normalizedPosition, .5);
