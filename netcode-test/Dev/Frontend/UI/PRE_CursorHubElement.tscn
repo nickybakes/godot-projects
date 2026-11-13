@@ -126,7 +126,7 @@ grow_vertical = 2
 [node name="PRE_TrackerLine_01" parent="." unique_id=946806820 instance=ExtResource("4_ygx0c")]
 visible = false
 zDepth = 13.0
-endPoint3DOffset = Vector3(0.874, -1.625, 0)
+endPoint3DOffset = Vector3(0.656, -1.219, 0)
 
 [node name="Inverted Charge Aim" type="Label" parent="." unique_id=1844112269]
 layout_mode = 1

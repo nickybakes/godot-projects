@@ -136,6 +136,7 @@ offset_right = -354.0
 offset_bottom = 57.0
 grow_horizontal = 0
 scale = Vector2(0.75, 0.75)
+focus_mode = 0
 theme_override_font_sizes/font_size = 35
 text = "Network Log"
 
@@ -155,10 +156,10 @@ text = "Test Log"
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -554.0
-offset_top = 57.0
-offset_right = -25.0
-offset_bottom = 498.0
+offset_left = -577.0
+offset_top = 43.0
+offset_right = -48.0
+offset_bottom = 484.0
 grow_horizontal = 0
 
 [node name="Log Scroll Container" type="ScrollContainer" parent="Log Panel" unique_id=2140427114]

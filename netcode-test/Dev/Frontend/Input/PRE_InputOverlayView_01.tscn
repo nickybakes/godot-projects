@@ -18,6 +18,7 @@ offset_right = -219.99988
 offset_bottom = 57.0
 grow_horizontal = 0
 scale = Vector2(0.75, 0.75)
+focus_mode = 0
 theme_override_font_sizes/font_size = 35
 text = "Input Log"
 
@@ -40,10 +41,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -553.0
-offset_top = -1023.0
-offset_right = -24.0
-offset_bottom = -818.0
+offset_left = -577.0
+offset_top = -1037.0
+offset_right = -48.0
+offset_bottom = -832.0
 grow_horizontal = 0
 grow_vertical = 0
 

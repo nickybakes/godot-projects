@@ -100,10 +100,13 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Steam Log In Button" type="Button" parent="Menu Temp/Steam Logged Out View" unique_id=1080329905]
-layout_mode = 0
-offset_left = 669.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.49800003
+anchor_right = 0.49800003
+offset_left = -287.16003
 offset_top = 357.0
-offset_right = 1244.125
+offset_right = 287.96497
 offset_bottom = 521.0
 theme_override_font_sizes/font_size = 54
 text = "Log Into Steam"
@@ -118,10 +121,13 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Host Steam Lobby Button" type="Button" parent="Menu Temp/Steam Logged In View" unique_id=1994945497]
-layout_mode = 0
-offset_left = 669.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -291.0
 offset_top = 136.0
-offset_right = 1244.0
+offset_right = 284.0
 offset_bottom = 300.0
 theme_override_font_sizes/font_size = 54
 text = "Host Steam Lobby
