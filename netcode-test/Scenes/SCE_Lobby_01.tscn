@@ -28,6 +28,8 @@
 [ext_resource type="Texture2D" uid="uid://vs4o0xhfhei6" path="res://Art/Sprites/UI/SPR_FaceButtons_04.png" id="26_1utpr"]
 [ext_resource type="FontFile" uid="uid://lgdr3l7q2pks" path="res://Art/Fonts/Montserrat-Black.ttf" id="26_qtbfs"]
 [ext_resource type="Texture2D" uid="uid://hs80vim226f3" path="res://Art/Sprites/UI/SPR_FaceButtons_04a.png" id="28_xjmx3"]
+[ext_resource type="Texture2D" uid="uid://c7iu2hyjhasp0" path="res://Art/Sprites/UI/SPR_FaceButtons_01a.png" id="29_1utpr"]
+[ext_resource type="Texture2D" uid="uid://c2n7ny4wvbast" path="res://Art/Sprites/UI/SPR_FaceButtons_01b.png" id="29_8uxrf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_c5qv8"]
 font_size = 54
@@ -191,6 +193,7 @@ light_bake_mode = 0
 
 [node name="Menu Items" type="Node3D" parent="." unique_id=1877388344]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, -24.756)
+visible = false
 
 [node name="Combat RPS" type="Node3D" parent="Menu Items" unique_id=905432578]
 transform = Transform3D(0.691, 0, 0, 0, 0.691, 0, 0, 0, 0.691, -0.971, 0.208, -2.105)
@@ -715,6 +718,595 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4872144, -2.105)
 visible = false
 
 [node name="Label" type="Label3D" parent="Menu Items/Join Instructions" unique_id=2068097773]
+pixel_size = 0.002
+render_priority = -2
+outline_render_priority = -3
+outline_modulate = Color(0.12, 0.12, 0.12, 1)
+text = "Press A or SPACE to join!"
+font = ExtResource("11_i0gx5")
+font_size = 95
+outline_size = 39
+
+[node name="Menu Items 2" type="Node3D" parent="." unique_id=1194232128]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, -24.756)
+
+[node name="Combat RPS" type="Node3D" parent="Menu Items 2" unique_id=1957815813]
+transform = Transform3D(0.61, 0, 0, 0, 0.61, 0, 0, 0, 0.61, 0, 0.444, -2.105)
+
+[node name="Grab Visual" type="Node3D" parent="Menu Items 2/Combat RPS" unique_id=1660161182]
+transform = Transform3D(0.5018006, 0, -0.11584979, 0, 0.515, 0, 0.11584979, 0, 0.5018006, -0.306, 0.916, -0.663)
+
+[node name="Grab Hand L" type="Node3D" parent="Menu Items 2/Combat RPS/Grab Visual" unique_id=1089456528]
+transform = Transform3D(0.6454579, 0, 0.7637963, 0, 1, 0, -0.7637963, 0, 0.6454579, 0.649, 0, -0.291)
+
+[node name="Grab Hand L Mesh" type="MeshInstance3D" parent="Menu Items 2/Combat RPS/Grab Visual/Grab Hand L" unique_id=1160789137]
+material_override = ExtResource("14_vtdo5")
+cast_shadow = 0
+mesh = ExtResource("15_2j83q")
+
+[node name="Outline" type="MeshInstance3D" parent="Menu Items 2/Combat RPS/Grab Visual/Grab Hand L" unique_id=1172341294]
+material_override = ExtResource("16_6xqfs")
+cast_shadow = 0
+mesh = ExtResource("15_2j83q")
+
+[node name="Grab Hand R" type="Node3D" parent="Menu Items 2/Combat RPS/Grab Visual" unique_id=1301522100]
+transform = Transform3D(-0.43208572, -3.777413e-08, 0.9018327, -8.7422784e-08, 1, 0, 0.9018327, 7.8840706e-08, 0.43208572, -0.12775493, 0, 0.8576746)
+
+[node name="Grab Hand R Mesh" type="MeshInstance3D" parent="Menu Items 2/Combat RPS/Grab Visual/Grab Hand R" unique_id=1858029524]
+material_override = ExtResource("14_vtdo5")
+cast_shadow = 0
+mesh = ExtResource("15_2j83q")
+
+[node name="Outline" type="MeshInstance3D" parent="Menu Items 2/Combat RPS/Grab Visual/Grab Hand R" unique_id=115338419]
+material_override = ExtResource("16_6xqfs")
+cast_shadow = 0
+mesh = ExtResource("15_2j83q")
+
+[node name="Ball Visual" type="Node3D" parent="Menu Items 2/Combat RPS/Grab Visual" unique_id=1205218952]
+
+[node name="Ball Mesh" type="MeshInstance3D" parent="Menu Items 2/Combat RPS/Grab Visual/Ball Visual" unique_id=1968987717]
+layers = 2
+material_override = ExtResource("14_vtdo5")
+mesh = ExtResource("17_6xqfs")
+
+[node name="Outline Mesh" type="MeshInstance3D" parent="Menu Items 2/Combat RPS/Grab Visual/Ball Visual" unique_id=363480673]
+layers = 2
+material_override = ExtResource("18_5j78h")
+mesh = ExtResource("17_6xqfs")
+
+[node name="Block Visual" type="Node3D" parent="Menu Items 2/Combat RPS" unique_id=862252573]
+transform = Transform3D(0.6239483, -0.13698862, 0.0156109985, 0.13720565, 0.62404704, -0.007806663, -0.0135721015, 0.010974758, 0.6387616, 0.948, -0.749, -0.663)
+
+[node name="Ball Visual" type="Node3D" parent="Menu Items 2/Combat RPS/Block Visual" unique_id=1457016816]
+
+[node name="Ball Mesh" type="MeshInstance3D" parent="Menu Items 2/Combat RPS/Block Visual/Ball Visual" unique_id=142096796]
+layers = 2
+material_override = ExtResource("17_ycj5k")
+mesh = ExtResource("17_6xqfs")
+
+[node name="Outline Mesh" type="MeshInstance3D" parent="Menu Items 2/Combat RPS/Block Visual/Ball Visual" unique_id=79395950]
+layers = 2
+material_override = ExtResource("18_5j78h")
+mesh = ExtResource("17_6xqfs")
+
+[node name="Block Mesh" type="MeshInstance3D" parent="Menu Items 2/Combat RPS/Block Visual/Ball Visual" unique_id=1513335554]
+layers = 2
+material_override = ExtResource("17_xadx2")
+cast_shadow = 0
+mesh = ExtResource("18_ycj5k")
+
+[node name="Strike Visual" type="Node3D" parent="Menu Items 2/Combat RPS" unique_id=1613448471]
+transform = Transform3D(0.606, 0, 0, 0, 0.606, 0, 0, 0, 0.606, -1.041, -0.713, -0.663)
+
+[node name="Ball Visual" type="Node3D" parent="Menu Items 2/Combat RPS/Strike Visual" unique_id=624932477]
+transform = Transform3D(-4.371139e-08, 0, -1.281, 0, 1, 0, 1, 0, -5.599429e-08, 0, 0, 0)
+
+[node name="Ball Mesh" type="MeshInstance3D" parent="Menu Items 2/Combat RPS/Strike Visual/Ball Visual" unique_id=1982897898]
+transform = Transform3D(0.937, 0, 0, 0, 0.937, 0, 0, 0, 0.937, 0, 0, 0)
+layers = 2
+material_override = ExtResource("20_b4ntv")
+mesh = ExtResource("17_6xqfs")
+
+[node name="Outline Mesh" type="MeshInstance3D" parent="Menu Items 2/Combat RPS/Strike Visual/Ball Visual" unique_id=270635580]
+transform = Transform3D(0.937, 0, 0, 0, 0.937, 0, 0, 0, 0.937, 0, 0, 0)
+layers = 2
+material_override = ExtResource("18_5j78h")
+mesh = ExtResource("17_6xqfs")
+
+[node name="Strike Mesh" type="MeshInstance3D" parent="Menu Items 2/Combat RPS/Strike Visual/Ball Visual" unique_id=1653557887]
+transform = Transform3D(1.208, 3.6715333e-15, -1.6931726e-22, 0, -5.4027275e-08, -1.304, -3.58836e-15, 1.236, -5.699965e-08, 0, 0, 0.035)
+layers = 2
+material_override = ExtResource("21_trxcp")
+cast_shadow = 0
+mesh = SubResource("SphereMesh_n3kh0")
+
+[node name="Title" type="Label3D" parent="Menu Items 2/Combat RPS" unique_id=505199096]
+transform = Transform3D(0.07352198, 0, 0.06770074, 0, 0.072, 0, -0.20310225, 0, 0.024507325, 0.018, -0.372, 5.642)
+visible = false
+render_priority = -2
+outline_render_priority = -3
+text = "When
+Balls
+Touch"
+font = ExtResource("26_qtbfs")
+font_size = 121
+outline_size = 71
+line_spacing = -45.0
+
+[node name="Title Shadow" type="Label3D" parent="Menu Items 2/Combat RPS/Title" unique_id=821707863]
+transform = Transform3D(0.99999994, 0, 3.7252903e-09, 0, 1, 0, 0, 0, 1, -0.072, -0.056, 0)
+render_priority = -3
+outline_render_priority = -4
+modulate = Color(0, 0, 0, 1)
+text = "When
+Balls
+Touch"
+font = ExtResource("26_qtbfs")
+font_size = 121
+outline_size = 71
+line_spacing = -45.0
+
+[node name="Arrow 1" type="Sprite3D" parent="Menu Items 2/Combat RPS" unique_id=1657980736]
+transform = Transform3D(0.26699257, 0.40967798, 0, -0.40967798, 0.26699257, 0, 0, 0, 0.489, 0.8652297, 0.2348105, 0)
+cast_shadow = 0
+pixel_size = 0.00475
+render_priority = -4
+texture = ExtResource("14_qwpqa")
+
+[node name="Arrow 2" type="Sprite3D" parent="Menu Items 2/Combat RPS" unique_id=966854148]
+transform = Transform3D(-0.489, 4.2749736e-08, 0, -4.2749736e-08, -0.489, 0, 0, 0, 0.489, 0, -1.178, 0)
+cast_shadow = 0
+pixel_size = 0.00475
+render_priority = -4
+texture = ExtResource("14_qwpqa")
+
+[node name="Arrow 3" type="Sprite3D" parent="Menu Items 2/Combat RPS" unique_id=1724322065]
+transform = Transform3D(0.2445, -0.42348644, 0, 0.42348644, 0.2445, 0, 0, 0, 0.489, -0.84211683, 0.22025785, 0)
+cast_shadow = 0
+pixel_size = 0.00475
+render_priority = -4
+texture = ExtResource("14_qwpqa")
+
+[node name="Beats 1" type="Label3D" parent="Menu Items 2/Combat RPS" unique_id=1282049232]
+transform = Transform3D(0.26843694, 0.3777393, 0, -0.3777393, 0.26843694, 0, 0, 0, 0.46340623, 0.951, 0.333, 0.052)
+render_priority = -2
+outline_render_priority = -3
+text = "Beats"
+font = ExtResource("11_i0gx5")
+font_size = 85
+outline_size = 67
+
+[node name="Beats 2" type="Label3D" parent="Menu Items 2/Combat RPS" unique_id=1787327458]
+transform = Transform3D(0.4612938, -0.044200312, 0, 0.044200312, 0.4612938, 0, 0, 0, 0.46340653, 0.118, -1.333, 0.052)
+render_priority = -2
+outline_render_priority = -3
+text = "Beats"
+font = ExtResource("11_i0gx5")
+font_size = 85
+outline_size = 67
+
+[node name="Beats 3" type="Label3D" parent="Menu Items 2/Combat RPS" unique_id=427407623]
+transform = Transform3D(0.23143005, -0.40147942, 0, 0.40147942, 0.23143005, 0, 0, 0, 0.46340644, -0.96, 0.258, 0.052)
+render_priority = -2
+outline_render_priority = -3
+text = "Beats"
+font = ExtResource("11_i0gx5")
+font_size = 85
+outline_size = 67
+
+[node name="Labels" type="Node3D" parent="Menu Items 2/Combat RPS" unique_id=1883454803]
+
+[node name="Label 1" type="Label3D" parent="Menu Items 2/Combat RPS/Labels" unique_id=2075447175]
+transform = Transform3D(0.591, 0, 0, 0, 0.591, 0, 0, 0, 0.591, 0.036, 0.45200002, 0.052000046)
+render_priority = -2
+outline_render_priority = -3
+modulate = Color(1, 1, 0.35686275, 1)
+text = "Grab"
+font = ExtResource("26_qtbfs")
+font_size = 85
+outline_size = 48
+
+[node name="Shadow 1" type="Label3D" parent="Menu Items 2/Combat RPS/Labels/Label 1" unique_id=1996411590]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.048252463, 0)
+render_priority = -3
+outline_render_priority = -4
+modulate = Color(0, 0, 0, 1)
+text = "Grab"
+font = ExtResource("26_qtbfs")
+font_size = 85
+outline_size = 48
+
+[node name="Label 2" type="Label3D" parent="Menu Items 2/Combat RPS/Labels" unique_id=227123509]
+transform = Transform3D(0.5851039, 0.08327262, 0, -0.08327262, 0.5851039, 0, 0, 0, 0.591, 0.88, -0.9279999, 0.052000046)
+render_priority = -2
+outline_render_priority = -3
+modulate = Color(1, 0.33999997, 0.46100003, 1)
+text = "Block"
+font = ExtResource("26_qtbfs")
+font_size = 85
+outline_size = 48
+
+[node name="Shadow 2" type="Label3D" parent="Menu Items 2/Combat RPS/Labels/Label 2" unique_id=509345867]
+transform = Transform3D(1.0000002, 0, 0, 0, 1.0000002, 0, 0, 0, 1, 0.006798804, -0.047771096, 0)
+render_priority = -3
+outline_render_priority = -3
+modulate = Color(0, 0, 0, 1)
+text = "Block"
+font = ExtResource("26_qtbfs")
+font_size = 85
+outline_size = 48
+
+[node name="Label 3" type="Label3D" parent="Menu Items 2/Combat RPS/Labels" unique_id=563972466]
+transform = Transform3D(0.5767668, -0.12892266, 0, 0.12892266, 0.5767668, 0, 0, 0, 0.591, -0.73899996, -0.9279999, 0.052000046)
+render_priority = -2
+outline_render_priority = -3
+modulate = Color(0.62, 0.6453333, 1, 1)
+text = "Strike"
+font = ExtResource("26_qtbfs")
+font_size = 85
+outline_size = 48
+
+[node name="Shadow 3" type="Label3D" parent="Menu Items 2/Combat RPS/Labels/Label 3" unique_id=1768983304]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.010525942, -0.04709041, 0)
+render_priority = -3
+outline_render_priority = -3
+modulate = Color(0, 0, 0, 1)
+text = "Strike"
+font = ExtResource("26_qtbfs")
+font_size = 85
+outline_size = 48
+
+[node name="Label 4" type="Label3D" parent="Menu Items 2/Combat RPS/Labels" unique_id=1007623721]
+transform = Transform3D(0.67, 0, 0, 0, 0.67, 0, 0, 0, 0.67, 0.072, -1.7182592, 0)
+render_priority = -2
+outline_render_priority = -3
+modulate = Color(0.08235294, 0.8117647, 0.3764706, 1)
+text = "Lift"
+font = ExtResource("26_qtbfs")
+font_size = 85
+outline_size = 40
+
+[node name="Shadow 1" type="Label3D" parent="Menu Items 2/Combat RPS/Labels/Label 4" unique_id=1181753917]
+transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, -0.048681464, 0)
+render_priority = -3
+outline_render_priority = -3
+modulate = Color(0, 0, 0, 1)
+text = "Lift"
+font = ExtResource("26_qtbfs")
+font_size = 85
+outline_size = 40
+
+[node name="Button White 1" type="Sprite3D" parent="Menu Items 2/Combat RPS" unique_id=1549666984]
+transform = Transform3D(-1.402, 2.116961e-07, 0, -2.116961e-07, -1.402, 0, 0, 0, 1.402, 0.035, -0.069, 0)
+cast_shadow = 0
+pixel_size = 0.00475
+render_priority = -4
+texture = ExtResource("29_8uxrf")
+
+[node name="Button 1" type="Sprite3D" parent="Menu Items 2/Combat RPS/Button White 1" unique_id=1458288977]
+transform = Transform3D(0.99999976, -1.4210855e-14, 0, 1.4210855e-14, 0.99999976, 0, 0, 0, 0.99999976, 5.9604645e-08, 0, 0)
+cast_shadow = 0
+modulate = Color(1, 1, 0.35686275, 1)
+pixel_size = 0.00475
+render_priority = -4
+texture = ExtResource("29_1utpr")
+
+[node name="Button Shadow 1" type="Sprite3D" parent="Menu Items 2/Combat RPS/Button White 1/Button 1" unique_id=478982104]
+transform = Transform3D(1, -2.1316282e-14, 0, 2.1316282e-14, 1, 0, 0, 0, 1, -0.022398472, 0.032925665, 0)
+cast_shadow = 0
+modulate = Color(0, 0, 0, 1)
+pixel_size = 0.00475
+render_priority = -8
+texture = ExtResource("24_n3kh0")
+
+[node name="Button White 2" type="Sprite3D" parent="Menu Items 2/Combat RPS" unique_id=1632196936]
+transform = Transform3D(-6.1283366e-08, -1.402, 0, 1.402, -6.1283366e-08, 0, 0, 0, 1.402, 1.526, -1.279, 0)
+cast_shadow = 0
+pixel_size = 0.00475
+render_priority = -4
+texture = ExtResource("29_8uxrf")
+
+[node name="Button 2" type="Sprite3D" parent="Menu Items 2/Combat RPS/Button White 2" unique_id=914257767]
+transform = Transform3D(0.9999999, 7.1054274e-15, 0, -7.1054274e-15, 0.9999999, 0, 0, 0, 0.9999999, 1.1920929e-07, 0, 0)
+cast_shadow = 0
+modulate = Color(1, 0.34117648, 0.4627451, 1)
+pixel_size = 0.00475
+render_priority = -4
+texture = ExtResource("29_1utpr")
+
+[node name="Button Shadow 2" type="Sprite3D" parent="Menu Items 2/Combat RPS/Button White 2/Button 2" unique_id=112584113]
+transform = Transform3D(1, -7.1054274e-15, 0, 7.1054274e-15, 1, 0, 0, 0, 1, -0.032925963, -0.022398412, 0)
+cast_shadow = 0
+modulate = Color(0, 0, 0, 1)
+pixel_size = 0.00475
+render_priority = -8
+texture = ExtResource("24_n3kh0")
+
+[node name="Button White 3" type="Sprite3D" parent="Menu Items 2/Combat RPS" unique_id=67002153]
+transform = Transform3D(-6.1283366e-08, 1.402, 0, -1.402, -6.1283366e-08, 0, 0, 0, 1.402, -1.4209843, -1.2786307, 0)
+cast_shadow = 0
+pixel_size = 0.00475
+render_priority = -4
+texture = ExtResource("29_8uxrf")
+
+[node name="Button 3" type="Sprite3D" parent="Menu Items 2/Combat RPS/Button White 3" unique_id=2072743425]
+transform = Transform3D(0.9999999, -7.1054274e-15, 0, 7.1054274e-15, 0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0)
+cast_shadow = 0
+modulate = Color(0.61960787, 0.6431373, 1, 1)
+pixel_size = 0.00475
+render_priority = -4
+texture = ExtResource("29_1utpr")
+
+[node name="Button Shadow 3" type="Sprite3D" parent="Menu Items 2/Combat RPS/Button White 3/Button 3" unique_id=364917231]
+transform = Transform3D(1, 7.1054274e-15, 0, -7.1054274e-15, 1, 0, 0, 0, 1, 0.032925963, 0.022397995, 0)
+cast_shadow = 0
+modulate = Color(0, 0, 0, 1)
+pixel_size = 0.00475
+render_priority = -8
+texture = ExtResource("24_n3kh0")
+
+[node name="Button White 4" type="Sprite3D" parent="Menu Items 2/Combat RPS" unique_id=491445158]
+transform = Transform3D(1.402, 0, 0, 0, 1.402, 0, 0, 0, 1.402, 0.060999997, -1.9122595, 0)
+cast_shadow = 0
+pixel_size = 0.00475
+render_priority = -4
+texture = ExtResource("29_8uxrf")
+
+[node name="Button 4" type="Sprite3D" parent="Menu Items 2/Combat RPS/Button White 4" unique_id=1175210609]
+transform = Transform3D(0.9999999, -7.1054274e-15, 0, 7.1054274e-15, 0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0)
+cast_shadow = 0
+modulate = Color(0, 0.81730956, 0.37381148, 1)
+pixel_size = 0.00475
+render_priority = -4
+texture = ExtResource("29_1utpr")
+
+[node name="Button Shadow 4" type="Sprite3D" parent="Menu Items 2/Combat RPS/Button White 4/Button 4" unique_id=845229493]
+transform = Transform3D(1, 7.1054274e-15, 0, -7.1054274e-15, 1, 0, 0, 0, 1, 0.033, -0.022, 0)
+cast_shadow = 0
+modulate = Color(0, 0, 0, 1)
+pixel_size = 0.00475
+render_priority = -8
+texture = ExtResource("24_n3kh0")
+
+[node name="Menu Controls" type="Node3D" parent="Menu Items 2" unique_id=1147784247]
+transform = Transform3D(0.356, 0, 0, 0, 0.356, 0, 0, 0, 0.356, -1.443, 0.598, -2.105)
+
+[node name="Face Buttons" type="Sprite3D" parent="Menu Items 2/Menu Controls" unique_id=1797840954]
+transform = Transform3D(0.69589317, 0, 0, 0, 0.69589317, 0, 0, 0, 0.69589317, 0, 0, 0)
+visible = false
+cast_shadow = 0
+pixel_size = 0.00475
+render_priority = -6
+texture = ExtResource("26_1utpr")
+
+[node name="Face Buttons2" type="Sprite3D" parent="Menu Items 2/Menu Controls" unique_id=1975141554]
+transform = Transform3D(0.69589317, 0, 0, 0, 0.69589317, 0, 0, 0, 0.69589317, 0, 0, 0)
+visible = false
+cast_shadow = 0
+modulate = Color(1, 1, 1, 0.14509805)
+pixel_size = 0.00475
+render_priority = -5
+texture = ExtResource("28_xjmx3")
+
+[node name="Label 1" type="Label3D" parent="Menu Items 2/Menu Controls" unique_id=2121493317]
+transform = Transform3D(0.904, 0, 0, 0, 0.904, 0, 0, 0, 0.904, -0.97419786, 0.25424647, 0)
+render_priority = -2
+outline_render_priority = -3
+text = "Join"
+font = ExtResource("11_i0gx5")
+font_size = 85
+outline_size = 48
+horizontal_alignment = 0
+
+[node name="Shadow 1" type="Label3D" parent="Menu Items 2/Menu Controls/Label 1" unique_id=1653512973]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.06991053, 0)
+render_priority = -3
+outline_render_priority = -4
+modulate = Color(0, 0, 0, 1)
+text = "Join"
+font = ExtResource("11_i0gx5")
+font_size = 85
+outline_size = 48
+horizontal_alignment = 0
+
+[node name="Button White 1" type="Sprite3D" parent="Menu Items 2/Menu Controls" unique_id=1302307095]
+transform = Transform3D(1.402, 0, 0, 0, 1.402, 0, 0, 0, 1.402, -1.3629999, 0.30103862, 0)
+cast_shadow = 0
+pixel_size = 0.00475
+render_priority = -4
+texture = ExtResource("29_8uxrf")
+
+[node name="Button 4" type="Sprite3D" parent="Menu Items 2/Menu Controls/Button White 1" unique_id=1684296055]
+transform = Transform3D(0.9999999, -7.1054274e-15, 0, 7.1054274e-15, 0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0)
+cast_shadow = 0
+modulate = Color(0, 0.81730956, 0.37381148, 1)
+pixel_size = 0.00475
+render_priority = -4
+texture = ExtResource("29_1utpr")
+
+[node name="Button Shadow 4" type="Sprite3D" parent="Menu Items 2/Menu Controls/Button White 1/Button 4" unique_id=600352260]
+transform = Transform3D(1, 7.1054274e-15, 0, -7.1054274e-15, 1, 0, 0, 0, 1, 0.033, -0.022, 0)
+cast_shadow = 0
+modulate = Color(0, 0, 0, 1)
+pixel_size = 0.00475
+render_priority = -8
+texture = ExtResource("24_n3kh0")
+
+[node name="Label 2" type="Label3D" parent="Menu Items 2/Menu Controls" unique_id=225999557]
+transform = Transform3D(0.877, 0, 0, 0, 0.877, 0, 0, 0, 0.877, -0.97419786, -0.501388, 0)
+render_priority = -2
+outline_render_priority = -3
+text = "Leave"
+font = ExtResource("11_i0gx5")
+font_size = 85
+outline_size = 48
+horizontal_alignment = 0
+
+[node name="Shadow 2" type="Label3D" parent="Menu Items 2/Menu Controls/Label 2" unique_id=509459501]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0712738, 0)
+render_priority = -3
+outline_render_priority = -4
+modulate = Color(0, 0, 0, 1)
+text = "Leave"
+font = ExtResource("11_i0gx5")
+font_size = 85
+outline_size = 48
+horizontal_alignment = 0
+
+[node name="Button White 2" type="Sprite3D" parent="Menu Items 2/Menu Controls" unique_id=1266899678]
+transform = Transform3D(-6.1283366e-08, -1.402, 0, 1.402, -6.1283366e-08, 0, 0, 0, 1.402, -1.3629999, -0.463739, 0)
+cast_shadow = 0
+pixel_size = 0.00475
+render_priority = -4
+texture = ExtResource("29_8uxrf")
+
+[node name="Button 2" type="Sprite3D" parent="Menu Items 2/Menu Controls/Button White 2" unique_id=799890750]
+transform = Transform3D(0.9999999, 7.1054274e-15, 0, -7.1054274e-15, 0.9999999, 0, 0, 0, 0.9999999, 1.1920929e-07, 0, 0)
+cast_shadow = 0
+modulate = Color(1, 0.34117648, 0.4627451, 1)
+pixel_size = 0.00475
+render_priority = -4
+texture = ExtResource("29_1utpr")
+
+[node name="Button Shadow 2" type="Sprite3D" parent="Menu Items 2/Menu Controls/Button White 2/Button 2" unique_id=977501497]
+transform = Transform3D(1, -7.1054274e-15, 0, 7.1054274e-15, 1, 0, 0, 0, 1, -0.032925963, -0.022398412, 0)
+cast_shadow = 0
+modulate = Color(0, 0, 0, 1)
+pixel_size = 0.00475
+render_priority = -8
+texture = ExtResource("24_n3kh0")
+
+[node name="Label 3" type="Label3D" parent="Menu Items 2/Menu Controls" unique_id=1018804737]
+transform = Transform3D(0.828, 0, 0, 0, 0.828, 0, 0, 0, 0.828, -0.97419786, -1.3363863, 0)
+render_priority = -2
+outline_render_priority = -3
+text = "Cycle
+Colors"
+font = ExtResource("11_i0gx5")
+font_size = 85
+outline_size = 48
+horizontal_alignment = 0
+
+[node name="Shadow 3" type="Label3D" parent="Menu Items 2/Menu Controls/Label 3" unique_id=1831538208]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.06302929, 0)
+render_priority = -3
+outline_render_priority = -4
+modulate = Color(0, 0, 0, 1)
+text = "Cycle
+Colors"
+font = ExtResource("11_i0gx5")
+font_size = 85
+outline_size = 48
+horizontal_alignment = 0
+
+[node name="Button White 3" type="Sprite3D" parent="Menu Items 2/Menu Controls" unique_id=569796341]
+transform = Transform3D(-6.1283366e-08, 1.402, 0, -1.402, -6.1283366e-08, 0, 0, 0, 1.402, -1.363, -1.3, 0)
+cast_shadow = 0
+pixel_size = 0.00475
+render_priority = -4
+texture = ExtResource("29_8uxrf")
+
+[node name="Button 1" type="Sprite3D" parent="Menu Items 2/Menu Controls/Button White 3" unique_id=2071019209]
+transform = Transform3D(1.9470721e-07, 1, 0, -1, 1.9470721e-07, 0, 0, 0, 1, 0, 0.018504858, 0)
+cast_shadow = 0
+modulate = Color(1, 1, 0.35686275, 1)
+pixel_size = 0.00475
+render_priority = -3
+texture = ExtResource("29_1utpr")
+
+[node name="Button Shadow 1" type="Sprite3D" parent="Menu Items 2/Menu Controls/Button White 3/Button 1" unique_id=438592657]
+transform = Transform3D(1.0000001, 1.4210855e-14, 0, -1.4210855e-14, 1.0000001, 0, 0, 0, 1.0000001, -0.022, 0.033, 0)
+cast_shadow = 0
+modulate = Color(0, 0, 0, 1)
+pixel_size = 0.00475
+render_priority = -8
+texture = ExtResource("29_1utpr")
+
+[node name="Button 3" type="Sprite3D" parent="Menu Items 2/Menu Controls/Button White 3" unique_id=128551873]
+transform = Transform3D(0.9999999, -7.1054274e-15, 0, 7.1054274e-15, 0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0)
+cast_shadow = 0
+modulate = Color(0.61960787, 0.6431373, 1, 1)
+pixel_size = 0.00475
+render_priority = -4
+texture = ExtResource("29_1utpr")
+
+[node name="Button Shadow 3" type="Sprite3D" parent="Menu Items 2/Menu Controls/Button White 3/Button 3" unique_id=222424327]
+transform = Transform3D(1, 7.1054274e-15, 0, -7.1054274e-15, 1, 0, 0, 0, 1, 0.032925963, 0.022397995, 0)
+cast_shadow = 0
+modulate = Color(0, 0, 0, 1)
+pixel_size = 0.00475
+render_priority = -8
+texture = ExtResource("24_n3kh0")
+
+[node name="Invert Control" type="Node3D" parent="Menu Items 2" unique_id=1627883481]
+transform = Transform3D(0.516, 0, 0, 0, 0.516, 0, 0, 0, 0.516, -1.6911741, -0.23528051, -2.1050003)
+
+[node name="Button" type="Sprite3D" parent="Menu Items 2/Invert Control" unique_id=2028858740]
+transform = Transform3D(1.1149997, 0, 0, 0, 1.1149997, 0, 0, 0, 1.1149997, -0.45099998, 0.030673027, 0)
+cast_shadow = 0
+pixel_size = 0.00475
+render_priority = -4
+texture = ExtResource("14_6qhb7")
+region_rect = Rect2(7, 0, 51, 64)
+
+[node name="Shadow" type="Sprite3D" parent="Menu Items 2/Invert Control/Button" unique_id=873379278]
+transform = Transform3D(0.99999964, 0, 0, 0, 0.99999964, 0, 0, 0, 0.99999964, 0.016879082, -0.016869664, 0)
+cast_shadow = 0
+modulate = Color(0, 0, 0, 1)
+pixel_size = 0.00475
+render_priority = -5
+texture = ExtResource("14_6qhb7")
+region_rect = Rect2(7, 0, 51, 64)
+
+[node name="Label 1" type="Label3D" parent="Menu Items 2/Invert Control" unique_id=542501268]
+transform = Transform3D(0.3029999, 0, 0, 0, 0.3029999, 0, 0, 0, 0.3029999, -0.45099998, 0.030673027, 0)
+render_priority = -2
+outline_render_priority = -3
+text = "L
+"
+font = ExtResource("11_i0gx5")
+font_size = 85
+outline_size = 48
+
+[node name="Shadow" type="Label3D" parent="Menu Items 2/Invert Control/Label 1" unique_id=1419405134]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03891945, -0.040335655, 0)
+render_priority = -3
+outline_render_priority = -4
+modulate = Color(0, 0, 0, 1)
+text = "L
+"
+font = ExtResource("11_i0gx5")
+font_size = 85
+outline_size = 48
+
+[node name="Label 2" type="Label3D" parent="Menu Items 2/Invert Control" unique_id=748927490]
+transform = Transform3D(0.523, 0, 0, 0, 0.557, 0, 0, 0, 0.557, -0.22000027, 0.020673066, 0)
+render_priority = -2
+outline_render_priority = -3
+text = "Toggle Invert
+Charge Aim"
+font = SubResource("FontVariation_6qhb7")
+font_size = 57
+outline_size = 26
+horizontal_alignment = 0
+
+[node name="Shadow" type="Label3D" parent="Menu Items 2/Invert Control/Label 2" unique_id=1452216658]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.036388278, 0)
+render_priority = -3
+outline_render_priority = -4
+modulate = Color(0, 0, 0, 1)
+text = "Toggle Invert
+Charge Aim"
+font = SubResource("FontVariation_6qhb7")
+font_size = 57
+outline_size = 26
+horizontal_alignment = 0
+
+[node name="Join Instructions" type="Node3D" parent="Menu Items 2" unique_id=637737469]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4872144, -2.105)
+visible = false
+
+[node name="Label" type="Label3D" parent="Menu Items 2/Join Instructions" unique_id=1279585425]
 pixel_size = 0.002
 render_priority = -2
 outline_render_priority = -3
