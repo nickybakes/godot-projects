@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cvbqrfykumn2q"]
+
+[ext_resource type="Shader" uid="uid://djslgtoa3fl3" path="res://Art/Shaders/S_RingCapture_01.gdshader" id="1_v364m"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_v364m")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/heightArray = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/distanceThreshold = 2.0
+shader_parameter/arraySplit = 0.08333
