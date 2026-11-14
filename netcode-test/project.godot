@@ -153,6 +153,7 @@ fullscreentoggle={
 3d_physics/layer_2="Ball"
 3d_physics/layer_3="Ball Hitbox"
 3d_physics/layer_4="Ball Hit Region"
+3d_physics/layer_5="Ember Surface"
 
 [physics]
 
