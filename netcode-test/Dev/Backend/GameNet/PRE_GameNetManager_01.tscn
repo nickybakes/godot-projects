@@ -12,6 +12,15 @@ metadata/_custom_type_script = "uid://bypppgyldenl2"
 
 [node name="Lobby Manager" type="Node" parent="." unique_id=751203014]
 script = ExtResource("3_5p0yt")
+defaultMatchOptions = Dictionary[int, int]({
+0: 0,
+1: 0,
+2: 0,
+3: 3,
+4: 0,
+5: 1,
+6: 10
+})
 
 [node name="NetSceneManager" type="MultiplayerSpawner" parent="." unique_id=1186417477]
 spawn_path = NodePath(".")

@@ -14,3 +14,25 @@ enum InputAction
 	CycleColorNext,
 	CycleColorPrev,
 }
+
+
+enum GameMode
+{
+	Lives,
+	Timed,
+	BattleRoyale,
+	Spotlight,
+	KingOfTheHill,
+	Random = 9999,
+}
+
+enum MatchOption
+{
+	Map,
+	GameMode,
+	InfiniteLives,
+	NumLives,
+	TimeLength,
+	InfiniteScore,
+	ScoreLimit
+}

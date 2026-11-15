@@ -13,8 +13,13 @@ signal PlayerRemoved(playerNumber : int, clientId : int, inputDevice : int)
 var canPlayersJoin = true;
 var canPlayersLeave = true;
 
+var matchOptions : Dictionary[Enums.MatchOption, int];
+@export var defaultMatchOptions : Dictionary[Enums.MatchOption, int];
+
+
 
 func _ready() -> void:
+	matchOptions = defaultMatchOptions.duplicate();
 	Lobby = self;
 
 
@@ -71,4 +76,28 @@ func GetPlayerTokenByPlayerNumber(playerNumber : int) -> PlayerToken:
 	return playerToken;
 
 func _process(delta: float) -> void:
+	pass;
+	
+	
+	
+@rpc("any_peer", "call_remote")
+func RequestHostMatchOptionsSync(requesterId : int):
+	rpc_id(requesterId, "AcceptMatchOptions", matchOptions);
+	pass;
+	
+func SetMatchOptions(options : Dictionary[Enums.MatchOption, int]):
+	if(Network.currentLobby.isHost):
+		RequestSetMatchOptions(options);
+	else:
+		rpc_id(1, 'RequestSetMatchOptions', options);
+		
+@rpc("any_peer","call_remote")
+func RequestSetMatchOptions(options : Dictionary[Enums.MatchOption, int]):
+	rpc("AcceptMatchOptions", options);
+	
+@rpc("authority", "call_local")
+func AcceptMatchOptions(options : Dictionary[Enums.MatchOption, int]):
+	matchOptions = options;
+	if(MatchOptions.Instance):
+		MatchOptions.Instance.UpdateMatchOptions(matchOptions);
 	pass;

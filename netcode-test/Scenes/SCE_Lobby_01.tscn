@@ -8,10 +8,14 @@
 [ext_resource type="Resource" uid="uid://dxbmthys0ijbe" path="res://Dev/Frontend/UI/R_HubProfile_01.tres" id="5_40un4"]
 [ext_resource type="Resource" uid="uid://dpwawajn4ovhe" path="res://Dev/Frontend/Customization/R_CursorCustomizationDirectory_01.tres" id="5_rsejo"]
 [ext_resource type="Script" uid="uid://b3mping6psqq0" path="res://Dev/Frontend/Camera/CameraManager.gd" id="6_fbg8u"]
+[ext_resource type="Script" uid="uid://csb8deekombi5" path="res://Dev/Frontend/Game/Option.gd" id="6_k4cd1"]
 [ext_resource type="Script" uid="uid://bsw5rk11juyn3" path="res://Dev/Frontend/UI/Hub.gd" id="6_kfure"]
+[ext_resource type="Texture2D" uid="uid://bbyr6h4m4kawy" path="res://Art/Sprites/UI/SPR_Arrow_02.png" id="6_ol0rm"]
+[ext_resource type="Script" uid="uid://b7vxutxgn4fpb" path="res://Dev/Frontend/Game/MatchOptions.gd" id="6_yef6a"]
 [ext_resource type="Script" uid="uid://dhuxkgt2jqlqf" path="res://Dev/Frontend/Customization/CustomizationManager.gd" id="7_kfure"]
 [ext_resource type="FontFile" uid="uid://toyoa2sfe754" path="res://Art/Fonts/KeepCalm-Medium.ttf" id="11_i0gx5"]
 [ext_resource type="Material" uid="uid://dfrqja6kekaj7" path="res://Art/Materials/M_SkyHavana_01a.tres" id="11_qtbfs"]
+[ext_resource type="Script" uid="uid://bddcjj74ltjvi" path="res://Dev/Frontend/Game/GameModeOptionsList.gd" id="13_ktve1"]
 [ext_resource type="Texture2D" uid="uid://bx11o7fga5gv6" path="res://Art/Sprites/UI/SPR_RoundedRectBorder_01.png" id="14_6qhb7"]
 [ext_resource type="Texture2D" uid="uid://bkredd1mkh44t" path="res://Art/Sprites/UI/SPR_ArrowCurve_01a.png" id="14_qwpqa"]
 [ext_resource type="Material" uid="uid://d0q0o32safx07" path="res://Art/Materials/Example/M_BallExample_03.tres" id="14_vtdo5"]
@@ -33,6 +37,14 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_c5qv8"]
 font_size = 54
+
+[sub_resource type="Theme" id="Theme_ol0rm"]
+PopupMenu/font_sizes/font_size = 30
+
+[sub_resource type="DPITexture" id="DPITexture_ol0rm"]
+
+[sub_resource type="Theme" id="Theme_c5qv8"]
+default_font_size = 40
 
 [sub_resource type="Sky" id="Sky_d28wa"]
 sky_material = ExtResource("11_qtbfs")
@@ -152,6 +164,283 @@ alignment = 1
 script = ExtResource("6_kfure")
 hubElementPrefab = NodePath("../Cursor Hub Element")
 hubProfile = ExtResource("5_40un4")
+
+[node name="Match Options Control" type="Control" parent="Lobby View" unique_id=279720083]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -541.0
+offset_top = -388.0
+offset_right = -119.0
+offset_bottom = 240.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Match Options" type="Node" parent="Lobby View/Match Options Control" unique_id=1201085526 node_paths=PackedStringArray("mapOption", "gameModeOption", "modeOptions", "livesTitle", "gameModeOptionsListsParent")]
+script = ExtResource("6_yef6a")
+mapOption = NodePath("../VBoxContainer/Map Option Parent/Map Option")
+gameModeOption = NodePath("../VBoxContainer/Game Mode Option Parent/Game Mode Option")
+modeOptions = [NodePath("../Game Mode Options Container/Infinite Lives Option Parent/Infinite Lives Option")]
+livesTitle = NodePath("../Game Mode Options Container/Lives Title/Lives Title Option")
+gameModeOptionsListsParent = NodePath("Mode Option Lists")
+metadata/_custom_type_script = "uid://b7vxutxgn4fpb"
+
+[node name="Mode Option Lists" type="Node" parent="Lobby View/Match Options Control/Match Options" unique_id=1420054599]
+
+[node name="Lives" type="Node" parent="Lobby View/Match Options Control/Match Options/Mode Option Lists" unique_id=1950960185]
+script = ExtResource("13_ktve1")
+timeLength = false
+infiniteScore = false
+scoreLimit = false
+metadata/_custom_type_script = "uid://bddcjj74ltjvi"
+
+[node name="Timed" type="Node" parent="Lobby View/Match Options Control/Match Options/Mode Option Lists" unique_id=980935256]
+script = ExtResource("13_ktve1")
+gameMode = 1
+infiniteLives = false
+numLives = false
+metadata/_custom_type_script = "uid://bddcjj74ltjvi"
+
+[node name="Battle Royale" type="Node" parent="Lobby View/Match Options Control/Match Options/Mode Option Lists" unique_id=1247270747]
+script = ExtResource("13_ktve1")
+gameMode = 2
+infiniteLives = false
+numLives = false
+timeLength = false
+infiniteScore = false
+scoreLimit = false
+metadata/_custom_type_script = "uid://bddcjj74ltjvi"
+
+[node name="Spotlight" type="Node" parent="Lobby View/Match Options Control/Match Options/Mode Option Lists" unique_id=356573992]
+script = ExtResource("13_ktve1")
+gameMode = 3
+infiniteLives = false
+numLives = false
+timeLength = false
+infiniteScore = false
+scoreLimit = false
+metadata/_custom_type_script = "uid://bddcjj74ltjvi"
+
+[node name="King of the Hill" type="Node" parent="Lobby View/Match Options Control/Match Options/Mode Option Lists" unique_id=80204776]
+script = ExtResource("13_ktve1")
+gameMode = 4
+infiniteLives = false
+numLives = false
+timeLength = false
+infiniteScore = false
+scoreLimit = false
+metadata/_custom_type_script = "uid://bddcjj74ltjvi"
+
+[node name="Random" type="Node" parent="Lobby View/Match Options Control/Match Options/Mode Option Lists" unique_id=1902127537]
+script = ExtResource("13_ktve1")
+gameMode = 9999
+infiniteLives = false
+numLives = false
+timeLength = false
+infiniteScore = false
+scoreLimit = false
+metadata/_custom_type_script = "uid://bddcjj74ltjvi"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Lobby View/Match Options Control" unique_id=1622249666]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_constants/separation = 12
+
+[node name="Map Option Parent" type="Control" parent="Lobby View/Match Options Control/VBoxContainer" unique_id=956975943]
+custom_minimum_size = Vector2(422, 85)
+layout_mode = 2
+
+[node name="Map Option" type="Node" parent="Lobby View/Match Options Control/VBoxContainer/Map Option Parent" unique_id=227966641 node_paths=PackedStringArray("controlParent", "optionButton")]
+script = ExtResource("6_k4cd1")
+controlParent = NodePath("..")
+optionButton = NodePath("../OptionButton")
+metadata/_custom_type_script = "uid://csb8deekombi5"
+
+[node name="OptionButton" type="OptionButton" parent="Lobby View/Match Options Control/VBoxContainer/Map Option Parent" unique_id=2074738952]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 35.0
+offset_bottom = 85.0
+grow_horizontal = 2
+focus_mode = 0
+theme = SubResource("Theme_ol0rm")
+theme_override_font_sizes/font_size = 30
+theme_override_icons/icon = ExtResource("6_ol0rm")
+theme_override_icons/arrow = SubResource("DPITexture_ol0rm")
+icon_alignment = 2
+expand_icon = true
+selected = 0
+item_count = 2
+popup/item_0/text = "Arena 01"
+popup/item_0/id = 0
+popup/item_1/text = "Random"
+popup/item_1/id = 9999
+
+[node name="Label" type="Label" parent="Lobby View/Match Options Control/VBoxContainer/Map Option Parent" unique_id=1552120078]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_bottom = 35.0
+theme_override_font_sizes/font_size = 23
+text = "Map"
+
+[node name="Game Mode Option Parent" type="Control" parent="Lobby View/Match Options Control/VBoxContainer" unique_id=1690770955]
+custom_minimum_size = Vector2(422, 85)
+layout_mode = 2
+
+[node name="Game Mode Option" type="Node" parent="Lobby View/Match Options Control/VBoxContainer/Game Mode Option Parent" unique_id=229087466 node_paths=PackedStringArray("controlParent", "optionButton")]
+script = ExtResource("6_k4cd1")
+matchOption = 1
+controlParent = NodePath("..")
+optionButton = NodePath("../OptionButton")
+metadata/_custom_type_script = "uid://csb8deekombi5"
+
+[node name="OptionButton" type="OptionButton" parent="Lobby View/Match Options Control/VBoxContainer/Game Mode Option Parent" unique_id=1778333825]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 35.0
+offset_bottom = 85.0
+grow_horizontal = 2
+focus_mode = 0
+theme = SubResource("Theme_ol0rm")
+theme_override_font_sizes/font_size = 30
+theme_override_icons/icon = ExtResource("6_ol0rm")
+theme_override_icons/arrow = SubResource("DPITexture_ol0rm")
+icon_alignment = 2
+expand_icon = true
+selected = 0
+item_count = 6
+popup/item_0/text = "Stocks"
+popup/item_0/id = 0
+popup/item_1/text = "Timed"
+popup/item_1/id = 1
+popup/item_2/text = "Battle Royale"
+popup/item_2/id = 2
+popup/item_3/text = "Spotlight"
+popup/item_3/id = 3
+popup/item_4/text = "King of the Hill"
+popup/item_4/id = 4
+popup/item_5/text = "Random"
+popup/item_5/id = 9999
+
+[node name="Label" type="Label" parent="Lobby View/Match Options Control/VBoxContainer/Game Mode Option Parent" unique_id=723804335]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_bottom = 35.0
+theme_override_font_sizes/font_size = 23
+text = "Game Mode"
+
+[node name="Basic Option" type="Control" parent="Lobby View/Match Options Control" unique_id=1443022573]
+visible = false
+anchors_preset = 0
+offset_top = 97.0
+offset_right = 514.0
+offset_bottom = 248.0
+
+[node name="Option" type="Node" parent="Lobby View/Match Options Control/Basic Option" unique_id=62871608]
+script = ExtResource("6_k4cd1")
+metadata/_custom_type_script = "uid://csb8deekombi5"
+
+[node name="OptionButton" type="OptionButton" parent="Lobby View/Match Options Control/Basic Option" unique_id=1482736739]
+layout_mode = 0
+offset_top = 35.0
+offset_right = 384.0
+offset_bottom = 85.0
+focus_mode = 0
+theme = SubResource("Theme_ol0rm")
+theme_override_font_sizes/font_size = 30
+theme_override_icons/icon = ExtResource("6_ol0rm")
+theme_override_icons/arrow = SubResource("DPITexture_ol0rm")
+icon_alignment = 2
+expand_icon = true
+selected = 0
+item_count = 2
+popup/item_0/text = "option 1"
+popup/item_0/id = 0
+popup/item_1/text = "option 2"
+popup/item_1/id = 1
+
+[node name="SpinBox" type="SpinBox" parent="Lobby View/Match Options Control/Basic Option" unique_id=1544685913]
+layout_mode = 0
+offset_top = 122.0
+offset_right = 270.96774
+offset_bottom = 172.0
+theme = SubResource("Theme_c5qv8")
+theme_override_constants/buttons_width = 58
+
+[node name="CheckBox" type="CheckBox" parent="Lobby View/Match Options Control/Basic Option" unique_id=1686292106]
+layout_mode = 0
+offset_left = 317.0
+offset_top = 122.0
+offset_right = 377.0
+offset_bottom = 182.0
+theme_override_font_sizes/font_size = 26
+text = "wadawddw"
+expand_icon = true
+
+[node name="Game Mode Options Container" type="VBoxContainer" parent="Lobby View/Match Options Control" unique_id=350715361]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 212.0
+offset_bottom = 284.0
+grow_horizontal = 2
+
+[node name="Lives Title" type="Control" parent="Lobby View/Match Options Control/Game Mode Options Container" unique_id=1231666907]
+custom_minimum_size = Vector2(422, 65)
+layout_mode = 2
+
+[node name="Lives Title Option" type="Node" parent="Lobby View/Match Options Control/Game Mode Options Container/Lives Title" unique_id=1172278248 node_paths=PackedStringArray("controlParent")]
+script = ExtResource("6_k4cd1")
+controlParent = NodePath("..")
+metadata/_custom_type_script = "uid://csb8deekombi5"
+
+[node name="Label" type="Label" parent="Lobby View/Match Options Control/Game Mode Options Container/Lives Title" unique_id=600042780]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_bottom = 35.0
+theme_override_font_sizes/font_size = 43
+text = "Lives"
+horizontal_alignment = 1
+
+[node name="Infinite Lives Option Parent" type="Control" parent="Lobby View/Match Options Control/Game Mode Options Container" unique_id=1338939476]
+custom_minimum_size = Vector2(422, 85)
+layout_mode = 2
+
+[node name="Infinite Lives Option" type="Node" parent="Lobby View/Match Options Control/Game Mode Options Container/Infinite Lives Option Parent" unique_id=1435296165 node_paths=PackedStringArray("controlParent", "checkBox")]
+script = ExtResource("6_k4cd1")
+matchOption = 2
+controlParent = NodePath("..")
+type = 1
+checkBox = NodePath("../CheckBox")
+metadata/_custom_type_script = "uid://csb8deekombi5"
+
+[node name="Label" type="Label" parent="Lobby View/Match Options Control/Game Mode Options Container/Infinite Lives Option Parent" unique_id=69009476]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_bottom = 35.0
+theme_override_font_sizes/font_size = 32
+text = "Infinite Lives"
+
+[node name="CheckBox" type="CheckBox" parent="Lobby View/Match Options Control/Game Mode Options Container/Infinite Lives Option Parent" unique_id=2038434705]
+layout_mode = 0
+offset_left = 210.99997
+offset_top = -4.0000005
+offset_right = 234.99997
+offset_bottom = 20.0
+scale = Vector2(2.4786081, 2.4786081)
+focus_mode = 0
 
 [node name="Player Joiner" type="Node" parent="." unique_id=1136046608]
 script = ExtResource("1_5a6u1")
