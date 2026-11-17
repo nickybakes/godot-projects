@@ -50,6 +50,7 @@ class_name BallTraits
 @export var blockDecelMaxSpeed : float = 40;
 @export var blockStaminaSpeedBoost : float = 0.5;
 @export var basicBounceWhileBlockingTraits : BallBounceTraits;
+@export var blockBuffer : float = 0.3;
 
 @export_range(0.0, 1.0, .01) var blockVerticalBounceDamp : float = 0.5;
 
@@ -122,6 +123,10 @@ class_name BallTraits
 @export_group("Fail")
 @export var grabFailRecoveryTime : float = 1.0;
 @export var grabFailDeceleration : float = 6.0;
+
+@export_category("Repsawn")
+@export var respawnTime : float = 5.0;
+@export var knockedOutTime : float = 2.0;
 
 
 @export_category("Misc")

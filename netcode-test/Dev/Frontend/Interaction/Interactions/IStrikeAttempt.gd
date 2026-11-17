@@ -95,7 +95,7 @@ func Evaluate():
 				var victimController = GameManager.Manager.balls[victims[i]].ballController;
 					
 				if(victimController.updatePhysics):
-					if(victimController.blocking):
+					if(victimController.blocking || victimController.blockBuffer > 0):
 						victimController.BlockDamageFromStrike(activatorController, activatorSpeed, activatorElectric);
 						victimController.GetPhysics().BounceVelocity(-directionsFromVictims[i], activatorSpeed, victimController.traits.strikeBlockerBounceTraits);
 						pass;
@@ -108,7 +108,7 @@ func Evaluate():
 				totalDirection += directionsFromVictims[i];
 				
 				totalVictims += 1;
-				if(victimController.blocking):
+				if(victimController.blocking || victimController.blockBuffer > 0):
 					totalBlocked += 1;
 				else:
 					totalHit += 1;

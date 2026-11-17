@@ -187,6 +187,13 @@ hubProfile = ExtResource("7_4puxp")
 
 [node name="GameManager" type="Node" parent="." unique_id=335467618]
 script = ExtResource("2_n03q8")
+gameModeControllersDict = Dictionary[int, String]({
+0: "uid://dk2770vj4siex",
+1: "uid://dk2770vj4siex",
+2: "uid://dk2770vj4siex",
+3: "uid://dk2770vj4siex",
+4: "uid://dk2770vj4siex"
+})
 metadata/_custom_type_script = "uid://dwjf48i5tqrx3"
 
 [node name="InteractionManager" type="Node" parent="." unique_id=641186659]

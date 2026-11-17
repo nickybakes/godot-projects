@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://cykj1daogk7s7" path="res://Art/Textures/T_StaminaBar_Under.png" id="8_pa4jx"]
 [ext_resource type="Texture2D" uid="uid://ckx7d68rt4fyr" path="res://Art/Textures/T_StaminaBar_Over.png" id="9_wr6fh"]
 [ext_resource type="Texture2D" uid="uid://b2nww8j3x0psr" path="res://Art/Textures/T_StaminaBar_Fill.png" id="10_mnpx0"]
+[ext_resource type="Script" uid="uid://y5eg0qnydwji" path="res://Dev/Frontend/UI/LivesDisplay.gd" id="11_mnpx0"]
+[ext_resource type="Texture2D" uid="uid://q186bew40wwj" path="res://Art/Sprites/UI/SPR_Ball_01.png" id="11_wr6fh"]
 
 [sub_resource type="Gradient" id="Gradient_6gu6k"]
 offsets = PackedFloat32Array(0, 0.2570533, 0.5423198, 1)
@@ -49,8 +51,14 @@ variation_embolden = 0.93
 
 [sub_resource type="LabelSettings" id="LabelSettings_5ud67"]
 font = SubResource("FontVariation_6gu6k")
-font_size = 54
-outline_size = 20
+font_size = 21
+outline_size = 11
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mnpx0"]
+font = SubResource("FontVariation_6gu6k")
+font_size = 25
+outline_size = 11
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="FontVariation" id="FontVariation_wri1x"]
@@ -61,8 +69,8 @@ spacing_glyph = -4
 
 [sub_resource type="LabelSettings" id="LabelSettings_wri1x"]
 font = SubResource("FontVariation_wri1x")
-font_size = 68
-outline_size = 20
+font_size = 60
+outline_size = 19
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_c5qv8"]
@@ -71,7 +79,13 @@ font_size = 22
 outline_size = 7
 outline_color = Color(0, 0, 0, 1)
 
-[node name="Ball Hub Element" type="Control" unique_id=190371458 node_paths=PackedStringArray("colorBar", "playerNumberLabel", "alive", "eliminated", "lineTrackerStartPoint", "trackerLine", "healthLabel", "healthIcon", "staminaBar", "invertChargeAim")]
+[sub_resource type="LabelSettings" id="LabelSettings_etr8x"]
+font = ExtResource("5_wri1x")
+font_size = 31
+outline_size = 13
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Ball Hub Element" type="Control" unique_id=190371458 node_paths=PackedStringArray("colorBar", "playerNumberLabel", "alive", "respawning", "respawningClockLabel", "eliminated", "livesDisplay", "lineTrackerStartPoint", "trackerLine", "healthLabel", "healthIcon", "staminaBar", "invertChargeAim")]
 custom_minimum_size = Vector2(235, 127)
 layout_mode = 3
 anchor_left = 0.411
@@ -89,7 +103,10 @@ colorBar = NodePath("Color BG")
 playerNumberLabel = NodePath("Player Number Label")
 customization = ExtResource("2_wri1x")
 alive = NodePath("Alive")
+respawning = NodePath("Respawning")
+respawningClockLabel = NodePath("Respawning/Respawn Clock")
 eliminated = NodePath("Eliminated")
+livesDisplay = NodePath("Lives Display")
 lineTrackerStartPoint = NodePath("Line Tracker Start Point")
 trackerLine = NodePath("PRE_TrackerLine_01")
 healthLabel = NodePath("Alive/Health Label")
@@ -215,9 +232,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -112.5
-offset_top = -104.5
+offset_top = -107.5
 offset_right = 102.97827
-offset_bottom = 63.5
+offset_bottom = 60.5
 grow_horizontal = 2
 grow_vertical = 2
 rotation = -0.06432354
@@ -293,6 +310,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -1.0
+offset_right = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
@@ -305,20 +324,47 @@ offset_right = 225.47827
 offset_bottom = 145.0
 rotation = -0.11632598
 pivot_offset_ratio = Vector2(0.5, 0.5)
-text = "KO"
+text = "Eliminated"
 label_settings = SubResource("LabelSettings_5ud67")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Stamina Label" type="Label" parent="Eliminated" unique_id=324624548]
-visible = false
+[node name="Respawning" type="Control" parent="." unique_id=343736833]
 layout_mode = 1
-offset_left = 8.0
-offset_top = -2.0
-offset_right = 223.47827
-offset_bottom = 166.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
-text = "100"
+
+[node name="Label" type="Label" parent="Respawning" unique_id=2090775704]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -68.0
+offset_bottom = -68.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "Respawn in..."
+label_settings = SubResource("LabelSettings_mnpx0")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Respawn Clock" type="Label" parent="Respawning" unique_id=1184416362]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -10.000004
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.075049154
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "5"
 label_settings = SubResource("LabelSettings_wri1x")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -335,4 +381,114 @@ offset_bottom = 4.0
 grow_vertical = 0
 text = "Invert"
 label_settings = SubResource("LabelSettings_c5qv8")
+vertical_alignment = 2
+
+[node name="Lives Display" type="Control" parent="." unique_id=139559825 node_paths=PackedStringArray("boxContainer", "spritePrefab", "numLabel", "spriteBased", "numberBased")]
+layout_mode = 1
+anchor_top = 0.80300003
+anchor_right = 0.9480001
+anchor_bottom = 0.80300003
+offset_left = 62.0
+offset_top = -20.981003
+offset_right = -52.780014
+offset_bottom = 4.018997
+scale = Vector2(0.84, 0.84)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+script = ExtResource("11_mnpx0")
+boxContainer = NodePath("Sprite Based/HBoxContainer")
+spritePrefab = NodePath("Life")
+numLabel = NodePath("Number Based/Num Label")
+spriteBased = NodePath("Sprite Based")
+numberBased = NodePath("Number Based")
+spriteSeparations = Array[int]([4, 4, 4, 4, 4, 4])
+metadata/_custom_type_script = "uid://y5eg0qnydwji"
+
+[node name="Life" type="Control" parent="Lives Display" unique_id=1795793298]
+visible = false
+custom_minimum_size = Vector2(25, 25)
+anchors_preset = 0
+offset_right = 25.0
+offset_bottom = 25.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+
+[node name="TextureRect" type="TextureRect" parent="Lives Display/Life" unique_id=729145093]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = -1.0
+offset_bottom = -0.7500019
+scale = Vector2(1.228, 1.228)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("11_wr6fh")
+expand_mode = 1
+
+[node name="Sprite Based" type="Control" parent="Lives Display" unique_id=606370611]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Lives Display/Sprite Based" unique_id=1906492151]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Number Based" type="Control" parent="Lives Display" unique_id=1907168503]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+
+[node name="Life2" type="Control" parent="Lives Display/Number Based" unique_id=357694539]
+custom_minimum_size = Vector2(25, 25)
+anchors_preset = 0
+offset_left = 20.666658
+offset_right = 45.666656
+offset_bottom = 25.0
+scale = Vector2(1.5519592, 1.5519592)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+
+[node name="TextureRect" type="TextureRect" parent="Lives Display/Number Based/Life2" unique_id=1695463994]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = -1.0
+offset_bottom = -0.7500019
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_wr6fh")
+expand_mode = 1
+
+[node name="x" type="Label" parent="Lives Display/Number Based" unique_id=880723188]
+layout_mode = 0
+offset_left = 36.142845
+offset_right = 54.142845
+offset_bottom = 32.0
+text = "x"
+label_settings = SubResource("LabelSettings_etr8x")
+vertical_alignment = 2
+
+[node name="Num Label" type="Label" parent="Lives Display/Number Based" unique_id=359779689]
+layout_mode = 0
+offset_left = 57.571438
+offset_right = 99.57144
+offset_bottom = 32.0
+text = "6"
+label_settings = SubResource("LabelSettings_etr8x")
 vertical_alignment = 2

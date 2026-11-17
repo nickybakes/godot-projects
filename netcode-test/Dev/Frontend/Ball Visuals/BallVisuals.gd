@@ -41,6 +41,9 @@ var ballHubElement : BallHubElement;
 
 @export_category("Messages")
 @export var eliminatedVisual : Node3D;
+@export var knockedOutVisual : Node3D;
+@export var respawningVisual : Node3D;
+@export var respawningClockLabel : Label3D;
 @export var strikePriorityVisual : Node3D;
 @export var unblockableVisual : Node3D;
 
@@ -197,15 +200,29 @@ func StopGrabSuccessAimVisual():
 	chargeAimMesh.visible = false;
 	
 func HideMessages():
+	respawningVisual.visible = false;
+	knockedOutVisual.visible = false;
 	eliminatedVisual.visible = false;
 	strikePriorityVisual.visible = false;
 	unblockableVisual.visible = false;
+	
+func ShowKnockedOutMessage():
+	messageTime = 10.0;
+	HideMessages();
+	knockedOutVisual.visible = true;
+	
+func ShowRespawningMessage():
+	messageTime = 10.0;
+	HideMessages();
+	respawningVisual.visible = true;
+	
+func UpdateRespawnClock(respawnTime : float):
+	respawningClockLabel.text = "%.0f" % respawnTime;
 	
 func ShowEliminatedMessage():
 	messageTime = profile.eliminatedMessageTime;
 	HideMessages();
 	eliminatedVisual.visible = true;
-	ballHubElement.ShowEliminated();
 	
 func ShowStrikePriorityMessage():
 	messageTime = profile.strikePriorityMessageTime;

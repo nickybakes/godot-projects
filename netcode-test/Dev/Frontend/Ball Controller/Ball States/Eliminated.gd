@@ -8,6 +8,7 @@ func StartState(params : Dictionary = {}):
 func StartStateVisuals(params : Dictionary = {}):
 	mcc.visuals.HideBall();
 	mcc.visuals.ShowEliminatedMessage();
+	mcc.visuals.ballHubElement.ShowEliminated();
 	mcc.visuals.cameraTarget.goalStrength = 0;
 	mcc.visuals.cameraTarget.strength = 2.5;
 	CameraManager.CM.shaker.Shake(mcc.visuals.profile.eliminationCameraShake);
@@ -17,6 +18,7 @@ func ExitState():
 	
 func ExitStateVisuals():
 	mcc.visuals.ShowBall();
+	mcc.visuals.ballHubElement.ShowAlive();
 	
 func ProcessPhysics(delta : float):
 	pass;

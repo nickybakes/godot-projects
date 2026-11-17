@@ -37,11 +37,15 @@ var interactive : bool = true;
 
 var playerNumber : int;
 var playerToken : PlayerToken;
+var knockedOut : bool;
 var eliminated : bool;
+var respawnTimer : float;
+var lives : int;
 
 var clash : bool;
 
 var blocking : bool;
+var blockBuffer : float;
 var successfulBlock : bool;
 
 var grabParent : BallMCC;
@@ -160,6 +164,8 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
 	
 	moveCooldown = move_toward(moveCooldown, 1.0, delta);
+	
+	blockBuffer = move_toward(blockBuffer, 0, delta);
 	
 	currentState.Process(delta);
 	strikeRegion.ScaleRegion(currentSpeed, electricStat.percent);

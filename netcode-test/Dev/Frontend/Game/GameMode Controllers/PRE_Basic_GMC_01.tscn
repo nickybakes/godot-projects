@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dk2770vj4siex"]
+
+[ext_resource type="Script" uid="uid://dopoq4g5rnct6" path="res://Dev/Frontend/Game/GameModeController.gd" id="1_e331e"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_bv7ot"]
+
+[node name="GameModeController" type="MultiplayerSynchronizer" unique_id=1229509542]
+replication_config = SubResource("SceneReplicationConfig_bv7ot")
+script = ExtResource("1_e331e")
+metadata/_custom_type_script = "uid://dopoq4g5rnct6"

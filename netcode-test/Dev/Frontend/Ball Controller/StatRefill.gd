@@ -17,6 +17,9 @@ var percent : float;
 @export var cooldownMax : float = 10;
 
 func _ready() -> void:
+	Reset();
+	
+func Reset() -> void:
 	value = lerp(minValue, maxValue, startingPercent);
 
 func Process(delta : float):

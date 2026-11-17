@@ -8,6 +8,7 @@ var id : int;
 var ownerId : int;
 
 var syncedIds : Array[int] = [];
+var spawned : bool;
 
 func Spawn(_id : int, _ownerId : int, _spawnParams : Dictionary, _originalNetObjectPath : String):
 	id = _id;
@@ -15,6 +16,7 @@ func Spawn(_id : int, _ownerId : int, _spawnParams : Dictionary, _originalNetObj
 	originalNetObjectPath = _originalNetObjectPath;
 	SetOwner(_ownerId);
 	DoSpawnParams();
+	spawned = true;
 	
 func SetOwner(newOwnerId : int):
 	ownerId = newOwnerId;

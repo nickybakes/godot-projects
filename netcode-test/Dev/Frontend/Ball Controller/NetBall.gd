@@ -12,11 +12,14 @@ class_name NetBall
 @export var electric : float;
 @export var invuln : float;
 @export var strikeCooldown : float;
+@export var respawnTimer : float;
+@export var lives : int;
 
 var playerNumber : int;
 var playerToken : PlayerToken;
 var inputDevice : InputDevice;
 var currentStateIndex : int = -1;
+var currentLives : int = -1;
 
 func DoSpawnParams():
 	if(spawnParams.has("playerNumber")):
@@ -27,6 +30,9 @@ func DoSpawnParams():
 	if(spawnParams.has("velocity")):
 		velocity = spawnParams["velocity"];
 		ballController.velocity = velocity;
+	if(spawnParams.has("lives")):
+		lives = spawnParams["lives"];
+		ballController.lives = lives;
 		
 	playerToken = LobbyManager.Lobby.GetPlayerTokenByPlayerNumber(playerNumber);
 	ballController.playerToken = playerToken;
@@ -70,6 +76,14 @@ func _process(delta: float) -> void:
 		ballController.strikeCooldown.value = lerp(ballController.strikeCooldown.value, strikeCooldown, .5);
 		if(is_zero_approx(strikeCooldown)):
 			ballController.strikeCooldown.value = 0;
+			
+						
+		ballController.respawnTimer = lerp(ballController.respawnTimer, respawnTimer, .5)
+		
+		if(currentLives != lives):
+			currentLives = lives;
+			ballController.lives = lives;
+			ballController.visuals.ballHubElement.livesDisplay.Display(lives);
 		
 	else:
 		position = ballController.position;
@@ -81,6 +95,9 @@ func _process(delta: float) -> void:
 		electric = ballController.electricStat.value;
 		invuln = ballController.invulnStat.value;
 		strikeCooldown = ballController.strikeCooldown.value;
+		respawnTimer = ballController.respawnTimer;
+		lives = ballController.lives;
+		
 		if(inputDevice != null && playerToken):
 			if(inputDevice.inputBuffer.IsActionJustPressedThisFrame(Enums.InputAction.ToggleInvert, 1)):
 				playerToken.customization.invertChargeAim = !playerToken.customization.invertChargeAim;

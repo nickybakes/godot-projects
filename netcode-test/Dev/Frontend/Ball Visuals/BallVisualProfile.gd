@@ -41,4 +41,5 @@ class_name BallVisualProfile
 @export_category("Camera Shake")
 @export var strikeCameraShake : float = .25;
 @export var grabCameraShake : float = .25;
+@export var knockedOutCameraShake : float = .75;
 @export var eliminationCameraShake : float = .75;

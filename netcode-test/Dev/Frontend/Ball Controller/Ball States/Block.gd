@@ -19,6 +19,7 @@ func ExitStatePhysics():
 func ExitState():
 	super();
 	mcc.blocking = false;
+	mcc.blockBuffer = mcc.traits.blockBuffer;
 
 func ProcessPhysics(delta : float):
 	super(delta);

@@ -3,10 +3,14 @@ class_name BallHubElement
 
 @export_group("Basics")
 @export var colorBar : CanvasItem;
+@export_range(0.0, 1.0, .01) var eliminatedAlpha : float = .5;
 @export var playerNumberLabel : Label;
 @export var customization : CursorCustomizationDirectory;
 @export var alive : Control;
+@export var respawning : Control;
+@export var respawningClockLabel : Label;
 @export var eliminated : Control;
+@export var livesDisplay : LivesDisplay;
 
 @export_group("Tracker Line")
 @export var lineTrackerStartPoint : Control;
@@ -45,6 +49,9 @@ func Setup(id : int):
 	trackerLine.startPointTarget = lineTrackerStartPoint;
 	trackerLine.endPointTarget = ballController;
 	
+	livesDisplay.Setup();
+	livesDisplay.Display(ballController.lives);
+	
 	UpdateColor();
 	
 	ShowAlive();
@@ -76,12 +83,28 @@ func GetPercentageString(percent : float) -> String:
 	return "%.0f" % [percent * 100.0];
 	
 func ShowAlive():
+	respawning.visible = false;
+	livesDisplay.visible = true;
 	eliminated.visible = false;
 	alive.visible = true;
+	colorBar.modulate.a = 1.0;
+	
+func ShowRespawning():
+	respawning.visible = true;
+	alive.visible = false;
+	eliminated.visible = false;
+	colorBar.modulate.a = 1.0;
+	pass;
+	
+func UpdateRespawnClock(respawnTime : float):
+	respawningClockLabel.text = "%.0f" % respawnTime;
 	
 func ShowEliminated():
+	respawning.visible = false;
+	livesDisplay.visible = false;
 	alive.visible = false;
 	eliminated.visible = true;
+	colorBar.modulate.a = eliminatedAlpha;
 
 func _process(delta: float) -> void:
 	if(!visible):
