@@ -36,3 +36,9 @@ enum MatchOption
 	InfiniteScore,
 	ScoreLimit
 }
+
+enum DamageType
+{
+	Strike,
+	Grab
+}

@@ -1,10 +1,18 @@
 [gd_scene format=3 uid="uid://dk2770vj4siex"]
 
 [ext_resource type="Script" uid="uid://dopoq4g5rnct6" path="res://Dev/Frontend/Game/GameModeController.gd" id="1_e331e"]
+[ext_resource type="PackedScene" uid="uid://bmnm3pj8cpu20" path="res://Dev/Frontend/UI/PRE_ClockDisplay_01.tscn" id="2_bv7ot"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_bv7ot"]
+properties/0/path = NodePath(".:gameTime")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
-[node name="GameModeController" type="MultiplayerSynchronizer" unique_id=1229509542]
+[node name="GameModeController" type="MultiplayerSynchronizer" unique_id=1229509542 node_paths=PackedStringArray("clockDisplay")]
+root_path = NodePath(".")
 replication_config = SubResource("SceneReplicationConfig_bv7ot")
 script = ExtResource("1_e331e")
+clockDisplay = NodePath("Clock Display")
 metadata/_custom_type_script = "uid://dopoq4g5rnct6"
+
+[node name="Clock Display" parent="." unique_id=1821210268 instance=ExtResource("2_bv7ot")]

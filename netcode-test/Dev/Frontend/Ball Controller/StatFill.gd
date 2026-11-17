@@ -7,6 +7,7 @@ var value : float;
 var cooldown : float;
 
 var percent : float;
+var percentHundred : int;
 
 @export_range(0.0, 1.0, .01) var startingPercent : float = 0;
 @export var minValue : float = 0;
@@ -17,7 +18,11 @@ var percent : float;
 @export var cooldownMax : float = 10;
 
 func _ready() -> void:
+	Reset();
+	
+func Reset() -> void:
 	value = lerp(minValue, maxValue, startingPercent);
+	CalcPercent();
 
 func Process(delta : float):
 	if(cooldown > 0):
@@ -42,3 +47,4 @@ func Add(amount : float) -> float:
 
 func CalcPercent():
 	percent = (value - minValue)/maxValue;
+	percentHundred = (percent * 100.0) as int;

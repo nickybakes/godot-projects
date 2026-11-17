@@ -1148,7 +1148,7 @@ metadata/_custom_type_script = "uid://dulfhx4ftd06"
 [node name="No Health Rule" type="Node" parent="Generic Rules" unique_id=1520060342 node_paths=PackedStringArray("node")]
 script = ExtResource("15_ahjyt")
 node = NodePath("../../Health Stat")
-property = "value"
+property = "percentHundred"
 comparisonType = 4
 traitProperty = "one"
 metadata/_custom_type_script = "uid://dulfhx4ftd06"

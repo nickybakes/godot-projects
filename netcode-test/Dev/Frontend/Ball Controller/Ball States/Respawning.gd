@@ -31,6 +31,7 @@ func ExitStatePhysics():
 	mcc.chargeCooldown.Restart();
 	mcc.jumpCooldown.Restart();
 	mcc.blockCooldown.Restart();
+	mcc.mostRecentDamageDealerId = -1;
 	mcc.autoAimCooldown = 0;
 	
 func ProcessVisuals(delta : float):

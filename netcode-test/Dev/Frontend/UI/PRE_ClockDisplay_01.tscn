@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://bmnm3pj8cpu20"]
+
+[ext_resource type="Script" uid="uid://dfn11uduwpuwj" path="res://Dev/Frontend/UI/ClockDisplay.gd" id="1_xpfq8"]
+[ext_resource type="FontFile" uid="uid://toyoa2sfe754" path="res://Art/Fonts/KeepCalm-Medium.ttf" id="2_87h1m"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_c5qv8"]
+font = ExtResource("2_87h1m")
+font_size = 96
+outline_size = 24
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Clock Display" type="Control" unique_id=1821210268 node_paths=PackedStringArray("minuteLabel", "secondLabel")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0)
+script = ExtResource("1_xpfq8")
+minuteLabel = NodePath("Container/Minute Label")
+secondLabel = NodePath("Container/Second Label")
+metadata/_custom_type_script = "uid://dfn11uduwpuwj"
+
+[node name="Container" type="Control" parent="." unique_id=1663134718]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.939363, 0.939363)
+pivot_offset_ratio = Vector2(0.5, 0)
+
+[node name="Minute Label" type="Label" parent="Container" unique_id=1577663579]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -485.0
+offset_top = 34.0
+offset_right = -26.0
+offset_bottom = 143.0
+grow_horizontal = 2
+text = "01"
+label_settings = SubResource("LabelSettings_c5qv8")
+horizontal_alignment = 2
+
+[node name="Colon" type="Label" parent="Container" unique_id=1171570657]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 29.0
+offset_right = 22.0
+offset_bottom = 138.0
+grow_horizontal = 2
+text = ":"
+label_settings = SubResource("LabelSettings_c5qv8")
+horizontal_alignment = 1
+
+[node name="Second Label" type="Label" parent="Container" unique_id=1706502734]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 28.0
+offset_top = 34.0
+offset_right = 482.0
+offset_bottom = 143.0
+grow_horizontal = 2
+text = "01"
+label_settings = SubResource("LabelSettings_c5qv8")

@@ -2,10 +2,16 @@ extends BallState
 class_name Eliminated
 
 func StartState(params : Dictionary = {}):
+	super(params);
 	mcc.interactive = false;
 	mcc.eliminated = true;
 	
+func StartStatePhysics(params : Dictionary = {}):
+	super(params);
+	GameManager.Manager.LogElimination.rpc(mcc.mostRecentDamageDealerId, mcc.playerNumber);
+	
 func StartStateVisuals(params : Dictionary = {}):
+	super(params);
 	mcc.visuals.HideBall();
 	mcc.visuals.ShowEliminatedMessage();
 	mcc.visuals.ballHubElement.ShowEliminated();
