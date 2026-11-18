@@ -13,6 +13,13 @@ var gameModeController : GameModeController;
 
 var gameTime : float;
 
+@export var gameFinishBufferTime = 3.0;
+@export var gameFinishedMessage : Control;
+@export var resultsView : ResultsView;
+
+var gameFinished : bool;
+var finishedSubState : SubState;
+
 var gameMechanics : Array[GameMechanic];
 var gamePlayerLogs : Dictionary[int, GamePlayerLog] = {};
 
@@ -20,6 +27,8 @@ var gamePlayerLogs : Dictionary[int, GamePlayerLog] = {};
 func _ready() -> void:
 	Manager = self;
 	gameMechanics = [];
+	gameFinishedMessage.visible = false;
+	resultsView.visible = false;
 	if(Network.currentLobby.isHost):
 		SpawnPlayerBalls();
 		SpawnGameModeController();
@@ -33,6 +42,14 @@ func _process(delta: float) -> void:
 	if(Network.currentLobby.isHost && gameModeController):
 		gameTime += delta;
 		gameModeController.gameTime = gameTime;
+		
+	if(gameFinished && finishedSubState):
+		var newState = finishedSubState.Update(delta);
+		match(finishedSubState.currentIndex):
+			1:
+				if(newState):
+					ShowResults();
+					pass;
 	pass;
 	
 	
@@ -57,6 +74,20 @@ func RequestEndGame():
 	GameNetManager.GameNet.netSceneManager.SwitchScene(SceneManager.SCENE.LobbyScene);
 	pass;
 
+@rpc("authority", "call_local")
+func FinishGame():
+	finishedSubState = SubState.new([gameFinishBufferTime]);
+	gameFinished = true;
+	gameFinishedMessage.visible = true;
+	
+func ShowResults():
+	gameFinishedMessage.visible = false;
+	resultsView.visible = true;
+	resultsView.DisplayResults();
+	CameraManager.CM.SetBlur(true);
+	GamerView.View.hub.visible = false;
+	GamerView.View.HideAllTrackerLines();
+
 func SpawnGameModeController():
 	if(LobbyManager.Lobby):
 		var gameMode = LobbyManager.Lobby.matchOptions[Enums.MatchOption.GameMode] as Enums.GameMode;
@@ -74,7 +105,7 @@ func SpawnPlayerBalls():
 			var pickedPlayerToken : PlayerToken = tokenArray.pick_random();
 			tokenArray.erase(pickedPlayerToken);
 			var ballPosition = GameSceneSetup.GSS.GetSpawnPosition(tokenNum + 1, totalPlayers);
-			var spawnParams = {"playerNumber": pickedPlayerToken.playerNumber, "position": ballPosition, "velocity": Vector3.ZERO, "lives": 6};
+			var spawnParams = {"playerNumber": pickedPlayerToken.playerNumber, "position": ballPosition, "velocity": Vector3.ZERO, "lives": 1};
 			GameNetManager.GameNet.netObjectManager.SpawnNetObjectWithOwnerId(ballPrefabPath, spawnParams, pickedPlayerToken.ownerId);
 			pass;
 	pass;
@@ -100,6 +131,15 @@ func DestroyAllBalls():
 		GameNetManager.GameNet.netObjectManager.DestroyNetObject(balls[playerNumber].id);
 	pass;
 	
+@rpc("any_peer", "call_remote")
+func RequestGameStateSync(requesterId : int):
+	rpc_id(requesterId, "AcceptGameStateSync", gameFinished);
+	pass;
+	
+@rpc("authority", "call_remote")
+func AcceptGameStateSync(isGameFinished : bool):
+	if(isGameFinished):
+		FinishGame();
 	
 @rpc("any_peer", "call_remote")
 func RequestLogSync(requesterId : int):
@@ -115,6 +155,7 @@ func AcceptLogSync(logs : Array):
 		var newLog = GamePlayerLog.new(log["playerNumber"]);
 		newLog.ParseDict(log);
 		gamePlayerLogs.set(log["playerNumber"], newLog);
+	rpc_id(1, "RequestGameStateSync", Network.myId);
 	pass;
 	
 @rpc("any_peer", "call_local")

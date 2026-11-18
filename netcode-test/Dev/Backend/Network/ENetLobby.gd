@@ -9,6 +9,7 @@ const DEFAULT_PORT = 10567
 func HostLobby():
 	Network.Log("ENET Lobby Host");
 	isHost = true;
+	isLocal = true;
 	startConnecting();
 	var peer : ENetMultiplayerPeer = ENetMultiplayerPeer.new();
 	var hostMessage : Error = (peer as ENetMultiplayerPeer).create_server(DEFAULT_PORT, MAX_CONNECTIONS);
@@ -22,6 +23,7 @@ func HostLobby():
 	
 func JoinLobby():
 	isHost = false;
+	isLocal = true;
 	startConnecting();
 	var peer : ENetMultiplayerPeer = ENetMultiplayerPeer.new();
 	var joinMessage : Error = peer.create_client("127.0.0.1", DEFAULT_PORT);

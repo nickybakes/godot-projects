@@ -18,7 +18,7 @@ var eliminatedBy : int = -1;
 func _init(_playerNumber : int) -> void:
 	playerNumber = _playerNumber;
 	for i in LobbyManager.Lobby.MAX_PLAYERS:
-		RegisterNewPlayer(i);
+		RegisterNewPlayer(i + 1);
 
 func RegisterNewPlayer(otherPlayerNumber : int):
 	damageDealtToPlayers.set(otherPlayerNumber, 0);

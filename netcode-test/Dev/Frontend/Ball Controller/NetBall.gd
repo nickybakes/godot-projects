@@ -14,6 +14,7 @@ class_name NetBall
 @export var strikeCooldown : float;
 @export var respawnTimer : float;
 @export var lives : int;
+@export var score : float;
 
 var playerNumber : int;
 var playerToken : PlayerToken;
@@ -78,7 +79,8 @@ func _process(delta: float) -> void:
 			ballController.strikeCooldown.value = 0;
 			
 						
-		ballController.respawnTimer = lerp(ballController.respawnTimer, respawnTimer, .5)
+		ballController.respawnTimer = respawnTimer;
+		ballController.score = score;
 		
 		if(currentLives != lives):
 			currentLives = lives;
@@ -97,6 +99,7 @@ func _process(delta: float) -> void:
 		strikeCooldown = ballController.strikeCooldown.value;
 		respawnTimer = ballController.respawnTimer;
 		lives = ballController.lives;
+		score = ballController.score;
 		
 		if(inputDevice != null && playerToken):
 			if(inputDevice.inputBuffer.IsActionJustPressedThisFrame(Enums.InputAction.ToggleInvert, 1)):

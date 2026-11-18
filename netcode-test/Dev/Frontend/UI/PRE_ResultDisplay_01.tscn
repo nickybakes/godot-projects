@@ -1,0 +1,173 @@
+[gd_scene format=3 uid="uid://bph2vqtx8jcvj"]
+
+[ext_resource type="Script" uid="uid://cukl66xx6n47p" path="res://Dev/Frontend/UI/ResultDisplay.gd" id="1_60eaf"]
+[ext_resource type="Script" uid="uid://napor4at8qyp" path="res://Dev/Frontend/App/AccountDisplay.gd" id="2_m8hjv"]
+[ext_resource type="FontFile" uid="uid://toyoa2sfe754" path="res://Art/Fonts/KeepCalm-Medium.ttf" id="3_khabp"]
+[ext_resource type="Texture2D" uid="uid://dm82bfae8jix3" path="res://Art/Sprites/SPR_AvatarPlaceholder_01.png" id="4_60eaf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_etr8x"]
+font = ExtResource("3_khabp")
+font_size = 75
+outline_size = 36
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_p5jk2"]
+font = ExtResource("3_khabp")
+font_size = 60
+outline_size = 28
+outline_color = Color(0, 0, 0, 1)
+
+[node name="PRE_ResultDisplay_01" type="Control" unique_id=2010483158 node_paths=PackedStringArray("placement", "accountDisplay", "nameLabel", "avatarDisplay", "damageDone", "damageTaken", "knockouts", "eliminations", "colorBG")]
+custom_minimum_size = Vector2(0, 94)
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 94.0
+grow_horizontal = 2
+script = ExtResource("1_60eaf")
+placement = NodePath("Placement Label")
+accountDisplay = NodePath("Account Display")
+nameLabel = NodePath("Name Label")
+avatarDisplay = NodePath("Avatar Display")
+damageDone = NodePath("Damage Done Label")
+damageTaken = NodePath("Damage Taken Label")
+knockouts = NodePath("Knockouts Label")
+eliminations = NodePath("Eliminations Label")
+colorBG = NodePath("Color BG")
+metadata/_custom_type_script = "uid://cukl66xx6n47p"
+
+[node name="Account Display" type="Node" parent="." unique_id=923520582 node_paths=PackedStringArray("avatarDisplay", "nameDisplay")]
+script = ExtResource("2_m8hjv")
+avatarDisplay = NodePath("../Avatar Display")
+nameDisplay = NodePath("../Name Label")
+metadata/_custom_type_script = "uid://napor4at8qyp"
+
+[node name="Color BG" type="ColorRect" parent="." unique_id=888870312]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+color = Color(1, 1, 1, 0.3019608)
+
+[node name="Placement Label" type="Label" parent="." unique_id=1038142535]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = 5.0
+offset_right = 127.0
+offset_bottom = 3.0
+grow_vertical = 2
+scale = Vector2(0.7613548, 0.7613548)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "1."
+label_settings = SubResource("LabelSettings_etr8x")
+vertical_alignment = 1
+
+[node name="Avatar Display" type="TextureRect" parent="." unique_id=1926470644]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 1.0
+offset_left = 83.0
+offset_top = 5.0
+offset_right = 165.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_60eaf")
+expand_mode = 1
+
+[node name="Name Label" type="Label" parent="." unique_id=272309051]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 94.32034
+offset_top = 3.000001
+offset_right = 984.6797
+offset_bottom = 1.0
+grow_vertical = 2
+scale = Vector2(0.814278, 0.814278)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "Player 1"
+label_settings = SubResource("LabelSettings_etr8x")
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="Damage Done Label" type="Label" parent="." unique_id=1069547189]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -968.93665
+offset_top = 14.221148
+offset_right = -721.93677
+offset_bottom = -6.7788544
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(0.814278, 0.814278)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "5555"
+label_settings = SubResource("LabelSettings_p5jk2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Damage Taken Label" type="Label" parent="." unique_id=794152469]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -700.93677
+offset_top = 14.221148
+offset_right = -453.93677
+offset_bottom = -6.7788544
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(0.814278, 0.814278)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "5555"
+label_settings = SubResource("LabelSettings_p5jk2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Knockouts Label" type="Label" parent="." unique_id=1720645381]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -372.0
+offset_top = 17.0
+offset_right = -267.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(1.044454, 1.044454)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "4"
+label_settings = SubResource("LabelSettings_p5jk2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Eliminations Label" type="Label" parent="." unique_id=46000840]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -169.0
+offset_top = 20.0
+offset_right = -80.89673
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(1.044454, 1.044454)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "8"
+label_settings = SubResource("LabelSettings_p5jk2")
+horizontal_alignment = 1
+vertical_alignment = 1

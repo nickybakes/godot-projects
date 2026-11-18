@@ -5,7 +5,7 @@ enum AccountType{
 	STEAM
 }
 
-@onready var PLACEHOLDER_AVATAR = preload("res://icon.svg") as Texture2D;
+@onready var PLACEHOLDER_AVATAR = preload("res://Art/Sprites/SPR_AvatarPlaceholder_01.png") as Texture2D;
 
 var accounts : Dictionary[int, Account];
 var accountType : AccountType = AccountType.LOCAL;
@@ -37,7 +37,7 @@ func LoadAccount(id : int, onlyLoadIfNotNew : bool = false):
 	pass;
 	
 func LoadLocalAccount(account : Account, isNew : bool):
-	account.SetDisplayName("Local Player");
+	account.SetDisplayName("Player");
 	account.SetAvatar(PLACEHOLDER_AVATAR);
 	pass;
 
@@ -59,3 +59,6 @@ func UnregisterAccountDisplay(display : AccountDisplay):
 		loadedAccount.accountDisplays.erase(display);
 		pass;
 	pass;
+
+func GetLocalAccountName(playerNumber : int) -> String:
+	return "Player " + str(playerNumber);

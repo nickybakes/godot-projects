@@ -8,6 +8,7 @@ var connecting : bool;
 const maxTimeConnecting : float = 5;
 var timeConnecting : float = 0;
 var isHost : bool;
+var isLocal : bool;
 var hostId : int;
 
 var connections : Dictionary[int, Connection];

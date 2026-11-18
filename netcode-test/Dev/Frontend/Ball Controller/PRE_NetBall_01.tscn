@@ -37,6 +37,9 @@ properties/9/replication_mode = 1
 properties/10/path = NodePath(".:lives")
 properties/10/spawn = true
 properties/10/replication_mode = 1
+properties/11/path = NodePath(".:score")
+properties/11/spawn = true
+properties/11/replication_mode = 1
 
 [node name="PRE_NetBall_01" type="MultiplayerSynchronizer" unique_id=732516578 node_paths=PackedStringArray("ballController")]
 root_path = NodePath(".")

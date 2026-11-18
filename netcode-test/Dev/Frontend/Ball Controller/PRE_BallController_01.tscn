@@ -306,7 +306,7 @@ script = ExtResource("51_ej7s1")
 transitionSpeed = 0.5
 metadata/_custom_type_script = "uid://fxck7cgoc485"
 
-[node name="Ball Visuals" type="Node3D" parent="." unique_id=851201941 node_paths=PackedStringArray("ballController", "shadowDecal", "cameraTarget", "header", "ballMesh", "outlineMesh", "xrayMesh", "chargeAimMesh", "blockMesh", "electricParticles", "clashVisual", "strikeVisual", "grabVisual", "grabAnimator", "grabHandMesh_l", "grabHandMesh_r", "grabVictimVisual", "grabVictimHandMesh_l", "grabVictimHandMesh_r", "eliminatedVisual", "knockedOutVisual", "respawningVisual", "respawningClockLabel", "strikePriorityVisual", "unblockableVisual", "spinner", "pitcher", "stretcher", "roller")]
+[node name="Ball Visuals" type="Node3D" parent="." unique_id=851201941 node_paths=PackedStringArray("ballController", "shadowDecal", "cameraTarget", "header", "ballMesh", "outlineMesh", "xrayMesh", "chargeAimMesh", "blockMesh", "electricParticles", "clashVisual", "strikeVisual", "grabVisual", "grabAnimator", "grabHandMesh_l", "grabHandMesh_r", "grabHandMeshXray_l", "grabHandMeshXray_r", "grabVictimVisual", "grabVictimHandMesh_l", "grabVictimHandMesh_r", "eliminatedVisual", "knockedOutVisual", "respawningVisual", "respawningClockLabel", "strikePriorityVisual", "unblockableVisual", "spinner", "pitcher", "stretcher", "roller")]
 script = ExtResource("2_3d8wc")
 ballController = NodePath("..")
 ballCustomizationDirectory = ExtResource("4_lr45t")
@@ -326,6 +326,8 @@ grabVisual = NodePath("Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visua
 grabAnimator = NodePath("Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual/Grab Animator")
 grabHandMesh_l = NodePath("Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual/Grab Hand L/Grab Hand L Mesh")
 grabHandMesh_r = NodePath("Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual/Grab Hand R/Grab Hand R Mesh")
+grabHandMeshXray_l = NodePath("Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual/Grab Hand L/Grab Hand L Xray Mesh")
+grabHandMeshXray_r = NodePath("Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual/Grab Hand R/Grab Hand R Xray Mesh")
 grabAnimationName = "grabAttempt"
 grabVictimVisual = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Grab Hand Victim Visual")
 grabVictimHandMesh_l = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher/Grab Hand Victim Visual/Grab Hand Victim L/Grab Hand Victim L Mesh")
@@ -548,6 +550,11 @@ material_override = ExtResource("2_i0e7p")
 cast_shadow = 0
 mesh = ExtResource("12_c74sw")
 
+[node name="Grab Hand L Xray Mesh" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual/Grab Hand L" unique_id=1747165742]
+material_override = ExtResource("8_m53x3")
+cast_shadow = 0
+mesh = ExtResource("12_c74sw")
+
 [node name="Outline" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual/Grab Hand L" unique_id=1812907719]
 material_override = ExtResource("13_vktj5")
 cast_shadow = 0
@@ -559,6 +566,11 @@ visible = false
 
 [node name="Grab Hand R Mesh" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual/Grab Hand R" unique_id=555342478]
 material_override = ExtResource("2_i0e7p")
+cast_shadow = 0
+mesh = ExtResource("12_c74sw")
+
+[node name="Grab Hand R Xray Mesh" type="MeshInstance3D" parent="Ball Visuals/Visual Spinner/Visual Pitcher/Ball Grab Region/Grab Visual/Grab Hand R" unique_id=55385150]
+material_override = ExtResource("8_m53x3")
 cast_shadow = 0
 mesh = ExtResource("12_c74sw")
 

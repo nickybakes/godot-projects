@@ -35,6 +35,7 @@ class_name BallMCC
 
 var interactive : bool = true;
 
+var score : float;
 var playerNumber : int;
 var playerToken : PlayerToken;
 var knockedOut : bool;
@@ -120,23 +121,32 @@ func CalculateRequestedMoveDirection(delta : float):
 		requestedMoveDirection = Vector3(inputDevice.moveInput.x, 0, -inputDevice.moveInput.y);
 
 func TakeDamageFromStrike(activator : BallMCC, activatorSpeed : float, activatorElectric : float) -> float:
+	if(GameManager.Manager.gameFinished):
+		return 0;
 	mostRecentDamageDealerId = activator.playerNumber;
 	var damageCalc = DamageCalcStrike(activator, activatorSpeed, activatorElectric);
+	damageCalc = min(damageCalc, healthStat.value);
 	if(updatePhysics):
 		GameManager.Manager.LogDamageTaken.rpc(activator.playerNumber, playerNumber, Enums.DamageType.Strike, damageCalc);
 		healthStat.Spend(damageCalc);
 	return damageCalc;
 	
 func BlockDamageFromStrike(activator : BallMCC, activatorSpeed : float, activatorElectric : float) -> float:
+	if(GameManager.Manager.gameFinished):
+		return 0;
 	successfulBlock = true;
 	var damageCalc = DamageCalcStrike(activator, activatorSpeed, activatorElectric);
+	damageCalc = min(damageCalc, healthStat.value);
 	if(updatePhysics):
 		GameManager.Manager.LogDamageBlocked.rpc(activator.playerNumber, playerNumber, damageCalc);
 	return damageCalc;
 	
 func TakeDamageFromGrab(activator : BallMCC, activatorElectric : float) -> float:
+	if(GameManager.Manager.gameFinished):
+		return 0;
 	mostRecentDamageDealerId = activator.playerNumber;
 	var damageCalc = DamageCalcGrab(activator, activatorElectric);
+	damageCalc = min(damageCalc, healthStat.value);
 	if(updatePhysics):
 		GameManager.Manager.LogDamageTaken.rpc(activator.playerNumber, playerNumber, Enums.DamageType.Grab, damageCalc);
 		healthStat.Spend(damageCalc);
@@ -144,11 +154,13 @@ func TakeDamageFromGrab(activator : BallMCC, activatorElectric : float) -> float
 	
 func DamageCalcStrike(activator : BallMCC, activatorSpeed : float, activatorElectric : float) -> float:
 	var damageCalc = (traits.baseStrikeDamage + (activatorElectric * traits.strikeDamageElectricMultScalar)) * (activatorSpeed * traits.strikeDamageSpeedScalar);
-	damageCalc = clamp(damageCalc, 0.0, traits.maxStrikeDamage) * GameManager.Manager.gameModeController.GetDamageScale();
+	damageCalc = min(damageCalc, traits.maxStrikeDamage);
+	damageCalc *= GameManager.Manager.gameModeController.GetDamageScale();
 	return damageCalc;
 	
 func DamageCalcGrab(activator : BallMCC, activatorElectric : float) -> float:
-	var damageCalc = traits.baseGrabDamage + (activatorElectric * traits.grabDamageElectricMultScalar) * GameManager.Manager.gameModeController.GetDamageScale();
+	var damageCalc = traits.baseGrabDamage + (activatorElectric * traits.grabDamageElectricMultScalar);
+	damageCalc *= GameManager.Manager.gameModeController.GetDamageScale();
 	return damageCalc;
 
 func _ready() -> void:

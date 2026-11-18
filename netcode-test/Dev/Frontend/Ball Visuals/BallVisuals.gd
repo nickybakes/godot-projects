@@ -31,6 +31,8 @@ var ballHubElement : BallHubElement;
 @export var grabAnimator : AnimationPlayer;
 @export var grabHandMesh_l : MeshInstance3D;
 @export var grabHandMesh_r : MeshInstance3D;
+@export var grabHandMeshXray_l : MeshInstance3D;
+@export var grabHandMeshXray_r : MeshInstance3D;
 @export var grabAnimationName : String;
 
 @export_category("Grab Victim")
@@ -74,6 +76,10 @@ func Setup(playerNumber : int):
 	
 	grabHandMesh_l.material_override = ballMaterial;
 	grabHandMesh_r.material_override = ballMaterial;
+	
+	grabHandMeshXray_l.material_override = xrayMaterial;
+	grabHandMeshXray_r.material_override = xrayMaterial;
+	
 	grabVictimHandMesh_l.material_override = ballMaterial.duplicate();
 	grabVictimHandMesh_r.material_override = grabVictimHandMesh_l.material_override;
 	
