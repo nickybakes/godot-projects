@@ -25,6 +25,3 @@ func ExitState():
 func ExitStateVisuals():
 	mcc.visuals.ShowBall();
 	mcc.visuals.ballHubElement.ShowAlive();
-	
-func ProcessPhysics(delta : float):
-	pass;

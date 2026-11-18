@@ -9,6 +9,7 @@ func StartState(params : Dictionary = {}):
 	
 func StartStatePhysics(params : Dictionary = {}):
 	super(params);
+	print(mcc.playerNumber, " knockout");
 	GameManager.Manager.LogKnockOut.rpc(mcc.mostRecentDamageDealerId, mcc.playerNumber);
 	mcc.lives -= 1;
 	

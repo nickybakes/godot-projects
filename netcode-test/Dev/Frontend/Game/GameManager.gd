@@ -39,7 +39,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	CheckForEndGameInput();
 	
-	if(Network.currentLobby.isHost && gameModeController):
+	if(Network.currentLobby && Network.currentLobby.isHost && gameModeController):
 		gameTime += delta;
 		gameModeController.gameTime = gameTime;
 		
