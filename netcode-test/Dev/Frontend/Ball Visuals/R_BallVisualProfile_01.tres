@@ -29,4 +29,6 @@ strikeCameraShake = 0.4
 grabCameraShake = 0.3
 knockedOutCameraShake = 0.2
 eliminationCameraShake = 0.075
+respawnMovementEase = -2.4
+respawnSpeedScale = 3.0
 metadata/_custom_type_script = "uid://cx0pe6ktsy0rm"

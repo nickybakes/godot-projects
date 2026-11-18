@@ -6,11 +6,23 @@ static var GSS : GameSceneSetup;
 @export var spawnCircle : Node3D;
 @export_range(0, 1, .01) var spawnOffset : float;
 
+@export var respawnPointsParent : Node3D;
+
+var respawnPoints : Array[RespawnPoint];
 
 func _ready() -> void:
 	GSS = self;
 	spawnCircle.visible = false;
+	GatherRespawnPoints();
 
+func GatherRespawnPoints():
+	respawnPoints = [];
+	for child in respawnPointsParent.get_children():
+		if(child is RespawnPoint):
+			respawnPoints.push_back(child as RespawnPoint);
+			
+func GetRandomSpawnPointPosition() -> Vector3:
+	return respawnPoints.pick_random().global_position;
 
 func GetSpawnPosition(spawnIndex : int, totalSpawns : int) -> Vector3:
 	totalSpawns = max(totalSpawns, 1);

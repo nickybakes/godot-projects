@@ -43,3 +43,7 @@ class_name BallVisualProfile
 @export var grabCameraShake : float = .25;
 @export var knockedOutCameraShake : float = .75;
 @export var eliminationCameraShake : float = .75;
+
+@export_category("Respawn")
+@export var respawnMovementEase : float = 1.0;
+@export var respawnSpeedScale : float = 1.0;

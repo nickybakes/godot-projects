@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://bsw5rk11juyn3" path="res://Dev/Frontend/UI/Hub.gd" id="9_2j8qv"]
 [ext_resource type="Material" uid="uid://dusafwqyxu7f8" path="res://Art/Materials/M_BoostPanel_01.tres" id="9_h3ruc"]
 [ext_resource type="PackedScene" uid="uid://dvss6411d67np" path="res://Dev/Frontend/Game/PRE_GameManager_01.tscn" id="12_vbxp2"]
+[ext_resource type="Script" uid="uid://xq5gb72kdhcu" path="res://Dev/Frontend/Game/RespawnPoint.gd" id="15_p5jk2"]
 [ext_resource type="Material" uid="uid://c2sqxi5cmjlpw" path="res://Art/Materials/M_RingFire_01.tres" id="17_0ow6v"]
 [ext_resource type="Script" uid="uid://bcqjolj5y51g4" path="res://Dev/Frontend/Objects/RingOfFire.gd" id="17_gsuud"]
 [ext_resource type="Material" uid="uid://5l6q4x0dd6g4" path="res://Art/Materials/M_Ember_01.tres" id="18_1orte"]
@@ -96,9 +97,10 @@ material = SubResource("StandardMaterial3D_mfcfy")
 script = ExtResource("1_0hxaj")
 metadata/_custom_type_script = "uid://cot4hd21yd7ka"
 
-[node name="GameSceneSetup" type="Node3D" parent="." unique_id=312988255 node_paths=PackedStringArray("spawnCircle")]
+[node name="GameSceneSetup" type="Node3D" parent="." unique_id=312988255 node_paths=PackedStringArray("spawnCircle", "respawnPointsParent")]
 script = ExtResource("4_8lxd5")
 spawnCircle = NodePath("../Spawn Circle")
+respawnPointsParent = NodePath("../Respawn Points")
 metadata/_custom_type_script = "uid://lomqln3v0xvt"
 
 [node name="Spawn Circle" type="MeshInstance3D" parent="." unique_id=353306037]
@@ -203,6 +205,48 @@ light_bake_mode = 0
 shadow_enabled = true
 shadow_caster_mask = 4294967289
 
+[node name="Respawn Points" type="Node3D" parent="." unique_id=66973233]
+
+[node name="RespawnPoint 01" type="Node3D" parent="Respawn Points" unique_id=235976606]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.205988, 0)
+script = ExtResource("15_p5jk2")
+metadata/_custom_type_script = "uid://xq5gb72kdhcu"
+
+[node name="RespawnPoint 02" type="Node3D" parent="Respawn Points" unique_id=1113180437]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.205872, 8.205987, 5.4243417)
+script = ExtResource("15_p5jk2")
+metadata/_custom_type_script = "uid://xq5gb72kdhcu"
+
+[node name="RespawnPoint 03" type="Node3D" parent="Respawn Points" unique_id=1590523478]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.650872, 8.205987, -5.8031077)
+script = ExtResource("15_p5jk2")
+metadata/_custom_type_script = "uid://xq5gb72kdhcu"
+
+[node name="RespawnPoint 04" type="Node3D" parent="Respawn Points" unique_id=579566447]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.291876, 8.205987, -7.4760227)
+script = ExtResource("15_p5jk2")
+metadata/_custom_type_script = "uid://xq5gb72kdhcu"
+
+[node name="RespawnPoint 05" type="Node3D" parent="Respawn Points" unique_id=2071811154]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.801094, 8.205987, 4.8223114)
+script = ExtResource("15_p5jk2")
+metadata/_custom_type_script = "uid://xq5gb72kdhcu"
+
+[node name="RespawnPoint 06" type="Node3D" parent="Respawn Points" unique_id=1356751816]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.10183, 8.205987, -0.8602023)
+script = ExtResource("15_p5jk2")
+metadata/_custom_type_script = "uid://xq5gb72kdhcu"
+
+[node name="RespawnPoint 07" type="Node3D" parent="Respawn Points" unique_id=1185355381]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.452152, 8.205987, -0.43416357)
+script = ExtResource("15_p5jk2")
+metadata/_custom_type_script = "uid://xq5gb72kdhcu"
+
+[node name="RespawnPoint 08" type="Node3D" parent="Respawn Points" unique_id=1198460889]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33060932, 8.205985, -7.4127374)
+script = ExtResource("15_p5jk2")
+metadata/_custom_type_script = "uid://xq5gb72kdhcu"
+
 [node name="Arena Mesh" type="MeshInstance3D" parent="." unique_id=1485065166]
 material_override = ExtResource("1_avklc")
 mesh = ExtResource("8_h3ruc")
@@ -291,6 +335,7 @@ mesh = SubResource("CylinderMesh_3jhpk")
 
 [node name="PRE_RingCaptureVisual_01" type="Node3D" parent="." unique_id=996815747 node_paths=PackedStringArray("mesh", "detectorPrefab", "detectorContainer")]
 transform = Transform3D(4.659, 0, 0, 0, 1, 0, 0, 0, 4.659, 6.366, 0, -4.481)
+visible = false
 script = ExtResource("22_dn7fg")
 radius = 3.238
 mesh = NodePath("Ring Mesh")
