@@ -21,6 +21,8 @@ var matchOptions : Dictionary[Enums.MatchOption, int];
 func _ready() -> void:
 	matchOptions = defaultMatchOptions.duplicate();
 	Lobby = self;
+	if(!Network.currentLobby.isHost):
+		rpc_id(1, "RequestHostMatchOptionsSync", Network.myId);
 
 
 func RequestPlayerJoin():
