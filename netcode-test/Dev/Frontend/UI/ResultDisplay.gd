@@ -9,6 +9,8 @@ class_name ResultDisplay
 @export var damageTaken : Label;
 @export var knockouts : Label;
 @export var eliminations : Label;
+@export var score : Label;
+@export var roundScoreToInt : bool = true;
 @export var colorBG : CanvasItem;
 
 func Display(place : int, playerToken : PlayerToken, ballController : BallMCC, log : GamePlayerLog, customization : CursorCustomizationDirectory):
@@ -36,6 +38,12 @@ func Display(place : int, playerToken : PlayerToken, ballController : BallMCC, l
 		
 	if(eliminations):
 		eliminations.text = "%s" % log.GetTotalEliminationsDealt();
+		
+	if(score):
+		if(roundScoreToInt):
+			score.text = "%.0f" % roundf(ballController.score);
+		else:
+			score.text = "%.1f" % ballController.score;
 		
 	if(nameLabel):
 		nameLabel.modulate = customization.cursorColors[playerToken.customization.colorIndex];

@@ -85,6 +85,7 @@ func ShowResults():
 	gameFinishedMessage.visible = false;
 	resultsView.visible = true;
 	resultsView.DisplayResults();
+	gameModeController.OnResultsShown();
 	CameraManager.CM.SetBlur(true);
 	GamerView.View.hub.visible = false;
 	GamerView.View.HideAllTrackerLines();
@@ -106,7 +107,7 @@ func SpawnPlayerBalls():
 			var pickedPlayerToken : PlayerToken = tokenArray.pick_random();
 			tokenArray.erase(pickedPlayerToken);
 			var ballPosition = GameSceneSetup.GSS.GetSpawnPosition(tokenNum + 1, totalPlayers);
-			var spawnParams = {"playerNumber": pickedPlayerToken.playerNumber, "position": ballPosition, "velocity": Vector3.ZERO, "lives": 3};
+			var spawnParams = {"playerNumber": pickedPlayerToken.playerNumber, "position": ballPosition, "velocity": Vector3.ZERO, "lives": 99};
 			GameNetManager.GameNet.netObjectManager.SpawnNetObjectWithOwnerId(ballPrefabPath, spawnParams, pickedPlayerToken.ownerId);
 			pass;
 	pass;

@@ -59,3 +59,6 @@ func OnKnockOut(activator : int, victim : int):
 	
 func OnElimination(activator : int, victim : int):
 	pass;
+	
+func OnResultsShown():
+	pass;

@@ -1,0 +1,41 @@
+[gd_resource type="Animation" format=3 uid="uid://b446151bn5r2f"]
+
+[resource]
+length = 1.5999999999999999
+step = 0.016666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Score Change Label:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Score Change Label:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.21666667, 1.3000001, 1.3666668, 1.5500001),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-1, -40), Vector2(-1, -120), Vector2(-1, -100), Vector2(-1, -100), Vector2(-1, -120), Vector2(-1, -40)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Score Change Label:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.21666668, 1.3000001, 1.3666668, 1.5500001),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1.25, 1.25), Vector2(1, 1), Vector2(1, 1), Vector2(1.25, 1.25), Vector2(1e-05, 1e-05)]
+}

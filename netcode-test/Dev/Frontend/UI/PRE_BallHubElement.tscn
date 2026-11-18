@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://b2nww8j3x0psr" path="res://Art/Textures/T_StaminaBar_Fill.png" id="10_mnpx0"]
 [ext_resource type="Script" uid="uid://y5eg0qnydwji" path="res://Dev/Frontend/UI/LivesDisplay.gd" id="11_mnpx0"]
 [ext_resource type="Texture2D" uid="uid://q186bew40wwj" path="res://Art/Sprites/UI/SPR_Ball_01.png" id="11_wr6fh"]
+[ext_resource type="Animation" uid="uid://cnjfgf0viev85" path="res://Art/Animations/UI/A_ScoreChange_Negative_01.tres" id="13_6ach8"]
+[ext_resource type="Animation" uid="uid://b446151bn5r2f" path="res://Art/Animations/UI/A_ScoreChange_Positive_01.tres" id="14_5vxlf"]
 
 [sub_resource type="Gradient" id="Gradient_6gu6k"]
 offsets = PackedFloat32Array(0, 0.2570533, 0.5423198, 1)
@@ -85,7 +87,80 @@ font_size = 31
 outline_size = 13
 outline_color = Color(0, 0, 0, 1)
 
-[node name="Ball Hub Element" type="Control" unique_id=190371458 node_paths=PackedStringArray("colorBar", "playerNumberLabel", "alive", "respawning", "respawningClockLabel", "eliminated", "livesDisplay", "lineTrackerStartPoint", "trackerLine", "healthLabel", "healthIcon", "staminaBar", "invertChargeAim")]
+[sub_resource type="FontVariation" id="FontVariation_mnpx0"]
+base_font = ExtResource("5_wri1x")
+variation_embolden = 0.69
+variation_transform = Transform2D(0.861, 0, 0, 1, 0, 0)
+spacing_glyph = -4
+
+[sub_resource type="LabelSettings" id="LabelSettings_suvvl"]
+font = SubResource("FontVariation_mnpx0")
+font_size = 105
+outline_size = 27
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 27
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="Animation" id="Animation_6ach8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Score Change Label:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Score Change Label:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1.5000019, -20.000017)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Score Change Label:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Score Change Label:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_swkup"]
+_data = {
+&"RESET": SubResource("Animation_6ach8"),
+&"scoreChangeNegative": ExtResource("13_6ach8"),
+&"scoreChangePositive": ExtResource("14_5vxlf")
+}
+
+[node name="Ball Hub Element" type="Control" unique_id=190371458 node_paths=PackedStringArray("colorBar", "playerNumberLabel", "alive", "respawning", "respawningClockLabel", "eliminated", "livesDisplay", "lineTrackerStartPoint", "trackerLine", "healthLabel", "healthIcon", "staminaBar", "invertChargeAim", "scoreChangeVisual", "scoreChangeLabel", "scoreChangeAnimator")]
 custom_minimum_size = Vector2(235, 127)
 layout_mode = 3
 anchor_left = 0.411
@@ -118,6 +193,13 @@ healthColor = SubResource("Gradient_6gu6k")
 healthRotation = SubResource("Curve_6gu6k")
 staminaBar = NodePath("Alive/Stamina Bar")
 invertChargeAim = NodePath("Inverted Charge Aim")
+scoreChangeVisual = NodePath("Score Change Visual")
+scoreChangeLabel = NodePath("Score Change Visual/Score Change Label")
+scoreChangeAnimator = NodePath("Score Change Visual/AnimationPlayer")
+scoreChangePositiveAnimationName = "scoreChangePositive"
+scoreChangeNegativeAnimationName = "scoreChangeNegative"
+scoreChangePositiveColor = Color(1, 0.87200004, 0.36, 1)
+scoreChangeNegativeColor = Color(0.66, 0.2442, 0.5214, 1)
 metadata/_custom_type_script = "uid://8jdgve60fqwx"
 
 [node name="Color BG" type="TextureRect" parent="." unique_id=1921094636]
@@ -174,6 +256,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Alive" type="Control" parent="." unique_id=1175906140]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -492,3 +575,34 @@ offset_bottom = 32.0
 text = "6"
 label_settings = SubResource("LabelSettings_etr8x")
 vertical_alignment = 2
+
+[node name="Score Change Visual" type="Control" parent="." unique_id=155283666]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+
+[node name="Score Change Label" type="Label" parent="Score Change Visual" unique_id=812873166]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.5000019
+offset_top = -20.000017
+offset_right = 1.5
+offset_bottom = -1.5258789e-05
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "+1"
+label_settings = SubResource("LabelSettings_suvvl")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Score Change Visual" unique_id=206431341]
+libraries/ = SubResource("AnimationLibrary_swkup")

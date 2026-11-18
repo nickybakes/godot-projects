@@ -33,6 +33,15 @@ class_name BallHubElement
 @export_group("Controls")
 @export var invertChargeAim : Control;
 
+@export_group("Score")
+@export var scoreChangeVisual : Control;
+@export var scoreChangeLabel : Label;
+@export var scoreChangeAnimator : AnimationPlayer
+@export var scoreChangePositiveAnimationName : String;
+@export var scoreChangeNegativeAnimationName : String;
+@export var scoreChangePositiveColor : Color;
+@export var scoreChangeNegativeColor : Color;
+
 var healthBlinkTimer : float = 0.0;
 var staminaBlinkTimer : float = 0.0;
 var ballController : BallMCC;
@@ -105,6 +114,26 @@ func ShowEliminated():
 	alive.visible = false;
 	eliminated.visible = true;
 	colorBar.modulate.a = eliminatedAlpha;
+	
+func ShowScoreChange(change : float, decimal : bool = false):
+	var finalString = '';
+	if(decimal):
+		finalString = "%.1f" % change;
+	else:
+		finalString = "%.0f" % roundf(change);
+		
+	if(change > 0):
+		finalString = "+" + finalString;
+		
+	scoreChangeLabel.text = finalString;
+	
+	if(change >= 0):
+		scoreChangeLabel.modulate = scoreChangePositiveColor;
+		scoreChangeAnimator.play(scoreChangePositiveAnimationName);
+	else:
+		scoreChangeLabel.modulate = scoreChangeNegativeColor;
+		scoreChangeAnimator.play(scoreChangeNegativeAnimationName);
+		
 
 func _process(delta: float) -> void:
 	if(!visible):

@@ -16,7 +16,7 @@ func OnElimination(activator : int, victim : int):
 			numAlive += 1;
 		
 	if(Network.currentLobby.isHost):
-		if(numAlive == 1):
+		if(numAlive <= 1):
 			GameManager.Manager.FinishGame.rpc();
 		
 	pass;
