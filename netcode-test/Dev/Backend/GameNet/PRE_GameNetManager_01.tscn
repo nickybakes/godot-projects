@@ -17,9 +17,10 @@ defaultMatchOptions = Dictionary[int, int]({
 1: 0,
 2: 0,
 3: 3,
-4: 0,
+4: 120,
 5: 1,
-6: 10
+6: 10,
+7: 1
 })
 
 [node name="NetSceneManager" type="MultiplayerSpawner" parent="." unique_id=1186417477]

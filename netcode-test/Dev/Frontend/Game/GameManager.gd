@@ -20,6 +20,9 @@ var gameTime : float;
 var gameFinished : bool;
 var finishedSubState : SubState;
 
+var infiniteLives : bool;
+var numLives : int = 5;
+
 var gameMechanics : Array[GameMechanic];
 var gamePlayerLogs : Dictionary[int, GamePlayerLog] = {};
 
@@ -30,7 +33,6 @@ func _ready() -> void:
 	gameFinishedMessage.visible = false;
 	resultsView.visible = false;
 	if(Network.currentLobby.isHost):
-		SpawnPlayerBalls();
 		SpawnGameModeController();
 	else:
 		rpc_id(1, "RequestLogSync", Network.myId);
@@ -52,6 +54,10 @@ func _process(delta: float) -> void:
 					pass;
 	pass;
 	
+func GameModeRulesAreSet():
+	if(Network.currentLobby.isHost):
+		SpawnPlayerBalls();
+	pass;
 	
 func CheckForEndGameInput():
 	if(LobbyManager.Lobby):
@@ -107,7 +113,7 @@ func SpawnPlayerBalls():
 			var pickedPlayerToken : PlayerToken = tokenArray.pick_random();
 			tokenArray.erase(pickedPlayerToken);
 			var ballPosition = GameSceneSetup.GSS.GetSpawnPosition(tokenNum + 1, totalPlayers);
-			var spawnParams = {"playerNumber": pickedPlayerToken.playerNumber, "position": ballPosition, "velocity": Vector3.ZERO, "lives": 99};
+			var spawnParams = {"playerNumber": pickedPlayerToken.playerNumber, "position": ballPosition, "velocity": Vector3.ZERO, "lives": numLives};
 			GameNetManager.GameNet.netObjectManager.SpawnNetObjectWithOwnerId(ballPrefabPath, spawnParams, pickedPlayerToken.ownerId);
 			pass;
 	pass;

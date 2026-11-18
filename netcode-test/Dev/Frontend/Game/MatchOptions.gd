@@ -10,6 +10,8 @@ static var Instance : MatchOptions;
 
 @export_category("Title Elements")
 @export var livesTitle : Option;
+@export var timeTitle : Option;
+@export var scoreTitle : Option;
 
 @export_category("Game Mode Options Lists")
 @export var gameModeOptionsListsParent : Node;
@@ -50,6 +52,12 @@ func OptionChanged(matchOption : Enums.MatchOption, value : int):
 	if(LobbyManager.Lobby):
 		var newOptions = LobbyManager.Lobby.matchOptions.duplicate();
 		newOptions.set(matchOption, value);
+		
+		if(matchOption == Enums.MatchOption.GameMode):
+			var optionsList : GameModeOptionsList = optionsListsDict.get(value);
+			for key in optionsList.defaultMatchOptions.keys():
+				newOptions.set(key, optionsList.defaultMatchOptions[key]);
+		
 		LobbyManager.Lobby.SetMatchOptions(newOptions);
 	pass;
 
@@ -66,12 +74,25 @@ func UpdateMatchOptions(newOptions : Dictionary[Enums.MatchOption, int]):
 	
 	var optionsList : GameModeOptionsList = optionsListsDict.get(newOptions[Enums.MatchOption.GameMode]);
 	if(optionsList != null):
-		
-		if(optionsList.infiniteLives):
-			livesTitle.SetVisible(true);
-			modeOptionsDict[Enums.MatchOption.InfiniteLives].SetVisible(true);
+		ShowInfiniteAndNumberOptions(newOptions, livesTitle, optionsList.infiniteLives, optionsList.numLives, Enums.MatchOption.InfiniteLives, Enums.MatchOption.NumLives);
+		ShowInfiniteAndNumberOptions(newOptions, timeTitle, optionsList.infiniteTime, optionsList.timeLength, Enums.MatchOption.InfiniteTime, Enums.MatchOption.TimeLength);
+		ShowInfiniteAndNumberOptions(newOptions, scoreTitle, optionsList.infiniteScore, optionsList.scoreLimit, Enums.MatchOption.InfiniteScore, Enums.MatchOption.ScoreLimit);
 		
 		pass;
+	pass;
+
+
+func ShowInfiniteAndNumberOptions(newOptions : Dictionary[Enums.MatchOption, int], title : Option, hasInfOpt : bool, hasNumOpt : bool, infiniteOption : Enums.MatchOption, numOption : Enums.MatchOption):
+	title.SetVisible(false);
+	if(hasInfOpt):
+		title.SetVisible(true);
+		modeOptionsDict[infiniteOption].SetVisible(true);
+		if(!newOptions[infiniteOption]):
+			if(hasNumOpt):
+				modeOptionsDict[numOption].SetVisible(true);
+	elif(hasNumOpt):
+		title.SetVisible(true);
+		modeOptionsDict[numOption].SetVisible(true);
 	pass;
 
 func HideAllModeOptions():

@@ -199,7 +199,7 @@ scoreChangeAnimator = NodePath("Score Change Visual/AnimationPlayer")
 scoreChangePositiveAnimationName = "scoreChangePositive"
 scoreChangeNegativeAnimationName = "scoreChangeNegative"
 scoreChangePositiveColor = Color(1, 0.87200004, 0.36, 1)
-scoreChangeNegativeColor = Color(0.66, 0.2442, 0.5214, 1)
+scoreChangeNegativeColor = Color(0.40931, 0.31020004, 0.66, 1)
 metadata/_custom_type_script = "uid://8jdgve60fqwx"
 
 [node name="Color BG" type="TextureRect" parent="." unique_id=1921094636]

@@ -172,19 +172,21 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -541.0
+offset_left = -500.0
 offset_top = -388.0
-offset_right = -119.0
+offset_right = -78.0
 offset_bottom = 240.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="Match Options" type="Node" parent="Lobby View/Match Options Control" unique_id=1201085526 node_paths=PackedStringArray("mapOption", "gameModeOption", "modeOptions", "livesTitle", "gameModeOptionsListsParent")]
+[node name="Match Options" type="Node" parent="Lobby View/Match Options Control" unique_id=1201085526 node_paths=PackedStringArray("mapOption", "gameModeOption", "modeOptions", "livesTitle", "timeTitle", "scoreTitle", "gameModeOptionsListsParent")]
 script = ExtResource("6_yef6a")
 mapOption = NodePath("../VBoxContainer/Map Option Parent/Map Option")
 gameModeOption = NodePath("../VBoxContainer/Game Mode Option Parent/Game Mode Option")
-modeOptions = [NodePath("../Game Mode Options Container/Infinite Lives Option Parent/Infinite Lives Option")]
+modeOptions = [NodePath("../Game Mode Options Container/Infinite Lives Option Parent/Infinite Lives Option"), NodePath("../Game Mode Options Container/Lives Number Option Parent/Lives Number Option"), NodePath("../Game Mode Options Container/Infinite Time Option Parent/Infinite Time Option"), NodePath("../Game Mode Options Container/Time Length Option Parent/Time Length Option"), NodePath("../Game Mode Options Container/Infinite Score Option Parent/Infinite Score Option"), NodePath("../Game Mode Options Container/Score Limit Option Parent/Score Limit Option")]
 livesTitle = NodePath("../Game Mode Options Container/Lives Title/Lives Title Option")
+timeTitle = NodePath("../Game Mode Options Container/Time Title/Time Title Option")
+scoreTitle = NodePath("../Game Mode Options Container/Score Title Option Parent/Score Title Option")
 gameModeOptionsListsParent = NodePath("Mode Option Lists")
 metadata/_custom_type_script = "uid://b7vxutxgn4fpb"
 
@@ -192,9 +194,12 @@ metadata/_custom_type_script = "uid://b7vxutxgn4fpb"
 
 [node name="Lives" type="Node" parent="Lobby View/Match Options Control/Match Options/Mode Option Lists" unique_id=1950960185]
 script = ExtResource("13_ktve1")
-timeLength = false
 infiniteScore = false
 scoreLimit = false
+defaultMatchOptions = Dictionary[int, int]({
+3: 3,
+7: 1
+})
 metadata/_custom_type_script = "uid://bddcjj74ltjvi"
 
 [node name="Timed" type="Node" parent="Lobby View/Match Options Control/Match Options/Mode Option Lists" unique_id=980935256]
@@ -202,16 +207,19 @@ script = ExtResource("13_ktve1")
 gameMode = 1
 infiniteLives = false
 numLives = false
+infiniteTime = false
 metadata/_custom_type_script = "uid://bddcjj74ltjvi"
 
 [node name="Battle Royale" type="Node" parent="Lobby View/Match Options Control/Match Options/Mode Option Lists" unique_id=1247270747]
 script = ExtResource("13_ktve1")
 gameMode = 2
 infiniteLives = false
-numLives = false
-timeLength = false
 infiniteScore = false
 scoreLimit = false
+defaultMatchOptions = Dictionary[int, int]({
+3: 1,
+7: 1
+})
 metadata/_custom_type_script = "uid://bddcjj74ltjvi"
 
 [node name="Spotlight" type="Node" parent="Lobby View/Match Options Control/Match Options/Mode Option Lists" unique_id=356573992]
@@ -219,7 +227,6 @@ script = ExtResource("13_ktve1")
 gameMode = 3
 infiniteLives = false
 numLives = false
-timeLength = false
 infiniteScore = false
 scoreLimit = false
 metadata/_custom_type_script = "uid://bddcjj74ltjvi"
@@ -441,6 +448,247 @@ offset_right = 234.99997
 offset_bottom = 20.0
 scale = Vector2(2.4786081, 2.4786081)
 focus_mode = 0
+
+[node name="Lives Number Option Parent" type="Control" parent="Lobby View/Match Options Control/Game Mode Options Container" unique_id=2118634230]
+custom_minimum_size = Vector2(422, 85)
+layout_mode = 2
+
+[node name="Lives Number Option" type="Node" parent="Lobby View/Match Options Control/Game Mode Options Container/Lives Number Option Parent" unique_id=2037697950 node_paths=PackedStringArray("controlParent", "spinBox")]
+script = ExtResource("6_k4cd1")
+matchOption = 3
+controlParent = NodePath("..")
+type = 2
+spinBox = NodePath("../SpinBox")
+metadata/_custom_type_script = "uid://csb8deekombi5"
+
+[node name="Label" type="Label" parent="Lobby View/Match Options Control/Game Mode Options Container/Lives Number Option Parent" unique_id=125509031]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_right = -233.0
+offset_bottom = 45.0
+theme_override_font_sizes/font_size = 32
+text = "Num Lives"
+
+[node name="SpinBox" type="SpinBox" parent="Lobby View/Match Options Control/Game Mode Options Container/Lives Number Option Parent" unique_id=431086091]
+layout_mode = 0
+offset_left = 211.0
+offset_top = -6.0
+offset_right = 431.0
+offset_bottom = 57.0
+theme = SubResource("Theme_c5qv8")
+theme_override_constants/buttons_width = 58
+min_value = 1.0
+value = 3.0
+
+[node name="Click Blocker" type="Control" parent="Lobby View/Match Options Control/Game Mode Options Container/Lives Number Option Parent" unique_id=1311857458]
+anchors_preset = 0
+offset_left = 208.0
+offset_top = -10.0
+offset_right = 376.0
+offset_bottom = 62.0
+theme = SubResource("Theme_c5qv8")
+
+[node name="Time Title" type="Control" parent="Lobby View/Match Options Control/Game Mode Options Container" unique_id=1645115330]
+custom_minimum_size = Vector2(422, 65)
+layout_mode = 2
+
+[node name="Time Title Option" type="Node" parent="Lobby View/Match Options Control/Game Mode Options Container/Time Title" unique_id=588150310 node_paths=PackedStringArray("controlParent")]
+script = ExtResource("6_k4cd1")
+controlParent = NodePath("..")
+metadata/_custom_type_script = "uid://csb8deekombi5"
+
+[node name="Label" type="Label" parent="Lobby View/Match Options Control/Game Mode Options Container/Time Title" unique_id=1482211697]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_bottom = 35.0
+theme_override_font_sizes/font_size = 43
+text = "Time"
+horizontal_alignment = 1
+
+[node name="Infinite Time Option Parent" type="Control" parent="Lobby View/Match Options Control/Game Mode Options Container" unique_id=125584276]
+custom_minimum_size = Vector2(422, 85)
+layout_mode = 2
+
+[node name="Infinite Time Option" type="Node" parent="Lobby View/Match Options Control/Game Mode Options Container/Infinite Time Option Parent" unique_id=1028671554 node_paths=PackedStringArray("controlParent", "checkBox")]
+script = ExtResource("6_k4cd1")
+matchOption = 7
+controlParent = NodePath("..")
+type = 1
+checkBox = NodePath("../CheckBox")
+metadata/_custom_type_script = "uid://csb8deekombi5"
+
+[node name="Label" type="Label" parent="Lobby View/Match Options Control/Game Mode Options Container/Infinite Time Option Parent" unique_id=294862026]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_bottom = 35.0
+theme_override_font_sizes/font_size = 32
+text = "Infinite Time"
+
+[node name="CheckBox" type="CheckBox" parent="Lobby View/Match Options Control/Game Mode Options Container/Infinite Time Option Parent" unique_id=1907680558]
+layout_mode = 0
+offset_left = 210.99997
+offset_top = -4.0000005
+offset_right = 234.99997
+offset_bottom = 20.0
+scale = Vector2(2.4786081, 2.4786081)
+focus_mode = 0
+
+[node name="Time Length Option Parent" type="Control" parent="Lobby View/Match Options Control/Game Mode Options Container" unique_id=951944057]
+custom_minimum_size = Vector2(422, 85)
+layout_mode = 2
+
+[node name="Time Length Option" type="Node" parent="Lobby View/Match Options Control/Game Mode Options Container/Time Length Option Parent" unique_id=1109364853 node_paths=PackedStringArray("controlParent", "optionButton")]
+script = ExtResource("6_k4cd1")
+matchOption = 4
+controlParent = NodePath("..")
+optionButton = NodePath("../OptionButton")
+metadata/_custom_type_script = "uid://csb8deekombi5"
+
+[node name="Label" type="Label" parent="Lobby View/Match Options Control/Game Mode Options Container/Time Length Option Parent" unique_id=480521916]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_right = -233.0
+offset_bottom = 45.0
+theme_override_font_sizes/font_size = 32
+text = "Time Length"
+
+[node name="OptionButton" type="OptionButton" parent="Lobby View/Match Options Control/Game Mode Options Container/Time Length Option Parent" unique_id=1385091123]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 211.0
+offset_bottom = 50.0
+grow_horizontal = 2
+focus_mode = 0
+theme = SubResource("Theme_ol0rm")
+theme_override_font_sizes/font_size = 30
+theme_override_icons/icon = ExtResource("6_ol0rm")
+theme_override_icons/arrow = SubResource("DPITexture_ol0rm")
+icon_alignment = 2
+expand_icon = true
+selected = 1
+item_count = 15
+popup/item_0/text = "0:30"
+popup/item_0/id = 30
+popup/item_1/text = "1:00"
+popup/item_1/id = 60
+popup/item_2/text = "1:30"
+popup/item_2/id = 90
+popup/item_3/text = "2:00"
+popup/item_3/id = 120
+popup/item_4/text = "2:30"
+popup/item_4/id = 150
+popup/item_5/text = "3:00"
+popup/item_5/id = 180
+popup/item_6/text = "4:00"
+popup/item_6/id = 240
+popup/item_7/text = "5:00"
+popup/item_7/id = 300
+popup/item_8/text = "6:00"
+popup/item_8/id = 360
+popup/item_9/text = "7:00"
+popup/item_9/id = 420
+popup/item_10/text = "7:30"
+popup/item_10/id = 450
+popup/item_11/text = "8:00"
+popup/item_11/id = 480
+popup/item_12/text = "9:00"
+popup/item_12/id = 540
+popup/item_13/text = "10:00"
+popup/item_13/id = 600
+popup/item_14/text = "15:00"
+popup/item_14/id = 900
+
+[node name="Score Title Option Parent" type="Control" parent="Lobby View/Match Options Control/Game Mode Options Container" unique_id=614392680]
+custom_minimum_size = Vector2(422, 65)
+layout_mode = 2
+
+[node name="Score Title Option" type="Node" parent="Lobby View/Match Options Control/Game Mode Options Container/Score Title Option Parent" unique_id=682778888 node_paths=PackedStringArray("controlParent")]
+script = ExtResource("6_k4cd1")
+controlParent = NodePath("..")
+metadata/_custom_type_script = "uid://csb8deekombi5"
+
+[node name="Label" type="Label" parent="Lobby View/Match Options Control/Game Mode Options Container/Score Title Option Parent" unique_id=60118515]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_bottom = 35.0
+theme_override_font_sizes/font_size = 43
+text = "Score"
+horizontal_alignment = 1
+
+[node name="Infinite Score Option Parent" type="Control" parent="Lobby View/Match Options Control/Game Mode Options Container" unique_id=216075774]
+custom_minimum_size = Vector2(422, 85)
+layout_mode = 2
+
+[node name="Infinite Score Option" type="Node" parent="Lobby View/Match Options Control/Game Mode Options Container/Infinite Score Option Parent" unique_id=945901554 node_paths=PackedStringArray("controlParent", "checkBox")]
+script = ExtResource("6_k4cd1")
+matchOption = 5
+controlParent = NodePath("..")
+type = 1
+checkBox = NodePath("../CheckBox")
+metadata/_custom_type_script = "uid://csb8deekombi5"
+
+[node name="Label" type="Label" parent="Lobby View/Match Options Control/Game Mode Options Container/Infinite Score Option Parent" unique_id=231498615]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_bottom = 35.0
+theme_override_font_sizes/font_size = 32
+text = "Infinite Score Limit"
+
+[node name="CheckBox" type="CheckBox" parent="Lobby View/Match Options Control/Game Mode Options Container/Infinite Score Option Parent" unique_id=1803038958]
+layout_mode = 0
+offset_left = 316.99997
+offset_top = -4.0000005
+offset_right = 340.99997
+offset_bottom = 20.0
+scale = Vector2(2.4786081, 2.4786081)
+focus_mode = 0
+
+[node name="Score Limit Option Parent" type="Control" parent="Lobby View/Match Options Control/Game Mode Options Container" unique_id=445373171]
+custom_minimum_size = Vector2(422, 85)
+layout_mode = 2
+
+[node name="Score Limit Option" type="Node" parent="Lobby View/Match Options Control/Game Mode Options Container/Score Limit Option Parent" unique_id=443500571 node_paths=PackedStringArray("controlParent", "spinBox")]
+script = ExtResource("6_k4cd1")
+matchOption = 6
+controlParent = NodePath("..")
+type = 2
+spinBox = NodePath("../SpinBox")
+metadata/_custom_type_script = "uid://csb8deekombi5"
+
+[node name="Label" type="Label" parent="Lobby View/Match Options Control/Game Mode Options Container/Score Limit Option Parent" unique_id=369629741]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_right = -233.0
+offset_bottom = 45.0
+theme_override_font_sizes/font_size = 32
+text = "Score Limit"
+
+[node name="SpinBox" type="SpinBox" parent="Lobby View/Match Options Control/Game Mode Options Container/Score Limit Option Parent" unique_id=691617694]
+layout_mode = 0
+offset_left = 211.0
+offset_top = -6.0
+offset_right = 431.0
+offset_bottom = 57.0
+theme = SubResource("Theme_c5qv8")
+theme_override_constants/buttons_width = 58
+min_value = 1.0
+value = 10.0
+
+[node name="Click Blocker" type="Control" parent="Lobby View/Match Options Control/Game Mode Options Container/Score Limit Option Parent" unique_id=836415439]
+anchors_preset = 0
+offset_left = 208.0
+offset_top = -10.0
+offset_right = 376.0
+offset_bottom = 61.0
+theme = SubResource("Theme_c5qv8")
 
 [node name="Player Joiner" type="Node" parent="." unique_id=1136046608]
 script = ExtResource("1_5a6u1")

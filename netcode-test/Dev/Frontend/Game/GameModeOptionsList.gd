@@ -6,9 +6,12 @@ class_name GameModeOptionsList
 @export var infiniteLives : bool = true;
 @export var numLives : bool = true;
 
+@export var infiniteTime : bool = true;
 @export var timeLength : bool = true;
 @export var infiniteScore : bool = true;
 @export var scoreLimit : bool = true;
+
+@export var defaultMatchOptions : Dictionary[Enums.MatchOption, int];
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

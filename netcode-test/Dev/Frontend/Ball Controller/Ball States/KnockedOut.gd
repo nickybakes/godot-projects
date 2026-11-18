@@ -11,7 +11,8 @@ func StartStatePhysics(params : Dictionary = {}):
 	super(params);
 	mcc.velocity = Vector3.ZERO;
 	GameManager.Manager.LogKnockOut.rpc(mcc.mostRecentDamageDealerId, mcc.playerNumber);
-	mcc.lives -= 1;
+	if(!GameManager.Manager.infiniteLives):
+		mcc.lives -= 1;
 	
 func StartStateVisuals(params : Dictionary = {}):
 	super(params);

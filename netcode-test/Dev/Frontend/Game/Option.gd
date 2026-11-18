@@ -16,6 +16,7 @@ enum OptionType{
 
 @export var optionButton : OptionButton;
 @export var checkBox : CheckBox;
+@export var spinBox : SpinBox;
 
 
 signal ValueChanged(_matchOption : Enums.MatchOption, _value : int);
@@ -25,6 +26,8 @@ func _ready() -> void:
 		optionButton.item_selected.connect(OnChangeValue);
 	if(checkBox):
 		checkBox.toggled.connect(OnChangeValue);
+	if(spinBox):
+		spinBox.value_changed.connect(OnChangeValue);
 
 func ReadValue(value : int):
 	match(type):
@@ -34,6 +37,9 @@ func ReadValue(value : int):
 		OptionType.Bool:
 			if(checkBox):
 				checkBox.set_pressed_no_signal(value as bool)
+		OptionType.Number:
+			if(spinBox):
+				spinBox.set_value_no_signal(value);
 	pass;
 
 func OnChangeValue(value : int):
@@ -44,6 +50,9 @@ func OnChangeValue(value : int):
 		OptionType.Bool:
 			if(checkBox):
 				value = checkBox.button_pressed as int;
+		OptionType.Number:
+			if(spinBox):
+				value = spinBox.value as int;
 	
 	ValueChanged.emit(matchOption, value);
 	pass;

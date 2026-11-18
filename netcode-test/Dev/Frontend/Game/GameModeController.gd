@@ -8,6 +8,9 @@ class_name GameModeController
 @export var resultTableHeaderPrefab : Control;
 @export var resultDisplayPrefab : ResultDisplay;
 
+func _ready() -> void:
+	GameManager.Manager.GameModeRulesAreSet();
+
 func GetDamageScale() -> float:
 	return 10.0;
 	

@@ -61,6 +61,9 @@ func Setup(id : int):
 	livesDisplay.Setup();
 	livesDisplay.Display(ballController.lives);
 	
+	if(GameManager.Manager.infiniteLives):
+		livesDisplay.visible = false;
+	
 	UpdateColor();
 	
 	ShowAlive();
@@ -93,7 +96,8 @@ func GetPercentageString(percent : float) -> String:
 	
 func ShowAlive():
 	respawning.visible = false;
-	livesDisplay.visible = true;
+	if(!GameManager.Manager.infiniteLives):
+		livesDisplay.visible = true;
 	eliminated.visible = false;
 	alive.visible = true;
 	colorBar.modulate.a = 1.0;

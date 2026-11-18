@@ -34,7 +34,8 @@ enum MatchOption
 	NumLives,
 	TimeLength,
 	InfiniteScore,
-	ScoreLimit
+	ScoreLimit,
+	InfiniteTime
 }
 
 enum DamageType

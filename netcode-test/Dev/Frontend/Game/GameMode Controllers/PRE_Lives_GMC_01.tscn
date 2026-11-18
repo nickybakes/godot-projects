@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ochytfucmwmu"]
 
 [ext_resource type="Script" uid="uid://5045oppllw3h" path="res://Dev/Frontend/Game/GameMode Controllers/LivesGMC.gd" id="1_htsjf"]
+[ext_resource type="PackedScene" uid="uid://bmnm3pj8cpu20" path="res://Dev/Frontend/UI/PRE_ClockDisplay_01.tscn" id="2_33l2g"]
 [ext_resource type="PackedScene" uid="uid://44rue7hdw58h" path="res://Dev/Frontend/UI/PRE_ResultTableHeader_01.tscn" id="3_4aiu4"]
 [ext_resource type="PackedScene" uid="uid://bph2vqtx8jcvj" path="res://Dev/Frontend/UI/PRE_ResultDisplay_01.tscn" id="4_amb7o"]
 
@@ -9,13 +10,17 @@ properties/0/path = NodePath(".:gameTime")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
-[node name="PRE_Lives_GMC_01" type="MultiplayerSynchronizer" unique_id=388207586 node_paths=PackedStringArray("resultTableHeaderPrefab", "resultDisplayPrefab")]
+[node name="PRE_Lives_GMC_01" type="MultiplayerSynchronizer" unique_id=388207586 node_paths=PackedStringArray("clockDisplay", "resultTableHeaderPrefab", "resultDisplayPrefab")]
 root_path = NodePath(".")
 replication_config = SubResource("SceneReplicationConfig_bv7ot")
 script = ExtResource("1_htsjf")
+clockDisplay = NodePath("Clock Display")
 resultTableHeaderPrefab = NodePath("PRE_ResultTableHeader_01")
 resultDisplayPrefab = NodePath("PRE_ResultDisplay_01")
 metadata/_custom_type_script = "uid://5045oppllw3h"
+
+[node name="Clock Display" parent="." unique_id=1821210268 instance=ExtResource("2_33l2g")]
+scale = Vector2(0.74610376, 0.74610376)
 
 [node name="PRE_ResultTableHeader_01" parent="." unique_id=1178281555 instance=ExtResource("3_4aiu4")]
 visible = false
