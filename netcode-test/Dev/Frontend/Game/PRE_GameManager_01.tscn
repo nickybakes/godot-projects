@@ -1,0 +1,143 @@
+[gd_scene format=3 uid="uid://dvss6411d67np"]
+
+[ext_resource type="Script" uid="uid://dwjf48i5tqrx3" path="res://Dev/Frontend/Game/GameManager.gd" id="1_afbyq"]
+[ext_resource type="FontFile" uid="uid://lgdr3l7q2pks" path="res://Art/Fonts/Montserrat-Black.ttf" id="2_o6qb5"]
+[ext_resource type="Script" uid="uid://dal6b4sn6707l" path="res://Dev/Frontend/UI/ResultsView.gd" id="3_dw35e"]
+[ext_resource type="Resource" uid="uid://dpwawajn4ovhe" path="res://Dev/Frontend/Customization/R_CursorCustomizationDirectory_01.tres" id="4_x3i67"]
+[ext_resource type="Texture2D" uid="uid://dkbspi3jnk6wh" path="res://Art/Sprites/SPR_ScreenFill_01.png" id="5_02832"]
+[ext_resource type="Script" uid="uid://napor4at8qyp" path="res://Dev/Frontend/App/AccountDisplay.gd" id="6_e5xyu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_c5qv8"]
+font = ExtResource("2_o6qb5")
+font_size = 186
+outline_size = 52
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 52
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(16, 16)
+
+[sub_resource type="LabelSettings" id="LabelSettings_rvs67"]
+font = ExtResource("2_o6qb5")
+font_size = 129
+outline_size = 44
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 52
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(12, 12)
+
+[node name="GameManager" type="Node" unique_id=1593738528 node_paths=PackedStringArray("gameFinishedMessage", "resultsView")]
+script = ExtResource("1_afbyq")
+gameModeControllersDict = Dictionary[int, String]({
+0: "uid://ochytfucmwmu",
+1: "uid://hqwaxqf05s1",
+2: "uid://dk2770vj4siex",
+3: "uid://dk2770vj4siex",
+4: "uid://dk2770vj4siex"
+})
+gameFinishedMessage = NodePath("UI/Game Finished Message")
+resultsView = NodePath("UI/Results View")
+metadata/_custom_type_script = "uid://dwjf48i5tqrx3"
+
+[node name="UI" type="Control" parent="." unique_id=208182385]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Game Finished Message" type="Label" parent="UI" unique_id=1883721250]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -683.6131
+offset_top = -377.5
+offset_right = 683.61304
+offset_bottom = 377.5
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.10646509
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "BALL
+DONE!"
+label_settings = SubResource("LabelSettings_c5qv8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Results View" type="Control" parent="UI" unique_id=963030964 node_paths=PackedStringArray("container", "winnerMessageLabel", "winnerMessageColorLabel", "winnerAccountDisplay")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_dw35e")
+container = NodePath("VBoxContainer")
+winnerMessageLabel = NodePath("Winner Message")
+winnerMessageColorLabel = NodePath("Winner Message/Winner Message Color")
+winnerMessageString = "%s is balling!"
+winnerAccountDisplay = NodePath("AccountDisplay")
+customization = ExtResource("4_x3i67")
+metadata/_custom_type_script = "uid://dal6b4sn6707l"
+
+[node name="Background" type="TextureRect" parent="UI/Results View" unique_id=711296533]
+modulate = Color(1, 1, 1, 0.36862746)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_02832")
+
+[node name="Winner Message" type="Label" parent="UI/Results View" unique_id=1003586589]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -684.0
+offset_top = 4.0
+offset_right = 683.2261
+offset_bottom = 194.0
+grow_horizontal = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "Player 1 is balling!"
+label_settings = SubResource("LabelSettings_rvs67")
+horizontal_alignment = 1
+vertical_alignment = 1
+visible_characters = 12
+visible_characters_behavior = 4
+visible_ratio = 0.6
+
+[node name="Winner Message Color" type="Label" parent="UI/Results View/Winner Message" unique_id=1819191286]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "Player 1 is balling!"
+label_settings = SubResource("LabelSettings_rvs67")
+horizontal_alignment = 1
+vertical_alignment = 1
+visible_characters = 8
+visible_characters_behavior = 1
+visible_ratio = 0.4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Results View" unique_id=1683254647]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 172.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AccountDisplay" type="Node" parent="UI/Results View" unique_id=826328699]
+script = ExtResource("6_e5xyu")
+metadata/_custom_type_script = "uid://napor4at8qyp"

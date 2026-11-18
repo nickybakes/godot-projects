@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://cot4hd21yd7ka" path="res://Dev/Backend/App/Scene.gd" id="1_0hxaj"]
 [ext_resource type="Material" uid="uid://dsqom3ceceiyc" path="res://Art/Materials/M_DevEnv_01.tres" id="1_avklc"]
-[ext_resource type="Script" uid="uid://dwjf48i5tqrx3" path="res://Dev/Frontend/Game/GameManager.gd" id="2_n03q8"]
 [ext_resource type="Script" uid="uid://n8hbkua4cygf" path="res://Dev/Frontend/Game/GamerView.gd" id="3_fg3k8"]
 [ext_resource type="Script" uid="uid://m3l5b2c2wr0k" path="res://Dev/Frontend/Camera/CameraFocuser.gd" id="4_2j8qv"]
 [ext_resource type="Script" uid="uid://lomqln3v0xvt" path="res://Dev/Frontend/Game/GameSceneSetup.gd" id="4_8lxd5"]
@@ -17,11 +16,7 @@
 [ext_resource type="ArrayMesh" uid="uid://c7s1apef4jbtx" path="res://Art/Models/SM_ArenaMesh_01.glb" id="8_h3ruc"]
 [ext_resource type="Script" uid="uid://bsw5rk11juyn3" path="res://Dev/Frontend/UI/Hub.gd" id="9_2j8qv"]
 [ext_resource type="Material" uid="uid://dusafwqyxu7f8" path="res://Art/Materials/M_BoostPanel_01.tres" id="9_h3ruc"]
-[ext_resource type="FontFile" uid="uid://lgdr3l7q2pks" path="res://Art/Fonts/Montserrat-Black.ttf" id="12_vbxp2"]
-[ext_resource type="Script" uid="uid://dal6b4sn6707l" path="res://Dev/Frontend/UI/ResultsView.gd" id="13_ohrcc"]
-[ext_resource type="Texture2D" uid="uid://dkbspi3jnk6wh" path="res://Art/Sprites/SPR_ScreenFill_01.png" id="14_aa2jd"]
-[ext_resource type="Resource" uid="uid://dpwawajn4ovhe" path="res://Dev/Frontend/Customization/R_CursorCustomizationDirectory_01.tres" id="14_ohrcc"]
-[ext_resource type="Script" uid="uid://napor4at8qyp" path="res://Dev/Frontend/App/AccountDisplay.gd" id="16_spc8p"]
+[ext_resource type="PackedScene" uid="uid://dvss6411d67np" path="res://Dev/Frontend/Game/PRE_GameManager_01.tscn" id="12_vbxp2"]
 [ext_resource type="Material" uid="uid://c2sqxi5cmjlpw" path="res://Art/Materials/M_RingFire_01.tres" id="17_0ow6v"]
 [ext_resource type="Script" uid="uid://bcqjolj5y51g4" path="res://Dev/Frontend/Objects/RingOfFire.gd" id="17_gsuud"]
 [ext_resource type="Material" uid="uid://5l6q4x0dd6g4" path="res://Art/Materials/M_Ember_01.tres" id="18_1orte"]
@@ -52,24 +47,6 @@ point_count = 3
 _limits = [0.0, 1.0, 0.0, 2.0]
 _data = [Vector2(1.0215517, 0), 0.0, 0.39248118, 0, 0, Vector2(2, 1), 0.94354093, 0.0, 0, 0]
 point_count = 2
-
-[sub_resource type="LabelSettings" id="LabelSettings_c5qv8"]
-font = ExtResource("12_vbxp2")
-font_size = 141
-outline_size = 52
-outline_color = Color(0, 0, 0, 1)
-shadow_size = 52
-shadow_color = Color(0, 0, 0, 1)
-shadow_offset = Vector2(12, 12)
-
-[sub_resource type="LabelSettings" id="LabelSettings_rvs67"]
-font = ExtResource("12_vbxp2")
-font_size = 129
-outline_size = 44
-outline_color = Color(0, 0, 0, 1)
-shadow_size = 52
-shadow_color = Color(0, 0, 0, 1)
-shadow_offset = Vector2(12, 12)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0hxaj"]
 
@@ -210,124 +187,7 @@ script = ExtResource("9_2j8qv")
 hubElementPrefab = NodePath("../Ball Hub Element")
 hubProfile = ExtResource("7_4puxp")
 
-[node name="GameManager" type="Node" parent="." unique_id=335467618 node_paths=PackedStringArray("gameFinishedMessage", "resultsView")]
-script = ExtResource("2_n03q8")
-gameModeControllersDict = Dictionary[int, String]({
-0: "uid://ochytfucmwmu",
-1: "uid://hqwaxqf05s1",
-2: "uid://dk2770vj4siex",
-3: "uid://dk2770vj4siex",
-4: "uid://dk2770vj4siex"
-})
-gameFinishedMessage = NodePath("UI/Game Finished Message")
-resultsView = NodePath("UI/Results View")
-metadata/_custom_type_script = "uid://dwjf48i5tqrx3"
-
-[node name="UI" type="Control" parent="GameManager" unique_id=968082936]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Game Finished Message" type="Label" parent="GameManager/UI" unique_id=163201999]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -683.6131
-offset_top = -377.5
-offset_right = 683.61304
-offset_bottom = 377.5
-grow_horizontal = 2
-grow_vertical = 2
-rotation = -0.10646509
-pivot_offset_ratio = Vector2(0.5, 0.5)
-text = "BALL
-DONE!"
-label_settings = SubResource("LabelSettings_c5qv8")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Results View" type="Control" parent="GameManager/UI" unique_id=977374655 node_paths=PackedStringArray("container", "winnerMessageLabel", "winnerMessageColorLabel", "winnerAccountDisplay")]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("13_ohrcc")
-container = NodePath("VBoxContainer")
-winnerMessageLabel = NodePath("Winner Message")
-winnerMessageColorLabel = NodePath("Winner Message/Winner Message Color")
-winnerMessageString = "%s is balling!"
-winnerAccountDisplay = NodePath("AccountDisplay")
-customization = ExtResource("14_ohrcc")
-metadata/_custom_type_script = "uid://dal6b4sn6707l"
-
-[node name="Background" type="TextureRect" parent="GameManager/UI/Results View" unique_id=2041602584]
-modulate = Color(1, 1, 1, 0.36862746)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("14_aa2jd")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GameManager/UI/Results View" unique_id=1203817628]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 172.0
-offset_bottom = 5.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Winner Message" type="Label" parent="GameManager/UI/Results View" unique_id=305945306]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -684.0
-offset_top = 4.0
-offset_right = 683.2261
-offset_bottom = 194.0
-grow_horizontal = 2
-pivot_offset_ratio = Vector2(0.5, 0.5)
-text = "Player 1 is balling!"
-label_settings = SubResource("LabelSettings_rvs67")
-horizontal_alignment = 1
-vertical_alignment = 1
-visible_characters = 12
-visible_characters_behavior = 4
-visible_ratio = 0.6
-
-[node name="Winner Message Color" type="Label" parent="GameManager/UI/Results View/Winner Message" unique_id=1339536440]
-modulate = Color(1, 0, 0, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset_ratio = Vector2(0.5, 0.5)
-text = "Player 1 is balling!"
-label_settings = SubResource("LabelSettings_rvs67")
-horizontal_alignment = 1
-vertical_alignment = 1
-visible_characters = 8
-visible_characters_behavior = 1
-visible_ratio = 0.4
-
-[node name="AccountDisplay" type="Node" parent="GameManager/UI/Results View" unique_id=1287796057]
-script = ExtResource("16_spc8p")
-metadata/_custom_type_script = "uid://napor4at8qyp"
+[node name="PRE_GameManager_01" parent="." unique_id=1593738528 instance=ExtResource("12_vbxp2")]
 
 [node name="InteractionManager" type="Node" parent="." unique_id=641186659]
 script = ExtResource("4_nmwte")

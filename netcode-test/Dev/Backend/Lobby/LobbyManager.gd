@@ -78,7 +78,15 @@ func GetPlayerTokenByPlayerNumber(playerNumber : int) -> PlayerToken:
 func _process(delta: float) -> void:
 	pass;
 	
+@rpc("authority", "call_local")
+func StartGame():
+	canPlayersJoin = false;
+	canPlayersLeave = false;
 	
+@rpc("authority", "call_local")
+func ReturnToLobby():
+	canPlayersJoin = true;
+	canPlayersLeave = true;
 	
 @rpc("any_peer", "call_remote")
 func RequestHostMatchOptionsSync(requesterId : int):

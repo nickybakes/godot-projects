@@ -35,6 +35,7 @@ func CheckForStartGameInput():
 func RequestStartGame():
 	if(!gameStarted):
 		gameStarted = true;
+		LobbyManager.Lobby.StartGame.rpc();
 		CursorManager.Manager.DestroyAllCursors();
 		GameNetManager.GameNet.netSceneManager.SwitchScene(SceneManager.SCENE.ArenaScene_01);
 	pass;

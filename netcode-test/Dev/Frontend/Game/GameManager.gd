@@ -71,6 +71,7 @@ func RequestEndGame():
 		GameNetManager.GameNet.netObjectManager.DestroyNetObject(gameModeController.id);
 	GameManager.Manager.DestroyAllGameMechanics();
 	GameManager.Manager.DestroyAllBalls();
+	LobbyManager.Lobby.ReturnToLobby.rpc();
 	GameNetManager.GameNet.netSceneManager.SwitchScene(SceneManager.SCENE.LobbyScene);
 	pass;
 
