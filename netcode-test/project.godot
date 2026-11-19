@@ -163,6 +163,17 @@ fullscreentoggle={
 
 rendering_device/driver.windows="d3d12"
 
+[shader_globals]
+
+ringPosition={
+"type": "vec2",
+"value": Vector2(0, 0)
+}
+ringRadius={
+"type": "float",
+"value": 9999.0
+}
+
 [steam]
 
 initialization/app_data/app_id=480

@@ -8,12 +8,17 @@ static var GSS : GameSceneSetup;
 
 @export var respawnPointsParent : Node3D;
 
+@export var battleRoyaleRingStartRadius : float = 50.0;
+@export var ringPointsParent : Node3D;
+
 var respawnPoints : Array[RespawnPoint];
+var ringPoints : Array[RingPoint];
 
 func _ready() -> void:
 	GSS = self;
 	spawnCircle.visible = false;
 	GatherRespawnPoints();
+	GatherRingPoints();
 
 func GatherRespawnPoints():
 	respawnPoints = [];
@@ -23,6 +28,15 @@ func GatherRespawnPoints():
 			
 func GetRandomSpawnPointPosition() -> Vector3:
 	return respawnPoints.pick_random().global_position;
+	
+func GatherRingPoints():
+	ringPoints = [];
+	for child in ringPointsParent.get_children():
+		if(child is RingPoint):
+			ringPoints.push_back(child as RingPoint);
+			
+func GetRandomRingPoint() -> RingPoint:
+	return ringPoints.pick_random();
 
 func GetSpawnPosition(spawnIndex : int, totalSpawns : int) -> Vector3:
 	totalSpawns = max(totalSpawns, 1);

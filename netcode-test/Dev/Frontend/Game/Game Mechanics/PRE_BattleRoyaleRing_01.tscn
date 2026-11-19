@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://c18ustxgem8bw"]
+
+[ext_resource type="Script" uid="uid://dpi2di0jqws8v" path="res://Dev/Frontend/Game/Game Mechanics/BattleRoyaleRing.gd" id="1_07t8c"]
+[ext_resource type="Script" uid="uid://bcqjolj5y51g4" path="res://Dev/Frontend/Objects/RingOfFire.gd" id="2_xolsr"]
+[ext_resource type="Script" uid="uid://c70bqkm1fovgp" path="res://Dev/Frontend/Objects/RingEmber.gd" id="3_7m3o5"]
+[ext_resource type="Script" uid="uid://fxck7cgoc485" path="res://Dev/Frontend/Camera/CameraTarget.gd" id="3_g3jvh"]
+[ext_resource type="Material" uid="uid://5l6q4x0dd6g4" path="res://Art/Materials/M_Ember_01.tres" id="4_g3jvh"]
+[ext_resource type="Material" uid="uid://c3uvmca8ut231" path="res://Art/Particles/PPM_Ember_01.tres" id="5_ps47p"]
+[ext_resource type="Material" uid="uid://c2sqxi5cmjlpw" path="res://Art/Materials/M_RingFire_01.tres" id="6_41ci3"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_10ni2"]
+properties/0/path = NodePath(".:radius")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[sub_resource type="Curve" id="Curve_7m3o5"]
+_limits = [0.0, 1.0, 0.0, 30.0]
+_data = [Vector2(6.9230766, 1), 0.0, 0.0, 0, 0, Vector2(30, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_htx88"]
+_limits = [0.0, 1.0, 0.0, 10.0]
+_data = [Vector2(0.5291005, 0), 0.0, 0.0, 0, 0, Vector2(1.2698412, 0.13999999), 0.0, 0.0, 0, 0, Vector2(5.05291, 0.32), 0.0, 0.0, 0, 0, Vector2(10, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_r5vq0"]
+size = Vector2(1.202, 2.56)
+orientation = 2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1r80x"]
+top_radius = 1.0
+bottom_radius = 1.0
+height = 150.0
+radial_segments = 32
+rings = 0
+cap_top = false
+cap_bottom = false
+
+[node name="BattleRoyaleRing" type="MultiplayerSynchronizer" unique_id=476003322 node_paths=PackedStringArray("ringVisual", "cameraTarget")]
+root_path = NodePath(".")
+replication_config = SubResource("SceneReplicationConfig_10ni2")
+script = ExtResource("1_07t8c")
+ringVisual = NodePath("PRE_RingOfFireVisual_01")
+cameraTarget = NodePath("PRE_RingOfFireVisual_01/CameraTarget")
+radiusToCameraTargetStrength = SubResource("Curve_7m3o5")
+metadata/_custom_type_script = "uid://dpi2di0jqws8v"
+
+[node name="PRE_RingOfFireVisual_01" type="Node3D" parent="." unique_id=773375558 node_paths=PackedStringArray("emberPrefab", "emberContainer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.022516727, 0, 0)
+script = ExtResource("2_xolsr")
+radius = 10.0
+numParticles = 16
+emberPrefab = NodePath("P_Ember_01")
+emberContainer = NodePath("Ember Container")
+radiusToParticleRatio = SubResource("Curve_htx88")
+radiusToDisableParticles = 0.5
+metadata/_custom_type_script = "uid://bcqjolj5y51g4"
+
+[node name="CameraTarget" type="Node3D" parent="PRE_RingOfFireVisual_01" unique_id=1870986830]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.4369018, 0)
+script = ExtResource("3_g3jvh")
+goalStrength = 0.75
+metadata/_custom_type_script = "uid://fxck7cgoc485"
+
+[node name="P_Ember_01" type="Node3D" parent="PRE_RingOfFireVisual_01" unique_id=605303476 node_paths=PackedStringArray("particleContainer", "particles", "raycast")]
+transform = Transform3D(0.1, 0, 0, 0, 1, 0, 0, 0, 0.1, 0, 0, 0)
+visible = false
+script = ExtResource("3_7m3o5")
+particleContainer = NodePath("Particle Contailer")
+particles = NodePath("Particle Contailer/Particle")
+raycast = NodePath("RayCast3D")
+metadata/_custom_type_script = "uid://c70bqkm1fovgp"
+
+[node name="Particle Contailer" type="Node3D" parent="PRE_RingOfFireVisual_01/P_Ember_01" unique_id=338837373]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0078125, 0)
+
+[node name="Particle" type="GPUParticles3D" parent="PRE_RingOfFireVisual_01/P_Ember_01/Particle Contailer" unique_id=1523409082]
+transform = Transform3D(0.999873, 0, 0, 0, 1.0000137, 0, 0, 0, 0.999873, 0, 0, 0)
+layers = 4
+material_override = ExtResource("4_g3jvh")
+amount = 6
+lifetime = 1.3
+process_material = ExtResource("5_ps47p")
+draw_pass_1 = SubResource("PlaneMesh_r5vq0")
+
+[node name="RayCast3D" type="RayCast3D" parent="PRE_RingOfFireVisual_01/P_Ember_01" unique_id=386455547]
+transform = Transform3D(0.9999998, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 0, 99999, 0)
+target_position = Vector3(0, -999999, 0)
+collision_mask = 17
+hit_back_faces = false
+
+[node name="Ring Of Fire Mesh" type="MeshInstance3D" parent="PRE_RingOfFireVisual_01" unique_id=136218487]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+layers = 4
+material_override = ExtResource("6_41ci3")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_1r80x")
+
+[node name="Ember Container" type="Node3D" parent="PRE_RingOfFireVisual_01" unique_id=1710253419]

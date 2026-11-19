@@ -9,6 +9,11 @@ var infiniteTime : bool = false;
 
 func _ready() -> void:
 	if(LobbyManager.Lobby):
+		SetGameModeRules();
+		GameManager.Manager.GameModeRulesAreSet();
+		
+func SetGameModeRules():
+	if(LobbyManager.Lobby):
 		GameManager.Manager.infiniteLives = LobbyManager.Lobby.matchOptions[Enums.MatchOption.InfiniteLives];
 		GameManager.Manager.numLives = LobbyManager.Lobby.matchOptions[Enums.MatchOption.NumLives];
 		
@@ -18,7 +23,6 @@ func _ready() -> void:
 			clockDisplay.visible = true;
 		else:
 			clockDisplay.visible = false;
-		GameManager.Manager.GameModeRulesAreSet();
 
 func OnElimination(activator : int, victim : int):
 	if(timeIsUp || GameManager.Manager.gameFinished):

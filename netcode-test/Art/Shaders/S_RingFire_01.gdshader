@@ -4,7 +4,7 @@ render_mode blend_mix, unshaded, cull_disabled;
 #include "SI_Fire_01.gdshaderinc"
 
 uniform float steppedTime;
-uniform float ringRadius = 5.0;
+global uniform float ringRadius;
 
 uniform sampler2D depth_texture : hint_depth_texture, repeat_disable, filter_nearest;
 

@@ -13,3 +13,6 @@ shader_parameter/roughnessAdjust = 0.25999999418848
 shader_parameter/metallic = 0.25999999418848
 shader_parameter/brightness = 0.15999999642368
 shader_parameter/saturation = 0.999999977648
+shader_parameter/ringRadiusMultiply = 0.95
+shader_parameter/ringThreshold = 0.4
+shader_parameter/outsideRingBrightness = 0.2999999932944

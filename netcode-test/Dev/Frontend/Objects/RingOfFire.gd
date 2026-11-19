@@ -28,20 +28,22 @@ func _ready() -> void:
 
 func _process(delta):
 	UpdateScaleAndPosition();
-	#if(position != currentPosition):
-		#currentPosition = position;
-		#RenderingServer.global_shader_parameter_set("ringCenter", Vector2(currentPosition.x, currentPosition.z));
-	#if(scale.x != currentRadius):
-		#currentRadius = scale.x;
-		#RenderingServer.global_shader_parameter_set("ringRadius", scale.x);
 	pass;
 	
 func UpdateScaleAndPosition():
-	scale.x = radius;
-	scale.y = 1.0;
-	scale.z = scale.x;
+	if(position != currentPosition):
+		currentPosition = position;
+		RenderingServer.global_shader_parameter_set("ringPosition", Vector2(currentPosition.x, currentPosition.z));
+	if(radius != currentRadius):
+		currentRadius = radius;
+		scale.x = radius;
+		scale.y = 1.0;
+		scale.z = scale.x;
+		RenderingServer.global_shader_parameter_set("ringRadius", currentRadius);
+	
 	UpdateParticleRatio();
 	SetDisabledParticles(radius <= radiusToDisableParticles);
+	
 
 func UpdateParticleRatio():
 	var newRatio = radiusToParticleRatio.sample(radius);

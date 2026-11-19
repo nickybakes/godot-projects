@@ -41,6 +41,8 @@
 [ext_resource type="Script" uid="uid://xjddwtm4q0e2" path="res://Dev/Frontend/Ball Controller/StatFill.gd" id="19_mf80y"]
 [ext_resource type="Script" uid="uid://b3ldpufefysau" path="res://Dev/Frontend/Ball Controller/Ball States/Bounce.gd" id="19_s4hg4"]
 [ext_resource type="Resource" uid="uid://c30op58wvx74q" path="res://Dev/Frontend/Interaction/R_InteractionTraits_01.tres" id="20_tcg3y"]
+[ext_resource type="Material" uid="uid://5l6q4x0dd6g4" path="res://Art/Materials/M_Ember_01.tres" id="21_bxr6a"]
+[ext_resource type="Material" uid="uid://dpd7d5hbges2w" path="res://Art/Particles/PPM_EmberPlayer_01.tres" id="22_bxr6a"]
 [ext_resource type="Script" uid="uid://bahf8h0o6ombf" path="res://Dev/Frontend/Ball Controller/Ball States/Block.gd" id="22_g6j7v"]
 [ext_resource type="Script" uid="uid://cer4nd24f3oe8" path="res://Dev/Frontend/Ball Controller/Rules/CooldownRule.gd" id="23_thta1"]
 [ext_resource type="Script" uid="uid://bern5mlba1p1h" path="res://Dev/Frontend/Ball Controller/Ball States/StrikeAttempt.gd" id="29_c4qju"]
@@ -97,6 +99,10 @@ spacing_glyph = -6
 base_font = ExtResource("10_vb6wf")
 variation_transform = Transform2D(0.842, 0, 0, 1, 0, 0)
 spacing_glyph = -18
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ee4yk"]
+size = Vector2(2.22, 2.622)
+orientation = 2
 
 [sub_resource type="Curve" id="Curve_qrgwy"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -306,7 +312,7 @@ script = ExtResource("51_ej7s1")
 transitionSpeed = 0.5
 metadata/_custom_type_script = "uid://fxck7cgoc485"
 
-[node name="Ball Visuals" type="Node3D" parent="." unique_id=851201941 node_paths=PackedStringArray("ballController", "shadowDecal", "cameraTarget", "header", "ballMesh", "outlineMesh", "xrayMesh", "chargeAimMesh", "blockMesh", "electricParticles", "clashVisual", "strikeVisual", "grabVisual", "grabAnimator", "grabHandMesh_l", "grabHandMesh_r", "grabHandMeshXray_l", "grabHandMeshXray_r", "grabVictimVisual", "grabVictimHandMesh_l", "grabVictimHandMesh_r", "eliminatedVisual", "knockedOutVisual", "respawningVisual", "respawningClockLabel", "strikePriorityVisual", "unblockableVisual", "spinner", "pitcher", "stretcher", "roller")]
+[node name="Ball Visuals" type="Node3D" parent="." unique_id=851201941 node_paths=PackedStringArray("ballController", "shadowDecal", "cameraTarget", "header", "ballMesh", "outlineMesh", "xrayMesh", "chargeAimMesh", "blockMesh", "electricParticles", "clashVisual", "strikeVisual", "grabVisual", "grabAnimator", "grabHandMesh_l", "grabHandMesh_r", "grabHandMeshXray_l", "grabHandMeshXray_r", "grabVictimVisual", "grabVictimHandMesh_l", "grabVictimHandMesh_r", "eliminatedVisual", "knockedOutVisual", "respawningVisual", "respawningClockLabel", "strikePriorityVisual", "unblockableVisual", "ringFireParticle", "spinner", "pitcher", "stretcher", "roller")]
 script = ExtResource("2_3d8wc")
 ballController = NodePath("..")
 ballCustomizationDirectory = ExtResource("4_lr45t")
@@ -338,6 +344,7 @@ respawningVisual = NodePath("Respawning Visual")
 respawningClockLabel = NodePath("Respawning Visual/Respawning Clock Label")
 strikePriorityVisual = NodePath("Strike Priority Visual")
 unblockableVisual = NodePath("Unblockable Visual")
+ringFireParticle = NodePath("Ring Fire Visual/Particle")
 spinner = NodePath("Visual Spinner")
 pitcher = NodePath("Visual Spinner/Visual Pitcher")
 stretcher = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher")
@@ -470,6 +477,18 @@ font_size = 115
 outline_size = 65
 line_spacing = -60.0
 autowrap_mode = 2
+
+[node name="Ring Fire Visual" type="Node3D" parent="Ball Visuals" unique_id=1812432600]
+
+[node name="Particle" type="GPUParticles3D" parent="Ball Visuals/Ring Fire Visual" unique_id=902252550]
+transform = Transform3D(0.719, 0, 0, 0, 0.825, 0, 0, 0, 0.719, 0, 0.34269756, 0)
+layers = 4
+material_override = ExtResource("21_bxr6a")
+amount = 24
+lifetime = 0.77
+local_coords = true
+process_material = ExtResource("22_bxr6a")
+draw_pass_1 = SubResource("PlaneMesh_ee4yk")
 
 [node name="Visual Spinner" type="Node3D" parent="Ball Visuals" unique_id=1916116689]
 

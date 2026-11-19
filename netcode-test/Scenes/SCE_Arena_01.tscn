@@ -18,11 +18,7 @@
 [ext_resource type="Material" uid="uid://dusafwqyxu7f8" path="res://Art/Materials/M_BoostPanel_01.tres" id="9_h3ruc"]
 [ext_resource type="PackedScene" uid="uid://dvss6411d67np" path="res://Dev/Frontend/Game/PRE_GameManager_01.tscn" id="12_vbxp2"]
 [ext_resource type="Script" uid="uid://xq5gb72kdhcu" path="res://Dev/Frontend/Game/RespawnPoint.gd" id="15_p5jk2"]
-[ext_resource type="Material" uid="uid://c2sqxi5cmjlpw" path="res://Art/Materials/M_RingFire_01.tres" id="17_0ow6v"]
-[ext_resource type="Script" uid="uid://bcqjolj5y51g4" path="res://Dev/Frontend/Objects/RingOfFire.gd" id="17_gsuud"]
-[ext_resource type="Material" uid="uid://5l6q4x0dd6g4" path="res://Art/Materials/M_Ember_01.tres" id="18_1orte"]
-[ext_resource type="Material" uid="uid://c3uvmca8ut231" path="res://Art/Particles/PPM_Ember_01.tres" id="18_b0640"]
-[ext_resource type="Script" uid="uid://c70bqkm1fovgp" path="res://Dev/Frontend/Objects/RingEmber.gd" id="20_vny3c"]
+[ext_resource type="Script" uid="uid://b8ty3j0g6hpym" path="res://Dev/Frontend/Game/RingPoint.gd" id="16_ildox"]
 [ext_resource type="Script" uid="uid://doowr5fgxjrli" path="res://Dev/Frontend/Objects/RingCapture.gd" id="22_dn7fg"]
 [ext_resource type="Script" uid="uid://bvmqn1xosy8vr" path="res://Dev/Frontend/Objects/RingHeightDetector.gd" id="22_ildox"]
 [ext_resource type="Material" uid="uid://cvbqrfykumn2q" path="res://Art/Materials/M_RingCapture_01.tres" id="24_olv42"]
@@ -70,15 +66,6 @@ data = PackedVector3Array(2.6476998, 0, -3.3372998, 0, 0, 8.6228, 0, 0, -3.33729
 
 [sub_resource type="QuadMesh" id="QuadMesh_c5qv8"]
 
-[sub_resource type="Curve" id="Curve_vny3c"]
-_limits = [0.0, 1.0, 0.0, 10.0]
-_data = [Vector2(0.5291005, 0), 0.0, 0.0, 0, 0, Vector2(1.2698412, 0.13999999), 0.0, 0.0, 0, 0, Vector2(5.05291, 0.32), 0.0, 0.0, 0, 0, Vector2(10, 1), 0.0, 0.0, 0, 0]
-point_count = 4
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_qwk6n"]
-size = Vector2(1.202, 2.357)
-orientation = 2
-
 [sub_resource type="CylinderMesh" id="CylinderMesh_3jhpk"]
 top_radius = 1.0
 bottom_radius = 1.0
@@ -97,10 +84,12 @@ material = SubResource("StandardMaterial3D_mfcfy")
 script = ExtResource("1_0hxaj")
 metadata/_custom_type_script = "uid://cot4hd21yd7ka"
 
-[node name="GameSceneSetup" type="Node3D" parent="." unique_id=312988255 node_paths=PackedStringArray("spawnCircle", "respawnPointsParent")]
+[node name="GameSceneSetup" type="Node3D" parent="." unique_id=312988255 node_paths=PackedStringArray("spawnCircle", "respawnPointsParent", "ringPointsParent")]
 script = ExtResource("4_8lxd5")
 spawnCircle = NodePath("../Spawn Circle")
 respawnPointsParent = NodePath("../Respawn Points")
+battleRoyaleRingStartRadius = 20.0
+ringPointsParent = NodePath("../Ring Points")
 metadata/_custom_type_script = "uid://lomqln3v0xvt"
 
 [node name="Spawn Circle" type="MeshInstance3D" parent="." unique_id=353306037]
@@ -247,6 +236,48 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33060932, 8.205985, -7.4127
 script = ExtResource("15_p5jk2")
 metadata/_custom_type_script = "uid://xq5gb72kdhcu"
 
+[node name="Ring Points" type="Node3D" parent="." unique_id=1923481840]
+
+[node name="RingPoint 01" type="Node3D" parent="Ring Points" unique_id=1775278876]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.205988, 0)
+script = ExtResource("16_ildox")
+metadata/_custom_type_script = "uid://b8ty3j0g6hpym"
+
+[node name="RingPoint 02" type="Node3D" parent="Ring Points" unique_id=1224005194]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.205872, 8.205987, 5.4243417)
+script = ExtResource("16_ildox")
+metadata/_custom_type_script = "uid://b8ty3j0g6hpym"
+
+[node name="RingPoint 03" type="Node3D" parent="Ring Points" unique_id=2026732821]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.650872, 8.205987, -5.8031077)
+script = ExtResource("16_ildox")
+metadata/_custom_type_script = "uid://b8ty3j0g6hpym"
+
+[node name="RingPoint 04" type="Node3D" parent="Ring Points" unique_id=483630354]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.291876, 8.205987, -7.4760227)
+script = ExtResource("16_ildox")
+metadata/_custom_type_script = "uid://b8ty3j0g6hpym"
+
+[node name="RingPoint 05" type="Node3D" parent="Ring Points" unique_id=285914555]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.801094, 8.205987, 4.8223114)
+script = ExtResource("16_ildox")
+metadata/_custom_type_script = "uid://b8ty3j0g6hpym"
+
+[node name="RingPoint 06" type="Node3D" parent="Ring Points" unique_id=530031915]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.10183, 8.205987, -0.8602023)
+script = ExtResource("16_ildox")
+metadata/_custom_type_script = "uid://b8ty3j0g6hpym"
+
+[node name="RingPoint 07" type="Node3D" parent="Ring Points" unique_id=1113869736]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.452152, 8.205987, -0.43416357)
+script = ExtResource("16_ildox")
+metadata/_custom_type_script = "uid://b8ty3j0g6hpym"
+
+[node name="RingPoint 08" type="Node3D" parent="Ring Points" unique_id=1763772708]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33060932, 8.205985, -7.4127374)
+script = ExtResource("16_ildox")
+metadata/_custom_type_script = "uid://b8ty3j0g6hpym"
+
 [node name="Arena Mesh" type="MeshInstance3D" parent="." unique_id=1485065166]
 material_override = ExtResource("1_avklc")
 mesh = ExtResource("8_h3ruc")
@@ -284,54 +315,6 @@ transform = Transform3D(-7.467756e-08, -0.92616636, 0.3771152, -1.8340249e-07, 0
 material_override = ExtResource("9_h3ruc")
 cast_shadow = 0
 mesh = SubResource("QuadMesh_c5qv8")
-
-[node name="PRE_RingOfFireVisual_01" type="Node3D" parent="." unique_id=1894723500 node_paths=PackedStringArray("emberPrefab", "emberContainer")]
-transform = Transform3D(4.659, 0, 0, 0, 1, 0, 0, 0, 4.659, -0.022516727, 0, 0)
-visible = false
-script = ExtResource("17_gsuud")
-radius = 10.0
-numParticles = 16
-emberPrefab = NodePath("P_Ember_01")
-emberContainer = NodePath("Ember Container")
-radiusToParticleRatio = SubResource("Curve_vny3c")
-radiusToDisableParticles = 0.5
-metadata/_custom_type_script = "uid://bcqjolj5y51g4"
-
-[node name="P_Ember_01" type="Node3D" parent="PRE_RingOfFireVisual_01" unique_id=2025216389 node_paths=PackedStringArray("particleContainer", "particles", "raycast")]
-transform = Transform3D(0.1, 0, 0, 0, 1, 0, 0, 0, 0.1, 0, 0, 0)
-visible = false
-script = ExtResource("20_vny3c")
-particleContainer = NodePath("Particle Contailer")
-particles = NodePath("Particle Contailer/Particle")
-raycast = NodePath("RayCast3D")
-metadata/_custom_type_script = "uid://c70bqkm1fovgp"
-
-[node name="Particle Contailer" type="Node3D" parent="PRE_RingOfFireVisual_01/P_Ember_01" unique_id=1366640836]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0078125, 0)
-
-[node name="Particle" type="GPUParticles3D" parent="PRE_RingOfFireVisual_01/P_Ember_01/Particle Contailer" unique_id=2004613211]
-transform = Transform3D(0.999873, 0, 0, 0, 1.0000137, 0, 0, 0, 0.999873, 0, 0, 0)
-layers = 4
-material_override = ExtResource("18_1orte")
-amount = 6
-lifetime = 1.3
-process_material = ExtResource("18_b0640")
-draw_pass_1 = SubResource("PlaneMesh_qwk6n")
-
-[node name="RayCast3D" type="RayCast3D" parent="PRE_RingOfFireVisual_01/P_Ember_01" unique_id=2077098563]
-transform = Transform3D(0.9999998, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 0, 99999, 0)
-target_position = Vector3(0, -999999, 0)
-collision_mask = 17
-hit_back_faces = false
-
-[node name="Ring Of Fire Mesh" type="MeshInstance3D" parent="PRE_RingOfFireVisual_01" unique_id=1597381571]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-layers = 4
-material_override = ExtResource("17_0ow6v")
-cast_shadow = 0
-mesh = SubResource("CylinderMesh_3jhpk")
-
-[node name="Ember Container" type="Node3D" parent="PRE_RingOfFireVisual_01" unique_id=1484528467]
 
 [node name="PRE_RingCaptureVisual_01" type="Node3D" parent="." unique_id=996815747 node_paths=PackedStringArray("mesh", "detectorPrefab", "detectorContainer")]
 transform = Transform3D(4.659, 0, 0, 0, 1, 0, 0, 0, 4.659, 6.366, 0, -4.481)

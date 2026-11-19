@@ -29,6 +29,8 @@ var gamePlayerLogs : Dictionary[int, GamePlayerLog] = {};
 
 func _ready() -> void:
 	Manager = self;
+	RenderingServer.global_shader_parameter_set("ringRadius", 999999);
+	RenderingServer.global_shader_parameter_set("ringPosition", Vector2.ZERO);
 	gameMechanics = [];
 	gameFinishedMessage.visible = false;
 	resultsView.visible = false;

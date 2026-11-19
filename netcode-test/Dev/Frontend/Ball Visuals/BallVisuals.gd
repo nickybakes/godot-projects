@@ -49,6 +49,9 @@ var ballHubElement : BallHubElement;
 @export var strikePriorityVisual : Node3D;
 @export var unblockableVisual : Node3D;
 
+@export_category("Ring Fire")
+@export var ringFireParticle : GPUParticles3D
+
 var messageTime : float = 0.0;
 
 @export_category("Transforms")
@@ -96,6 +99,7 @@ func Setup(playerNumber : int):
 	StopGrabVisual();
 	StopGrabSuccessAimVisual();
 	StopGrabVictimVisual(grabberPlayerNumber);
+	StopRingFireVisual();
 	HideMessages();
 	
 func RollBall(currentSpeed : float, delta : float):
@@ -204,6 +208,12 @@ func StartGrabSuccessAimVisual():
 	
 func StopGrabSuccessAimVisual():
 	chargeAimMesh.visible = false;
+	
+func StartRingFireVisual():
+	ringFireParticle.emitting = true;
+	
+func StopRingFireVisual():
+	ringFireParticle.emitting = false;
 	
 func HideMessages():
 	respawningVisual.visible = false;

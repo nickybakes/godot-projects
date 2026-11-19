@@ -12,7 +12,7 @@ func _ready() -> void:
 	GameManager.Manager.GameModeRulesAreSet();
 
 func GetDamageScale() -> float:
-	return 10.0;
+	return 1.0;
 	
 func DoSpawnParams():
 	if(GameManager.Manager):

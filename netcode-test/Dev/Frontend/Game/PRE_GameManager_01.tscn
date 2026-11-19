@@ -30,7 +30,7 @@ script = ExtResource("1_afbyq")
 gameModeControllersDict = Dictionary[int, String]({
 0: "uid://ochytfucmwmu",
 1: "uid://hqwaxqf05s1",
-2: "uid://dk2770vj4siex",
+2: "uid://cfsae0d16xd3u",
 3: "uid://dk2770vj4siex",
 4: "uid://dk2770vj4siex"
 })

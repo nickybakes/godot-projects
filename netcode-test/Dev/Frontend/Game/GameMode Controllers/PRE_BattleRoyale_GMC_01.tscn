@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://cfsae0d16xd3u"]
+
+[ext_resource type="Script" uid="uid://c005e3jq6ae4x" path="res://Dev/Frontend/Game/GameMode Controllers/BattleRoyaleGMC.gd" id="1_kxpk5"]
+[ext_resource type="PackedScene" uid="uid://bmnm3pj8cpu20" path="res://Dev/Frontend/UI/PRE_ClockDisplay_01.tscn" id="2_72hgx"]
+[ext_resource type="PackedScene" uid="uid://44rue7hdw58h" path="res://Dev/Frontend/UI/PRE_ResultTableHeader_01.tscn" id="3_bghwg"]
+[ext_resource type="PackedScene" uid="uid://bph2vqtx8jcvj" path="res://Dev/Frontend/UI/PRE_ResultDisplay_01.tscn" id="4_xyubk"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_bv7ot"]
+properties/0/path = NodePath(".:gameTime")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="PRE_BattleRoyale_GMC_01" type="MultiplayerSynchronizer" unique_id=120613533 node_paths=PackedStringArray("clockDisplay", "resultTableHeaderPrefab", "resultDisplayPrefab")]
+root_path = NodePath(".")
+replication_config = SubResource("SceneReplicationConfig_bv7ot")
+script = ExtResource("1_kxpk5")
+ringMechanicUID = "uid://c18ustxgem8bw"
+clockDisplay = NodePath("Clock Display")
+resultTableHeaderPrefab = NodePath("PRE_ResultTableHeader_01")
+resultDisplayPrefab = NodePath("PRE_ResultDisplay_01")
+metadata/_custom_type_script = "uid://c005e3jq6ae4x"
+
+[node name="Clock Display" parent="." unique_id=1821210268 instance=ExtResource("2_72hgx")]
+scale = Vector2(0.74610376, 0.74610376)
+
+[node name="PRE_ResultTableHeader_01" parent="." unique_id=1178281555 instance=ExtResource("3_bghwg")]
+visible = false
+
+[node name="PRE_ResultDisplay_01" parent="." unique_id=2010483158 instance=ExtResource("4_xyubk")]
+visible = false
