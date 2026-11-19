@@ -15,6 +15,12 @@ enum InputAction
 	CycleColorPrev,
 }
 
+enum Map
+{
+	Arena_01,
+	Arena_02,
+	Random = 9999,
+}
 
 enum GameMode
 {

@@ -17,6 +17,7 @@ enum SCENE{
 	BaseScene,
 	LobbyScene,
 	ArenaScene_01,
+	ArenaScene_02,
 }
 
 func _ready() -> void:

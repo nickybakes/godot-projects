@@ -289,11 +289,13 @@ theme_override_icons/arrow = SubResource("DPITexture_ol0rm")
 icon_alignment = 2
 expand_icon = true
 selected = 0
-item_count = 2
+item_count = 3
 popup/item_0/text = "Arena 01"
 popup/item_0/id = 0
-popup/item_1/text = "Random"
-popup/item_1/id = 9999
+popup/item_1/text = "Arena 02"
+popup/item_1/id = 1
+popup/item_2/text = "Random"
+popup/item_2/id = 9999
 
 [node name="Label" type="Label" parent="Lobby View/Match Options Control/VBoxContainer/Map Option Parent" unique_id=1552120078]
 layout_mode = 1

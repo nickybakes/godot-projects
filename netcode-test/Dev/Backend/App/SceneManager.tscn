@@ -7,6 +7,7 @@ script = ExtResource("1_mppln")
 scenePaths = Dictionary[int, String]({
 0: "uid://cqemrtackwhnb",
 1: "uid://b5452rgondapk",
-2: "uid://dfe26cy4cjnly"
+2: "uid://dfe26cy4cjnly",
+3: "uid://dtt7402ivdvxp"
 })
 metadata/_custom_type_script = "uid://coblg680jlh6p"

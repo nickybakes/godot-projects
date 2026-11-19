@@ -37,7 +37,17 @@ func RequestStartGame():
 		gameStarted = true;
 		LobbyManager.Lobby.StartGame.rpc();
 		CursorManager.Manager.DestroyAllCursors();
-		GameNetManager.GameNet.netSceneManager.SwitchScene(SceneManager.SCENE.ArenaScene_01);
+		
+		var chosenMap = LobbyManager.Lobby.matchOptions[Enums.MatchOption.Map];
+			
+		if(chosenMap == Enums.Map.Random):
+			chosenMap = randi_range(0, Enums.Map.size() - 2) as Enums.Map;
+			pass;
+		
+		var sceneToLoad = SceneManager.SCENE.ArenaScene_01;
+		if(chosenMap == Enums.Map.Arena_02):
+			sceneToLoad = SceneManager.SCENE.ArenaScene_02;
+		GameNetManager.GameNet.netSceneManager.SwitchScene(sceneToLoad);
 	pass;
 	
 func OnHostSuccess():
