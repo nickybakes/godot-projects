@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://ctsjgpkd6s8d2"]
+
+[ext_resource type="Script" uid="uid://bsko5lfb7e1ug" path="res://Dev/Frontend/Game/Game Mechanics/SpotlightRing.gd" id="1_wd8wy"]
+[ext_resource type="Script" uid="uid://doowr5fgxjrli" path="res://Dev/Frontend/Objects/RingCapture.gd" id="2_0vgmx"]
+[ext_resource type="Script" uid="uid://bvmqn1xosy8vr" path="res://Dev/Frontend/Objects/RingHeightDetector.gd" id="3_lm4gk"]
+[ext_resource type="Material" uid="uid://cvbqrfykumn2q" path="res://Art/Materials/M_RingCapture_01.tres" id="4_g0de6"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_10ni2"]
+properties/0/path = NodePath(".:radius")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_wd8wy"]
+top_radius = 1.0
+bottom_radius = 1.0
+height = 150.0
+radial_segments = 32
+rings = 0
+cap_top = false
+cap_bottom = false
+
+[node name="Spotlight Ring" type="MultiplayerSynchronizer" unique_id=2057522877 node_paths=PackedStringArray("ringVisual")]
+root_path = NodePath(".")
+replication_config = SubResource("SceneReplicationConfig_10ni2")
+script = ExtResource("1_wd8wy")
+ringSpeed = 2.0
+ringChangeDirectionTime = 3.0
+ringVisual = NodePath("PRE_RingCaptureVisual_01")
+metadata/_custom_type_script = "uid://bsko5lfb7e1ug"
+
+[node name="PRE_RingCaptureVisual_01" type="Node3D" parent="." unique_id=863412232 node_paths=PackedStringArray("mesh", "detectorPrefab", "detectorContainer")]
+script = ExtResource("2_0vgmx")
+radius = 3.238
+mesh = NodePath("Ring Mesh")
+numDetectors = 32
+numEaseSteps = 1
+easing = 1.0
+detectorPrefab = NodePath("Height Detector")
+detectorContainer = NodePath("Detector Container")
+metadata/_custom_type_script = "uid://doowr5fgxjrli"
+
+[node name="Height Detector" type="Node3D" parent="PRE_RingCaptureVisual_01" unique_id=2049897645 node_paths=PackedStringArray("raycast")]
+transform = Transform3D(0.21463838, 0, 0, 0, 1, 0, 0, 0, 0.21463838, 0.0048329537, 0, 0)
+script = ExtResource("3_lm4gk")
+moveTime = 0.3
+raycast = NodePath("RayCast3D")
+metadata/_custom_type_script = "uid://bvmqn1xosy8vr"
+
+[node name="RayCast3D" type="RayCast3D" parent="PRE_RingCaptureVisual_01/Height Detector" unique_id=49473429]
+transform = Transform3D(0.46589985, 0, 0, 0, 1, 0, 0, 0, 0.46589985, -0.022516727, 99999, 0)
+enabled = false
+target_position = Vector3(0, -999999, 0)
+collision_mask = 17
+hit_back_faces = false
+
+[node name="Ring Mesh" type="MeshInstance3D" parent="PRE_RingCaptureVisual_01" unique_id=1676518818]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, 1, 0, 4.371139e-08, 0, 0, 0)
+layers = 4
+material_override = ExtResource("4_g0de6")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_wd8wy")
+
+[node name="Detector Container" type="Node3D" parent="PRE_RingCaptureVisual_01" unique_id=1982590495]

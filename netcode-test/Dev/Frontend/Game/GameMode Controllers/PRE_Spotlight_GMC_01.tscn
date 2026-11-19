@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://cgdj7l5vxa3p"]
+
+[ext_resource type="Script" uid="uid://d1scf580x4qh7" path="res://Dev/Frontend/Game/GameMode Controllers/SpotlightGMC.gd" id="1_qtri8"]
+[ext_resource type="PackedScene" uid="uid://bmnm3pj8cpu20" path="res://Dev/Frontend/UI/PRE_ClockDisplay_01.tscn" id="2_72bvr"]
+[ext_resource type="PackedScene" uid="uid://bbvuxklcsmehe" path="res://Dev/Frontend/UI/PRE_ResultTableHeader_02.tscn" id="3_72bvr"]
+[ext_resource type="PackedScene" uid="uid://bmwmhuvuo07m4" path="res://Dev/Frontend/UI/PRE_ResultDisplay_02.tscn" id="4_1mtxs"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_bv7ot"]
+properties/0/path = NodePath(".:gameTime")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="PRE_Spotlight_GMC_01" type="MultiplayerSynchronizer" unique_id=1876917159 node_paths=PackedStringArray("clockDisplay", "resultTableHeaderPrefab", "resultDisplayPrefab")]
+root_path = NodePath(".")
+replication_config = SubResource("SceneReplicationConfig_bv7ot")
+script = ExtResource("1_qtri8")
+spotlightMechanicUID = "uid://ctsjgpkd6s8d2"
+clockDisplay = NodePath("Clock Display")
+resultTableHeaderPrefab = NodePath("PRE_ResultTableHeader_02")
+resultDisplayPrefab = NodePath("PRE_ResultDisplay_02")
+metadata/_custom_type_script = "uid://d1scf580x4qh7"
+
+[node name="Clock Display" parent="." unique_id=1821210268 instance=ExtResource("2_72bvr")]
+
+[node name="PRE_ResultTableHeader_02" parent="." unique_id=1178281555 instance=ExtResource("3_72bvr")]
+visible = false
+
+[node name="PRE_ResultDisplay_02" parent="." unique_id=2010483158 instance=ExtResource("4_1mtxs")]
+visible = false

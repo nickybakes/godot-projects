@@ -31,8 +31,8 @@ gameModeControllersDict = Dictionary[int, String]({
 0: "uid://ochytfucmwmu",
 1: "uid://hqwaxqf05s1",
 2: "uid://cfsae0d16xd3u",
-3: "uid://dk2770vj4siex",
-4: "uid://dk2770vj4siex"
+3: "uid://cgdj7l5vxa3p",
+4: "uid://cgdj7l5vxa3p"
 })
 gameFinishedMessage = NodePath("UI/Game Finished Message")
 resultsView = NodePath("UI/Results View")

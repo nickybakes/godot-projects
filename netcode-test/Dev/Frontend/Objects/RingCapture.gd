@@ -20,6 +20,9 @@ var heights : Array[float];
 var heightEased : Array[float];
 var material : Material;
 
+var currentPosition : Vector3 = Vector3(0, 0, 0);
+var currentRadius : float = 1;
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	detectorPrefab.visible = false;
@@ -45,9 +48,15 @@ func SetDisabledDetectors(disabled : bool):
 
 
 func UpdateScaleAndPosition():
-	scale.x = radius;
-	scale.y = 1.0;
-	scale.z = scale.x;
+	if(position != currentPosition):
+		currentPosition = position;
+		RenderingServer.global_shader_parameter_set("ringPosition", Vector2(currentPosition.x, currentPosition.z));
+	if(radius != currentRadius):
+		currentRadius = radius;
+		scale.x = radius;
+		scale.y = 1.0;
+		scale.z = scale.x;
+		RenderingServer.global_shader_parameter_set("ringRadius", currentRadius);
 	SetDisabledDetectors(radius <= radiusToDisableDetectors);
 	UpdateHeights();
 	pass;

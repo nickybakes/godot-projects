@@ -19,9 +19,6 @@
 [ext_resource type="PackedScene" uid="uid://dvss6411d67np" path="res://Dev/Frontend/Game/PRE_GameManager_01.tscn" id="12_vbxp2"]
 [ext_resource type="Script" uid="uid://xq5gb72kdhcu" path="res://Dev/Frontend/Game/RespawnPoint.gd" id="15_p5jk2"]
 [ext_resource type="Script" uid="uid://b8ty3j0g6hpym" path="res://Dev/Frontend/Game/RingPoint.gd" id="16_ildox"]
-[ext_resource type="Script" uid="uid://doowr5fgxjrli" path="res://Dev/Frontend/Objects/RingCapture.gd" id="22_dn7fg"]
-[ext_resource type="Script" uid="uid://bvmqn1xosy8vr" path="res://Dev/Frontend/Objects/RingHeightDetector.gd" id="22_ildox"]
-[ext_resource type="Material" uid="uid://cvbqrfykumn2q" path="res://Art/Materials/M_RingCapture_01.tres" id="24_olv42"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_c5qv8"]
 top_radius = 1.0
@@ -66,15 +63,6 @@ data = PackedVector3Array(2.6476998, 0, -3.3372998, 0, 0, 8.6228, 0, 0, -3.33729
 
 [sub_resource type="QuadMesh" id="QuadMesh_c5qv8"]
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_3jhpk"]
-top_radius = 1.0
-bottom_radius = 1.0
-height = 150.0
-radial_segments = 32
-rings = 0
-cap_top = false
-cap_bottom = false
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mfcfy"]
 
 [sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_etr8x"]
@@ -84,12 +72,14 @@ material = SubResource("StandardMaterial3D_mfcfy")
 script = ExtResource("1_0hxaj")
 metadata/_custom_type_script = "uid://cot4hd21yd7ka"
 
-[node name="GameSceneSetup" type="Node3D" parent="." unique_id=312988255 node_paths=PackedStringArray("spawnCircle", "respawnPointsParent", "ringPointsParent")]
+[node name="GameSceneSetup" type="Node3D" parent="." unique_id=312988255 node_paths=PackedStringArray("spawnCircle", "respawnPointsParent", "ringPointsParent", "mapMax", "mapMin")]
 script = ExtResource("4_8lxd5")
 spawnCircle = NodePath("../Spawn Circle")
 respawnPointsParent = NodePath("../Respawn Points")
-battleRoyaleRingStartRadius = 20.0
+battleRoyaleRingStartRadius = 25.0
 ringPointsParent = NodePath("../Ring Points")
+mapMax = NodePath("../Map Max")
+mapMin = NodePath("../Map Min")
 metadata/_custom_type_script = "uid://lomqln3v0xvt"
 
 [node name="Spawn Circle" type="MeshInstance3D" parent="." unique_id=353306037]
@@ -315,42 +305,6 @@ transform = Transform3D(-7.467756e-08, -0.92616636, 0.3771152, -1.8340249e-07, 0
 material_override = ExtResource("9_h3ruc")
 cast_shadow = 0
 mesh = SubResource("QuadMesh_c5qv8")
-
-[node name="PRE_RingCaptureVisual_01" type="Node3D" parent="." unique_id=996815747 node_paths=PackedStringArray("mesh", "detectorPrefab", "detectorContainer")]
-transform = Transform3D(4.659, 0, 0, 0, 1, 0, 0, 0, 4.659, 6.366, 0, -4.481)
-visible = false
-script = ExtResource("22_dn7fg")
-radius = 3.238
-mesh = NodePath("Ring Mesh")
-numDetectors = 32
-numEaseSteps = 1
-easing = 1.0
-detectorPrefab = NodePath("Height Detector")
-detectorContainer = NodePath("Detector Container")
-metadata/_custom_type_script = "uid://doowr5fgxjrli"
-
-[node name="Height Detector" type="Node3D" parent="PRE_RingCaptureVisual_01" unique_id=859347406 node_paths=PackedStringArray("raycast")]
-transform = Transform3D(0.21463838, 0, 0, 0, 1, 0, 0, 0, 0.21463838, 0.0048329537, 0, 0)
-script = ExtResource("22_ildox")
-moveTime = 0.3
-raycast = NodePath("RayCast3D")
-metadata/_custom_type_script = "uid://bvmqn1xosy8vr"
-
-[node name="RayCast3D" type="RayCast3D" parent="PRE_RingCaptureVisual_01/Height Detector" unique_id=1330112480]
-transform = Transform3D(0.46589985, 0, 0, 0, 1, 0, 0, 0, 0.46589985, -0.022516727, 99999, 0)
-enabled = false
-target_position = Vector3(0, -999999, 0)
-collision_mask = 17
-hit_back_faces = false
-
-[node name="Ring Mesh" type="MeshInstance3D" parent="PRE_RingCaptureVisual_01" unique_id=1892985243]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, 1, 0, 4.371139e-08, 0, 0, 0)
-layers = 4
-material_override = ExtResource("24_olv42")
-cast_shadow = 0
-mesh = SubResource("CylinderMesh_3jhpk")
-
-[node name="Detector Container" type="Node3D" parent="PRE_RingCaptureVisual_01" unique_id=606070136]
 
 [node name="Trail Test" type="Node3D" parent="." unique_id=601802306]
 transform = Transform3D(0.1, 0, 0, 0, 1, 0, 0, 0, 0.1, 4.9963427, 1.6288302, -1.6353707)

@@ -39,6 +39,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	ringVisual.global_position = Vector3(position.x, 0, position.y);
 	ringVisual.radius = radius;
+	cameraTarget.goalStrength = radiusToCameraTargetStrength.sample(radius);
 	
 	if(GameManager.Manager.gameFinished):
 		return;

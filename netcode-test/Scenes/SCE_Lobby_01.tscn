@@ -208,6 +208,9 @@ gameMode = 1
 infiniteLives = false
 numLives = false
 infiniteTime = false
+defaultMatchOptions = Dictionary[int, int]({
+6: 10
+})
 metadata/_custom_type_script = "uid://bddcjj74ltjvi"
 
 [node name="Battle Royale" type="Node" parent="Lobby View/Match Options Control/Match Options/Mode Option Lists" unique_id=1247270747]
@@ -227,8 +230,10 @@ script = ExtResource("13_ktve1")
 gameMode = 3
 infiniteLives = false
 numLives = false
-infiniteScore = false
-scoreLimit = false
+infiniteTime = false
+defaultMatchOptions = Dictionary[int, int]({
+6: 30
+})
 metadata/_custom_type_script = "uid://bddcjj74ltjvi"
 
 [node name="King of the Hill" type="Node" parent="Lobby View/Match Options Control/Match Options/Mode Option Lists" unique_id=80204776]

@@ -11,6 +11,10 @@ static var GSS : GameSceneSetup;
 @export var battleRoyaleRingStartRadius : float = 50.0;
 @export var ringPointsParent : Node3D;
 
+@export var mapMax : Node3D;
+@export var mapMin : Node3D;
+
+
 var respawnPoints : Array[RespawnPoint];
 var ringPoints : Array[RingPoint];
 
