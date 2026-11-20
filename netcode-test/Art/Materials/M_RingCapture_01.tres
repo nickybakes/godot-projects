@@ -2,18 +2,31 @@
 
 [ext_resource type="Shader" uid="uid://djslgtoa3fl3" path="res://Art/Shaders/S_RingCapture_01.gdshader" id="1_v364m"]
 [ext_resource type="Texture2D" uid="uid://ujxpnok1yptc" path="res://Art/Textures/T_Rainbow_03.png" id="2_y5s25"]
+[ext_resource type="Texture2D" uid="uid://ckk8ykikq37oj" path="res://Art/Textures/T_Sparkles_01.png" id="3_gjt7i"]
 
 [resource]
 render_priority = 0
 shader = ExtResource("1_v364m")
 shader_parameter/colorTexture = ExtResource("2_y5s25")
 shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/emissive = 1.367
 shader_parameter/textureScroll = Vector2(1, -1)
 shader_parameter/textureScale = Vector2(1, 0.2)
-shader_parameter/scanlineScale = 6.958
-shader_parameter/scanlineTimeScale = -2.5789999999999997
-shader_parameter/scanlineAlpha = 0.47999998927104
-shader_parameter/minAlpha = 0.11999999731776
-shader_parameter/heightArray = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 shader_parameter/distanceThreshold = 1.411
+shader_parameter/detailTexture = ExtResource("3_gjt7i")
+shader_parameter/detailColor = Color(1.1291975, 1.1291975, 1.1291975, 1)
+shader_parameter/detailTextureScale = Vector2(10, 2)
+shader_parameter/detailTextureScale2 = Vector2(12, 7)
+shader_parameter/detailScrollSpeed = Vector2(0.736, -1.332)
+shader_parameter/detailScrollSpeed2 = Vector2(-0.61, -1.5)
+shader_parameter/scanlineScale = 6.5
+shader_parameter/scanlineTimeScale = -2.5789999999999997
+shader_parameter/scanlineAlpha = 0.8499999810008
+shader_parameter/minAlpha = 0.11999999731776
+shader_parameter/depthColor = Color(1, 1, 1, 1)
+shader_parameter/depthEmissive = 1.315
+shader_parameter/depthMultiply = 2.179
+shader_parameter/depthPower = 2.673
+shader_parameter/depthAlpha = 1.0
+shader_parameter/heightArray = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 shader_parameter/arraySplit = 0.08333

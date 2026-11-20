@@ -9,6 +9,7 @@ class_name RingCapture
 @export var numDetectors : int = 12;
 @export var numEaseSteps : int = 4;
 @export var easing : float = -2.0;
+#@export_range(0.0, 1.0, .01) var averageRangeNormalized : float = .25;
 @export var detectorPrefab : RingHeightDetector;
 @export var detectorContainer : Node3D;
 @export var radiusToDisableDetectors = 1.0;
@@ -28,7 +29,7 @@ func _ready() -> void:
 	detectorPrefab.visible = false;
 	mesh.material_override = mesh.material_override.duplicate();
 	material = mesh.material_override;
-	material.set_shader_parameter("arraySplit", 1.0/((numDetectors * numEaseSteps) as float));
+	material.set_shader_parameter("arraySplit", 1.0/((numDetectors) as float));
 	CreateDetectors();
 	pass # Replace with function body.
 
@@ -65,15 +66,28 @@ func UpdateHeights():
 	for i in numDetectors:
 		heights[i] = detectors[i].height;
 	
-	var easeIndex = 0;
 	for i in numDetectors:
 		var nextIndex = (i + 1) % detectors.size();
+		var averageHeight = 0.0;
+		var range = (numEaseSteps as float) / (numDetectors as float);
+		var base = i - (range * .5);
 		for j in numEaseSteps:
-			var p = (j as float)/(numEaseSteps as float);
-			heightEased[easeIndex] = lerp(detectors[i].height, detectors[nextIndex].height, ease(p, easing));
-			easeIndex += 1;
+			averageHeight += GetHeight(base + (ease((numEaseSteps as float) * (j as float), easing) * range));
+		
+		averageHeight /= numEaseSteps;
+		heightEased[i] = averageHeight;
 		
 	material.set_shader_parameter("heightArray", heightEased);
+	pass;
+
+
+func GetHeight(i : float) -> float:
+	var iInt = i as int;
+	var index0 = iInt % detectors.size();
+	var index1 = (index0 + 1) % detectors.size();
+	var t = i - iInt;
+	var value = lerp(heights[index0], heights[index1], t);
+	return value;
 	pass;
 	
 func CreateDetectors():
@@ -87,7 +101,6 @@ func CreateDetectors():
 		detectorContainer.add_child(newDetector, true);
 		detectors.push_back(newDetector);
 		heights.push_back(0.0);
-		for j in numEaseSteps:
-			heightEased.push_back(0.0);
+		heightEased.push_back(0.0);
 		newDetector.position = Vector3(cos(currentAngle), 0, sin(currentAngle));
 	pass;
