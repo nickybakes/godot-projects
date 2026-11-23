@@ -7,7 +7,6 @@
 render_priority = 0
 shader = ExtResource("1_20aij")
 shader_parameter/steppedTime = 0.0
-shader_parameter/ringRadius = 10.0
 shader_parameter/fireNoiseTexture = ExtResource("2_3jhpk")
 shader_parameter/innerColor = Color(0, 0, 0, 1)
 shader_parameter/outerColor = Color(1, 1, 1, 1)

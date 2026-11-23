@@ -1,0 +1,31 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://xfbhcup3awvc"]
+
+[ext_resource type="Shader" uid="uid://m01f16dupar0" path="res://Art/Shaders/S_Fire_02.gdshader" id="1_ivobp"]
+[ext_resource type="Texture2D" uid="uid://dri0dt1uwtc27" path="res://Art/Textures/T_FireNoise_03.png" id="3_xmt60"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ivobp")
+shader_parameter/noiseTexture = ExtResource("3_xmt60")
+shader_parameter/textureScale = Vector2(0.964, 0.854)
+shader_parameter/textureScale2 = Vector2(0.692, 1.401)
+shader_parameter/scrollSpeed = Vector2(0.458, 0.909)
+shader_parameter/scrollSpeed2 = Vector2(0.781, 0.955)
+shader_parameter/noiseDistort1 = 1.035
+shader_parameter/noiseDistort2 = -0.328
+shader_parameter/alphaMin = -1.617
+shader_parameter/alphaMax = 0.652
+shader_parameter/alphaTransitionPower = 1.45
+shader_parameter/alphaTransitionOffset = -0.149
+shader_parameter/alphaThreshold = 0.0999999977648
+shader_parameter/innerColor = Color(0, 0, 0, 1)
+shader_parameter/outerColor = Color(1, 1, 1, 1)
+shader_parameter/outerThickness = 0.3
+shader_parameter/emissive = 1.0
+shader_parameter/distortAmount = Vector2(0, 0)
+shader_parameter/distortPower = Vector2(0, 0)
+shader_parameter/distortFrequency = Vector2(0, 0)
+shader_parameter/distortTimeScale = 0.0
+shader_parameter/distortSpeed = Vector3(0, 0, 0)
+shader_parameter/distortTimeOffset = Vector3(0, 0, 0)
+shader_parameter/distortMin = Vector2(0, 0)

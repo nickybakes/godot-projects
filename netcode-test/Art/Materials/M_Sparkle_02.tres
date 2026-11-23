@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://mrcoci5b5b74"]
+
+[ext_resource type="Shader" uid="uid://dbh2hebla7dag" path="res://Art/Shaders/S_BasicTexture_01.gdshader" id="1_gmgsy"]
+[ext_resource type="Texture2D" uid="uid://csbg5bnba0jk5" path="res://Art/Textures/T_Sparkle_02.png" id="2_gmgsy"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_gmgsy")
+shader_parameter/mainTexture = ExtResource("2_gmgsy")
+shader_parameter/emissive = 1.19
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/alpha = 0.999999977648

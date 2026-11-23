@@ -4,6 +4,9 @@
 [ext_resource type="Script" uid="uid://doowr5fgxjrli" path="res://Dev/Frontend/Objects/RingCapture.gd" id="2_0vgmx"]
 [ext_resource type="Script" uid="uid://bvmqn1xosy8vr" path="res://Dev/Frontend/Objects/RingHeightDetector.gd" id="3_lm4gk"]
 [ext_resource type="Material" uid="uid://cvbqrfykumn2q" path="res://Art/Materials/M_RingCapture_01.tres" id="4_g0de6"]
+[ext_resource type="Script" uid="uid://c70bqkm1fovgp" path="res://Dev/Frontend/Objects/RingEmber.gd" id="4_wd8wy"]
+[ext_resource type="Material" uid="uid://gtyd72pc86f4" path="res://Art/Materials/M_Sparkle_01.tres" id="5_wd8wy"]
+[ext_resource type="Material" uid="uid://piyjcxavchpx" path="res://Art/Particles/PPM_Sparkles_01.tres" id="6_4s32l"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_10ni2"]
 properties/0/path = NodePath(".:radius")
@@ -12,6 +15,14 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath(".:position")
 properties/1/spawn = true
 properties/1/replication_mode = 1
+
+[sub_resource type="Curve" id="Curve_htx88"]
+_limits = [0.0, 1.0, 0.0, 10.0]
+_data = [Vector2(0.5291005, 0), 0.0, 0.0, 0, 0, Vector2(1.2698412, 0.13999999), 0.0, 0.0, 0, 0, Vector2(5.05291, 0.32), 0.0, 0.0, 0, 0, Vector2(10, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="QuadMesh" id="QuadMesh_e7gj5"]
+size = Vector2(0.4, 0.535)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_wd8wy"]
 top_radius = 1.0
@@ -31,15 +42,20 @@ ringChangeDirectionTime = 3.0
 ringVisual = NodePath("PRE_RingCaptureVisual_01")
 metadata/_custom_type_script = "uid://bsko5lfb7e1ug"
 
-[node name="PRE_RingCaptureVisual_01" type="Node3D" parent="." unique_id=863412232 node_paths=PackedStringArray("mesh", "detectorPrefab", "detectorContainer")]
+[node name="PRE_RingCaptureVisual_01" type="Node3D" parent="." unique_id=863412232 node_paths=PackedStringArray("mesh", "detectorPrefab", "detectorContainer", "emberPrefab", "emberContainer")]
 script = ExtResource("2_0vgmx")
-radius = 3.238
 mesh = NodePath("Ring Mesh")
 numDetectors = 32
 numEaseSteps = 16
 easing = 2.5
 detectorPrefab = NodePath("Height Detector")
 detectorContainer = NodePath("Detector Container")
+radius = 3.238
+numParticles = 16
+emberPrefab = NodePath("P_Sparkle_01")
+emberContainer = NodePath("Ember Container")
+radiusToParticleRatio = SubResource("Curve_htx88")
+radiusToDisableParticles = 0.5
 metadata/_custom_type_script = "uid://doowr5fgxjrli"
 
 [node name="Height Detector" type="Node3D" parent="PRE_RingCaptureVisual_01" unique_id=2049897645 node_paths=PackedStringArray("raycast")]
@@ -56,6 +72,31 @@ target_position = Vector3(0, -999999, 0)
 collision_mask = 17
 hit_back_faces = false
 
+[node name="P_Sparkle_01" type="Node3D" parent="PRE_RingCaptureVisual_01" unique_id=1740857968 node_paths=PackedStringArray("particleContainer", "particles", "raycast")]
+transform = Transform3D(0.1, 0, 0, 0, 1, 0, 0, 0, 0.1, 0, 0, 0)
+script = ExtResource("4_wd8wy")
+particleContainer = NodePath("Particle Contailer")
+particles = NodePath("Particle Contailer/Particle")
+raycast = NodePath("RayCast3D")
+metadata/_custom_type_script = "uid://c70bqkm1fovgp"
+
+[node name="Particle Contailer" type="Node3D" parent="PRE_RingCaptureVisual_01/P_Sparkle_01" unique_id=2098143131]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0078125, 0)
+
+[node name="Particle" type="GPUParticles3D" parent="PRE_RingCaptureVisual_01/P_Sparkle_01/Particle Contailer" unique_id=2077849256]
+material_override = ExtResource("5_wd8wy")
+lifetime = 0.7
+transform_align = 1
+transform_align_channel_filter = 1
+process_material = ExtResource("6_4s32l")
+draw_pass_1 = SubResource("QuadMesh_e7gj5")
+
+[node name="RayCast3D" type="RayCast3D" parent="PRE_RingCaptureVisual_01/P_Sparkle_01" unique_id=960621954]
+transform = Transform3D(0.9999998, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 0, 99999, 0)
+target_position = Vector3(0, -999999, 0)
+collision_mask = 17
+hit_back_faces = false
+
 [node name="Ring Mesh" type="MeshInstance3D" parent="PRE_RingCaptureVisual_01" unique_id=1676518818]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, 1, 0, 4.371139e-08, 0, 0, 0)
 layers = 4
@@ -64,3 +105,5 @@ cast_shadow = 0
 mesh = SubResource("CylinderMesh_wd8wy")
 
 [node name="Detector Container" type="Node3D" parent="PRE_RingCaptureVisual_01" unique_id=1982590495]
+
+[node name="Ember Container" type="Node3D" parent="PRE_RingCaptureVisual_01" unique_id=1127586900]

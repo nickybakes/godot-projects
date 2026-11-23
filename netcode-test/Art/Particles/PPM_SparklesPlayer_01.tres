@@ -1,0 +1,18 @@
+[gd_resource type="ParticleProcessMaterial" format=3 uid="uid://v00ys44v5e1n"]
+
+[sub_resource type="Curve" id="Curve_skvfr"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.33333334, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_cu8le"]
+curve = SubResource("Curve_skvfr")
+
+[resource]
+lifetime_randomness = 0.17
+particle_flag_rotate_y = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+gravity = Vector3(0, 9.745, 0)
+scale_min = 0.79999995
+scale_max = 1.1
+scale_curve = SubResource("CurveTexture_cu8le")

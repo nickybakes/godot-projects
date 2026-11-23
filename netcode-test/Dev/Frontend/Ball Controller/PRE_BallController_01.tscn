@@ -14,6 +14,7 @@
 [ext_resource type="Material" uid="uid://d4i6d6wxg2j5m" path="res://Art/Materials/M_HitRegion_01.tres" id="7_l67tw"]
 [ext_resource type="Material" uid="uid://dqrlfdt0mxo4s" path="res://Art/Materials/M_Xray_01.tres" id="8_m53x3"]
 [ext_resource type="FontFile" uid="uid://toyoa2sfe754" path="res://Art/Fonts/KeepCalm-Medium.ttf" id="10_vb6wf"]
+[ext_resource type="Material" uid="uid://xfbhcup3awvc" path="res://Art/Materials/M_RingOfFirePlayer_01.tres" id="11_2s67u"]
 [ext_resource type="Material" uid="uid://mi3rb0advqsw" path="res://Art/Materials/M_HitRegion_01a.tres" id="11_bjlbd"]
 [ext_resource type="Material" uid="uid://bnwwedt8ua82h" path="res://Art/Materials/M_Strike_01.tres" id="11_qrgwy"]
 [ext_resource type="Material" uid="uid://okolx5gyqwo1" path="res://Art/Materials/M_Block_01.tres" id="11_v2vyv"]
@@ -25,9 +26,11 @@
 [ext_resource type="Script" uid="uid://bao3317lfi3tc" path="res://Dev/Frontend/Modular Character Controller/MCCTransition.gd" id="12_nefp1"]
 [ext_resource type="Script" uid="uid://c3t7bpre2tf53" path="res://Dev/Frontend/Modular Character Controller/StorageNode.gd" id="12_ods0j"]
 [ext_resource type="Script" uid="uid://cx8j2ywloqwq7" path="res://Dev/Frontend/Ball Controller/Rules/OnSurfaceRule.gd" id="13_2mr7f"]
+[ext_resource type="Material" uid="uid://cbqcp0unkidov" path="res://Art/Materials/M_Sparkle_01a.tres" id="13_ee4yk"]
 [ext_resource type="Script" uid="uid://b2jd3djd45lf3" path="res://Dev/Frontend/Ball Controller/Rules/InputRule.gd" id="13_ilenv"]
 [ext_resource type="ArrayMesh" uid="uid://c62f147t8g58f" path="res://Art/Models/SM_Ball_01.glb" id="13_n4m0h"]
 [ext_resource type="Material" uid="uid://b23s3gvugcel7" path="res://Art/Materials/M_Outline_01a.tres" id="13_vktj5"]
+[ext_resource type="Material" uid="uid://v00ys44v5e1n" path="res://Art/Particles/PPM_SparklesPlayer_01.tres" id="14_ee4yk"]
 [ext_resource type="Script" uid="uid://nlxsi446gre7" path="res://Dev/Frontend/Ball Controller/Cooldown.gd" id="14_s4hg4"]
 [ext_resource type="Script" uid="uid://bya8tt6ubw05d" path="res://Dev/Frontend/Ball Controller/Ball States/Launch.gd" id="15_84w8q"]
 [ext_resource type="Script" uid="uid://dulfhx4ftd06" path="res://Dev/Frontend/Ball Controller/Rules/TraitRule.gd" id="15_ahjyt"]
@@ -103,6 +106,9 @@ spacing_glyph = -18
 [sub_resource type="PlaneMesh" id="PlaneMesh_ee4yk"]
 size = Vector2(2.22, 2.622)
 orientation = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_e7gj5"]
+size = Vector2(0.4, 0.535)
 
 [sub_resource type="Curve" id="Curve_qrgwy"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -312,7 +318,7 @@ script = ExtResource("51_ej7s1")
 transitionSpeed = 0.5
 metadata/_custom_type_script = "uid://fxck7cgoc485"
 
-[node name="Ball Visuals" type="Node3D" parent="." unique_id=851201941 node_paths=PackedStringArray("ballController", "shadowDecal", "cameraTarget", "header", "ballMesh", "outlineMesh", "xrayMesh", "chargeAimMesh", "blockMesh", "electricParticles", "clashVisual", "strikeVisual", "grabVisual", "grabAnimator", "grabHandMesh_l", "grabHandMesh_r", "grabHandMeshXray_l", "grabHandMeshXray_r", "grabVictimVisual", "grabVictimHandMesh_l", "grabVictimHandMesh_r", "eliminatedVisual", "knockedOutVisual", "respawningVisual", "respawningClockLabel", "strikePriorityVisual", "unblockableVisual", "ringFireParticle", "spinner", "pitcher", "stretcher", "roller")]
+[node name="Ball Visuals" type="Node3D" parent="." unique_id=851201941 node_paths=PackedStringArray("ballController", "shadowDecal", "cameraTarget", "header", "ballMesh", "outlineMesh", "xrayMesh", "chargeAimMesh", "blockMesh", "electricParticles", "clashVisual", "strikeVisual", "grabVisual", "grabAnimator", "grabHandMesh_l", "grabHandMesh_r", "grabHandMeshXray_l", "grabHandMeshXray_r", "grabVictimVisual", "grabVictimHandMesh_l", "grabVictimHandMesh_r", "eliminatedVisual", "knockedOutVisual", "respawningVisual", "respawningClockLabel", "strikePriorityVisual", "unblockableVisual", "ringFireVisual", "ringFireParticle", "spotlightVisual", "spotlightParticle", "spinner", "pitcher", "stretcher", "roller")]
 script = ExtResource("2_3d8wc")
 ballController = NodePath("..")
 ballCustomizationDirectory = ExtResource("4_lr45t")
@@ -344,7 +350,10 @@ respawningVisual = NodePath("Respawning Visual")
 respawningClockLabel = NodePath("Respawning Visual/Respawning Clock Label")
 strikePriorityVisual = NodePath("Strike Priority Visual")
 unblockableVisual = NodePath("Unblockable Visual")
+ringFireVisual = NodePath("Ring Fire Visual")
 ringFireParticle = NodePath("Ring Fire Visual/Particle")
+spotlightVisual = NodePath("Spotlight Visual")
+spotlightParticle = NodePath("Spotlight Visual/Particle")
 spinner = NodePath("Visual Spinner")
 pitcher = NodePath("Visual Spinner/Visual Pitcher")
 stretcher = NodePath("Visual Spinner/Visual Pitcher/Visual Stretcher")
@@ -480,15 +489,37 @@ autowrap_mode = 2
 
 [node name="Ring Fire Visual" type="Node3D" parent="Ball Visuals" unique_id=1812432600]
 
+[node name="Ring Of Fire Mesh" type="MeshInstance3D" parent="Ball Visuals/Ring Fire Visual" unique_id=744338014]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2026758, -2.3841858e-07, 3.0522068)
+visible = false
+layers = 2
+material_override = ExtResource("11_2s67u")
+mesh = ExtResource("13_n4m0h")
+
 [node name="Particle" type="GPUParticles3D" parent="Ball Visuals/Ring Fire Visual" unique_id=902252550]
 transform = Transform3D(0.719, 0, 0, 0, 0.825, 0, 0, 0, 0.719, 0, 0.34269756, 0)
 layers = 4
 material_override = ExtResource("21_bxr6a")
-amount = 24
+amount = 12
 lifetime = 0.77
-local_coords = true
+transform_align = 1
+transform_align_channel_filter = 1
 process_material = ExtResource("22_bxr6a")
 draw_pass_1 = SubResource("PlaneMesh_ee4yk")
+
+[node name="Spotlight Visual" type="Node3D" parent="Ball Visuals" unique_id=1089324685]
+visible = false
+
+[node name="Particle" type="GPUParticles3D" parent="Ball Visuals/Spotlight Visual" unique_id=679813640]
+transform = Transform3D(0.6817791, 0, 0, 0, 0.6462187, 0, 0, 0, 0.60957277, 0, 0.10671812, 0)
+layers = 4
+material_override = ExtResource("13_ee4yk")
+amount = 12
+lifetime = 0.36
+transform_align = 1
+transform_align_channel_filter = 1
+process_material = ExtResource("14_ee4yk")
+draw_pass_1 = SubResource("QuadMesh_e7gj5")
 
 [node name="Visual Spinner" type="Node3D" parent="Ball Visuals" unique_id=1916116689]
 

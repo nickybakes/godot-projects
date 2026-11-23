@@ -11,10 +11,6 @@ class_name RingOfFire
 @export var radiusToParticleRatio : Curve;
 @export var radiusToDisableParticles = 1.0;
 
-@export_category("Commands")
-#@export_tool_button("Create Ember Particles") var createEmberParticlesAction = CreateEmberParticles;
-#@export_tool_button("Delete Ember Particles") var deleteEmberParticlesAction = DeleteEmberParticles;
-	
 var currentPosition : Vector3 = Vector3(0, 0, 0);
 var currentRadius : float = 1;
 var particlesDisabled : bool = false;
@@ -59,16 +55,6 @@ func SetDisabledParticles(disabled : bool):
 		
 	for ember in embers:
 		ember.visible = !disabled;	
-		
-#func SetHalvedParticles(halved : bool):
-	#if(particlesHalved == halved || !embers):
-		#return;
-	#particlesHalved = halved;
-	#
-	#for index in emberContainer.get_child_count():
-		#if(index % 2 == 0):
-			#var child = emberContainer.get_child(index) as RingEmber;
-			#child.visible = !particlesHalved;
 
 func DeleteEmberParticles():
 	embers = [];

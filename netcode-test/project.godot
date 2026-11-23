@@ -171,7 +171,7 @@ ringPosition={
 }
 ringRadius={
 "type": "float",
-"value": 9999.0
+"value": 5.0
 }
 
 [steam]

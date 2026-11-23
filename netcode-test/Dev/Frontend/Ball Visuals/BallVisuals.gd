@@ -50,7 +50,13 @@ var ballHubElement : BallHubElement;
 @export var unblockableVisual : Node3D;
 
 @export_category("Ring Fire")
+@export var ringFireVisual : Node3D
 @export var ringFireParticle : GPUParticles3D
+@export var ringFireMeshMaterial : Material
+
+@export_category("Spotlight")
+@export var spotlightVisual : Node3D
+@export var spotlightParticle : GPUParticles3D
 
 var messageTime : float = 0.0;
 
@@ -62,12 +68,17 @@ var messageTime : float = 0.0;
 
 var invulnBlinkTimer : float = 0.0;
 
+var ballMaterial : Material;
+var outlineMaterial : Material;
+var xrayMaterial : Material;
+var chargeAimMaterial : Material;
+
 func Setup(playerNumber : int):
 	var color = ballCustomizationDirectory.ballColors[ballController.playerToken.customization.colorIndex];
-	var ballMaterial = ballCustomizationDirectory.ballMaterialBasic.duplicate();
-	var outlineMaterial = ballCustomizationDirectory.outlineMaterial.duplicate();
-	var xrayMaterial = ballCustomizationDirectory.xrayMaterial.duplicate();
-	var chargeAimMaterial = ballCustomizationDirectory.chargeAimMaterial.duplicate();
+	ballMaterial = ballCustomizationDirectory.ballMaterialBasic.duplicate();
+	outlineMaterial = ballCustomizationDirectory.outlineMaterial.duplicate();
+	xrayMaterial = ballCustomizationDirectory.xrayMaterial.duplicate();
+	chargeAimMaterial = ballCustomizationDirectory.chargeAimMaterial.duplicate();
 	ballMaterial.set_shader_parameter("color", color);
 	outlineMaterial.set_shader_parameter("color", color);
 	xrayMaterial.set_shader_parameter("color", color);
@@ -92,6 +103,9 @@ func Setup(playerNumber : int):
 	
 	header.target = ballController;
 	
+	ringFireVisual.visible = true;
+	spotlightVisual.visible = true;
+	
 	StopChargeVisual();
 	StopBlockVisual();
 	StopClashVisual();
@@ -100,6 +114,7 @@ func Setup(playerNumber : int):
 	StopGrabSuccessAimVisual();
 	StopGrabVictimVisual(grabberPlayerNumber);
 	StopRingFireVisual();
+	StopSpotlightVisual();
 	HideMessages();
 	
 func RollBall(currentSpeed : float, delta : float):
@@ -211,9 +226,17 @@ func StopGrabSuccessAimVisual():
 	
 func StartRingFireVisual():
 	ringFireParticle.emitting = true;
+	outlineMesh.material_override = ringFireMeshMaterial;
 	
 func StopRingFireVisual():
 	ringFireParticle.emitting = false;
+	outlineMesh.material_override = outlineMaterial;
+	
+func StartSpotlightVisual():
+	spotlightParticle.emitting = true;
+	
+func StopSpotlightVisual():
+	spotlightParticle.emitting = false;
 	
 func HideMessages():
 	respawningVisual.visible = false;

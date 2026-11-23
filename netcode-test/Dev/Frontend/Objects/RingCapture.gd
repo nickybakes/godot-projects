@@ -1,8 +1,7 @@
-extends Node3D
+extends RingOfFire
 class_name RingCapture
 
 @export_category("Ring")
-@export var radius : float = 5.0;
 @export var mesh : MeshInstance3D;
 
 @export_category("Height Detectors")
@@ -21,9 +20,6 @@ var heights : Array[float];
 var heightEased : Array[float];
 var material : Material;
 
-var currentPosition : Vector3 = Vector3(0, 0, 0);
-var currentRadius : float = 1;
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	detectorPrefab.visible = false;
@@ -31,6 +27,8 @@ func _ready() -> void:
 	material = mesh.material_override;
 	material.set_shader_parameter("arraySplit", 1.0/((numDetectors) as float));
 	CreateDetectors();
+	emberPrefab.visible = false;
+	CreateEmberParticles();
 	pass # Replace with function body.
 
 
@@ -60,6 +58,8 @@ func UpdateScaleAndPosition():
 		RenderingServer.global_shader_parameter_set("ringRadius", currentRadius);
 	SetDisabledDetectors(radius <= radiusToDisableDetectors);
 	UpdateHeights();
+	UpdateParticleRatio();
+	SetDisabledParticles(radius <= radiusToDisableParticles);
 	pass;
 	
 func UpdateHeights():

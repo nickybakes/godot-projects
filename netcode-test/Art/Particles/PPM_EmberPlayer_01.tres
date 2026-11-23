@@ -15,7 +15,7 @@ point_count = 3
 curve = SubResource("Curve_skvfr")
 
 [resource]
-lifetime_randomness = 0.14
+lifetime_randomness = 0.1
 particle_flag_rotate_y = true
 emission_shape = 3
 emission_box_extents = Vector3(1, 1, 1)

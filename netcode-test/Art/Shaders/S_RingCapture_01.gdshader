@@ -3,10 +3,13 @@ render_mode blend_mix, unshaded, cull_disabled;
 
 #include "SI_Util_01.gdshaderinc"
 
+global uniform float ringRadius;
+
 uniform sampler2D depth_texture : hint_depth_texture, repeat_disable, filter_nearest;
 
 uniform sampler2D colorTexture : filter_linear_mipmap;
 uniform vec3 color : source_color = vec3(1, 1, 1);
+uniform float colorToTextureMix : hint_range(0.0, 1.0, .01) = 0.0;
 uniform float emissive = 1.0;
 uniform vec2 textureScroll;
 uniform vec2 textureScale;
@@ -14,11 +17,13 @@ uniform float distanceThreshold = 5.0;
 
 group_uniforms details;
 uniform sampler2D detailTexture : source_color, filter_linear;
-uniform vec3 detailColor : source_color = vec3(1, 1, 1);
+uniform float ringRadiusUVScale = 10.0;
 uniform vec2 detailTextureScale;
 uniform vec2 detailTextureScale2;
 uniform vec2 detailScrollSpeed;
 uniform vec2 detailScrollSpeed2;
+uniform float detailAlphaPower = 1.0;
+uniform float detailAlphaMultiply = 1.0;
 
 group_uniforms scanline;
 uniform float scanlineScale = 1.0;
@@ -58,12 +63,13 @@ void fragment() {
 	
 	float t = (UV.x - (float(index0) * arraySplit))/arraySplit;
 	float calcHeight = mix(heightArray[index0], heightArray[index1], t);
+	float diff = WORLD_POS.y - calcHeight;
 	
-	vec2 uvs = vec2(0, WORLD_POS.y);
+	vec2 uvs = vec2(0, diff);
+	
 	uvs *= textureScale;
 	uvs += TIME * textureScroll;
 	
-	float diff = WORLD_POS.y - calcHeight;
 	
 	vec3 textureSample = texture(colorTexture, uvs).rgb;
 	
@@ -73,27 +79,29 @@ void fragment() {
 	
 	float dist = diff + 1.0 - distanceThreshold;
 	
+	vec3 finalColor = mix(textureSample, color, colorToTextureMix) * emissive;
+	finalColor = mix(finalColor, depthColor * depthEmissive, depth);
+	
+	vec2 detailUVs = UV;
+	detailUVs.x *= ringRadius * ringRadiusUVScale;
+	detailUVs.y = WORLD_POS.y;
+	
+	float sampledAlpha = texture(detailTexture, detailUVs * detailTextureScale + (TIME * detailScrollSpeed)).r;
+	sampledAlpha += texture(detailTexture, detailUVs * detailTextureScale2 + (TIME * detailScrollSpeed2)).r;
+	
+	sampledAlpha = saturate(sampledAlpha);
+	
+	
 	float alpha = dist;
 	alpha = saturate(alpha);
 	alpha = 1.0 - alpha;
 	float clipAlpha = alpha;
-	alpha = alpha * mix(minAlpha, scanlineAlpha, sinValue);
+	
+	alpha = (pow(clipAlpha, detailAlphaPower) * detailAlphaMultiply) - sampledAlpha;
+	
+	alpha = saturate(alpha);
+	//alpha = alpha * mix(minAlpha, scanlineAlpha, sinValue);
 	alpha = mix(alpha, depthAlpha, depth);
-	
-	vec3 finalColor = color * textureSample * emissive;
-	finalColor = mix(finalColor, depthColor * depthEmissive, depth);
-	
-	//vec2 detailUVs = UV;
-	//detailUVs.y = WORLD_POS.y;
-	//
-	//float sampledAlpha = texture(detailTexture, detailUVs * detailTextureScale + (TIME * detailScrollSpeed)).a;
-	//sampledAlpha += texture(detailTexture, detailUVs * detailTextureScale2 + (TIME * detailScrollSpeed2)).a;
-	//
-	//finalColor = mix(finalColor, detailColor, sampledAlpha);
-	//sampledAlpha *= clipAlpha;
-	//
-	//alpha += sampledAlpha;
-	//alpha = saturate(alpha);
 	
 	ALBEDO = finalColor;
 	ALPHA = alpha;

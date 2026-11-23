@@ -41,7 +41,12 @@ func _process(delta: float) -> void:
 			if(dist <= radius):
 				if(ballController.updatePhysics && !ballController.knockedOut):
 					ballController.score += insideRingScore * delta;
+				if(ballController.updateVisuals):
+					ballController.visuals.StartSpotlightVisual();
 				pass;
+			else:
+				if(ballController.updateVisuals):
+					ballController.visuals.StopSpotlightVisual();
 	
 	if(!isDummy):
 		position = position + currDirection * currSpeed * delta;

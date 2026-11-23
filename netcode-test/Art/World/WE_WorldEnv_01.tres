@@ -1,0 +1,14 @@
+[gd_resource type="Environment" format=3 uid="uid://dns6mdinsa4mq"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0hxaj"]
+
+[sub_resource type="Sky" id="Sky_etr8x"]
+sky_material = SubResource("ProceduralSkyMaterial_0hxaj")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_etr8x")
+glow_enabled = true
+glow_levels/2 = 0.4
+glow_intensity = 0.34
+glow_strength = 1.69
