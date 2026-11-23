@@ -40,6 +40,8 @@ script = ExtResource("1_wd8wy")
 ringSpeed = 2.0
 ringChangeDirectionTime = 3.0
 ringVisual = NodePath("PRE_RingCaptureVisual_01")
+insidePulseSpeed = 0.74
+insidePulseScale = 0.2
 metadata/_custom_type_script = "uid://bsko5lfb7e1ug"
 
 [node name="PRE_RingCaptureVisual_01" type="Node3D" parent="." unique_id=863412232 node_paths=PackedStringArray("mesh", "detectorPrefab", "detectorContainer", "emberPrefab", "emberContainer")]

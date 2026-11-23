@@ -12,6 +12,8 @@ class_name SpotlightRing
 
 @export_category("Non Networked")
 @export var ringVisual : RingCapture;
+@export var insidePulseSpeed : float = 1.0;
+@export var insidePulseScale : float = 1.0;
 
 var currDirection := Vector2.ZERO;
 var currSpeed := 1.0;
@@ -43,11 +45,15 @@ func _process(delta: float) -> void:
 					ballController.score += insideRingScore * delta;
 				if(ballController.updateVisuals):
 					ballController.visuals.StartSpotlightVisual();
+					ballController.visuals.ballHubElement.trackerLine.requestedPulseSpeed = insidePulseSpeed;
+					ballController.visuals.ballHubElement.trackerLine.requestedPulseScale = insidePulseScale;
 				pass;
 			else:
 				if(ballController.updateVisuals):
 					ballController.visuals.StopSpotlightVisual();
-	
+					ballController.visuals.ballHubElement.trackerLine.requestedPulseSpeed = ballController.visuals.ballHubElement.trackerLine.defaultPulseSpeed;
+					ballController.visuals.ballHubElement.trackerLine.requestedPulseScale = ballController.visuals.ballHubElement.trackerLine.defaultPulseScale;
+					
 	if(!isDummy):
 		position = position + currDirection * currSpeed * delta;
 		

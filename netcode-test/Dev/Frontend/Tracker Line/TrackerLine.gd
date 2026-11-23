@@ -29,6 +29,14 @@ var alphaMultiply : float = 1.0;
 var goalAlphaMultiply : float = 1.0;
 var maxAlphaMultiply : float = 13.0;
 
+var defaultPulseSpeed : float = 0.313;
+var currentPulseSpeed : float = 0.0;
+var requestedPulseSpeed : float = 0.0;
+
+var defaultPulseScale : float = 0.342;
+var currentPulseScale : float = 0.0;
+var requestedPulseScale : float = 0.0;
+
 func Setup(playerNumber : int):
 	currentMaterial = middle.material_override.duplicate();
 	start.material_override = currentMaterial;
@@ -51,7 +59,12 @@ func _process(delta: float) -> void:
 	if(visible):
 		currentMaterial.set_shader_parameter("heartbeatFade", clamp(heartbeat, 0.0, 1.0));
 		currentMaterial.set_shader_parameter("alphaMultiply", clamp(alphaMultiply, 0.0, maxAlphaMultiply));
-	
+		if(requestedPulseSpeed != currentPulseSpeed):
+			currentMaterial.set_shader_parameter("pulseSpeed", requestedPulseSpeed);
+			currentPulseSpeed = requestedPulseSpeed;
+		if(requestedPulseScale != currentPulseScale):
+			currentMaterial.set_shader_parameter("pulseScale", requestedPulseScale);
+			currentPulseScale = requestedPulseScale;
 
 func FollowTarget(delta : float):
 	if(startPointTarget):
