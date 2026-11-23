@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode blend_mix, unshaded, cull_disabled, alpha_to_coverage, depth_prepass_alpha;
+render_mode world_vertex_coords, blend_mix, unshaded, alpha_to_coverage, depth_prepass_alpha;
 #include "SI_Util_01.gdshaderinc"
 #include "SI_Fire_01.gdshaderinc"
 
@@ -7,11 +7,8 @@ render_mode blend_mix, unshaded, cull_disabled, alpha_to_coverage, depth_prepass
 group_uniforms noiseSample;
 uniform sampler2D noiseTexture : source_color, filter_linear;
 uniform vec2 textureScale;
-uniform vec2 textureScale2;
 uniform vec2 scrollSpeed;
-uniform vec2 scrollSpeed2;
 uniform float noiseDistort1 = .3;
-uniform float noiseDistort2 = .3;
 
 group_uniforms alpha;
 uniform float alphaMin = .3;
@@ -52,33 +49,22 @@ void vertex() {
 }
 
 void fragment() {
-	vec3 WORLD_NORMAL = (INV_VIEW_MATRIX * vec4(normalize(NORMAL), 0.0)).xyz;
-	float transition = 1.0 - max(WORLD_NORMAL.y, 0);
+	float transition = 1.0 - max(NORMAL.y, 0);
 	float alphaTransition = pow(transition, alphaTransitionPower) + alphaTransitionOffset;
-	//float colorTransition = pow(transition, colorTransitionPower) + colorOffset;
 	
-	vec2 uv1 = WORLD_NORMAL.xy;
+	vec2 uv1 = NORMAL.xy;
 	uv1 = uv1 * textureScale + TIME * scrollSpeed;
 	uv1.x += noiseDistort1 * transition;
 	
-	vec2 uv2 = WORLD_NORMAL.yx;
-	uv2 = uv2 * textureScale2 + TIME * scrollSpeed2;
-	uv2.x += noiseDistort2 * transition;
-	
 	float noiseSample = texture(noiseTexture, uv1).r;
-	float noiseSample2 = texture(noiseTexture, uv2).r;
 	
 	float noise = noiseSample;
-	//noise = noiseSample;
 	float alpha = (1.0 - noise) - mix(1.0 - alphaMax, 1.0 - alphaMin, alphaTransition);	
-	alpha = clamp(alpha, 0.0, 1.0);	
-	
-	//vec3 color = texture(colorTexture, vec2(colorTransition, 0.0)).rgb;
+	alpha = saturate(alpha);	
 	
 	float maskColor = saturate(smoothstep(alpha, outerThickness, 1.0));
 
 	ALBEDO = mix(innerColor, outerColor, maskColor) * emissive;
-	//ALBEDO = WORLD_NORMAL;
-	//ALPHA = alpha;
+	ALPHA = alpha;
 	ALPHA_SCISSOR_THRESHOLD = alphaThreshold;
 }

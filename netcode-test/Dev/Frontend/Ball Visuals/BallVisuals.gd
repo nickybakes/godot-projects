@@ -52,7 +52,7 @@ var ballHubElement : BallHubElement;
 @export_category("Ring Fire")
 @export var ringFireVisual : Node3D
 @export var ringFireParticle : GPUParticles3D
-@export var ringFireMeshMaterial : Material
+@export var ringFireMesh : MeshInstance3D
 
 @export_category("Spotlight")
 @export var spotlightVisual : Node3D
@@ -226,11 +226,11 @@ func StopGrabSuccessAimVisual():
 	
 func StartRingFireVisual():
 	ringFireParticle.emitting = true;
-	outlineMesh.material_override = ringFireMeshMaterial;
+	ringFireMesh.visible = true;
 	
 func StopRingFireVisual():
 	ringFireParticle.emitting = false;
-	outlineMesh.material_override = outlineMaterial;
+	ringFireMesh.visible = false;
 	
 func StartSpotlightVisual():
 	spotlightParticle.emitting = true;
@@ -278,6 +278,7 @@ func HideBall():
 	ballHubElement.trackerLine.visible = false;
 	shadowDecal.visible = false;
 	header.visible = false;
+	StopRingFireVisual();
 	
 func ShowBall():
 	spinner.visible = true;
