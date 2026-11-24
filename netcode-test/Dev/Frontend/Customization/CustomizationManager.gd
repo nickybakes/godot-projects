@@ -50,7 +50,7 @@ func GetNextAvailableColor(currentColor : int, direction : int) -> int:
 	while(conflict):
 		conflict = false;
 		
-		for conflictNumber in playerNumberToColorIndex:
+		for conflictNumber in playerNumberToColorIndex.keys():
 			if(newColorIndex == playerNumberToColorIndex[conflictNumber]):
 				conflict = true;
 		
