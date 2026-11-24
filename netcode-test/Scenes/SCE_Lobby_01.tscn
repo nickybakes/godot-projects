@@ -1784,6 +1784,7 @@ texture = ExtResource("24_n3kh0")
 
 [node name="Invert Control" type="Node3D" parent="Menu Items 2" unique_id=1627883481]
 transform = Transform3D(0.516, 0, 0, 0, 0.516, 0, 0, 0, 0.516, -1.6911741, -0.23528051, -2.1050003)
+visible = false
 
 [node name="Button" type="Sprite3D" parent="Menu Items 2/Invert Control" unique_id=2028858740]
 transform = Transform3D(1.1149997, 0, 0, 0, 1.1149997, 0, 0, 0, 1.1149997, -0.45099998, 0.030673027, 0)

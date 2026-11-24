@@ -27,6 +27,9 @@ class_name BallVisualProfile
 
 @export_category("Messages")
 @export var eliminatedMessageTime : float = 4;
+@export var lastBallMessageTime : float = 1.5;
+@export_range(0.0, 1.0, 0.01) var lastBallBlinkOff : float = .15;
+@export var lastBallBlinkTime : float = 1.0;
 @export var strikePriorityMessageTime : float = 1.5;
 @export var unblockableMessageTime : float = 1.5;
 

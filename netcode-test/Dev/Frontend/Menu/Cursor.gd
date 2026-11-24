@@ -52,9 +52,9 @@ func _process(delta: float) -> void:
 		elif(inputDevice != null):
 			currentNormalizedPosition = CursorManager.Manager.MoveNormalizedPosition(currentNormalizedPosition, inputDevice.moveInput, delta);
 			normalizedPosition = currentNormalizedPosition;
-			if(inputDevice.inputBuffer.IsActionJustPressedThisFrame(Enums.InputAction.ToggleInvert, 1)):
-				playerToken.customization.invertChargeAim = !playerToken.customization.invertChargeAim;
-				pass;
+			#if(inputDevice.inputBuffer.IsActionJustPressedThisFrame(Enums.InputAction.ToggleInvert, 1)):
+				#playerToken.customization.invertChargeAim = !playerToken.customization.invertChargeAim;
+				#pass;
 			if(!requestedColorCycle && inputDevice.inputBuffer.IsActionJustPressedThisFrame(Enums.InputAction.CycleColorNext, 1)):
 				requestedColorCycle = true;
 				CustomizationManager.Manager.CycleColor(playerToken.customization.colorIndex, 1, playerNumber);

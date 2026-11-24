@@ -46,6 +46,8 @@ var ballHubElement : BallHubElement;
 @export var knockedOutVisual : Node3D;
 @export var respawningVisual : Node3D;
 @export var respawningClockLabel : Label3D;
+@export var lastBallVisual : Node3D;
+@export var lastBallBlinkVisual : Node3D;
 @export var strikePriorityVisual : Node3D;
 @export var unblockableVisual : Node3D;
 
@@ -67,6 +69,7 @@ var messageTime : float = 0.0;
 @export var roller : Node3D;
 
 var invulnBlinkTimer : float = 0.0;
+var lastBallBlinkTimer : float = 0.0;
 
 var ballMaterial : Material;
 var outlineMaterial : Material;
@@ -242,6 +245,7 @@ func HideMessages():
 	respawningVisual.visible = false;
 	knockedOutVisual.visible = false;
 	eliminatedVisual.visible = false;
+	lastBallVisual.visible = false;
 	strikePriorityVisual.visible = false;
 	unblockableVisual.visible = false;
 	
@@ -254,6 +258,11 @@ func ShowRespawningMessage():
 	messageTime = 10.0;
 	HideMessages();
 	respawningVisual.visible = true;
+	
+func ShowLastBallMessage():
+	messageTime = profile.lastBallMessageTime;
+	HideMessages();
+	lastBallVisual.visible = true;
 	
 func UpdateRespawnClock(respawnTime : float):
 	respawningClockLabel.text = "%.0f" % respawnTime;
@@ -290,6 +299,13 @@ func _process(delta: float) -> void:
 	messageTime = move_toward(messageTime, 0.0, delta);
 	if(messageTime == 0):
 		HideMessages();
+		
+	if(lastBallVisual.visible):
+		lastBallBlinkTimer += delta;
+		if(lastBallBlinkTimer >= profile.lastBallBlinkTime):
+			lastBallBlinkTimer = 0.0;
+		
+		lastBallBlinkVisual.visible = lastBallBlinkTimer >= profile.lastBallBlinkTime * profile.lastBallBlinkOff;
 	
 	grabVictimVisualTime += delta;
 	if(grabberPlayerNumber != -1 && grabVictimVisualTime > grabVictimVisualStopFailsafeTime):

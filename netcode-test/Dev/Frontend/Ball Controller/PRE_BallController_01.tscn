@@ -17,6 +17,7 @@
 [ext_resource type="Material" uid="uid://xfbhcup3awvc" path="res://Art/Materials/M_RingOfFirePlayer_01.tres" id="11_2s67u"]
 [ext_resource type="Material" uid="uid://b3eb5uc6va6mk" path="res://Art/Materials/M_EmberPlayer_01.tres" id="11_3ldyk"]
 [ext_resource type="Material" uid="uid://mi3rb0advqsw" path="res://Art/Materials/M_HitRegion_01a.tres" id="11_bjlbd"]
+[ext_resource type="FontFile" uid="uid://lgdr3l7q2pks" path="res://Art/Fonts/Montserrat-Black.ttf" id="11_ms2wh"]
 [ext_resource type="Material" uid="uid://bnwwedt8ua82h" path="res://Art/Materials/M_Strike_01.tres" id="11_qrgwy"]
 [ext_resource type="Material" uid="uid://okolx5gyqwo1" path="res://Art/Materials/M_Block_01.tres" id="11_v2vyv"]
 [ext_resource type="Script" uid="uid://decpb0lh7o7qx" path="res://Dev/Frontend/Ball Controller/Ball States/Roll.gd" id="12_84w8q"]
@@ -85,6 +86,9 @@ base_font = ExtResource("10_vb6wf")
 variation_embolden = 1.55
 variation_transform = Transform2D(0.879, 0, 0, 1, 0, 0)
 spacing_glyph = -6
+
+[sub_resource type="FontVariation" id="FontVariation_4sm07"]
+base_font = ExtResource("11_ms2wh")
 
 [sub_resource type="FontVariation" id="FontVariation_jfqt6"]
 base_font = ExtResource("10_vb6wf")
@@ -319,7 +323,7 @@ script = ExtResource("51_ej7s1")
 transitionSpeed = 0.5
 metadata/_custom_type_script = "uid://fxck7cgoc485"
 
-[node name="Ball Visuals" type="Node3D" parent="." unique_id=851201941 node_paths=PackedStringArray("ballController", "shadowDecal", "cameraTarget", "header", "ballMesh", "outlineMesh", "xrayMesh", "chargeAimMesh", "blockMesh", "electricParticles", "clashVisual", "strikeVisual", "grabVisual", "grabAnimator", "grabHandMesh_l", "grabHandMesh_r", "grabHandMeshXray_l", "grabHandMeshXray_r", "grabVictimVisual", "grabVictimHandMesh_l", "grabVictimHandMesh_r", "eliminatedVisual", "knockedOutVisual", "respawningVisual", "respawningClockLabel", "strikePriorityVisual", "unblockableVisual", "ringFireVisual", "ringFireParticle", "ringFireMesh", "spotlightVisual", "spotlightParticle", "spinner", "pitcher", "stretcher", "roller")]
+[node name="Ball Visuals" type="Node3D" parent="." unique_id=851201941 node_paths=PackedStringArray("ballController", "shadowDecal", "cameraTarget", "header", "ballMesh", "outlineMesh", "xrayMesh", "chargeAimMesh", "blockMesh", "electricParticles", "clashVisual", "strikeVisual", "grabVisual", "grabAnimator", "grabHandMesh_l", "grabHandMesh_r", "grabHandMeshXray_l", "grabHandMeshXray_r", "grabVictimVisual", "grabVictimHandMesh_l", "grabVictimHandMesh_r", "eliminatedVisual", "knockedOutVisual", "respawningVisual", "respawningClockLabel", "lastBallVisual", "lastBallBlinkVisual", "strikePriorityVisual", "unblockableVisual", "ringFireVisual", "ringFireParticle", "ringFireMesh", "spotlightVisual", "spotlightParticle", "spinner", "pitcher", "stretcher", "roller")]
 script = ExtResource("2_3d8wc")
 ballController = NodePath("..")
 ballCustomizationDirectory = ExtResource("4_lr45t")
@@ -349,6 +353,8 @@ eliminatedVisual = NodePath("Eliminated Visual")
 knockedOutVisual = NodePath("Knocked Out Visual")
 respawningVisual = NodePath("Respawning Visual")
 respawningClockLabel = NodePath("Respawning Visual/Respawning Clock Label")
+lastBallVisual = NodePath("Last Ball Visual")
+lastBallBlinkVisual = NodePath("Last Ball Visual/Label")
 strikePriorityVisual = NodePath("Strike Priority Visual")
 unblockableVisual = NodePath("Unblockable Visual")
 ringFireVisual = NodePath("Ring Fire Visual")
@@ -431,6 +437,20 @@ text = "KO"
 font = SubResource("FontVariation_vb6wf")
 font_size = 288
 outline_size = 100
+
+[node name="Last Ball Visual" type="Node3D" parent="Ball Visuals" unique_id=646869028]
+
+[node name="Label" type="Label3D" parent="Ball Visuals/Last Ball Visual" unique_id=1295894194]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13155276, 0)
+layers = 4
+billboard = 1
+no_depth_test = true
+text = "Last
+Ball!"
+font = SubResource("FontVariation_4sm07")
+font_size = 175
+outline_size = 101
+line_spacing = -69.98
 
 [node name="Respawning Visual" type="Node3D" parent="Ball Visuals" unique_id=1833003601]
 visible = false

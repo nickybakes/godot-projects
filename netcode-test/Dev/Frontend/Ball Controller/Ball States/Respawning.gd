@@ -34,6 +34,8 @@ func ExitState():
 func ExitStateVisuals():
 	mcc.visuals.HideMessages();
 	mcc.visuals.ballHubElement.ShowAlive();
+	if(mcc.lives <= 1):
+		mcc.visuals.ShowLastBallMessage();
 	
 func ExitStatePhysics():
 	mcc.grabCooldown.Restart();

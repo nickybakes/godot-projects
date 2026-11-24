@@ -129,6 +129,7 @@ zDepth = 13.0
 endPoint3DOffset = Vector3(0.656, -1.219, 0)
 
 [node name="Inverted Charge Aim" type="Label" parent="." unique_id=1844112269]
+visible = false
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0

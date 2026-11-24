@@ -101,10 +101,10 @@ func _process(delta: float) -> void:
 		lives = ballController.lives;
 		score = ballController.score;
 		
-		if(inputDevice != null && playerToken):
-			if(inputDevice.inputBuffer.IsActionJustPressedThisFrame(Enums.InputAction.ToggleInvert, 1)):
-				playerToken.customization.invertChargeAim = !playerToken.customization.invertChargeAim;
-				pass;
+		#if(inputDevice != null && playerToken):
+			#if(inputDevice.inputBuffer.IsActionJustPressedThisFrame(Enums.InputAction.ToggleInvert, 1)):
+				#playerToken.customization.invertChargeAim = !playerToken.customization.invertChargeAim;
+				#pass;
 	pass
 	
 func OwnerDisconnected():

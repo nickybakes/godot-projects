@@ -54,8 +54,8 @@ func _process(delta: float) -> void:
 		var speed = (cursor.currentNormalizedPosition - previousCursorPosition).length() * delta;
 		trackerLine.goalAlphaMultiply = max(speed * speedAlphaMultiply, 1.0);
 		previousCursorPosition = cursor.currentNormalizedPosition;
-		if(playerToken):
-			UpdateInvertChargeAim(playerToken.customization.invertChargeAim);
+		#if(playerToken):
+			#UpdateInvertChargeAim(playerToken.customization.invertChargeAim);
 	trackerLine.FollowTarget(delta);
 
 func _exit_tree() -> void:

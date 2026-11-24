@@ -193,8 +193,8 @@ func _process(delta: float) -> void:
 		visuals.ballHubElement.DisplayStamina(staminaStat.percent);
 		visuals.header.DisplayStamina(staminaStat.percent);
 		visuals.ballHubElement.DisplayHealth(healthStat.percent);
-		if(playerToken):
-			visuals.ballHubElement.UpdateInvertChargeAim(playerToken.customization.invertChargeAim);
+		#if(playerToken):
+			#visuals.ballHubElement.UpdateInvertChargeAim(playerToken.customization.invertChargeAim);
 		visuals.UpdateElectricVisuals(electricStat.percent, delta);
 		visuals.UpdateInvulnVisuals(invulnStat.value, delta);
 		currentState.ProcessVisuals(delta);
