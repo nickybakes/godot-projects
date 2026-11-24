@@ -26,6 +26,7 @@ var numLives : int = 5;
 var gameMechanics : Array[GameMechanic];
 var gamePlayerLogs : Dictionary[int, GamePlayerLog] = {};
 
+var numPlayersAlive : int = 0;
 
 func _ready() -> void:
 	Manager = self;
@@ -123,12 +124,14 @@ func SpawnPlayerBalls():
 
 func BallAdded(playerNumber : int, ball : NetBall):
 	balls.set(playerNumber, ball);
+	numPlayersAlive += 1;
 	GamerView.View.hub.SpawnElement(playerNumber);
 	
 	var newLog = GamePlayerLog.new(playerNumber);
 	gamePlayerLogs.set(playerNumber, newLog);
 	
 func BallRemoved(playerNumber : int):
+	numPlayersAlive -= 1;
 	balls.erase(playerNumber);
 
 func DestroyAllGameMechanics():
@@ -192,6 +195,7 @@ func LogKnockOut(activator : int, victim : int):
 	
 @rpc("any_peer", "call_local")
 func LogElimination(activator : int, victim : int):
+	numPlayersAlive -= 1;
 	if(activator != -1):
 		gamePlayerLogs[activator].eliminationsDoneByMe[victim] += 1;
 		gamePlayerLogs[victim].eliminatedBy = activator;

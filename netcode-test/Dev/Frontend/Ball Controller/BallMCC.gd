@@ -198,4 +198,6 @@ func _process(delta: float) -> void:
 		visuals.UpdateElectricVisuals(electricStat.percent, delta);
 		visuals.UpdateInvulnVisuals(invulnStat.value, delta);
 		currentState.ProcessVisuals(delta);
-		visuals.ballHubElement.trackerLine.goalAlphaMultiply = max(currentSpeed * visuals.profile.trackerLineSpeedAlphaMultiply, visuals.profile.trackerLineSpeedAlphaMultiplyMax);
+		
+		var trackerLineMaxAlphaMultiply = visuals.profile.trackerLineSpeedAlphaMultiplyMaxPerAlivePlayers[min(GameManager.Manager.numPlayersAlive, visuals.profile.trackerLineSpeedAlphaMultiplyMaxPerAlivePlayers.size())];
+		visuals.ballHubElement.trackerLine.goalAlphaMultiply = clamp(currentSpeed * visuals.profile.trackerLineSpeedAlphaMultiply, 1.0, trackerLineMaxAlphaMultiply);
